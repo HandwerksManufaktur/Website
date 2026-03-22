@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HandwerksManufaktur – Mehr Aufträge. Mehr Fachkräfte. Mehr Stabilität.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+<div id="sp"></div>
+<div id="cd"></div>
+<div id="cr"></div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mm">
+  <div class="mm-close" onclick="closeMM()">✕</div>
+  <a href="#problem" onclick="closeMM()">Problem</a>
+  <a href="#services" onclick="closeMM()">Leistungen</a>
+  <a href="#projects" onclick="closeMM()">Projekte</a>
+  <a href="#about" onclick="closeMM()">Über uns</a>
+  <a href="#reviews" onclick="closeMM()">Bewertungen</a>
+  <a href="#contact" onclick="closeMM()">Kontakt</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo"><img src="images/logo-handwerksmanufaktur.png" alt="HandwerksManufaktur"></a>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#services">Leistungen</a></li>
+    <li><a href="#projects">Projekte</a></li>
+    <li><a href="#about">Über uns</a></li>
+    <li><a href="#reviews">Bewertungen</a></li>
+    <li><a href="#contact" class="nav-cta">Jetzt starten →</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMM()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-video">
+    <video autoplay muted loop playsinline>
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag"><div class="hero-dot"></div>Die Nr.&nbsp;1 Web-Agentur für Handwerk</div>
+    <h1 class="hero-h1">
+      <span style="display:block;">Mehr Aufträge.</span>
+      <span style="display:block;" class="ac">Mehr Fachkräfte.</span>
+      <span style="display:block;" class="ol">Mehr Stabilität.</span>
+    </h1>
+    <p class="hero-sub">Wir bauen digitale Systeme, die Ihren Handwerksbetrieb planbar mit qualifizierten Anfragen und passenden Mitarbeitern versorgen – professionell, messbar, ohne Zeitverlust für Sie.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-main">Kostenloses Erstgespräch <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+      <a href="#projects" class="btn-outline">Projekte ansehen ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">120<em>+</em></div><div class="stat-label">Handwerksbetriebe</div></div>
+      <div><div class="stat-num">6<em>+</em></div><div class="stat-label">Jahre Erfahrung</div></div>
+      <div><div class="stat-num">98<em>%</em></div><div class="stat-label">Zufriedenheitsrate</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGO WALL – 79 transparent logos, 5 rows -->
+<section id="clients">
+<div class="lw-label-wrap reveal">
+  <div class="sec-label">Unsere Kunden</div>
+  <p>Über 120 Handwerksbetriebe vertrauen auf die HandwerksManufaktur</p>
+</div>
+
+<div class="logo-wall">
+  <div class="lw-row"><div class="lw-track lw-t1"><div class="li" title="Alexander Dietmayer"><img src="images/logo-alexander-dietmayer.png" alt="Alexander Dietmayer" loading="lazy"></div><div class="li" title="Allplast Laser"><img src="images/logo-allplast-laser.png" alt="Allplast Laser" loading="lazy"></div><div class="li" title="Ammer Lech Bau"><img src="images/logo-ammer-lech-bau.png" alt="Ammer Lech Bau" loading="lazy"></div><div class="li" title="Autohaus Ressle"><img src="images/logo-autohaus-ressle.png" alt="Autohaus Ressle" loading="lazy"></div><div class="li" title="Azemi Hausrenovierungen"><img src="images/logo-azemi-hausrenovierungen.png" alt="Azemi Hausrenovierungen" loading="lazy"></div><div class="li" title="BMS Tiefbau GmbH"><img src="images/logo-bms-tiefbau-gmbh.png" alt="BMS Tiefbau GmbH" loading="lazy"></div><div class="li" title="Barrrierefreier Wohnkomfort"><img src="images/logo-barrrierefreier-wohnkomfort.png" alt="Barrrierefreier Wohnkomfort" loading="lazy"></div><div class="li" title="Baugenossenschaft Eichenau"><img src="images/logo-baugenossenschaft-eichenau.png" alt="Baugenossenschaft Eichenau" loading="lazy"></div><div class="li" title="Baureize"><img src="images/logo-baureize.png" alt="Baureize" loading="lazy"></div><div class="li" title="Baustoffe Thaining Kirchner"><img src="images/logo-baustoffe-thaining-kirchner.png" alt="Baustoffe Thaining Kirchner" loading="lazy"></div><div class="li" title="Bjo#U0308rn Schillinger"><img src="images/logo-bjoern-schillinger.png" alt="Bjo#U0308rn Schillinger" loading="lazy"></div><div class="li" title="CS Metalldesign"><img src="images/logo-cs-metalldesign.png" alt="CS Metalldesign" loading="lazy"></div><div class="li" title="Dachbau Kraus GmbH"><img src="images/logo-dachbau-kraus-gmbh.png" alt="Dachbau Kraus GmbH" loading="lazy"></div><div class="li" title="Dinkel Metallbau"><img src="images/logo-dinkel-metallbau.png" alt="Dinkel Metallbau" loading="lazy"></div><div class="li" title="Ditsch Haustechnik"><img src="images/logo-markus_ditsch_logo-transformed.png" alt="Ditsch Haustechnik" loading="lazy"></div><div class="li" title="Do#U0308rfler Bau logo"><img src="images/logo-doerfler-bau.png" alt="Do#U0308rfler Bau logo" loading="lazy"></div><div class="li" title="Alexander Dietmayer"><img src="images/logo-alexander-dietmayer.png" alt="Alexander Dietmayer" loading="lazy"></div><div class="li" title="Allplast Laser"><img src="images/logo-allplast-laser.png" alt="Allplast Laser" loading="lazy"></div><div class="li" title="Ammer Lech Bau"><img src="images/logo-ammer-lech-bau.png" alt="Ammer Lech Bau" loading="lazy"></div><div class="li" title="Autohaus Ressle"><img src="images/logo-autohaus-ressle.png" alt="Autohaus Ressle" loading="lazy"></div><div class="li" title="Azemi Hausrenovierungen"><img src="images/logo-azemi-hausrenovierungen.png" alt="Azemi Hausrenovierungen" loading="lazy"></div><div class="li" title="BMS Tiefbau GmbH"><img src="images/logo-bms-tiefbau-gmbh.png" alt="BMS Tiefbau GmbH" loading="lazy"></div><div class="li" title="Barrrierefreier Wohnkomfort"><img src="images/logo-barrrierefreier-wohnkomfort.png" alt="Barrrierefreier Wohnkomfort" loading="lazy"></div><div class="li" title="Baugenossenschaft Eichenau"><img src="images/logo-baugenossenschaft-eichenau.png" alt="Baugenossenschaft Eichenau" loading="lazy"></div><div class="li" title="Baureize"><img src="images/logo-baureize.png" alt="Baureize" loading="lazy"></div><div class="li" title="Baustoffe Thaining Kirchner"><img src="images/logo-baustoffe-thaining-kirchner.png" alt="Baustoffe Thaining Kirchner" loading="lazy"></div><div class="li" title="Bjo#U0308rn Schillinger"><img src="images/logo-bjoern-schillinger.png" alt="Bjo#U0308rn Schillinger" loading="lazy"></div><div class="li" title="CS Metalldesign"><img src="images/logo-cs-metalldesign.png" alt="CS Metalldesign" loading="lazy"></div><div class="li" title="Dachbau Kraus GmbH"><img src="images/logo-dachbau-kraus-gmbh.png" alt="Dachbau Kraus GmbH" loading="lazy"></div><div class="li" title="Dinkel Metallbau"><img src="images/logo-dinkel-metallbau.png" alt="Dinkel Metallbau" loading="lazy"></div><div class="li" title="Ditsch Haustechnik"><img src="images/logo-markus_ditsch_logo-transformed.png" alt="Ditsch Haustechnik" loading="lazy"></div><div class="li" title="Do#U0308rfler Bau logo"><img src="images/logo-doerfler-bau.png" alt="Do#U0308rfler Bau logo" loading="lazy"></div></div></div>
+  <div class="lw-row"><div class="lw-track lw-t2"><div class="li" title="Drehkranz Josef Schwarz"><img src="images/logo-drehkranz-josef-schwarz.png" alt="Drehkranz Josef Schwarz" loading="lazy"></div><div class="li" title="EckRu CNC"><img src="images/logo-eckru-cnc.png" alt="EckRu CNC" loading="lazy"></div><div class="li" title="Effenberger & Scha#U0308fer Metallbau"><img src="images/logo-effenberger-und-schaefer-metallbau.png" alt="Effenberger & Scha#U0308fer Metallbau" loading="lazy"></div><div class="li" title="Eggert KFZ Sachversta#U0308ndigenbu#U0308ro"><img src="images/logo-eggert-kfz-sachverstaendigenbuero.png" alt="Eggert KFZ Sachversta#U0308ndigenbu#U0308ro" loading="lazy"></div><div class="li" title="Eibl Bau"><img src="images/logo-eibl-bau.png" alt="Eibl Bau" loading="lazy"></div><div class="li" title="Elektro Langmajer"><img src="images/logo-elektro-langmajer.png" alt="Elektro Langmajer" loading="lazy"></div><div class="li" title="Esapovic Fensterreinigung"><img src="images/logo-esapovic-fensterreinigung.png" alt="Esapovic Fensterreinigung" loading="lazy"></div><div class="li" title="FM Pack GmbH"><img src="images/logo-fm-pack-gmbh.png" alt="FM Pack GmbH" loading="lazy"></div><div class="li" title="FM Pack"><img src="images/logo-fm-pack-gmbh.png" alt="FM Pack" loading="lazy"></div><div class="li" title="Federspiel Metallbau"><img src="images/logo-federspiel-metallbaulogo.png" alt="Federspiel Metallbau" loading="lazy"></div><div class="li" title="FlyIn BBQ Streetfood"><img src="images/logo-flyin-bbq-streetfood.png" alt="FlyIn BBQ Streetfood" loading="lazy"></div><div class="li" title="Franz Gallenberger"><img src="images/logo-franz-gallenberger.png" alt="Franz Gallenberger" loading="lazy"></div><div class="li" title="Franz Musch"><img src="images/logo-franz-musch.png" alt="Franz Musch" loading="lazy"></div><div class="li" title="Gattinger GmbH"><img src="images/logo-gattinger-gmbh.png" alt="Gattinger GmbH" loading="lazy"></div><div class="li" title="Gebr. Ho#U0308ltl"><img src="images/logo-gebr.-hoeltl.png" alt="Gebr. Ho#U0308ltl" loading="lazy"></div><div class="li" title="Georgs Malerbetrieb"><img src="images/logo-georgs-malerbetrieb.png" alt="Georgs Malerbetrieb" loading="lazy"></div><div class="li" title="Drehkranz Josef Schwarz"><img src="images/logo-drehkranz-josef-schwarz.png" alt="Drehkranz Josef Schwarz" loading="lazy"></div><div class="li" title="EckRu CNC"><img src="images/logo-eckru-cnc.png" alt="EckRu CNC" loading="lazy"></div><div class="li" title="Effenberger & Scha#U0308fer Metallbau"><img src="images/logo-effenberger-und-schaefer-metallbau.png" alt="Effenberger & Scha#U0308fer Metallbau" loading="lazy"></div><div class="li" title="Eggert KFZ Sachversta#U0308ndigenbu#U0308ro"><img src="images/logo-eggert-kfz-sachverstaendigenbuero.png" alt="Eggert KFZ Sachversta#U0308ndigenbu#U0308ro" loading="lazy"></div><div class="li" title="Eibl Bau"><img src="images/logo-eibl-bau.png" alt="Eibl Bau" loading="lazy"></div><div class="li" title="Elektro Langmajer"><img src="images/logo-elektro-langmajer.png" alt="Elektro Langmajer" loading="lazy"></div><div class="li" title="Esapovic Fensterreinigung"><img src="images/logo-esapovic-fensterreinigung.png" alt="Esapovic Fensterreinigung" loading="lazy"></div><div class="li" title="FM Pack GmbH"><img src="images/logo-fm-pack-gmbh.png" alt="FM Pack GmbH" loading="lazy"></div><div class="li" title="FM Pack"><img src="images/logo-fm-pack-gmbh.png" alt="FM Pack" loading="lazy"></div><div class="li" title="Federspiel Metallbau"><img src="images/logo-federspiel-metallbaulogo.png" alt="Federspiel Metallbau" loading="lazy"></div><div class="li" title="FlyIn BBQ Streetfood"><img src="images/logo-flyin-bbq-streetfood.png" alt="FlyIn BBQ Streetfood" loading="lazy"></div><div class="li" title="Franz Gallenberger"><img src="images/logo-franz-gallenberger.png" alt="Franz Gallenberger" loading="lazy"></div><div class="li" title="Franz Musch"><img src="images/logo-franz-musch.png" alt="Franz Musch" loading="lazy"></div><div class="li" title="Gattinger GmbH"><img src="images/logo-gattinger-gmbh.png" alt="Gattinger GmbH" loading="lazy"></div><div class="li" title="Gebr. Ho#U0308ltl"><img src="images/logo-gebr.-hoeltl.png" alt="Gebr. Ho#U0308ltl" loading="lazy"></div><div class="li" title="Georgs Malerbetrieb"><img src="images/logo-georgs-malerbetrieb.png" alt="Georgs Malerbetrieb" loading="lazy"></div></div></div>
+  <div class="lw-row"><div class="lw-track lw-t3"><div class="li" title="Goldacker"><img src="images/logo-goldacker.png" alt="Goldacker" loading="lazy"></div><div class="li" title="Gutachter Hilbenz"><img src="images/logo-gutachter-hilbenz.png" alt="Gutachter Hilbenz" loading="lazy"></div><div class="li" title="HaWe Engineering"><img src="images/logo-hawe-engineering.png" alt="HaWe Engineering" loading="lazy"></div><div class="li" title="Hannes Schmidt GmbH"><img src="images/logo-hannes-schmidt-gmbh.png" alt="Hannes Schmidt GmbH" loading="lazy"></div><div class="li" title="Happach Maschinenbau"><img src="images/logo-happach-maschinenbau.png" alt="Happach Maschinenbau" loading="lazy"></div><div class="li" title="Haustechnik Buchschmid"><img src="images/logo-haustechnik-buchschmid.png" alt="Haustechnik Buchschmid" loading="lazy"></div><div class="li" title="Hohenester Zimmerei"><img src="images/logo-hohenester-zimmerei.png" alt="Hohenester Zimmerei" loading="lazy"></div><div class="li" title="Holzbau Gerg"><img src="images/logo-holzbau-gerg.png" alt="Holzbau Gerg" loading="lazy"></div><div class="li" title="KFZ Greif"><img src="images/logo-kfz-greif.png" alt="KFZ Greif" loading="lazy"></div><div class="li" title="Lanzinger GmbH"><img src="images/logo-lanzinger-gmbh.png" alt="Lanzinger GmbH" loading="lazy"></div><div class="li" title="Lu#U0308ders Fliesen"><img src="images/logo-lueders-fliesen.png" alt="Lu#U0308ders Fliesen" loading="lazy"></div><div class="li" title="Maler Abenthum"><img src="images/logo-maler-abenthum.png" alt="Maler Abenthum" loading="lazy"></div><div class="li" title="Maler Bo#U0308ck"><img src="images/logo-maler-boeck.png" alt="Maler Bo#U0308ck" loading="lazy"></div><div class="li" title="Markus_Ditsch_Logo-transformed"><img src="images/logo-markus_ditsch_logo-transformed.png" alt="Markus_Ditsch_Logo-transformed" loading="lazy"></div><div class="li" title="Martin Wo#U0308rner Maler"><img src="images/logo-martin-woerner-maler.png" alt="Martin Wo#U0308rner Maler" loading="lazy"></div><div class="li" title="Goldacker"><img src="images/logo-goldacker.png" alt="Goldacker" loading="lazy"></div><div class="li" title="Gutachter Hilbenz"><img src="images/logo-gutachter-hilbenz.png" alt="Gutachter Hilbenz" loading="lazy"></div><div class="li" title="HaWe Engineering"><img src="images/logo-hawe-engineering.png" alt="HaWe Engineering" loading="lazy"></div><div class="li" title="Hannes Schmidt GmbH"><img src="images/logo-hannes-schmidt-gmbh.png" alt="Hannes Schmidt GmbH" loading="lazy"></div><div class="li" title="Happach Maschinenbau"><img src="images/logo-happach-maschinenbau.png" alt="Happach Maschinenbau" loading="lazy"></div><div class="li" title="Haustechnik Buchschmid"><img src="images/logo-haustechnik-buchschmid.png" alt="Haustechnik Buchschmid" loading="lazy"></div><div class="li" title="Hohenester Zimmerei"><img src="images/logo-hohenester-zimmerei.png" alt="Hohenester Zimmerei" loading="lazy"></div><div class="li" title="Holzbau Gerg"><img src="images/logo-holzbau-gerg.png" alt="Holzbau Gerg" loading="lazy"></div><div class="li" title="KFZ Greif"><img src="images/logo-kfz-greif.png" alt="KFZ Greif" loading="lazy"></div><div class="li" title="Lanzinger GmbH"><img src="images/logo-lanzinger-gmbh.png" alt="Lanzinger GmbH" loading="lazy"></div><div class="li" title="Lu#U0308ders Fliesen"><img src="images/logo-lueders-fliesen.png" alt="Lu#U0308ders Fliesen" loading="lazy"></div><div class="li" title="Maler Abenthum"><img src="images/logo-maler-abenthum.png" alt="Maler Abenthum" loading="lazy"></div><div class="li" title="Maler Bo#U0308ck"><img src="images/logo-maler-boeck.png" alt="Maler Bo#U0308ck" loading="lazy"></div><div class="li" title="Markus_Ditsch_Logo-transformed"><img src="images/logo-markus_ditsch_logo-transformed.png" alt="Markus_Ditsch_Logo-transformed" loading="lazy"></div><div class="li" title="Martin Wo#U0308rner Maler"><img src="images/logo-martin-woerner-maler.png" alt="Martin Wo#U0308rner Maler" loading="lazy"></div></div></div>
+  <div class="lw-row"><div class="lw-track lw-t4"><div class="li" title="Maser-Tankschutz-"><img src="images/logo-maser-tankschutz-logo.png" alt="Maser-Tankschutz-" loading="lazy"></div><div class="li" title="Matthias Maier Tiefbau"><img src="images/logo-matthias-maier-tiefbau.png" alt="Matthias Maier Tiefbau" loading="lazy"></div><div class="li" title="Max Gleiser Bau"><img src="images/logo-max-gleiser-bau.png" alt="Max Gleiser Bau" loading="lazy"></div><div class="li" title="Metallbau Wei#U00df"><img src="" alt="Metallbau Wei#U00df" loading="lazy"></div><div class="li" title="OSWALD-BAU-WEIL"><img src="" alt="OSWALD-BAU-WEIL" loading="lazy"></div><div class="li" title="Planung Hindelang"><img src="images/logo-planung-hindelang.png" alt="Planung Hindelang" loading="lazy"></div><div class="li" title="Resch Bau"><img src="images/logo-resch-bau.png" alt="Resch Bau" loading="lazy"></div><div class="li" title="Ruf Frischdienst"><img src="images/logo-ruf-frischdienst.png" alt="Ruf Frischdienst" loading="lazy"></div><div class="li" title="Schreinerei Die Fu#U0308hrma#U0308nner"><img src="images/logo-schreinerei-die-fuehrmaenner.png" alt="Schreinerei Die Fu#U0308hrma#U0308nner" loading="lazy"></div><div class="li" title="Schreinerei Kreitner"><img src="images/logo-schreinerei-kreitner.png" alt="Schreinerei Kreitner" loading="lazy"></div><div class="li" title="Schreinerei Rupp"><img src="images/logo-schreinerei-rupp.png" alt="Schreinerei Rupp" loading="lazy"></div><div class="li" title="Schuster Landmaschinen Agrartechnik"><img src="images/logo-schuster-landmaschinen-agrartechnik.png" alt="Schuster Landmaschinen Agrartechnik" loading="lazy"></div><div class="li" title="Schwaighofer-Betontechnik-"><img src="images/logo-schwaighofer-betontechnik-logo.png" alt="Schwaighofer-Betontechnik-" loading="lazy"></div><div class="li" title="Senftleben Haustechnik"><img src="images/logo-senftleben-haustechnik.png" alt="Senftleben Haustechnik" loading="lazy"></div><div class="li" title="Spenglerei Gleixner"><img src="images/logo-spenglerei-gleixner.png" alt="Spenglerei Gleixner" loading="lazy"></div><div class="li" title="Maser-Tankschutz-"><img src="images/logo-maser-tankschutz-logo.png" alt="Maser-Tankschutz-" loading="lazy"></div><div class="li" title="Matthias Maier Tiefbau"><img src="images/logo-matthias-maier-tiefbau.png" alt="Matthias Maier Tiefbau" loading="lazy"></div><div class="li" title="Max Gleiser Bau"><img src="images/logo-max-gleiser-bau.png" alt="Max Gleiser Bau" loading="lazy"></div><div class="li" title="Metallbau Wei#U00df"><img src="" alt="Metallbau Wei#U00df" loading="lazy"></div><div class="li" title="OSWALD-BAU-WEIL"><img src="" alt="OSWALD-BAU-WEIL" loading="lazy"></div><div class="li" title="Planung Hindelang"><img src="images/logo-planung-hindelang.png" alt="Planung Hindelang" loading="lazy"></div><div class="li" title="Resch Bau"><img src="images/logo-resch-bau.png" alt="Resch Bau" loading="lazy"></div><div class="li" title="Ruf Frischdienst"><img src="images/logo-ruf-frischdienst.png" alt="Ruf Frischdienst" loading="lazy"></div><div class="li" title="Schreinerei Die Fu#U0308hrma#U0308nner"><img src="images/logo-schreinerei-die-fuehrmaenner.png" alt="Schreinerei Die Fu#U0308hrma#U0308nner" loading="lazy"></div><div class="li" title="Schreinerei Kreitner"><img src="images/logo-schreinerei-kreitner.png" alt="Schreinerei Kreitner" loading="lazy"></div><div class="li" title="Schreinerei Rupp"><img src="images/logo-schreinerei-rupp.png" alt="Schreinerei Rupp" loading="lazy"></div><div class="li" title="Schuster Landmaschinen Agrartechnik"><img src="images/logo-schuster-landmaschinen-agrartechnik.png" alt="Schuster Landmaschinen Agrartechnik" loading="lazy"></div><div class="li" title="Schwaighofer-Betontechnik-"><img src="images/logo-schwaighofer-betontechnik-logo.png" alt="Schwaighofer-Betontechnik-" loading="lazy"></div><div class="li" title="Senftleben Haustechnik"><img src="images/logo-senftleben-haustechnik.png" alt="Senftleben Haustechnik" loading="lazy"></div><div class="li" title="Spenglerei Gleixner"><img src="images/logo-spenglerei-gleixner.png" alt="Spenglerei Gleixner" loading="lazy"></div></div></div>
+  <div class="lw-row"><div class="lw-track lw-t5"><div class="li" title="Steinmetz Janisch"><img src="images/logo-steinmetz-janisch.png" alt="Steinmetz Janisch" loading="lazy"></div><div class="li" title="Taro Design"><img src="images/logo-taro-design.png" alt="Taro Design" loading="lazy"></div><div class="li" title="Thomas Vogel Holzbau"><img src="images/logo-thomas-vogel-holzbau.png" alt="Thomas Vogel Holzbau" loading="lazy"></div><div class="li" title="W&W Bau"><img src="images/logo-wundw-bau.png" alt="W&W Bau" loading="lazy"></div><div class="li" title="WSU Geburek"><img src="images/logo-wsu-geburek.png" alt="WSU Geburek" loading="lazy"></div><div class="li" title="Wammetsberger Mess- und Regelungstechnik"><img src="images/logo-wammetsberger-mess-und-regelungstechnik.png" alt="Wammetsberger Mess- und Regelungstechnik" loading="lazy"></div><div class="li" title="Weber Metallbau"><img src="images/logo-weber-metallbau.png" alt="Weber Metallbau" loading="lazy"></div><div class="li" title="Wegele Bau GmbH Utting"><img src="images/logo-wegele-bau-gmbh-utting.png" alt="Wegele Bau GmbH Utting" loading="lazy"></div><div class="li" title="Yannick-Stimpfle-"><img src="images/logo-yannick-stimpfle-logo.png" alt="Yannick-Stimpfle-" loading="lazy"></div><div class="li" title="Zimmerei Knappich"><img src="images/logo-zimmerei-knappich.png" alt="Zimmerei Knappich" loading="lazy"></div><div class="li" title="Zimmerei Koller"><img src="images/logo-zimmerei-koller.png" alt="Zimmerei Koller" loading="lazy"></div><div class="li" title="Zimmerei Pfo#U0308derl"><img src="images/logo-zimmerei-pfoederl.png" alt="Zimmerei Pfo#U0308derl" loading="lazy"></div><div class="li" title="Zimmerei Rauschmair"><img src="images/logo-zimmerei-rauschmair.png" alt="Zimmerei Rauschmair" loading="lazy"></div><div class="li" title="Zimmerei Schneider"><img src="images/logo-zimmerei-schneider.png" alt="Zimmerei Schneider" loading="lazy"></div><div class="li" title="Zimmerei Schuster"><img src="images/logo-zimmerei-schuster.png" alt="Zimmerei Schuster" loading="lazy"></div><div class="li" title="Steinmetz Janisch"><img src="images/logo-steinmetz-janisch.png" alt="Steinmetz Janisch" loading="lazy"></div><div class="li" title="Taro Design"><img src="images/logo-taro-design.png" alt="Taro Design" loading="lazy"></div><div class="li" title="Thomas Vogel Holzbau"><img src="images/logo-thomas-vogel-holzbau.png" alt="Thomas Vogel Holzbau" loading="lazy"></div><div class="li" title="W&W Bau"><img src="images/logo-wundw-bau.png" alt="W&W Bau" loading="lazy"></div><div class="li" title="WSU Geburek"><img src="images/logo-wsu-geburek.png" alt="WSU Geburek" loading="lazy"></div><div class="li" title="Wammetsberger Mess- und Regelungstechnik"><img src="images/logo-wammetsberger-mess-und-regelungstechnik.png" alt="Wammetsberger Mess- und Regelungstechnik" loading="lazy"></div><div class="li" title="Weber Metallbau"><img src="images/logo-weber-metallbau.png" alt="Weber Metallbau" loading="lazy"></div><div class="li" title="Wegele Bau GmbH Utting"><img src="images/logo-wegele-bau-gmbh-utting.png" alt="Wegele Bau GmbH Utting" loading="lazy"></div><div class="li" title="Yannick-Stimpfle-"><img src="images/logo-yannick-stimpfle-logo.png" alt="Yannick-Stimpfle-" loading="lazy"></div><div class="li" title="Zimmerei Knappich"><img src="images/logo-zimmerei-knappich.png" alt="Zimmerei Knappich" loading="lazy"></div><div class="li" title="Zimmerei Koller"><img src="images/logo-zimmerei-koller.png" alt="Zimmerei Koller" loading="lazy"></div><div class="li" title="Zimmerei Pfo#U0308derl"><img src="images/logo-zimmerei-pfoederl.png" alt="Zimmerei Pfo#U0308derl" loading="lazy"></div><div class="li" title="Zimmerei Rauschmair"><img src="images/logo-zimmerei-rauschmair.png" alt="Zimmerei Rauschmair" loading="lazy"></div><div class="li" title="Zimmerei Schneider"><img src="images/logo-zimmerei-schneider.png" alt="Zimmerei Schneider" loading="lazy"></div><div class="li" title="Zimmerei Schuster"><img src="images/logo-zimmerei-schuster.png" alt="Zimmerei Schuster" loading="lazy"></div></div></div>
+</div>
+</section>
+
+<section id="fotos" class="foto-strip-section">
+  <div class="foto-strip-head reveal">
+    <div class="sec-label">Referenzen</div>
+    <h2>Aus der Praxis</h2>
+    <p class="foto-strip-sub">Sanitär &amp; Heizung, Zimmerei, Metallbau &amp; viele mehr – wir sind in allen Handwerksbranchen zuhause.</p>
+  </div>
+  <div class="foto-strip-wrap" id="fotoStrip">
+    <div class="foto-strip">
+  <div class="foto-card">
+    <img src="images/foto-schreinerei-kreitner.jpg" alt="Handwerksbetrieb - Schreinerei" loading="lazy">
+    <div class="foto-card-overlay"></div>
+    <div class="foto-card-text">
+      <div class="foto-card-name">Schreinerei</div>
+    </div>
+  </div>
+  <div class="foto-card">
+    <img src="images/foto-sd-hirsch.jpg" alt="Handwerksbetrieb - Automotive" loading="lazy">
+    <div class="foto-card-overlay"></div>
+    <div class="foto-card-text">
+      <div class="foto-card-name">Automotive</div>
+    </div>
+  </div>
+  <div class="foto-card">
+    <img src="images/foto-kirchner.jpg" alt="Handwerksbetrieb - Bau" loading="lazy">
+    <div class="foto-card-overlay"></div>
+    <div class="foto-card-text">
+      <div class="foto-card-name">Bau</div>
+    </div>
+  </div>
+  <div class="foto-card">
+    <img src="images/foto-cs-metalldesign.jpg" alt="Handwerksbetrieb - Metallbau" loading="lazy">
+    <div class="foto-card-overlay"></div>
+    <div class="foto-card-text">
+      <div class="foto-card-name">Metallbau</div>
+    </div>
+  </div>
+  <div class="foto-card">
+    <img src="images/foto-hawe-engineering.jpg" alt="Handwerksbetrieb - Engineering" loading="lazy">
+    <div class="foto-card-overlay"></div>
+    <div class="foto-card-text">
+      <div class="foto-card-name">Engineering</div>
+    </div>
+  </div>
+  <div class="foto-card">
+    <img src="images/foto-allplast-laser.jpg" alt="Handwerksbetrieb - Lasertechnik" loading="lazy">
+    <div class="foto-card-overlay"></div>
+    <div class="foto-card-text">
+      <div class="foto-card-name">Maschinenbau</div>
+    </div>
+  </div>
+  <div class="foto-card">
+    <img src="images/foto-kuchenhaus-hirschvogel.jpg" alt="Handwerksbetrieb - Küche & Wohnen" loading="lazy">
+    <div class="foto-card-overlay"></div>
+    <div class="foto-card-text">
+      <div class="foto-card-name">Küche & Wohnen</div>
+    </div>
+  </div>
+  <div class="foto-card">
+    <img src="images/foto-klass-heizung.jpg" alt="Handwerksbetrieb - Sanitär" loading="lazy">
+    <div class="foto-card-overlay"></div>
+    <div class="foto-card-text">
+      <div class="foto-card-name">Sanitär</div>
+    </div>
+  </div>
+  <div class="foto-card">
+    <img src="images/foto-elektro.jpg" alt="Handwerksbetrieb - Handwerk" loading="lazy">
+    <div class="foto-card-overlay"></div>
+    <div class="foto-card-text">
+      <div class="foto-card-name">Elektro</div>
+    </div>
+  </div>
+  <div class="foto-card">
+    <img src="images/foto-monteur.jpg" alt="Handwerksbetrieb - Handwerk" loading="lazy">
+    <div class="foto-card-overlay"></div>
+    <div class="foto-card-text">
+      <div class="foto-card-name">Montage</div>
+    </div>
+  </div>
+    </div>
+  </div>
+  <div class="foto-strip-hint">Scrollen für mehr Einblicke</div>
+</section>
+
+<script>
+(function(){
+  var el=document.getElementById('fotoStrip');
+  if(!el)return;
+  var down=false,startX,scrollL;
+  el.addEventListener('mousedown',function(e){down=true;startX=e.pageX-el.offsetLeft;scrollL=el.scrollLeft;});
+  document.addEventListener('mouseup',function(){down=false;});
+  el.addEventListener('mousemove',function(e){if(!down)return;e.preventDefault();var x=e.pageX-el.offsetLeft;el.scrollLeft=scrollL-(x-startX);});
+})();
+</script>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="reveal">
+    <div class="sec-label">Das Problem</div>
+    <h2>Gutes Handwerk –<br>das kaum jemand findet</h2>
+    <p class="sec-sub">Ob volle Auftragsbücher oder Flaute: <strong>Ohne starke digitale Präsenz verschenkst du Potenzial</strong> – jeden Tag. Wir übernehmen alles, du machst weiter was du kannst.</p>
+  </div>
+  <div class="problem-grid">
+    <div class="p-items">
+      <div class="p-item stagger"><div class="p-icon">📉</div><div><h4>Empfehlungen reichen heute nicht mehr</h4><p>Empfehlungen sind wertvoll – aber nicht planbar. Wer digital sichtbar ist, hat eine zweite konstante Anfragequelle, die er selbst steuert.</p></div></div>
+      <div class="p-item stagger"><div class="p-icon">🔍</div><div><h4>Täglich verlierst du Kunden an den Wettbewerb</h4><p>Kunden googeln – und wenn sie dich nicht finden, rufen sie den nächsten an. Das passiert auch wenn dein Handwerk besser ist.</p></div></div>
+      <div class="p-item stagger"><div class="p-icon">👷</div><div><h4>Auch wer gut läuft, kann mehr rausholen</h4><p>Viele Betriebe laufen gut – aber ein professioneller Auftritt bringt noch bessere Aufträge, mehr Auswahl bei Bewerbern und mehr Planbarkeit.</p></div></div>
+      <div class="p-item stagger"><div class="p-icon">⏱️</div><div><h4>Kein Aufwand für dich</h4><p>Website, Fotos, Texte, SEO, Google-Profil – wir übernehmen alles. Du brauchst nur 10 Minuten für das erste Gespräch.</p></div></div>
+    </div>
+    <div class="sol-box reveal">
+      <h3>Alles aus<br>einer Hand</h3>
+      <p>Ob du gerade kämpfst oder gut läufst – wir holen dich genau da ab, wo du stehst, und bringen dich auf das nächste Level.</p>
+      <div class="sol-step"><div class="sol-num">1</div><span>Professioneller Auftritt mit Fotoshooting</span></div>
+      <div class="sol-step"><div class="sol-num">2</div><span>Sichtbarkeit bei Google & Maps</span></div>
+      <div class="sol-step"><div class="sol-num">3</div><span>Planbare Anfragen & Fachkräfte</span></div>
+      <div class="sol-step"><div class="sol-num">4</div><span>Alles aus einer Hand – minimaler Aufwand</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="reveal">
+    <div class="sec-label">Leistungen</div>
+    <h2>Was wir für Sie tun</h2>
+    <p class="sec-sub">Kein Baukastensystem – ein abgestimmtes System, das alle Maßnahmen auf ein Ziel ausrichtet: Ihr planbares Wachstum.</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc stagger"><div class="svc-icon"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="8" width="56" height="38" rx="4" stroke="white" stroke-width="4"/><path d="M22 8v38M42 8v38" stroke="white" stroke-width="2" opacity=".4"/><path d="M4 30h56" stroke="white" stroke-width="2" opacity=".4"/><rect x="20" y="46" width="24" height="4" rx="2" fill="white"/><rect x="14" y="50" width="36" height="6" rx="3" fill="white" opacity=".5"/><path d="M16 20l6 6-6 6M30 32h12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-num">01</div><h3>Webdesign & Entwicklung</h3><p>Moderne, schnelle Websites, die Ihre Leistungen professionell präsentieren und Besucher zu Anfragen konvertieren. Inkl. Fotoshooting direkt bei Ihnen.</p><div class="svc-arr">Mehr erfahren →</div></div>
+    <div class="svc stagger"><div class="svc-icon"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="26" r="18" stroke="white" stroke-width="4"/><path d="M39 39l16 16" stroke="white" stroke-width="4" stroke-linecap="round"/><path d="M14 30l6-8 6 4 6-10 6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-num">02</div><h3>SEO & Google-Sichtbarkeit</h3><p>Gezielte Suchmaschinenoptimierung, damit Ihr Betrieb bei relevanten Suchanfragen in Ihrer Region ganz oben erscheint.</p><div class="svc-arr">Mehr erfahren →</div></div>
+    <div class="svc stagger"><div class="svc-icon"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="26" stroke="white" stroke-width="4"/><circle cx="32" cy="32" r="16" stroke="white" stroke-width="3" opacity=".6"/><circle cx="32" cy="32" r="7" fill="white" opacity=".8"/><path d="M32 6v8M32 50v8M6 32h8M50 32h8" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".4"/></svg></div><div class="svc-num">03</div><h3>Auftragsgewinnung</h3><p>Strategische Google- & Meta-Kampagnen, die kontinuierlich qualifizierte Anfragen bringen – planbar und mit klaren Zahlen.</p><div class="svc-arr">Mehr erfahren →</div></div>
+    <div class="svc stagger"><div class="svc-icon"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="22" cy="18" r="10" stroke="white" stroke-width="4"/><circle cx="44" cy="22" r="8" stroke="white" stroke-width="3" opacity=".6"/><path d="M2 52c0-11 9-18 20-18s20 7 20 18" stroke="white" stroke-width="4" stroke-linecap="round"/><path d="M44 38c8 0 14 4 14 14" stroke="white" stroke-width="3" stroke-linecap="round" opacity=".6"/></svg></div><div class="svc-num">04</div><h3>Fachkräfte-Recruiting</h3><p>Ein strukturiertes System, das Handwerker auf Ihren Betrieb aufmerksam macht und zu Bewerbungen motiviert – regional und zielgenau.</p><div class="svc-arr">Mehr erfahren →</div></div>
+    <div class="svc stagger"><div class="svc-icon"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="18" width="56" height="38" rx="5" stroke="white" stroke-width="4"/><circle cx="32" cy="37" r="11" stroke="white" stroke-width="4"/><circle cx="32" cy="37" r="5" fill="white" opacity=".6"/><path d="M22 18l4-8h12l4 8" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="28" r="3" fill="white" opacity=".6"/></svg></div><div class="svc-num">05</div><h3>Professionelle Fotografie</h3><p>Echte Fotos aus Ihrem Betrieb statt generischer Stock-Bilder. Wir kommen zu Ihnen – für Authentizität, die Vertrauen schafft.</p><div class="svc-arr">Mehr erfahren →</div></div>
+    <div class="svc stagger"><div class="svc-icon"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M32 4L8 14v20c0 14 11 24 24 26 13-2 24-12 24-26V14L32 4z" stroke="white" stroke-width="4" stroke-linejoin="round"/><path d="M22 32l6 6 14-14" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="svc-num">06</div><h3>Betreuung & Support</h3><p>Wartung, Pflege und strategische Weiterentwicklung nach dem Launch. Damit Ihr Auftritt dauerhaft Ergebnisse liefert.</p><div class="svc-arr">Mehr erfahren →</div></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <div class="sec-label">Projekte</div>
+    <h2>Echte Ergebnisse für echte Handwerker</h2>
+    <p class="sec-sub">Kein Hochglanz-Portfolio für Konzerne. Handfeste Resultate für Betriebe genau wie Ihren.</p>
+  </div>
+  <div class="proj-featured-wrap">
+    <div class="proj-feat stagger">
+      <div class="proj-img-wrap"><img src="images/mockup-sd-hirsch.png" alt="SD Hirsch" loading="lazy"><span class="proj-badge">Automotive</span></div>
+      <div class="proj-body">
+        <h3>SD Hirsch Automotive GmbH</h3>
+        <p>Veralteter Auftritt spiegelte die industrielle Leistungsfähigkeit nicht wider. Neuer Webauftritt mit professionellem Fotoshooting und klarer Kommunikation der Kernkompetenzen.</p>
+        <div class="proj-result">✅ Professioneller Online-Auftritt – klar, modern, überzeugend</div>
+        <a href="https://sdhirsch.de" target="_blank" rel="noopener" class="proj-link">Zur Website →</a>
+      </div>
+    </div>
+    <div class="proj-feat reverse stagger">
+      <div class="proj-img-wrap"><img src="images/mockup-zimmerei-knappich.png" alt="Zimmerei Knappich" loading="lazy"><span class="proj-badge">Zimmerei</span></div>
+      <div class="proj-body">
+        <h3>Zimmerei Knappich</h3>
+        <p>Nicht mobiloptimierte Website ohne klare Leistungsdarstellung. Moderner Auftritt mit Projektgalerie, SEO-Optimierung und messbaren Ergebnissen.</p>
+        <div class="proj-result">🔨 Neue Website mit Projektgalerie & mobilem Design</div>
+        <a href="https://zimmerei-knappich.de" target="_blank" rel="noopener" class="proj-link">Zur Website →</a>
+      </div>
+    </div>
+  </div>
+  <div class="proj-sm-grid">
+    <div class="proj-sm stagger">
+      <div class="proj-img-wrap"><img src="images/mockup-kuchenhaus-hirschvogel.png" alt="Küchenhaus Hirschvogel" loading="lazy"><span class="proj-badge">Küchenstudio</span></div>
+      <div class="proj-body"><h3>Küchenhaus Hirschvogel</h3><p>Kompletter Neuauftritt mit Fotoshooting – professionell, vertrauenswürdig, konversionsstark.</p><div class="proj-result">⭐ Hochwertiger Auftritt – mehr Vertrauen, mehr Anfragen</div><a href="https://kuechenhaus-hirschvogel.de" target="_blank" rel="noopener" class="proj-link">Zur Website →</a></div>
+    </div>
+    <div class="proj-sm stagger">
+      <div class="proj-img-wrap"><img src="images/mockup-lanzinger.png" alt="Lanzinger GmbH" loading="lazy"><span class="proj-badge">Heizung & Sanitär</span></div>
+      <div class="proj-body"><h3>Lanzinger GmbH</h3><p>Komplette Neupositionierung mit neuem Branding und klarer, moderner Benutzerführung.</p><div class="proj-result">🏆 Moderner Auftritt mit klarer Positionierung im Netz</div><a href="https://lanzinger-gmbh.de" target="_blank" rel="noopener" class="proj-link">Zur Website →</a></div>
+    </div>
+    <div class="proj-sm stagger">
+      <div class="proj-img-wrap"><img src="images/mockup-sussmeier-heizungstechnik.png" alt="Süßmeier" loading="lazy"><span class="proj-badge">Heizungstechnik</span></div>
+      <div class="proj-body"><h3>Süßmeier Heizungstechnik</h3><p>Moderner Auftritt für ein etabliertes Familienunternehmen – minimal Aufwand, maximale Wirkung.</p><div class="proj-result">✅ Rundum-Paket: Design, Texte, Fotos – alles aus einer Hand</div><a href="https://suessmeier-heizung-solar.de" target="_blank" rel="noopener" class="proj-link">Zur Website →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-layout">
+    <div class="about-visual reveal">
+      <img src="images/foto-noah-portrait.jpg" alt="Noah Seelau" class="about-main">
+      <div class="about-inset"><img src="" alt="Noah Seelau Portrait" loading="lazy"></div>
+      <div class="about-badge"><div class="bn">120<span style="color:var(--accent)">+</span></div><div class="bl">Betriebe betreut</div></div>
+    </div>
+    <div class="about-text reveal">
+      <div class="sec-label">Über uns</div>
+      <h2>Digital stark.<br>Persönlich betreut.</h2>
+      <p>Wir sind die HandwerksManufaktur – ein kleines, spezialisiertes Team mit großer Wirkung. Seit über sechs Jahren unterstützen wir Handwerksbetriebe dabei, digital sichtbar zu werden, planbar Aufträge zu gewinnen und die richtigen Fachkräfte zu finden.</p>
+      <p>Als kleines Team von drei Spezialisten kümmern wir uns persönlich um jeden Betrieb – von der ersten Idee bis zur laufenden Betreuung. Unser Fokus: <strong>messbare Ergebnisse</strong> statt leere Versprechen.</p>
+      <div class="noah-card">
+        <div class="noah-img"><img src="images/foto-noah-portrait-rund.png" alt="Noah Seelau" loading="lazy"></div>
+        <div>
+          <div class="noah-name">Noah Seelau</div>
+          <div class="noah-role">Gründer & Geschäftsführer</div>
+          <div class="noah-quote">"Handwerk verdient einen Partner, der die Branche wirklich kennt – nicht nur von außen."</div>
+        </div>
+      </div>
+      <div class="about-hl">
+        <div class="hl"><div class="hldot"></div><span>Über 120 Handwerksbetriebe erfolgreich betreut</span></div>
+        <div class="hl"><div class="hldot"></div><span>Fotoshooting und Umsetzung direkt vor Ort</span></div>
+        <div class="hl"><div class="hldot"></div><span>Messbare Ergebnisse statt leere Versprechen</span></div>
+        <div class="hl"><div class="hldot"></div><span>Ausschließlich auf Handwerk spezialisiert</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-inner">
+  <div>
+  <div class="reveal">
+    <div class="sec-label">So läuft es ab</div>
+    <h2>Ihr Weg zum digitalen Wachstum</h2>
+    <p class="sec-sub">Von der ersten Anfrage bis zum laufenden Betrieb – klar strukturiert, transparent, mit minimalem Aufwand für Sie.</p>
+  </div>
+  <div class="proc-layout">
+  <div class="process-list" style="position:relative;">
+    <div class="proc-line"></div>
+    <div class="proc-step stagger"><div class="proc-num">01</div><div class="proc-content"><h3>Kostenloses Erstgespräch (10 Min.)</h3><p>Ein kurzes Gespräch – auch auf der Baustelle – in dem wir Ihre Situation analysieren. Kein Verkaufsdruck, keine Verpflichtung.</p></div></div>
+    <div class="proc-step stagger"><div class="proc-num">02</div><div class="proc-content"><h3>Strategie & Konzept</h3><p>Individuelle Strategie für Ihren Betrieb – klarer Plan mit konkreten Zielen und Maßnahmen, die wirklich passen.</p></div></div>
+    <div class="proc-step stagger"><div class="proc-num">03</div><div class="proc-content"><h3>Fotoshooting & Umsetzung</h3><p>Wir kommen zu Ihnen, machen professionelle Fotos und bauen Ihren neuen Auftritt auf. Drei Entwurfsschleifen inklusive.</p></div></div>
+    <div class="proc-step stagger"><div class="proc-num">04</div><div class="proc-content"><h3>Launch & erste Kampagnen</h3><p>Website geht live, Kampagnen starten. Wir optimieren kontinuierlich und berichten transparent.</p></div></div>
+    <div class="proc-step stagger"><div class="proc-num">05</div><div class="proc-content"><h3>Laufende Betreuung</h3><p>Regelmäßige Optimierungen, Support und strategische Weiterentwicklung – dauerhaft planbar wachsen.</p></div></div>
+  
+<div class="proc-orbit">
+  <div class="proc-orbit-ring"><div class="proc-orbit-dot"></div></div>
+  <div class="proc-orbit-ring"><div class="proc-orbit-dot"></div></div>
+  <div class="proc-orbit-ring"><div class="proc-orbit-dot"></div></div>
+</div>
+</div>
+<div class="proc-visual">
+  <div class="proc-anim">
+    <div class="proc-anim-line"></div>
+    <div class="proc-anim-prog"></div>
+    <!-- Node 1 -->
+    <div class="proc-anim-node active" style="top:48px;"></div>
+    <div class="proc-anim-label" style="top:42px;"><strong>Erstgespräch</strong>Kostenlos · 10 Min.</div>
+    <!-- Node 2 -->
+    <div class="proc-anim-node" style="top:136px;" id="pn2"></div>
+    <div class="proc-anim-label" style="top:130px;"><strong>Strategie</strong>Individuell für Ihren Betrieb</div>
+    <!-- Node 3 -->
+    <div class="proc-anim-node" style="top:224px;" id="pn3"></div>
+    <div class="proc-anim-label" style="top:218px;"><strong>Umsetzung</strong>Fotoshooting &amp; Launch</div>
+    <!-- Node 4 -->
+    <div class="proc-anim-node" style="top:312px;" id="pn4"></div>
+    <div class="proc-anim-label" style="top:306px;"><strong>Live &amp; sichtbar</strong>Ihre neue Website</div>
+    <!-- Node 5 -->
+    <div class="proc-anim-node" style="top:400px;" id="pn5"></div>
+    <div class="proc-anim-label" style="top:394px;"><strong>Betreuung</strong>Laufend optimiert</div>
+    <!-- Floating bubble -->
+    <div class="proc-anim-bubble" style="top:36px;right:20px;">✓ Kein Aufwand für Sie</div>
+    <div class="proc-anim-bubble" style="top:120px;right:20px;animation-delay:1s;">📞 Schnelle Reaktion</div>
+    <div class="proc-anim-bubble" style="top:204px;right:20px;animation-delay:2s;">📸 Vor Ort dabei</div>
+  </div>
+  <script>
+  (function(){
+    var nodes=[document.getElementById('pn2'),document.getElementById('pn3'),document.getElementById('pn4'),document.getElementById('pn5')];
+    var i=0;
+    setInterval(function(){
+      if(i<nodes.length&&nodes[i])nodes[i].classList.add('active');
+      i++;
+    },1000);
+  })();
+  </script>
+</div>
+</div></div>
+  </div>
+  <div class="proc-visual">
+  <div class="proc-orb-wrap">
+    <div class="proc-orb">Start</div>
+    <div class="proc-orb-line"></div>
+    <div class="proc-orb">Plan</div>
+    <div class="proc-orb-line"></div>
+    <div class="proc-orb">Shoot</div>
+    <div class="proc-orb-line"></div>
+    <div class="proc-orb">Build</div>
+    <div class="proc-orb-line"></div>
+    <div class="proc-orb">Live</div>
+  </div>
+</div>
+  
+<div class="proc-anim" aria-hidden="true">
+  <div class="proc-anim-step"><div class="pa-num">01</div><div class="pa-bar"></div></div>
+  <div class="proc-anim-step"><div class="pa-num">02</div><div class="pa-bar"></div></div>
+  <div class="proc-anim-step"><div class="pa-num">03</div><div class="pa-bar"></div></div>
+  <div class="proc-anim-step"><div class="pa-num">04</div><div class="pa-bar"></div></div>
+  <div class="proc-anim-step"><div class="pa-num">05</div><div class="pa-bar"></div></div>
+</div>
+</div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="reveal">
+    <div class="sec-label">Warum HandwerksManufaktur</div>
+    <h2>Der Unterschied, den Sie spüren werden</h2>
+  </div>
+  <div class="why-grid">
+    <div class="wi stagger"><div class="wi-icon">🎯</div><h4>100% Handwerk-Fokus</h4><p>Ausschließlich Handwerksbetriebe – keine Abstriche durch andere Branchen.</p></div>
+    <div class="wi stagger"><div class="wi-icon">📊</div><h4>Messbare Ergebnisse</h4><p>Klare Zahlen statt Versprechen – volle Transparenz über Kosten und Anfragen.</p></div>
+    <div class="wi stagger"><div class="wi-icon">⚡</div><h4>Minimaler Aufwand</h4><p>Strategie, Texte, Umsetzung – alles übernehmen wir. Sie konzentrieren sich aufs Handwerk.</p></div>
+    <div class="wi stagger"><div class="wi-icon">🛡️</div><h4>Zufriedenheitsgarantie</h4><p>Drei Entwurfsschleifen inklusive. Fertig erst wenn Sie vollständig zufrieden sind.</p></div>
+    <div class="wi stagger"><div class="wi-icon">📍</div><h4>Regionale Dominanz</h4><p>Sichtbarkeit dort, wo Ihre Kunden und Fachkräfte suchen – lokal, präzise.</p></div>
+    <div class="wi stagger"><div class="wi-icon">🤝</div><h4>Langfristige Partnerschaft</h4><p>Kein einmaliges Projekt – ein Partner, der dauerhaft strategisch begleitet.</p></div>
+    <div class="wi stagger"><div class="wi-icon">📸</div><h4>Echte Fotografie</h4><p>Professionelle Fotos aus Ihrem Betrieb – Authentizität schafft Vertrauen.</p></div>
+    <div class="wi stagger"><div class="wi-icon">🔧</div><h4>120+ Betriebe Erfahrung</h4><p>Über 120 Betriebe transformiert – wir wissen, was wirklich funktioniert.</p></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+
+<!-- WhatsApp Testimonial -->
+<div class="wa-testimonial reveal">
+  <div class="wa-img-wrap">
+    <img src="images/testimonial-kunde.jpg" alt="Kundenfeedback via WhatsApp" loading="lazy">
+  </div>
+  <div class="wa-content">
+    <div class="wa-badge">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Echtes Kundenfeedback
+    </div>
+    <div class="wa-quote">
+      „Viele sagen, dass wir eine <strong>super Website haben</strong> und es kommen dadurch wirklich viele auf mich zu! Ich denke, ohne diesen Weg hätten wir dieses Jahr <strong>lange nicht die Arbeit und nicht die Anfragen.</strong>"
+    </div>
+    <div class="wa-source">Autohaus-Kunde – via WhatsApp</div>
+  </div>
+</div>
+
+<section id="reviews">
+  <div class="reveal">
+    <div class="sec-label">Google Bewertungen</div>
+    <h2>Was unsere Kunden sagen</h2>
+    <p class="sec-sub">Echte Bewertungen von echten Handwerksbetrieben – direkt von Google.</p>
+    <div class="reviews-score">
+      <div class="rs-num">5.0</div>
+      <div><div class="rs-stars">★★★★★</div><div class="rs-label">Basierend auf Google Bewertungen</div></div>
+    </div>
+  </div>
+  <div class="wa-testimonial reveal">
+  <div class="wa-quote-mark">"</div>
+  <div class="wa-badge">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.558 4.135 1.535 5.874L0 24l6.29-1.51A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.792 9.792 0 01-5.001-1.374l-.36-.214-3.733.897.934-3.622-.235-.372A9.772 9.772 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+    WhatsApp – Kundenrückmeldung
+  </div>
+  <p class="wa-quote">„Viele sagen das wir eine <strong>super Website</strong> haben und es kommen dadurch <strong>wirklich viele auf mich zu!</strong> Also ich denke ohne diesen Weg hätten wir dieses Jahr lange nicht die Arbeit und nicht die Anfragen – also Mega."</p>
+  <div class="wa-sender">Autohaus-Kunde, Bayern</div>
+</div>
+
+<!-- WhatsApp Testimonial -->
+<div class="wa-testimonial reveal">
+  <div class="wa-inner">
+    <div class="wa-left">
+      <div class="wa-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </div>
+      <div class="wa-label">WhatsApp</div>
+    </div>
+    <div class="wa-content">
+      <div class="wa-quote">„Seit ca. 6 Monaten läuft alles super. Haben top Leute gefunden und auch Aufträge kommen über die Seite. Können uns gar nicht vorstellen wie es ohne wäre 😊"</div>
+      <div class="wa-author">
+        <span class="wa-name">Alisa Kirchner</span>
+        <span class="wa-company">Kirchner GmbH · Bau</span>
+        <span class="wa-stars">★★★★★</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="reviews-grid">
+    <div class="rc">
+  <div class="rc-top">
+    <div class="rc-av">AS</div>
+    <div class="rc-meta">
+      <div class="rc-name">Andreas Schuster</div>
+      <div class="rc-role">Handwerksbetrieb</div>
+    </div>
+  </div>
+  <div class="rc-stars">★★★★★</div>
+  <p class="rc-text">"Noah von der Handwerksmanufaktur hat uns beim Aufbau unserer Website unterstützt. Die Beratung war sehr kompetent und zuverlässig. Auch die Umsetzung verlief reibungslos und zu unserer vollen Zufriedenheit. Wir können die Zusammenarbeit definitiv weiterempfehlen."</p>
+  <div class="rc-google"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google Bewertung</span></div>
+</div><div class="rc">
+  <div class="rc-top">
+    <div class="rc-av">AK</div>
+    <div class="rc-meta">
+      <div class="rc-name">Alisa Kirchner</div>
+      <div class="rc-role">Kirchner GmbH</div>
+    </div>
+  </div>
+  <div class="rc-stars">★★★★★</div>
+  <p class="rc-text">"Noah hat unsere Website erstellt und auch die Bilder hierfür gemacht! Wir sind absolut happy und die Zusammenarbeit läuft immer super unkompliziert. Zusätzlich haben wir sein Recruiting Angebot in Anspruch genommen – absolute Empfehlung!"</p>
+  <div class="rc-google"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google Bewertung</span></div>
+</div><div class="rc">
+  <div class="rc-top">
+    <div class="rc-av">FG</div>
+    <div class="rc-meta">
+      <div class="rc-name">Franz Gallenberger</div>
+      <div class="rc-role">Sanitär-Heizung-Klimatechnik</div>
+    </div>
+  </div>
+  <div class="rc-stars">★★★★★</div>
+  <p class="rc-text">"Vom ersten Kontakt bis zur Umsetzung hat wirklich alles wunderbar funktioniert. Besonders beeindruckt hat uns die Kombination aus fachlicher Expertise und einer angenehm freundlichen Art. Das Ergebnis hat unsere Erwartungen sogar übertroffen."</p>
+  <div class="rc-google"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google Bewertung</span></div>
+</div><div class="rc">
+  <div class="rc-top">
+    <div class="rc-av">TV</div>
+    <div class="rc-meta">
+      <div class="rc-name">Thomas Vogel</div>
+      <div class="rc-role">Thomas Vogel Holzbau</div>
+    </div>
+  </div>
+  <div class="rc-stars">★★★★★</div>
+  <p class="rc-text">"Nach anfangs kleinen Startschwierigkeiten, danach aber eine super Zusammenarbeit – professionell, zuverlässig und mit einem tollen Endergebnis. Vielen Dank Noah, für deinen Einsatz."</p>
+  <div class="rc-google"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google Bewertung</span></div>
+</div><div class="rc">
+  <div class="rc-top">
+    <div class="rc-av">AR</div>
+    <div class="rc-meta">
+      <div class="rc-name">Autohaus Ressle</div>
+      <div class="rc-role">Autohaus</div>
+    </div>
+  </div>
+  <div class="rc-stars">★★★★★</div>
+  <p class="rc-text">"Herr Seelau hat uns mit Social Recruiting unterstützt. Wir haben eine überraschend hohe Anzahl an Bewerbern erhalten. Für uns ist dieser Weg der Personalsuche zukunftsweisend. Wir werden sicher wieder zusammenarbeiten!"</p>
+  <div class="rc-google"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google Bewertung</span></div>
+</div><div class="rc">
+  <div class="rc-top">
+    <div class="rc-av">KD</div>
+    <div class="rc-meta">
+      <div class="rc-name">K. Dörfler</div>
+      <div class="rc-role">Bauunternehmen</div>
+    </div>
+  </div>
+  <div class="rc-stars">★★★★★</div>
+  <p class="rc-text">"Auch ich empfehle nur zu gerne die HandwerksManufaktur weiter! Danke Noah für deinen professionellen Einsatz und die schnelle und einwandfreie Wiederherstellung meiner Homepage!"</p>
+  <div class="rc-google"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google Bewertung</span></div>
+</div><div class="rc">
+  <div class="rc-top">
+    <div class="rc-av">LG</div>
+    <div class="rc-meta">
+      <div class="rc-name">Lanzinger GmbH</div>
+      <div class="rc-role">Heizung & Sanitär</div>
+    </div>
+  </div>
+  <div class="rc-stars">★★★★★</div>
+  <p class="rc-text">"Reibungsloser Ablauf bis zur Fertigstellung der Homepage. Alle gewünschten Details wurden super umgesetzt. Vielen Dank für die einwandfreie Zusammenarbeit, gerne wieder."</p>
+  <div class="rc-google"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google Bewertung</span></div>
+</div><div class="rc">
+  <div class="rc-top">
+    <div class="rc-av">MF</div>
+    <div class="rc-meta">
+      <div class="rc-name">Martin Führmann</div>
+      <div class="rc-role">Schreinerei Gebr. Führmann GbR</div>
+    </div>
+  </div>
+  <div class="rc-stars">★★★★★</div>
+  <p class="rc-text">"Noah hat uns eine sehr schöne Webseite erstellt. Er hat super Vorschläge gemacht und ist auf unsere Änderungswünsche eingegangen. Sehr zum weiterempfehlen!"</p>
+  <div class="rc-google"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google Bewertung</span></div>
+</div><div class="rc">
+  <div class="rc-top">
+    <div class="rc-av">JF</div>
+    <div class="rc-meta">
+      <div class="rc-name">Jules Frey</div>
+      <div class="rc-role">Zimmerei Schneider GmbH</div>
+    </div>
+  </div>
+  <div class="rc-stars">★★★★★</div>
+  <p class="rc-text">"Noah macht einen super Job, ist sehr verlässlich und meldet sich immer zeitnah zurück. Wir sind mega happy mit unserer neuen Homepage – wärmste Empfehlung!"</p>
+  <div class="rc-google"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google Bewertung</span></div>
+</div><div class="rc">
+  <div class="rc-top">
+    <div class="rc-av">SF</div>
+    <div class="rc-meta">
+      <div class="rc-name">Stefan Fritsch</div>
+      <div class="rc-role">Handwerksbetrieb</div>
+    </div>
+  </div>
+  <div class="rc-stars">★★★★★</div>
+  <p class="rc-text">"Noah hat uns eine super Homepage erstellt, steht bei Fragen stets zur Seite und arbeitet sehr verlässlich. Klare Empfehlung."</p>
+  <div class="rc-google"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google Bewertung</span></div>
+</div><div class="rc">
+  <div class="rc-top">
+    <div class="rc-av">II</div>
+    <div class="rc-meta">
+      <div class="rc-name">Inna Illenseer</div>
+      <div class="rc-role">Selbstständig</div>
+    </div>
+  </div>
+  <div class="rc-stars">★★★★★</div>
+  <p class="rc-text">"Klare Empfehlung! Noah Seelau arbeitet sehr zuverlässig, genau und mit viel Gespür fürs Detail. Die Kommunikation war immer unkompliziert und angenehm. Die Webseite ist wunderschön geworden und spiegelt genau das wider, was ich mir vorgestellt habe."</p>
+  <div class="rc-google"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google Bewertung</span></div>
+</div><div class="rc">
+  <div class="rc-top">
+    <div class="rc-av">MB</div>
+    <div class="rc-meta">
+      <div class="rc-name">Marcel Burkart</div>
+      <div class="rc-role">Selbstständig</div>
+    </div>
+  </div>
+  <div class="rc-stars">★★★★★</div>
+  <p class="rc-text">"Sehr zu empfehlen, wenn es um eine neue Website geht. Wir waren sehr zufrieden und die Umsetzung war sehr unkompliziert!"</p>
+  <div class="rc-google"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg><span>Google Bewertung</span></div>
+</div>
+  </div>
+<div class="wa-testimonial reveal">
+  <div class="wa-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.11 1.522 5.836L.044 23.956l6.306-1.454A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.368l-.36-.214-3.727.859.883-3.63-.235-.374A9.818 9.818 0 1 1 12 21.818z"/></svg></div>
+  <div class="wa-content">
+    <div class="wa-label">Kundenstimme –</div>
+    <div class="wa-msg">Viele sagen das wir eine super Website haben und es kommen dadurch wirklich viele auf mich zu! Also ich denke ohne diesen Weg hätten wir dieses Jahr lange nicht die Arbeit und nicht die Anfragen – also Mega.</div>
+    <div class="wa-sender">Kunde der HandwerksManufaktur · Automotive-Betrieb</div>
+  </div>
+</div>
+<div class="wa-testimonial reveal">
+  <div class="wa-icon">
+    <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.558 4.112 1.532 5.836L.057 23.215a.75.75 0 00.928.928l5.379-1.475A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.697 9.697 0 01-4.956-1.358l-.355-.211-3.683 1.01 1.01-3.683-.211-.355A9.697 9.697 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
+    </svg>
+  </div>
+  <div class="wa-body">
+    <div class="wa-msg">
+      „Würde schon sagen, dass <strong>sehr viele über die Website kommen</strong>. Ohne die würden wir nicht die <strong>Auslastung haben, die wir jetzt haben</strong>."
+    </div>
+    <div class="wa-source">
+      <div>
+        <div class="wa-source-name">Jules Frey</div>
+        <div class="wa-source-role">Zimmerei Schneider GmbH</div>
+      </div>
+      <div class="wa-badge">WhatsApp Nachricht</div>
+    </div>
+  </div>
+</div>
+
+</section>
+<!-- WA TESTIMONIAL -->
+<div class="wa-testimonial">
+  <div class="wa-inner reveal">
+    <div class="wa-phone">
+      <div class="wa-phone-bar">
+        <div class="wa-avatar">ZK</div>
+        <div class="wa-contact">
+          <div class="wa-contact-name">Zimmerei – Kunde</div>
+          <div class="wa-contact-status">WhatsApp</div>
+        </div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+      </div>
+      <div class="wa-chat">
+        <div class="wa-bubble">
+          Wollte nur kurz Bescheid geben, dass wirklich sehr viele Leute über unsere Website kommen 😊
+          <div class="wa-time">✓✓</div>
+        </div>
+        <div class="wa-bubble">
+          Ich hätte ohne dich nicht die Auslastung, die ich jetzt habe. Danke dir!
+          <div class="wa-time">✓✓</div>
+        </div>
+      </div>
+    </div>
+    <div class="wa-text">
+      <div class="sec-label">Echte Ergebnisse</div>
+      <h3>So klingt <em>planbare</em><br>Auslastung</h3>
+      <p>Keine Hochglanz-Versprechen – sondern echte Nachrichten unserer Kunden. Diese Zimmerei schreibt uns, weil ihre neue Website heute der wichtigste Auftragsbringer ist.</p>
+      <div class="wa-attribution">
+        <div class="wa-attr-dot"></div>
+        <div>
+          <div class="wa-attr-text">Zimmerei – Bestandskunde</div>
+          <div class="wa-attr-sub">WhatsApp-Nachricht, unaufgefordert</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- CTA -->
+<section class="wa-section reveal">
+  <div class="wa-inner">
+    <div class="wa-text">
+      <div class="sec-label">Kundenstimme</div>
+      <h2>Das sagen unsere Kunden</h2>
+      <p>Diese Nachricht hat uns ein Kunde ungefragt geschrieben – genau solche Momente bestätigen, warum wir tun was wir tun.</p>
+    </div>
+    <div class="wa-bubble-wrap">
+      <div class="wa-bubble">
+        <div class="wa-badge">💬</div>
+        <p>„Viele sagen das wir eine super Website haben und es kommen dadurch wirklich viele auf mich zu! Also ich denke ohne diesen Weg hätten wir dieses Jahr lange nicht die Arbeit und nicht die Anfragen."</p>
+      </div>
+      <div class="wa-sender">
+        <span class="wa-sender-name">Kunde per WhatsApp</span>
+        <span class="wa-checkmarks">✓✓</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="wa-testimonial">
+  <div class="wa-wrap reveal">
+    <div class="wa-text">
+      <div class="sec-label">Aus der Praxis</div>
+      <h2>Was passiert,<br>wenn es läuft</h2>
+      <p>Genau das schreiben uns unsere Kunden. Nicht wir – sie. Wenn der digitale Auftritt stimmt, kommen die Aufträge. Planbar, konstant, ohne dass man jeden Tag Empfehlungen abwarten muss.</p>
+    </div>
+    <div class="wa-bubble-wrap">
+      <div class="wa-phone">
+        <div class="wa-screen">
+          <div class="wa-msg">
+            <div class="wa-sender">Kunde</div>
+            <p>„Viele sagen das wir eine super Website haben und es kommen dadurch wirklich viele auf mich zu! Also ich denke ohne diesen Weg hätten wir dieses Jahr lange nicht die Arbeit und nicht die Anfragen."</p>
+            <div class="wa-msg-time">✓✓</div>
+          </div>
+        </div>
+      </div>
+      <div class="wa-badge">Echte Nachricht</div>
+    </div>
+  </div>
+</section>
+
+<div id="cta">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <div class="cta-text">
+      <h2>Bereit für planbare Aufträge und Fachkräfte?</h2>
+      <p>In einem kostenlosen 10-Minuten-Gespräch analysieren wir Ihre Situation und zeigen Ihnen konkret, wo Wachstumspotenzial liegt.</p>
+    </div>
+    <div class="cta-visual">
+      <div style="position:relative;">
+        <div class="mock-browser">
+          <div class="mock-bar">
+            <div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div>
+            <div class="mock-url">ihr-betrieb.de</div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-hero">
+              <div class="mock-headline"></div>
+              <div class="mock-sub"></div>
+              <div class="mock-sub short"></div>
+              <div class="mock-btn">Jetzt Anfragen →</div>
+            </div>
+            <div class="mock-stats">
+              <div class="mock-stat"><div class="mock-stat-num">↑ 3×</div><div class="mock-stat-label">Mehr Anfragen</div></div>
+              <div class="mock-stat"><div class="mock-stat-num">★ 4.9</div><div class="mock-stat-label">Bewertungen</div></div>
+              <div class="mock-stat"><div class="mock-stat-num">#1</div><div class="mock-stat-label">Google</div></div>
+            </div>
+            <div class="mock-cards">
+              <div class="mock-card"><div class="mock-card-icon"></div><div class="mock-card-line"></div><div class="mock-card-line short"></div></div>
+              <div class="mock-card"><div class="mock-card-icon"></div><div class="mock-card-line"></div><div class="mock-card-line short"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="mock-notify">+12 Anfragen</div>
+        <div class="mock-notify2">🔔 Neue Kontaktanfrage eingegangen</div>
+      </div>
+    </div>
+    <a href="#contact" class="btn-dark">Jetzt Gespräch vereinbaren <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-layout">
+  <div>
+  <div class="reveal">
+    <div class="sec-label">FAQ</div>
+    <h2>Häufige Fragen</h2>
+  </div>
+  
+<div class="faq-anim" aria-hidden="true">
+  <div class="faq-anim-bubble"><div class="fab-line"></div><div class="fab-line short"></div></div>
+  <div class="faq-anim-bubble"><div class="fab-line"></div><div class="fab-line short"></div></div>
+  <div class="faq-anim-bubble"><div class="fab-line"></div><div class="fab-line short"></div></div>
+</div>
+  <div class="faq-wrap">
+<div class="faq-list">
+    <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was kostet eine neue Website?<div class="faq-ico">+</div></div><div class="faq-a">Die Kosten hängen vom Umfang ab. Im kostenlosen Erstgespräch erstellen wir ein individuelles Angebot – transparent und ohne versteckte Kosten. Wir arbeiten mit Betrieben jeder Größe.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="faq(this)">Wie lange dauert die Umsetzung?<div class="faq-ico">+</div></div><div class="faq-a">In der Regel 4–6 Wochen vom ersten Gespräch bis zum Launch. Fotoshooting und drei Entwurfsschleifen sind bereits inklusive.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was muss ich selbst beisteuern?<div class="faq-ico">+</div></div><div class="faq-a">Sehr wenig. Wir kommen für das Fotoshooting zu Ihnen, übernehmen Texterstellung und komplette technische Umsetzung. Ihr Aufwand ist minimal.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="faq(this)">Kann ich die Website selbst bearbeiten?<div class="faq-ico">+</div></div><div class="faq-a">Ja – auf Wunsch richten wir ein einfaches CMS ein, mit dem Sie selbst Bilder und Texte austauschen können. Eine ausführliche Anleitung gehört dazu.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="faq(this)">Arbeiten Sie nur mit Betrieben aus Bayern?<div class="faq-ico">+</div></div><div class="faq-a">Nein – wir sind deutschlandweit tätig. Das Fotoshooting findet vor Ort statt, alles andere läuft remote und vollständig digital.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was unterscheidet Sie von anderen Agenturen?<div class="faq-ico">+</div></div><div class="faq-a">Wir bauen ausschließlich digitale Systeme für Handwerksbetriebe. Dieser Fokus bedeutet: Wir kennen Ihre Branche, Ihre Kunden und Ihre Herausforderungen – und das schlägt sich direkt in den Ergebnissen nieder.</div></div>
+  </div>
+<div class="faq-visual reveal">
+  <div class="faq-visual-title">Das sagen Zahlen</div>
+  <div class="faq-stat">
+    <div class="faq-stat-label">Betriebe mit mehr Anfragen</div>
+    <div class="faq-stat-bar"><div class="faq-stat-fill" style="--w:94%"></div></div>
+    <div class="faq-stat-val">94%</div>
+  </div>
+  <div class="faq-stat">
+    <div class="faq-stat-label">Zufriedenheit nach 3 Monaten</div>
+    <div class="faq-stat-bar"><div class="faq-stat-fill" style="--w:98%"></div></div>
+    <div class="faq-stat-val">98%</div>
+  </div>
+  <div class="faq-stat">
+    <div class="faq-stat-label">Weiterempfehlungsrate</div>
+    <div class="faq-stat-bar"><div class="faq-stat-fill" style="--w:100%"></div></div>
+    <div class="faq-stat-val">100%</div>
+  </div>
+  <div class="faq-mini-quote">
+    „Seit 6 Monaten läuft alles super. Können uns gar nicht vorstellen wie es ohne wäre."
+    <div class="faq-mini-author">— Alisa Kirchner, Kirchner GmbH</div>
+  </div>
+</div>
+</div>
+  </div>
+  <div class="faq-visual">
+  <div class="faq-float-card">
+    <div class="faq-fc-icon">💬</div>
+    <div class="faq-fc-q">Wie lange dauert es?</div>
+    <div class="faq-fc-bar long"></div>
+    <div class="faq-fc-bar mid"></div>
+  </div>
+  <div class="faq-float-card">
+    <div class="faq-fc-icon">💰</div>
+    <div class="faq-fc-q">Was kostet das?</div>
+    <div class="faq-fc-bar long"></div>
+    <div class="faq-fc-bar short"></div>
+  </div>
+  <div class="faq-float-card">
+    <div class="faq-fc-icon">🔧</div>
+    <div class="faq-fc-q">Was brauche ich dafür?</div>
+    <div class="faq-fc-bar mid"></div>
+    <div class="faq-fc-bar long"></div>
+  </div>
+</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="sec-label">Kontakt</div>
+    <h2>Lassen Sie uns sprechen</h2>
+    <p class="sec-sub">Kein Verkaufsgespräch – eine ehrliche Einschätzung und konkrete Hebel für planbares Wachstum.</p>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <div class="c-item"><div class="c-icon">📞</div><div><h4>Telefon</h4><a href="tel:+4981947174990">+49 8194 7174990</a><p style="font-size:12px;color:#3a3a3a;margin-top:3px;">Mo–Fr, 8:00–18:00 Uhr</p></div></div>
+      <div class="c-item"><div class="c-icon">✉️</div><div><h4>E-Mail</h4><a href="/cdn-cgi/l/email-protection#6a03040c052a0e030f47020b040e1d0f180119070b041f0c0b011e1f18440e0f"><span class="__cf_email__" data-cfemail="c4adaaa2ab84a0ada1e9aca5aaa0b3a1b6afb7a9a5aab1a2a5afb0b1b6eaa0a1">[email&#160;protected]</span></a><p style="font-size:12px;color:#3a3a3a;margin-top:3px;">Antwort innerhalb von 24h</p></div></div>
+      <div class="c-item"><div class="c-icon">📍</div><div><h4>Einsatzgebiet</h4><a href="#">DACH-Raum – Deutschland, Österreich, Schweiz</a></div></div>
+      <div class="c-note"><strong>Gespräch auch auf der Baustelle möglich.</strong><br>In nur 10 Minuten klären wir, ob und wie wir Ihnen helfen können.</div>
+    </div>
+    <form class="contact-form" onsubmit="submitForm(event)">
+      <div class="form-row">
+        <div class="fg"><label>Vorname *</label><input type="text" placeholder="Max" required></div>
+        <div class="fg"><label>Nachname *</label><input type="text" placeholder="Mustermann" required></div>
+      </div>
+      <div class="fg"><label>Betrieb / Firma *</label><input type="text" placeholder="Mustermann GmbH" required></div>
+      <div class="form-row">
+        <div class="fg"><label>Telefon *</label><input type="tel" placeholder="+49 ..." required></div>
+        <div class="fg"><label>E-Mail</label><input type="email" placeholder="info@firma.de"></div>
+      </div>
+      <div class="fg"><label>Was suchen Sie?</label>
+        <select>
+          <option>Neue Website</option>
+          <option>SEO & Google Sichtbarkeit</option>
+          <option>Auftragsgewinnung</option>
+          <option>Fachkräfte-Recruiting</option>
+          <option>Alles oben genannte</option>
+        </select>
+      </div>
+      <div class="fg"><label>Nachricht (optional)</label><textarea placeholder="Kurz beschreiben, womit wir Ihnen helfen können..."></textarea></div>
+      <button type="submit" class="form-submit">Kostenlos anfragen <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><img src="images/logo-handwerksmanufaktur.png" alt="HandwerksManufaktur"></div>
+      <p>Die digitale Wachstumsagentur für Handwerksbetriebe. Planbare Aufträge, passende Fachkräfte, messbare Ergebnisse.</p>
+    </div>
+    <div class="footer-col"><h5>Navigation</h5><ul><li><a href="#hero">Home</a></li><li><a href="#problem">Das Problem</a></li><li><a href="#services">Leistungen</a></li><li><a href="#projects">Projekte</a></li><li><a href="#about">Über uns</a></li></ul></div>
+    <div class="footer-col"><h5>Leistungen</h5><ul><li><a href="#services">Webdesign</a></li><li><a href="#services">SEO</a></li><li><a href="#services">Auftragsgewinnung</a></li><li><a href="#services">Recruiting</a></li><li><a href="#services">Fotografie</a></li></ul></div>
+    <div class="footer-col"><h5>Kontakt</h5><ul><li><a href="tel:+4981947174990">+49 8194 7174990</a></li><li><a href="/cdn-cgi/l/email-protection#deb7b0b8b19ebab7bbf3b6bfb0baa9bbacb5adb3bfb0abb8bfb5aaabacf0babb">E-Mail schreiben</a></li><li><a href="#contact">Gespräch buchen</a></li><li><a href="#">Impressum</a></li><li><a href="#">Datenschutz</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 HandwerksManufaktur – Alle Rechte vorbehalten.</span>
+    <div style="display:flex;gap:16px;"><a href="#">Impressum</a><a href="#">Datenschutz</a></div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+
+</body>
+</html>
