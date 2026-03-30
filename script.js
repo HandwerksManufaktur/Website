@@ -55,25 +55,40 @@ function faq(el){
 
 // Form sub
 
-// Foto items + cards: activate when scrolled into center of viewport
+// Foto items (grid): activate when scrolled into center vertically
+// Foto cards (strip): activate when scrolled into center horizontally
 (function(){
-  var fotoEls=document.querySelectorAll('.foto-item,.foto-card');
-  if(!fotoEls.length) return;
-  function checkFotos(){
+  var fotoItems=document.querySelectorAll('.foto-item');
+  var fotoCards=document.querySelectorAll('.foto-card');
+  var strip=document.getElementById('fotoStrip');
+
+  function checkFotoItems(){
     var cy=window.innerHeight/2;
-    fotoEls.forEach(function(el){
+    fotoItems.forEach(function(el){
       var r=el.getBoundingClientRect();
       var elCenter=r.top+r.height/2;
       var dist=Math.abs(cy-elCenter);
-      if(dist<r.height*0.8){
-        el.classList.add('in-view');
-      } else {
-        el.classList.remove('in-view');
-      }
+      if(dist<r.height*0.8){el.classList.add('in-view');}
+      else{el.classList.remove('in-view');}
     });
   }
-  window.addEventListener('scroll',checkFotos,{passive:true});
-  checkFotos();
+
+  function checkFotoCards(){
+    if(!strip) return;
+    var cx=window.innerWidth/2;
+    fotoCards.forEach(function(el){
+      var r=el.getBoundingClientRect();
+      var elCenter=r.left+r.width/2;
+      var dist=Math.abs(cx-elCenter);
+      if(dist<r.width*0.7){el.classList.add('in-view');}
+      else{el.classList.remove('in-view');}
+    });
+  }
+
+  window.addEventListener('scroll',checkFotoItems,{passive:true});
+  if(strip) strip.addEventListener('scroll',checkFotoCards,{passive:true});
+  checkFotoItems();
+  checkFotoCards();
 })();
 
 // Mobile & Tablet: observe additional elements for entrance animations
