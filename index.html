@@ -733,26 +733,31 @@
       <div class="c-item"><div class="c-icon">📍</div><div><h4>Einsatzgebiet</h4><a href="#">DACH-Raum – Deutschland, Österreich, Schweiz</a></div></div>
       <div class="c-note"><strong>Gespräch auch auf der Baustelle möglich.</strong><br>In nur 10 Minuten klären wir, ob und wie wir Ihnen helfen können.</div>
     </div>
-    <form class="contact-form" onsubmit="submitForm(event)">
+    <form class="contact-form" action="https://formsubmit.co/info@die-handwerksmanufaktur.de" method="POST">
+      <input type="hidden" name="_subject" value="Neue Anfrage über die Website">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://die-handwerksmanufaktur.de/#contact">
+      <input type="text" name="_honey" style="display:none">
       <div class="form-row">
-        <div class="fg"><label>Vorname *</label><input type="text" placeholder="Max" required></div>
-        <div class="fg"><label>Nachname *</label><input type="text" placeholder="Mustermann" required></div>
+        <div class="fg"><label>Vorname *</label><input type="text" name="Vorname" placeholder="Max" required></div>
+        <div class="fg"><label>Nachname *</label><input type="text" name="Nachname" placeholder="Mustermann" required></div>
       </div>
-      <div class="fg"><label>Betrieb / Firma *</label><input type="text" placeholder="Mustermann GmbH" required></div>
+      <div class="fg"><label>Betrieb / Firma *</label><input type="text" name="Betrieb" placeholder="Mustermann GmbH" required></div>
       <div class="form-row">
-        <div class="fg"><label>Telefon *</label><input type="tel" placeholder="+49 ..." required></div>
-        <div class="fg"><label>E-Mail</label><input type="email" placeholder="info@firma.de"></div>
+        <div class="fg"><label>Telefon *</label><input type="tel" name="Telefon" placeholder="+49 ..." required></div>
+        <div class="fg"><label>E-Mail</label><input type="email" name="Email" placeholder="info@firma.de"></div>
       </div>
       <div class="fg"><label>Was suchen Sie?</label>
-        <select>
-          <option>Neue Website</option>
-          <option>SEO & Google Sichtbarkeit</option>
-          <option>Auftragsgewinnung</option>
-          <option>Fachkräfte-Recruiting</option>
-          <option>Alles oben genannte</option>
+        <select name="Interesse">
+          <option>🌐 Neue Website</option>
+          <option>🔄 Website-Update / Relaunch</option>
+          <option>🔍 SEO & Google Sichtbarkeit</option>
+          <option>📈 Auftragsgewinnung</option>
+          <option>👷 Fachkräfte-Recruiting</option>
+          <option>🚀 Alles oben genannte</option>
         </select>
       </div>
-      <div class="fg"><label>Nachricht (optional)</label><textarea placeholder="Kurz beschreiben, womit wir Ihnen helfen können..."></textarea></div>
+      <div class="fg"><label>Nachricht (optional)</label><textarea name="Nachricht" placeholder="Kurz beschreiben, womit wir Ihnen helfen können..."></textarea></div>
       <button type="submit" class="form-submit">Kostenlos anfragen <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></button>
     </form>
   </div>
@@ -763,7 +768,7 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="footer-logo"><img src="images/logo-handwerksmanufaktur.png" alt="HandwerksManufaktur"></div>
-      <p>Webauftritte für Handwerksbetriebe – professionell, sichtbar und unabhängig von Mundpropaganda.</p>
+      <p>Professionelle Webauftritte für Handwerksbetriebe – mehr Aufträge, mehr Sichtbarkeit.</p>
     </div>
     <div class="footer-col"><h5>Navigation</h5><ul><li><a href="#hero">Home</a></li><li><a href="#problem">Das Problem</a></li><li><a href="#services">Leistungen</a></li><li><a href="#projects">Projekte</a></li><li><a href="#about">Über uns</a></li></ul></div>
     <div class="footer-col"><h5>Leistungen</h5><ul><li><a href="#services">Webdesign</a></li><li><a href="#services">SEO</a></li><li><a href="#services">Conversion</a></li><li><a href="#services">Karriereseite</a></li><li><a href="#services">Fotografie</a></li></ul></div>
