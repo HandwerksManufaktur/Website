@@ -1139,4 +1139,12 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:56px 60px
   .svc.vis{opacity:1;transform:none;}
   .proj-feat,.proj-sm{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
   .proj-feat.vis,.proj-sm.vis{opacity:1;transform:none;}
+  .faq-item{opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease;}
+  .faq-item.vis{opacity:1;transform:none;}
+  .wi{opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .4s ease;}
+  .wi.vis{opacity:1;transform:none;}
+  .p-item{opacity:0;transform:translateX(-12px);transition:opacity .4s ease,transform .4s ease;}
+  .p-item.vis{opacity:1;transform:none;}
+  .foto-card{opacity:0;transform:scale(.97);transition:opacity .5s ease,transform .5s ease;}
+  .foto-card.vis{opacity:1;transform:none;}
 }
