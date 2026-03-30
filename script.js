@@ -55,15 +55,15 @@ function faq(el){
 
 // Form sub
 
-// Foto items: activate on scroll (mobile) – brighten & show caption
+// Foto items + cards: activate on scroll – brighten & show caption
 if('IntersectionObserver' in window){
   var fotoObs=new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){e.target.classList.add('in-view');}
       else{e.target.classList.remove('in-view');}
     });
-  },{threshold:0.6,rootMargin:'0px 0px -10% 0px'});
-  document.querySelectorAll('.foto-item').forEach(function(el){fotoObs.observe(el);});
+  },{threshold:0.15,rootMargin:'0px 0px 0px 0px'});
+  document.querySelectorAll('.foto-item,.foto-card').forEach(function(el){fotoObs.observe(el);});
 }
 
 // Mobile & Tablet: observe additional elements for entrance animations

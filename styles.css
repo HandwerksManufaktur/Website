@@ -619,7 +619,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:56px 60px
 .foto-card img{width:100%;height:100%;object-fit:cover;object-position:center 20%;
   transition:transform .6s cubic-bezier(.25,.46,.45,.94),filter .4s;
   filter:brightness(.6) saturate(.8);}
-.foto-card:hover img{transform:scale(1.04);filter:brightness(.8) saturate(1);}
+.foto-card:hover img,.foto-card.in-view img{transform:scale(1.04);filter:brightness(.8) saturate(1);}
 
 /* permanent gradient bottom overlay */
 .foto-card-overlay{
