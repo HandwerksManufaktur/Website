@@ -55,41 +55,42 @@ function faq(el){
 
 // Form sub
 
-// Foto items (grid): activate when scrolled into center vertically
-// Foto cards (strip): activate when scrolled into center horizontally
-(function(){
-  var fotoItems=document.querySelectorAll('.foto-item');
-  var fotoCards=document.querySelectorAll('.foto-card');
-  var strip=document.getElementById('fotoStrip');
+// Foto scroll animations (mobile/tablet only – desktop uses hover)
+if(window.innerWidth<=900){
+  (function(){
+    var fotoItems=document.querySelectorAll('.foto-item');
+    var fotoCards=document.querySelectorAll('.foto-card');
+    var strip=document.getElementById('fotoStrip');
 
-  function checkFotoItems(){
-    var cy=window.innerHeight/2;
-    fotoItems.forEach(function(el){
-      var r=el.getBoundingClientRect();
-      var elCenter=r.top+r.height/2;
-      var dist=Math.abs(cy-elCenter);
-      if(dist<r.height*0.8){el.classList.add('in-view');}
-      else{el.classList.remove('in-view');}
-    });
-  }
+    function checkFotoItems(){
+      var cy=window.innerHeight/2;
+      fotoItems.forEach(function(el){
+        var r=el.getBoundingClientRect();
+        var elCenter=r.top+r.height/2;
+        var dist=Math.abs(cy-elCenter);
+        if(dist<r.height*0.8){el.classList.add('in-view');}
+        else{el.classList.remove('in-view');}
+      });
+    }
 
-  function checkFotoCards(){
-    if(!strip) return;
-    var cx=window.innerWidth/2;
-    fotoCards.forEach(function(el){
-      var r=el.getBoundingClientRect();
-      var elCenter=r.left+r.width/2;
-      var dist=Math.abs(cx-elCenter);
-      if(dist<r.width*0.7){el.classList.add('in-view');}
-      else{el.classList.remove('in-view');}
-    });
-  }
+    function checkFotoCards(){
+      if(!strip) return;
+      var cx=window.innerWidth/2;
+      fotoCards.forEach(function(el){
+        var r=el.getBoundingClientRect();
+        var elCenter=r.left+r.width/2;
+        var dist=Math.abs(cx-elCenter);
+        if(dist<r.width*0.7){el.classList.add('in-view');}
+        else{el.classList.remove('in-view');}
+      });
+    }
 
-  window.addEventListener('scroll',checkFotoItems,{passive:true});
-  if(strip) strip.addEventListener('scroll',checkFotoCards,{passive:true});
-  checkFotoItems();
-  checkFotoCards();
-})();
+    window.addEventListener('scroll',checkFotoItems,{passive:true});
+    if(strip) strip.addEventListener('scroll',checkFotoCards,{passive:true});
+    checkFotoItems();
+    checkFotoCards();
+  })();
+}
 
 // Mobile & Tablet: observe additional elements for entrance animations
 if(window.innerWidth<=900){
