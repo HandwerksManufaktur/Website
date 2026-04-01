@@ -3,6 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics (loaded after cookie consent) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NQNECGN6HT"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('consent','default',{'analytics_storage':'denied'});
+if(localStorage.getItem('cookie-consent')==='accepted'){
+  gtag('consent','update',{'analytics_storage':'granted'});
+}
+gtag('config','G-NQNECGN6HT');
+</script>
 <title>HandwerksManufaktur – Webdesign & SEO für Handwerksbetriebe</title>
 <meta name="description" content="Die Nr. 1 Web-Agentur für Handwerksbetriebe. Professionelles Webdesign, SEO & Google-Sichtbarkeit – mehr Aufträge, mehr Fachkräfte, unabhängig von Mundpropaganda. 120+ Betriebe vertrauen uns.">
 <meta name="keywords" content="Webdesign Handwerk, Website Handwerksbetrieb, SEO Handwerker, Handwerker Website erstellen, Webdesign Agentur Handwerk, Google Sichtbarkeit Handwerk, Handwerker Webauftritt, Website Schreiner, Website Zimmerei, Website Metallbau, Website SHK, Handwerker Marketing">
@@ -967,6 +979,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()
 function cookieAccept(){
   localStorage.setItem('cookie-consent','accepted');
   document.getElementById('cookie-banner').style.display='none';
+  if(typeof gtag==='function') gtag('consent','update',{'analytics_storage':'granted'});
 }
 function cookieDecline(){
   localStorage.setItem('cookie-consent','declined');
