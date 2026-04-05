@@ -357,27 +357,42 @@ async function uploadFiles(files,folderId,si){
 }
 
 function collectFormData() {
-  const data = {};
-  // General fields (skip leistung-name - handled below)
-  document.querySelectorAll('input[type=text],input[type=email],input[type=tel],input[type=url],textarea,select').forEach(function(el) {
-    if (!el.value.trim() || el.type === 'file') return;
-    if (el.closest('.leistung-block, .leistung-item')) return;
-    const field = el.closest('.field,.f');
-    const label = field && field.querySelector('label') ? field.querySelector('label').textContent.replace('*','').trim() : (el.placeholder || '');
-    if (label && label.length > 1 && !data[label]) data[label] = el.value.trim();
+  var data = {};
+  var usedLabels = {};
+  var inputs = document.querySelectorAll('input:not([type=file]):not([type=radio]):not([type=checkbox]),textarea,select');
+  inputs.forEach(function(el) {
+    var val = (el.value || '').trim();
+    if (!val) return;
+    // Find best label
+    var label = '';
+    // 1. label[for=id]
+    if (el.id) {
+      var l = document.querySelector('label[for="' + el.id + '"]');
+      if (l) label = l.textContent;
+    }
+    // 2. parent .field > label
+    if (!label) {
+      var f = el.closest('.field') || el.closest('.f');
+      if (f) { var l2 = f.querySelector(':scope > label'); if (l2) label = l2.textContent; }
+    }
+    // 3. preceding sibling label
+    if (!label) {
+      var f2 = el.closest('.field') || el.closest('.f');
+      if (f2) { var l3 = f2.querySelector('label'); if (l3) label = l3.textContent; }
+    }
+    // 4. placeholder fallback
+    if (!label) label = el.placeholder || el.name || '';
+    label = label.replace(/\*/g,'').replace(/\s+/g,' ').trim().slice(0,60);
+    if (!label || label.length < 2) label = 'Eingabe';
+    // Handle duplicate labels
+    if (usedLabels[label]) {
+      usedLabels[label]++;
+      label = label + ' (' + usedLabels[label] + ')';
+    } else {
+      usedLabels[label] = 1;
+    }
+    data[label] = val;
   });
-  // Leistungen strukturiert
-  document.querySelectorAll('.leistung-block, .leistung-item, [class*="leistung"]').forEach(function(block, i) {
-    const nameEl = block.querySelector('.leistung-name');
-    if (!nameEl || !nameEl.value.trim()) return;
-    data['── Leistung ' + (i+1) + ' ──'] = nameEl.value.trim();
-  });
-  // Fallback: plain leistung-name inputs
-  if (!Object.keys(data).some(k => k.includes('Leistung'))) {
-    document.querySelectorAll('.leistung-name').forEach(function(el, i) {
-      if (el.value.trim()) data['── Leistung ' + (i+1) + ' ──'] = el.value.trim();
-    });
-  }
   return data;
 }
 
