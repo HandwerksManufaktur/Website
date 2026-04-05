@@ -1,0 +1,7 @@
+name = "handwerksmanufaktur-onboarding"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+# Secrets werden per CLI gesetzt – niemals hier eintragen:
+# wrangler secret put GOOGLE_CLIENT_EMAIL
+# wrangler secret put GOOGLE_PRIVATE_KEY

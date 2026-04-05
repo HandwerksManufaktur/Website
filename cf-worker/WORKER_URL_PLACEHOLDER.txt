@@ -1,0 +1,9 @@
+Nach dem ersten Deploy gibt dir Cloudflare eine URL wie:
+https://handwerksmanufaktur-onboarding.DEIN-NAME.workers.dev
+
+Diese URL muss in beiden HTML-Dateien eingetragen werden:
+const API_BASE = 'https://handwerksmanufaktur-onboarding.DEIN-NAME.workers.dev';
+
+Ersetze die Zeile in:
+- index.html (Webdesign)
+- shk.html (SHK)
