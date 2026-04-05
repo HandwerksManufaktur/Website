@@ -358,22 +358,26 @@ async function uploadFiles(files,folderId,si){
 
 function collectFormData() {
   const data = {};
+  // General fields (skip leistung-name - handled below)
   document.querySelectorAll('input[type=text],input[type=email],input[type=tel],input[type=url],textarea,select').forEach(function(el) {
-    if (!el.value.trim()) return;
-    if (el.type === 'file') return;
-    if (el.classList.contains('leistung-name')) return; // handled separately
-    const field = el.closest('.field,.f,[class*="field"]');
-    const label = field && field.querySelector('label') ? field.querySelector('label').textContent.replace('*','').trim() : (el.placeholder || el.name || el.id);
-    if (label && label.length > 1) {
-      if (data[label]) data[label] += ', ' + el.value.trim();
-      else data[label] = el.value.trim();
-    }
+    if (!el.value.trim() || el.type === 'file') return;
+    if (el.closest('.leistung-block, .leistung-item')) return;
+    const field = el.closest('.field,.f');
+    const label = field && field.querySelector('label') ? field.querySelector('label').textContent.replace('*','').trim() : (el.placeholder || '');
+    if (label && label.length > 1 && !data[label]) data[label] = el.value.trim();
   });
-  // Leistungen klar aufführen
-  const leistungEls = document.querySelectorAll('.leistung-name');
-  leistungEls.forEach(function(el, i) {
-    if (el.value.trim()) data['Leistung ' + (i+1)] = el.value.trim();
+  // Leistungen strukturiert
+  document.querySelectorAll('.leistung-block, .leistung-item, [class*="leistung"]').forEach(function(block, i) {
+    const nameEl = block.querySelector('.leistung-name');
+    if (!nameEl || !nameEl.value.trim()) return;
+    data['── Leistung ' + (i+1) + ' ──'] = nameEl.value.trim();
   });
+  // Fallback: plain leistung-name inputs
+  if (!Object.keys(data).some(k => k.includes('Leistung'))) {
+    document.querySelectorAll('.leistung-name').forEach(function(el, i) {
+      if (el.value.trim()) data['── Leistung ' + (i+1) + ' ──'] = el.value.trim();
+    });
+  }
   return data;
 }
 
