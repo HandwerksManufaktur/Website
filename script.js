@@ -48,7 +48,7 @@ document.querySelectorAll('.proc-step').forEach((el,i)=>{
 // Load more reviews
 var rcBatch=1;
 function loadMoreReviews(){
-  document.querySelectorAll('.rc[data-batch="'+rcBatch+'"]').forEach(function(el){el.style.display='';});
+  document.querySelectorAll('.rc[data-batch="'+rcBatch+'"]').forEach(function(el){el.style.display='block';});
   rcBatch++;
   if(rcBatch>2)document.getElementById('rcMoreBtn').style.display='none';
 }
