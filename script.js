@@ -45,6 +45,14 @@ document.querySelectorAll('.proc-step').forEach((el,i)=>{
   io.observe(el);
 });
 
+// Load more reviews
+var rcBatch=1;
+function loadMoreReviews(){
+  document.querySelectorAll('.rc[data-batch="'+rcBatch+'"]').forEach(function(el){el.style.display='';});
+  rcBatch++;
+  if(rcBatch>2)document.getElementById('rcMoreBtn').style.display='none';
+}
+
 // FAQ
 function faq(el){
   const it=el.parentElement;
