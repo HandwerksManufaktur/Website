@@ -21,6 +21,15 @@ function jsonResp(data, status = 200) {
   });
 }
 
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function b64u(str) {
   return btoa(str).replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
 }
@@ -130,22 +139,27 @@ async function sendNotification(env, firmaName, serviceType, driveLink, formData
   const typ = serviceType === 'webdesign' ? 'Webdesign' : 'LeadGen & Recruiting';
   const rows = formData ? Object.entries(formData).map(([k, v]) => {
     if (k.startsWith('\u2500\u2500')) {
-      // Section header
-      return `<tr><td colspan="2" style="padding:10px 14px 4px;background:#f0f0f0;font-size:12px;font-weight:bold;color:#333;letter-spacing:0.5px">${k.replace(/\u2500/g,'').trim()}</td></tr>`;
+      const title = escHtml(k.replace(/\u2500/g,'').trim());
+      return `<tr><td colspan="2" style="padding:11px 16px 5px;background:#1a3a52;font-size:10px;font-weight:700;color:#ffffff;letter-spacing:1.2px;text-transform:uppercase">${title}</td></tr>`;
     }
     if (!v) return '';
-    return `<tr><td style="padding:6px 14px;color:#666;font-size:12px;white-space:nowrap;vertical-align:top;padding-left:${k.startsWith('  ')?'28px':'14px'}">${k.trim()}</td>` +
-    `<td style="padding:6px 14px;font-size:12px">${String(v).replace(/\n/g, '<br>').replace(/\|/g,'·')}</td></tr>`;
+    const isIndented = k.startsWith('  ');
+    const labelStyle = isIndented
+      ? 'padding:6px 14px 6px 28px;color:#999;font-size:12px;vertical-align:top;width:210px;'
+      : 'padding:7px 14px;color:#444;font-size:12px;font-weight:500;vertical-align:top;width:210px;';
+    return `<tr style="border-bottom:1px solid #f2f2f2"><td style="${labelStyle}">${escHtml(k.trim())}</td>` +
+    `<td style="padding:7px 14px;font-size:12px;color:#111">${escHtml(String(v)).replace(/\n/g, '<br>').replace(/\|/g,'·')}</td></tr>`;
   }).join('') : '';
 
-  const html = `<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto">
-    <div style="background:#D4860A;padding:20px 24px">
-      <h1 style="color:#fff;margin:0;font-size:20px">Neues Onboarding: ${firmaName}</h1>
-      <p style="color:rgba(255,255,255,0.8);margin:4px 0 0;font-size:13px">Typ: ${typ}</p>
+  const html = `<div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto">
+    <div style="background:#1a3a52;padding:22px 26px">
+      <div style="font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Neues Onboarding</div>
+      <h1 style="color:#fff;margin:0;font-size:22px;font-weight:700">${escHtml(firmaName)}</h1>
+      <p style="color:rgba(255,255,255,0.6);margin:5px 0 0;font-size:12px">Leistung: ${escHtml(typ)}</p>
     </div>
-    <div style="padding:20px 24px;background:#f9f9f9">
-      <a href="${driveLink}" style="display:inline-block;background:#D4860A;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:bold;margin-bottom:20px">Drive-Ordner öffnen</a>
-      <table style="width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08)">
+    <div style="padding:20px 24px;background:#f4f6f8">
+      <a href="${driveLink}" style="display:inline-block;background:#D4860A;color:#fff;padding:11px 22px;border-radius:6px;text-decoration:none;font-weight:700;font-size:13px;margin-bottom:20px">→ Drive-Ordner öffnen</a>
+      <table style="width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.10)">
         ${rows}
       </table>
     </div>
@@ -212,17 +226,23 @@ async function handleCreateFolders(request, env) {
     const rows = Object.entries(formData).map(function(entry) {
       var k = entry[0]; var v = entry[1];
       if (k.indexOf('──') === 0) {
-        return '<tr><td colspan="2" style="padding:10px 14px 4px;background:#fff3e0;font-weight:bold;font-size:13px;color:#D4860A;border-top:2px solid #D4860A">' + k.replace(/─/g,'').trim() + '</td></tr>';
+        return '<tr><td colspan="2" style="padding:12px 16px 6px;background:#1a3a52;font-weight:700;font-size:11px;color:#ffffff;letter-spacing:1px;text-transform:uppercase;border-top:0">' + escHtml(k.replace(/─/g,'').trim()) + '</td></tr>';
       }
       if (!v) return '';
-      var indent = k.indexOf('  ') === 0 ? 'padding-left:28px;' : '';
-      return '<tr style="border-bottom:1px solid #f0f0f0"><td style="padding:7px 14px;color:#555;font-size:12px;vertical-align:top;width:200px;' + indent + '">' + k.trim() + '</td>' +
-      '<td style="padding:7px 14px;font-size:12px;color:#111">' + String(v).replace(/\n/g,'<br>').replace(/\|/g,'·') + '</td></tr>';
+      var isIndented = k.indexOf('  ') === 0;
+      var labelStyle = isIndented
+        ? 'padding:6px 14px 6px 28px;color:#999;font-size:12px;vertical-align:top;width:210px;'
+        : 'padding:7px 14px;color:#333;font-size:12px;font-weight:500;vertical-align:top;width:210px;';
+      return '<tr style="border-bottom:1px solid #f2f2f2"><td style="' + labelStyle + '">' + escHtml(k.trim()) + '</td>' +
+      '<td style="padding:7px 14px;font-size:12px;color:#111">' + escHtml(String(v)).replace(/\n/g,'<br>').replace(/\|/g,'·') + '</td></tr>';
     }).join('')
-    const docHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>` +
-      `<h1 style="color:#D4860A">Onboarding - ${firmaName}</h1>` +
-      `<p style="color:#888;font-size:12px">Typ: ${typ} | Eingegangen: ${date}</p>` +
-      `<table style="width:100%;border-collapse:collapse;margin-top:16px">${rows}</table>` +
+    const docHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body style="font-family:Arial,sans-serif;max-width:800px;margin:0 auto;padding:20px">` +
+      `<div style="background:#1a3a52;padding:20px 24px;border-radius:6px;margin-bottom:20px">` +
+      `<div style="font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">Onboarding</div>` +
+      `<h1 style="color:#ffffff;margin:0;font-size:22px">${escHtml(firmaName)}</h1>` +
+      `<p style="color:rgba(255,255,255,0.6);margin:5px 0 0;font-size:12px">Leistung: ${escHtml(typ)} | Eingegangen: ${date}</p>` +
+      `</div>` +
+      `<table style="width:100%;border-collapse:collapse;box-shadow:0 1px 3px rgba(0,0,0,0.08);border-radius:6px;overflow:hidden">${rows}</table>` +
       `</body></html>`;
     await createGoogleDoc(token, `Onboarding - ${firmaName}`, docHtml, customerFolderId)
       .catch(e => console.error('Doc failed:', e.message));
