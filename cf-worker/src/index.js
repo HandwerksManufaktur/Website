@@ -2,6 +2,8 @@
  * Handwerksmanufaktur Onboarding – Cloudflare Worker
  */
 
+import { createClickUpTasks } from './clickup.js';
+
 const FOLDER_IDS = {
   webdesign: '0AEItEqlPzyB0Uk9PVA',
   shk: '0AC4XaHzbPF-HUk9PVA',
@@ -253,6 +255,18 @@ async function handleCreateFolders(request, env) {
     await sendNotification(env, firmaName, serviceType, driveLink, formData);
   } catch(e) {
     console.error('[Email ERROR]', e.message);
+  }
+
+  // ClickUp: Tasks anlegen (non-blocking — Fehler killt Drive-Flow nicht)
+  if (env.CLICKUP_API_TOKEN) {
+    createClickUpTasks({
+      token: env.CLICKUP_API_TOKEN,
+      firmaName,
+      serviceType,
+      formData,
+      driveLink,
+      leistungen,
+    }).catch(err => console.error('[ClickUp ERROR]', err.message));
   }
 
   return jsonResp({ success: true, folderIds, customerFolderId, rootId, driveLink });
