@@ -12,9 +12,9 @@ const CLICKUP_API = 'https://api.clickup.com/api/v2';
 
 // === Listen-IDs ===
 const LISTS = {
-  kdb:         '901523338166', // 👥 Kundendatenbank (FULFILLMENT Space)
+  kdb:         '901523378981', // 👥 Kundendatenbank (FULFILLMENT Space — neu nach Rebuild)
   pipeline:    '901523338959', // ⚡ Performance Projekte (FULFILLMENT Space)
-  webdesign:   '901515004215', // 🌐 Website Projekte (Operations Space)
+  webdesign:   '901515004215', // 🌐 Website Projekte (FULFILLMENT Space)
 };
 
 // === Custom Field IDs ===
@@ -31,7 +31,7 @@ const FIELDS = {
     drive:           'e0f84371-a112-46c0-bd6b-2eb22b60a3b1',
     kundeSeit:       'e7959a32-f1f0-4bdb-9405-b105db7fb115',
     kundeTyp:        '04cc689d-8be7-478c-8c46-5ca3649914d8',
-    produkt:         'a8d1320e-44d2-4a07-9ad7-6f1577866b62',
+    produkt:         '455552f8-39ea-43f3-a312-8b7759ad7d1a', // neu nach Rebuild
   },
   // Performance Projekte
   pipeline: {
@@ -63,10 +63,10 @@ const OPTS = {
     Hybrid:      '09f02faa-cb10-4db1-92a7-c0e66a7e057d',
   },
   produkt: {
-    Webdesign:       'b8d7d0d3-7ede-4613-a13f-ba2d3b722585',
-    Performance:     '04aee833-c4ad-4802-98a4-fb81d3e7fc87',
-    Recruiting:      '67f8b549-3ba2-473d-985a-605297c79f29',
-    Wartungsvertrag: 'a4bf15b3-9ae6-4534-bb92-648c2ef053c1',
+    Webdesign:       '3a2bc3fc-3486-4978-bcc9-1a61386fe97a', // neu nach Rebuild
+    Performance:     '292af171-d780-461f-b7cf-75252dc61e99',
+    Recruiting:      'd1924e4f-d3e8-4468-b800-e3aa8a68a2cf',
+    Wartungsvertrag: '16a60de6-c2bb-456b-9083-ea96b39daac4',
   },
   serviceTyp: {
     Leadgen:    '86442432-86cc-4871-8401-da17850d9aeb',
