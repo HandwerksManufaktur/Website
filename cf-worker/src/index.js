@@ -181,7 +181,7 @@ async function sendNotification(env, firmaName, serviceType, driveLink, formData
   console.log('[Email] Status:', res.status, JSON.stringify(result));
 }
 
-async function handleCreateFolders(request, env) {
+async function handleCreateFolders(request, env, ctx) {
   const body = await request.json();
   const { firmaName, leistungen = [], serviceType = 'webdesign', formData = {} } = body;
   if (!firmaName) return jsonResp({ error: 'firmaName required' }, 400);
@@ -257,16 +257,22 @@ async function handleCreateFolders(request, env) {
     console.error('[Email ERROR]', e.message);
   }
 
-  // ClickUp: Tasks anlegen (non-blocking — Fehler killt Drive-Flow nicht)
+  // ClickUp: Tasks anlegen (non-blocking, aber via ctx.waitUntil damit Worker nicht killt)
   if (env.CLICKUP_API_TOKEN) {
-    createClickUpTasks({
+    const clickupPromise = createClickUpTasks({
       token: env.CLICKUP_API_TOKEN,
       firmaName,
       serviceType,
       formData,
       driveLink,
       leistungen,
-    }).catch(err => console.error('[ClickUp ERROR]', err.message));
+    }).then(r => console.log('[ClickUp OK]', JSON.stringify(r)))
+      .catch(err => console.error('[ClickUp ERROR]', err.message, err.stack));
+    if (ctx && ctx.waitUntil) {
+      ctx.waitUntil(clickupPromise);
+    }
+  } else {
+    console.error('[ClickUp] CLICKUP_API_TOKEN not set');
   }
 
   return jsonResp({ success: true, folderIds, customerFolderId, rootId, driveLink });
@@ -325,7 +331,7 @@ async function handleUploadChunk(request, env) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
@@ -333,7 +339,7 @@ export default {
 
     try {
       const p = url.pathname;
-      if (p === '/create-folders'  || p === '/api/create-folders')  return handleCreateFolders(request, env);
+      if (p === '/create-folders'  || p === '/api/create-folders')  return handleCreateFolders(request, env, ctx);
       if (p === '/start-upload'    || p === '/api/start-upload')    return handleStartUpload(request, env);
       if (p === '/upload-chunk'    || p === '/api/upload-chunk')    return handleUploadChunk(request, env);
       return new Response('Not found', { status: 404, headers: CORS });
