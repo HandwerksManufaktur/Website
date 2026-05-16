@@ -97,7 +97,8 @@ const OPTS = {
   },
 };
 
-const TASK_TYPE_LEAD = 1002;
+const TASK_TYPE_LEAD    = 1002;
+const TASK_TYPE_PROJECT = 1003;
 
 // ============================================================
 // Helpers
@@ -235,6 +236,7 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
     const wdTask = await clickup(token, `/list/${LISTS.webdesign}/task`, 'POST', {
       name: `${firmaName} - ${projekttyp && /multi/i.test(projekttyp) ? 'Multipager' : 'Onepager'}`,
       status: 'neuer kunde',
+      custom_item_id: TASK_TYPE_PROJECT,
       description,
       custom_fields: wdFields,
     });
@@ -277,7 +279,7 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
     const ppTask = await clickup(token, `/list/${LISTS.pipeline}/task`, 'POST', {
       name: `${firmaName} - ${isRecruiting ? 'Recruiting' : 'Leadgen'}`,
       status: '🆕 Neuer Kunde',
-      custom_item_id: TASK_TYPE_LEAD,
+      custom_item_id: TASK_TYPE_PROJECT,
       description,
       custom_fields: ppFields,
     });
