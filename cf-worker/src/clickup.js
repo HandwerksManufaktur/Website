@@ -191,7 +191,7 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
   // ============================================================
   const kdbFields = cleanFields([
     { id: FIELDS.kdb.kundeTyp,        value: isWebdesign ? OPTS.kundeTyp.Webdesign : OPTS.kundeTyp.Performance },
-    { id: FIELDS.kdb.produkt,         value: isWebdesign ? [OPTS.produkt.Webdesign] : [OPTS.produkt.Performance] },
+    // Produkt-Feld weggelassen — redundant zu Kunde-Typ
     { id: FIELDS.kdb.firmenadresse,   value: firmenadresse },
     { id: FIELDS.kdb.inhaber,         value: inhaber },
     { id: FIELDS.kdb.ansprechpartner, value: ansprechpartner },
