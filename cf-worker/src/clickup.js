@@ -275,7 +275,7 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
     ]);
 
     const ppTask = await clickup(token, `/list/${LISTS.pipeline}/task`, 'POST', {
-      name: firmaName,
+      name: `${firmaName} - ${isRecruiting ? 'Recruiting' : 'Leadgen'}`,
       status: '🆕 Neuer Kunde',
       custom_item_id: TASK_TYPE_LEAD,
       description,
