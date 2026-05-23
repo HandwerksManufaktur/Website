@@ -21,17 +21,17 @@ const LISTS = {
 const FIELDS = {
   // Kundendatenbank
   kdb: {
-    ansprechpartner: 'af58b50f-ccdb-4f17-aef9-3108ed521c42',
-    inhaber:         '4dac64f3-2adb-4965-9804-68f0d810eee2',
-    firmenadresse:   '11ac7353-b083-48df-8a05-39b3a755a8c0',
-    telefon:         '40d86cc8-bb12-4efe-8ab7-f5dedd4ff352',
-    email:           '7a4de0a6-4919-49f2-a471-45b2f5bcedcd',
-    uid:             '83474451-1136-4db3-89be-9bad372c58c1',
-    website:         '575fce4e-409e-4cf6-b758-9fe828372bb6',
-    drive:           'e0f84371-a112-46c0-bd6b-2eb22b60a3b1',
-    kundeSeit:       'e7959a32-f1f0-4bdb-9405-b105db7fb115',
-    kundeTyp:        '04cc689d-8be7-478c-8c46-5ca3649914d8',
-    produkt:         '455552f8-39ea-43f3-a312-8b7759ad7d1a', // neu nach Rebuild
+    ansprechpartner:  'af58b50f-ccdb-4f17-aef9-3108ed521c42',
+    inhaber:          '4dac64f3-2adb-4965-9804-68f0d810eee2',
+    firmenadresse:    '11ac7353-b083-48df-8a05-39b3a755a8c0',
+    telefon:          '40d86cc8-bb12-4efe-8ab7-f5dedd4ff352',
+    email:            '7a4de0a6-4919-49f2-a471-45b2f5bcedcd',
+    uid:              '83474451-1136-4db3-89be-9bad372c58c1',
+    website:          '575fce4e-409e-4cf6-b758-9fe828372bb6',
+    drive:            'e0f84371-a112-46c0-bd6b-2eb22b60a3b1',
+    kundeSeit:        'e7959a32-f1f0-4bdb-9405-b105db7fb115',
+    kundeTyp:         '04cc689d-8be7-478c-8c46-5ca3649914d8',
+    onboardingDatum:  '84fea7d6-8ee8-4a52-9b83-ff4321b2d3ce',
   },
   // Performance Projekte
   pipeline: {
@@ -191,17 +191,17 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
   // 1. KUNDENDATENBANK-Task — IMMER (egal welches Onboarding)
   // ============================================================
   const kdbFields = cleanFields([
-    { id: FIELDS.kdb.kundeTyp,        value: isWebdesign ? OPTS.kundeTyp.Webdesign : OPTS.kundeTyp.Performance },
-    // Produkt-Feld weggelassen — redundant zu Kunde-Typ
-    { id: FIELDS.kdb.firmenadresse,   value: firmenadresse },
-    { id: FIELDS.kdb.inhaber,         value: inhaber },
-    { id: FIELDS.kdb.ansprechpartner, value: ansprechpartner },
-    { id: FIELDS.kdb.telefon,         value: telefon },
-    { id: FIELDS.kdb.email,           value: email },
-    { id: FIELDS.kdb.uid,             value: uid },
-    { id: FIELDS.kdb.website,         value: websiteUrl },
-    { id: FIELDS.kdb.drive,           value: driveLink },
-    { id: FIELDS.kdb.kundeSeit,       value: todayMs },
+    { id: FIELDS.kdb.kundeTyp,         value: isWebdesign ? OPTS.kundeTyp.Webdesign : OPTS.kundeTyp.Performance },
+    { id: FIELDS.kdb.firmenadresse,    value: firmenadresse },
+    { id: FIELDS.kdb.inhaber,          value: inhaber },
+    { id: FIELDS.kdb.ansprechpartner,  value: ansprechpartner },
+    { id: FIELDS.kdb.telefon,          value: telefon },
+    { id: FIELDS.kdb.email,            value: email },
+    { id: FIELDS.kdb.uid,              value: uid },
+    { id: FIELDS.kdb.website,          value: websiteUrl },
+    { id: FIELDS.kdb.drive,            value: driveLink },
+    { id: FIELDS.kdb.kundeSeit,        value: todayMs },
+    { id: FIELDS.kdb.onboardingDatum,  value: todayMs },
   ]);
 
   const kdbTask = await clickup(token, `/list/${LISTS.kdb}/task`, 'POST', {
