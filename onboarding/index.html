@@ -10,7 +10,7 @@
 :root{
   --bg:#111111;--surface:#1a1a1a;--surface2:#222222;--border:#2e2e2e;
   --accent:#D4860A;--accent-hover:#e8960b;--accent-dim:rgba(212,134,10,0.1);
-  --text:#ffffff;--muted:#666;--label:#888;
+  --text:#ffffff;--muted:#d8d8d8;--label:#ffffff;
   --radius:4px;--font-head:'Barlow Condensed',sans-serif;--font-body:'Barlow',sans-serif;
 }
 html{scroll-behavior:smooth}
@@ -70,7 +70,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-we
 .field input,.field select,.field textarea{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;font-weight:300;padding:13px 16px;outline:none;transition:border-color 0.15s,background 0.15s;width:100%}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);background:rgba(212,134,10,0.03)}
 .field textarea{resize:vertical;min-height:90px;line-height:1.6}
-.field input::placeholder,.field textarea::placeholder{color:var(--muted)}
+.field input::placeholder,.field textarea::placeholder{color:#8c8c8c}
 .hint{font-size:12px;color:var(--muted);display:flex;gap:6px;line-height:1.5}
 .hint::before{content:'→';color:var(--accent);flex-shrink:0}
 .divider{height:1px;background:var(--border);margin:4px 0}
@@ -142,7 +142,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-we
 .choice-btn{flex:1;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--muted);font-family:var(--font-head);font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;padding:12px;cursor:pointer;transition:all 0.2s}
 .choice-btn:hover{border-color:var(--accent);color:var(--accent)}
 .choice-btn.active-yes{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}
-.choice-btn.active-no{border-color:#555;color:#555;background:rgba(255,255,255,0.03)}
+.choice-btn.active-no{border-color:#b0b0b0;color:#b0b0b0;background:rgba(255,255,255,0.03)}
 
 /* DSGVO */
 .dsgvo-box{display:flex;align-items:flex-start;gap:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:border-color 0.15s}
