@@ -266,6 +266,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-we
               <li>Konto-E-Mail eures Domain- &amp; Website-Hosters</li>
             </ul>
           </div>
+          <div style="background:var(--accent-dim);border:1.5px solid var(--accent);border-radius:8px;padding:12px 15px;font-size:12.5px;line-height:1.55;color:var(--text)">
+            <strong>Bevor ihr loslegt:</strong> Ihr müsst nicht alles perfekt vorbereitet haben. Wenn ihr bei einem Feld nicht wisst, was reinkommt — einfach leer lassen. Bei den Fotos ladet ihr am besten direkt hoch, was ihr gerade da habt; die müssen nicht perfekt sein. Und falls etwas noch fehlt: Schickt das Formular am Ende trotzdem ab — nachreichen geht jederzeit.
+          </div>
           <div class="divider"></div>
           <div class="fr">
             <div class="field"><label>Firmenname + Rechtsform <span class="req">*</span></label><input type="text" id="firmaName" placeholder="z.B. Mustermann GmbH" required></div>
@@ -349,6 +352,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-we
         <div class="card-sub">Lade dein Logo und die Fotos hoch – je mehr, desto besser für das Design.</div>
       </div>
       <div class="card-body">
+        <div style="background:var(--accent-dim);border:1.5px solid var(--accent);border-radius:8px;padding:12px 15px;margin-bottom:18px;font-size:12.5px;line-height:1.55;color:var(--text)">
+          <strong>Wichtig:</strong> Die Fotos müssen nicht perfekt sein — ladet einfach hoch, was ihr gerade da habt. Je mehr Material wir haben, desto besser wird eure Website. Und falls gerade etwas fehlt: Schickt das Formular trotzdem ab — fehlende Fotos könnt ihr später einfach in der Google Drive nachreichen.
+        </div>
         <div class="fg">
           <div class="foto-grid">
             <div class="field"><label>Logo <span class="req">*</span></label><div class="upload-zone" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="handleDrop(event,this,'logoPreview','logo')"><input type="file" accept=".png,.svg,.jpg,.pdf" onchange="handleFiles(this.files,'logoPreview','logo')"><div class="upload-icon">⬆</div><div class="upload-title"><span>Datei auswählen</span> oder reinziehen</div><div class="upload-sub">PNG, SVG, PDF · transparent bevorzugt</div></div><div class="upload-preview" id="logoPreview"></div></div>
@@ -744,6 +750,38 @@ function collectFormData() {
   return data;
 }
 
+// === MISSING CHECK (für Noahs Benachrichtigung) ===
+function collectMissing(leistungen) {
+  var missing = [];
+  function chk(id, label) { var el = document.getElementById(id); if (!el || !(el.value || '').trim()) missing.push(label); }
+  chk('wdInhaber', 'Inhaber / Geschäftsführer');
+  chk('wdStrasse', 'Straße + Hausnummer');
+  chk('wdPlz', 'PLZ');
+  chk('wdOrt', 'Ort');
+  chk('wdUstId', 'UID / USt-ID');
+  chk('wdGrj', 'Gründungsjahr');
+  chk('wdAnsprech', 'Ansprechpartner');
+  chk('wdEmail', 'E-Mail');
+  chk('wdTelefon', 'Telefon');
+  chk('wdWasMacht', 'Text: Was macht ihr genau?');
+  chk('wdBesonders', 'Text: Was macht euch besonders?');
+  document.querySelectorAll('.leistung-item').forEach(function(item, i) {
+    var nameEl = item.querySelector('.leistung-name');
+    var name = (nameEl && nameEl.value ? nameEl.value : '').trim() || ('Leistung ' + (i + 1));
+    var hasSp = false;
+    item.querySelectorAll('.stichpunkt-row input[type=text]').forEach(function(inp) { if ((inp.value || '').trim()) hasSp = true; });
+    if (!hasSp) missing.push('Stichpunkte zu Leistung: ' + name);
+  });
+  if (!(fileStore.logo && fileStore.logo.length)) missing.push('Logo (Datei)');
+  if (!(fileStore.inhaberfoto && fileStore.inhaberfoto.length)) missing.push('Inhaberfoto');
+  if (!(fileStore.teamfotos && fileStore.teamfotos.length)) missing.push('Team-Fotos');
+  leistungen.forEach(function(name, i) {
+    var key = 'leistung_' + i;
+    if (!(fileStore[key] && fileStore[key].length)) missing.push('Fotos zu Leistung: ' + name);
+  });
+  return missing;
+}
+
 // === SUBMIT ===
 const API_BASE = 'https://handwerksmanufaktur-onboarding.handwerksmanufaktur.workers.dev';
 async function submitForm() {
@@ -758,7 +796,7 @@ async function submitForm() {
   try {
     const s1 = addStep('Ordnerstruktur wird erstellt');
     setStepStatus(s1, 'active');
-    const r = await fetch(API_BASE + '/create-folders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ firmaName, leistungen, serviceType: 'webdesign', formData: collectFormData() }) });
+    const r = await fetch(API_BASE + '/create-folders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ firmaName, leistungen, serviceType: 'webdesign', formData: collectFormData(), missing: collectMissing(leistungen) }) });
     const { folderIds, driveLink, error } = await r.json();
     if (error) throw new Error(error);
     setStepStatus(s1, 'done');

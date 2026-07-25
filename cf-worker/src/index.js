@@ -134,11 +134,16 @@ async function createGoogleDoc(token, name, htmlContent, folderId) {
   return data.id;
 }
 
-async function sendNotification(env, firmaName, serviceType, driveLink, formData) {
+async function sendNotification(env, firmaName, serviceType, driveLink, formData, missing = []) {
   if (!env.RESEND_API_KEY) { console.error('[Email] RESEND_API_KEY not set'); return; }
   if (!env.NOTIFY_EMAIL)   { console.error('[Email] NOTIFY_EMAIL not set'); return; }
 
   const typ = serviceType === 'webdesign' ? 'Webdesign' : 'LeadGen & Recruiting';
+
+  const missingHtml = missing.length ? `<div style="background:#fff7e6;border:1.5px solid #D4860A;border-radius:8px;padding:13px 16px;margin-bottom:18px">
+      <div style="font-size:11px;font-weight:700;color:#9a6100;letter-spacing:1px;text-transform:uppercase;margin-bottom:7px">⚠️ Noch offen — mit Kunde klären (${missing.length})</div>
+      <ul style="margin:0;padding-left:18px;font-size:12.5px;color:#333;line-height:1.75">${missing.map(m => `<li>${escHtml(m)}</li>`).join('')}</ul>
+    </div>` : `<div style="background:#eefaf0;border:1.5px solid #2e9e4f;border-radius:8px;padding:11px 16px;margin-bottom:18px;font-size:12.5px;color:#1d6b35;font-weight:600">✅ Vollständig ausgefüllt — nichts offen.</div>`;
   const rows = formData ? Object.entries(formData).map(([k, v]) => {
     if (k.startsWith('\u2500\u2500')) {
       const title = escHtml(k.replace(/\u2500/g,'').trim());
@@ -161,6 +166,7 @@ async function sendNotification(env, firmaName, serviceType, driveLink, formData
     </div>
     <div style="padding:20px 24px;background:#f4f6f8">
       <a href="${driveLink}" style="display:inline-block;background:#D4860A;color:#fff;padding:11px 22px;border-radius:6px;text-decoration:none;font-weight:700;font-size:13px;margin-bottom:20px">→ Drive-Ordner öffnen</a>
+      ${missingHtml}
       <table style="width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.10)">
         ${rows}
       </table>
@@ -173,7 +179,7 @@ async function sendNotification(env, firmaName, serviceType, driveLink, formData
     body: JSON.stringify({
       from: 'Onboarding <onboarding@die-handwerksmanufaktur.de>',
       to: [env.NOTIFY_EMAIL],
-      subject: `Neues Onboarding: ${firmaName} (${typ})`,
+      subject: `Neues Onboarding: ${firmaName} (${typ})${missing.length ? ` — ${missing.length} Punkte offen` : ''}`,
       html,
     }),
   });
@@ -183,7 +189,7 @@ async function sendNotification(env, firmaName, serviceType, driveLink, formData
 
 async function handleCreateFolders(request, env, ctx) {
   const body = await request.json();
-  const { firmaName, leistungen = [], serviceType = 'webdesign', formData = {} } = body;
+  const { firmaName, leistungen = [], serviceType = 'webdesign', formData = {}, missing = [] } = body;
   if (!firmaName) return jsonResp({ error: 'firmaName required' }, 400);
 
   const token    = await getAccessToken(env.GOOGLE_CLIENT_EMAIL, env.GOOGLE_PRIVATE_KEY);
@@ -252,7 +258,7 @@ async function handleCreateFolders(request, env, ctx) {
 
   // Send email
   try {
-    await sendNotification(env, firmaName, serviceType, driveLink, formData);
+    await sendNotification(env, firmaName, serviceType, driveLink, formData, missing);
   } catch(e) {
     console.error('[Email ERROR]', e.message);
   }
