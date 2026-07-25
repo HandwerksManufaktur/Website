@@ -100,6 +100,60 @@ const OPTS = {
 const TASK_TYPE_LEAD    = 1002;
 const TASK_TYPE_PROJECT = 1003;
 
+const NOAH_USER_ID = 188597937;
+
+// === Subtask-Vorlage Performance Projekte ===
+// dueToday: Due Date = Tag des Onboarding-Eingangs
+const PIPELINE_SUBTASKS = [
+  { name: 'Onboarding versenden',                    dueToday: true },
+  { name: 'Shooting-Termin vereinbaren',             dueToday: true },
+  { name: 'Rechnung schicken',                       dueToday: true },
+  { name: 'Kick-Off Call durchführen' },
+  { name: 'Skripte schreiben und schicken' },
+  { name: 'Facebook Business Profile einrichten' },
+  { name: 'Videos cutten lassen' },
+  { name: 'Funnel erstellen' },
+  { name: 'Werbeanzeigenmanager + Copies aufsetzen' },
+  { name: 'Review mit Kunde durchführen' },
+  { name: 'Kampagne live schalten' },
+];
+
+// === Checklisten-Vorlage Performance Projekte ===
+const PIPELINE_CHECKLISTS = [
+  { name: '🎬 Video & Content', items: [
+    'Videos auf Rechtschreibfehler geprüft',
+    'Schnitte & Untertitel korrekt',
+    'Bildmaterial vom Shooting gesichtet',
+  ]},
+  { name: '🌐 Funnel / Landing Page', items: [
+    'Impressum hinterlegt',
+    'Funnel-Tracking aktiviert',
+    'Facebook-Pixel verbunden',
+    'Datenschutzerklärung hinterlegt + an Kunden-Datenspeicherung angepasst',
+    'Mobile-Ansicht & Ladezeit geprüft',
+    'Danke-Seite eingerichtet',
+    'Perspective mit Facebook verbunden',
+  ]},
+  { name: '📧 Kommunikation & Automation', items: [
+    'Lead-Routing getestet (Test-Lead durchgeschickt)',
+    'E-Mail-Weiterleitung im Panel bestätigt',
+    'Auto-Nachricht nach Kontaktabgabe individuell gestaltet',
+  ]},
+  { name: '📱 Facebook / Werbeanzeigen', items: [
+    'Werbekonto + Zahlungsmethode eingerichtet',
+    'Copies & Creatives final',
+    'Zielgruppe definiert',
+  ]},
+  { name: '✅ Pre-Go-Live', items: [
+    'Alles mit Kunde durchgesprochen + Freigabe eingeholt',
+    'Tracking final getestet',
+  ]},
+  { name: '🚀 Nach Go-Live', items: [
+    'Recruiting',
+    'Review-Call vereinbaren',
+  ]},
+];
+
 // ============================================================
 // Helpers
 // ============================================================
@@ -162,6 +216,58 @@ function cleanFields(arr) {
   return arr.filter(f => f.value !== null && f.value !== undefined && f.value !== '');
 }
 
+// ClickUp-Phone-Fields akzeptieren NUR internationales Format (+49…).
+// Nationale Nummern ("0943…") → 400 FIELD_016 und killen sonst den ganzen Task-Create.
+function normalizePhone(raw) {
+  if (!raw) return null;
+  let p = String(raw).replace(/[\s\/\-().]/g, '');
+  if (p.startsWith('00')) p = '+' + p.slice(2);
+  else if (p.startsWith('0')) p = '+49' + p.slice(1);
+  return p;
+}
+
+// Task-Create, der bei ungültigen Custom-Field-Werten NICHT komplett scheitert:
+// Erst Versuch mit allen Fields; bei 400 → Task ohne Fields anlegen und
+// jedes Field einzeln setzen (fehlerhafte Fields werden übersprungen und geloggt).
+async function createTaskSafe(token, listId, payload) {
+  try {
+    return await clickup(token, `/list/${listId}/task`, 'POST', payload);
+  } catch (err) {
+    console.error('[ClickUp] Create mit Fields fehlgeschlagen, Fallback ohne Fields:', err.message);
+    const { custom_fields, ...bare } = payload;
+    const task = await clickup(token, `/list/${listId}/task`, 'POST', bare);
+    for (const f of custom_fields || []) {
+      await clickup(token, `/task/${task.id}/field/${f.id}`, 'POST', { value: f.value })
+        .catch(e => console.error(`[ClickUp] Field ${f.id} übersprungen:`, e.message));
+    }
+    return task;
+  }
+}
+
+// Subtasks (an Noah, teils Due Date = heute) + Checklisten an einen Performance-Projekt-Task hängen
+async function addPipelineExtras(token, taskId, todayMs) {
+  for (const st of PIPELINE_SUBTASKS) {
+    await clickup(token, `/list/${LISTS.pipeline}/task`, 'POST', {
+      name: st.name,
+      parent: taskId,
+      assignees: [NOAH_USER_ID],
+      ...(st.dueToday ? { due_date: todayMs, due_date_time: false } : {}),
+    }).catch(e => console.error(`[ClickUp] Subtask "${st.name}" übersprungen:`, e.message));
+  }
+  for (const cl of PIPELINE_CHECKLISTS) {
+    try {
+      const created = await clickup(token, `/task/${taskId}/checklist`, 'POST', { name: cl.name });
+      const clId = created.checklist ? created.checklist.id : created.id;
+      for (const item of cl.items) {
+        await clickup(token, `/checklist/${clId}/checklist_item`, 'POST', { name: item })
+          .catch(e => console.error(`[ClickUp] Checklist-Item "${item}" übersprungen:`, e.message));
+      }
+    } catch (e) {
+      console.error(`[ClickUp] Checkliste "${cl.name}" übersprungen:`, e.message);
+    }
+  }
+}
+
 // ============================================================
 // Haupt-Funktion: createClickUpTasks
 // ============================================================
@@ -178,7 +284,7 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
   const ort             = pick(formData, 'Ort');
   const firmenadresse   = [strasse, [plz, ort].filter(Boolean).join(' ')].filter(Boolean).join(', ');
   const email           = pick(formData, 'E-Mail', 'Email');
-  const telefon         = pick(formData, 'Telefon');
+  const telefon         = normalizePhone(pick(formData, 'Telefon'));
   const uid             = pick(formData, 'UID / USt-ID', 'UID', 'USt-ID');
   const websiteUrl      = pick(formData, 'Link zur alten Website', 'Bestehende Website');
   const facebook        = pick(formData, 'Facebook Seite Link', 'Link Facebook', 'Facebook');
@@ -204,7 +310,7 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
     { id: FIELDS.kdb.onboardingDatum,  value: todayMs },
   ]);
 
-  const kdbTask = await clickup(token, `/list/${LISTS.kdb}/task`, 'POST', {
+  const kdbTask = await createTaskSafe(token, LISTS.kdb, {
     name: firmaName,
     status: 'aktiv',
     custom_item_id: TASK_TYPE_LEAD,
@@ -233,7 +339,7 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
       { id: FIELDS.webdesign.statusInhalte, value: OPTS.statusInhalte['Teilweise vorhanden'] },
     ]);
 
-    const wdTask = await clickup(token, `/list/${LISTS.webdesign}/task`, 'POST', {
+    const wdTask = await createTaskSafe(token, LISTS.webdesign, {
       name: `${firmaName} - ${projekttyp && /multi/i.test(projekttyp) ? 'Multipager' : 'Onepager'}`,
       status: 'neuer kunde',
       custom_item_id: TASK_TYPE_PROJECT,
@@ -276,16 +382,20 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
       { id: FIELDS.pipeline.instagram,     value: instagram },
     ]);
 
-    const ppTask = await clickup(token, `/list/${LISTS.pipeline}/task`, 'POST', {
+    const ppTask = await createTaskSafe(token, LISTS.pipeline, {
       name: `${firmaName} - ${isRecruiting ? 'Recruiting' : 'Leadgen'}`,
       status: '🆕 Neuer Kunde',
       custom_item_id: TASK_TYPE_PROJECT,
       description,
+      assignees: [NOAH_USER_ID],
       custom_fields: ppFields,
     });
 
     // Relationship: Performance Projekt ↔ Kundendatenbank
     await clickup(token, `/task/${ppTask.id}/link/${kdbTask.id}`, 'POST', null).catch(() => {});
+
+    // Standard-Subtasks (an Noah, erste 3 mit Due Date = heute) + Checklisten
+    await addPipelineExtras(token, ppTask.id, todayMs);
 
     // Offene Stellen als Subtasks (nur bei Recruiting)
     if (isRecruiting) {
