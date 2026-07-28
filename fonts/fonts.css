@@ -1,0 +1,18 @@
+/* Lokal gehostete Schriften (ehem. Google Fonts) — DSGVO: keine Verbindung zu Google-Servern */
+@font-face{font-family:'Barlow';font-style:normal;font-weight:300;font-display:swap;src:url('barlow-v13-latin_latin-ext-300.woff2') format('woff2');}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:400;font-display:swap;src:url('barlow-v13-latin_latin-ext-regular.woff2') format('woff2');}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:500;font-display:swap;src:url('barlow-v13-latin_latin-ext-500.woff2') format('woff2');}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url('barlow-v13-latin_latin-ext-600.woff2') format('woff2');}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:700;font-display:swap;src:url('barlow-v13-latin_latin-ext-700.woff2') format('woff2');}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:400;font-display:swap;src:url('barlow-condensed-v13-latin_latin-ext-regular.woff2') format('woff2');}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url('barlow-condensed-v13-latin_latin-ext-600.woff2') format('woff2');}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url('barlow-condensed-v13-latin_latin-ext-700.woff2') format('woff2');}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:800;font-display:swap;src:url('barlow-condensed-v13-latin_latin-ext-800.woff2') format('woff2');}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:900;font-display:swap;src:url('barlow-condensed-v13-latin_latin-ext-900.woff2') format('woff2');}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('inter-v20-latin_latin-ext-regular.woff2') format('woff2');}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url('inter-v20-latin_latin-ext-500.woff2') format('woff2');}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('inter-v20-latin_latin-ext-600.woff2') format('woff2');}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url('inter-v20-latin_latin-ext-700.woff2') format('woff2');}
+@font-face{font-family:'Inter';font-style:normal;font-weight:800;font-display:swap;src:url('inter-v20-latin_latin-ext-800.woff2') format('woff2');}
+@font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url('instrument-serif-v5-latin_latin-ext-regular.woff2') format('woff2');}
+@font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url('instrument-serif-v5-latin_latin-ext-italic.woff2') format('woff2');}
