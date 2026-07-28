@@ -15,8 +15,16 @@ if(localStorage.getItem('cookie-consent')==='accepted'){
 }
 gtag('config','G-NQNECGN6HT');
 </script>
-<!-- Hotjar / Contentsquare -->
-<script src="https://t.contentsquare.net/uxa/99d8993a2bc41.js"></script>
+<!-- Hotjar / Contentsquare (lädt erst nach Cookie-Einwilligung) -->
+<script>
+function loadContentsquare(){
+  if(document.getElementById('cs-tag'))return;
+  var s=document.createElement('script');s.id='cs-tag';s.async=true;
+  s.src='https://t.contentsquare.net/uxa/99d8993a2bc41.js';
+  document.head.appendChild(s);
+}
+if(localStorage.getItem('cookie-consent')==='accepted'){loadContentsquare();}
+</script>
 <title>HandwerksManufaktur – Webdesign & SEO für Handwerksbetriebe</title>
 <meta name="description" content="Die Nr. 1 Web-Agentur für Handwerksbetriebe. Professionelles Webdesign, SEO & Google-Sichtbarkeit – mehr Aufträge, mehr Fachkräfte, unabhängig von Mundpropaganda. 120+ Betriebe vertrauen uns.">
 <meta name="keywords" content="Webdesign Handwerk, Website Handwerksbetrieb, SEO Handwerker, Handwerker Website erstellen, Webdesign Agentur Handwerk, Google Sichtbarkeit Handwerk, Handwerker Webauftritt, Website Schreiner, Website Zimmerei, Website Metallbau, Website SHK, Handwerker Marketing">
@@ -930,6 +938,7 @@ function cookieAccept(){
   localStorage.setItem('cookie-consent','accepted');
   document.getElementById('cookie-banner').style.display='none';
   if(typeof gtag==='function') gtag('consent','update',{'analytics_storage':'granted'});
+  if(typeof loadContentsquare==='function') loadContentsquare();
 }
 function cookieDecline(){
   localStorage.setItem('cookie-consent','declined');
