@@ -232,7 +232,12 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 
 /* ═══════ FAQ ═══════ */
 #faq{padding:0 0 120px;}
-.faq-list{max-width:720px;margin:48px auto 0;}
+.faq-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:70px;align-items:start;}
+.faq-head{position:sticky;top:120px;}
+.faq-tel{display:inline-block;margin-top:24px;font-size:16px;font-weight:600;border-bottom:1.5px solid var(--line2);padding-bottom:2px;}
+.faq-tel:hover{color:var(--acc-deep);border-color:var(--acc);}
+.faq-list{margin:0;}
+@media(max-width:860px){.faq-layout{grid-template-columns:1fr;gap:36px;}.faq-head{position:static;}}
 .faq-item{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);margin-bottom:12px;overflow:hidden;transition:box-shadow .3s,border-color .3s;}
 .faq-item.open{box-shadow:var(--shadow-md);border-color:var(--line2);}
 .faq-q{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 24px;cursor:pointer;font-size:16px;font-weight:600;letter-spacing:-.015em;}
@@ -486,9 +491,12 @@ footer{padding:30px 0 40px;color:var(--sub);}
 
 <!-- ═══════ FOTOS ═══════ -->
 <section id="fotos">
-  <div class="wrap fotos-head reveal center">
-    <div class="eyebrow"><span class="dot"></span>Aus der Praxis</div>
-    <h2 class="d" style="margin-top:18px;">In jeder Branche <em>zuhause.</em></h2>
+  <div class="wrap fotos-head reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>Aus der Praxis</div>
+      <h2 class="d" style="margin-top:18px;">In jeder Branche <em>zuhause.</em></h2>
+    </div>
+    <p class="sec-sub" style="margin:0;max-width:340px;">Sanitär, Zimmerei, Metallbau, Elektro &amp; mehr – wir sprechen die Sprache deines Gewerks.</p>
   </div>
   <div class="fmarq">
     <div class="fmarq-t">
@@ -571,10 +579,13 @@ footer{padding:30px 0 40px;color:var(--sub);}
 <!-- ═══════ FAQ ═══════ -->
 <section id="faq">
   <div class="wrap">
-    <div class="reveal center">
-      <div class="eyebrow"><span class="dot"></span>Bevor du fragst</div>
-      <h2 class="d" style="margin-top:18px;">Häufige <em>Fragen.</em></h2>
-    </div>
+    <div class="faq-layout">
+      <div class="faq-head reveal">
+        <div class="eyebrow"><span class="dot"></span>Bevor du fragst</div>
+        <h2 class="d" style="margin-top:18px;">Häufige <em>Fragen.</em></h2>
+        <p class="sec-sub">Alles andere klären wir im Erstgespräch – ehrlich und ohne Fachchinesisch.</p>
+        <a href="tel:+4981947174990" class="faq-tel">📞 +49 8194 7174990</a>
+      </div>
     <div class="faq-list reveal">
       <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was kostet eine neue Website?<span class="pm">+</span></div><div class="faq-a"><p>Die Kosten hängen vom Umfang ab. Im kostenlosen Erstgespräch bekommst du ein individuelles Angebot – transparent und ohne versteckte Kosten. Wir arbeiten mit Betrieben jeder Größe.</p></div></div>
       <div class="faq-item"><div class="faq-q" onclick="faq(this)">Wie lange dauert die Umsetzung?<span class="pm">+</span></div><div class="faq-a"><p>In der Regel 4–6 Wochen vom ersten Gespräch bis zum Launch. Fotoshooting und drei Entwurfsschleifen sind bereits inklusive.</p></div></div>
@@ -583,6 +594,7 @@ footer{padding:30px 0 40px;color:var(--sub);}
       <div class="faq-item"><div class="faq-q" onclick="faq(this)">Arbeitet ihr nur mit Betrieben aus Bayern?<span class="pm">+</span></div><div class="faq-a"><p>Nein – wir sind deutschlandweit tätig. Das Fotoshooting findet vor Ort statt, alles andere läuft remote und vollständig digital.</p></div></div>
       <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was unterscheidet euch von anderen Agenturen?<span class="pm">+</span></div><div class="faq-a"><p>Wir bauen ausschließlich digitale Systeme für Handwerksbetriebe. Dieser Fokus bedeutet: Wir kennen deine Branche, deine Kunden und deine Herausforderungen – und das schlägt sich direkt in den Ergebnissen nieder.</p></div></div>
     </div>
+  </div>
   </div>
 </section>
 
