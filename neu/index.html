@@ -65,51 +65,58 @@ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
   .nav-logo img{height:27px;}
   .nav-cta{font-size:13px;padding:8px 14px;white-space:nowrap;}
   .scroll-cue{display:none;}
-  .scene-inner{padding-bottom:9vh;}
 }
 
-/* ══════════ FILM OPENER ══════════ */
-.scene{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;}
-.scene-bg{position:absolute;inset:0;}
-.scene-bg img,.scene-bg video{width:100%;height:100%;object-fit:cover;transform:scale(1.12);will-change:transform;}
-.scene-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,6,5,.92) 0%,rgba(7,6,5,.34) 45%,rgba(7,6,5,.25) 100%);}
-.scene-inner{position:relative;z-index:2;width:100%;max-width:1220px;margin:0 auto;padding:0 28px 11vh;}
-.scene h2,.scene h1{font-family:var(--fd);font-weight:900;text-transform:uppercase;font-size:clamp(46px,7.6vw,108px);line-height:.94;letter-spacing:.005em;margin-top:18px;max-width:16ch;}
-.scene .sub{margin-top:22px;max-width:520px;font-size:18px;font-weight:300;color:rgba(240,235,228,.85);}
-.scene .em{color:var(--bronze-l);}
-.scene .it{font-style:italic;font-weight:700;}
-.scene-count{position:absolute;right:34px;bottom:11vh;z-index:2;font-family:var(--fd);font-weight:800;font-size:15px;letter-spacing:.3em;color:rgba(240,235,228,.4);writing-mode:vertical-rl;}
-@media(max-width:700px){.scene-count{display:none;}}
-
-/* opener scene (pure type) */
-#s0{align-items:center;background:var(--black);}
-#s0 .scene-inner{padding-bottom:0;text-align:left;}
-#s0::before{content:"";position:absolute;top:44%;left:52%;width:1000px;height:520px;transform:translate(-50%,-50%);filter:blur(110px);background:radial-gradient(circle at 30% 50%,rgba(200,135,58,.20),transparent 34%),radial-gradient(circle at 72% 50%,rgba(120,70,20,.16),transparent 40%);opacity:0;animation:flare 1.8s var(--ease) .2s forwards;}
+/* ══════════ HERO ══════════ */
+#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;background:var(--black);padding:130px 0 70px;}
+#hero::before{content:"";position:absolute;top:40%;left:62%;width:1000px;height:540px;transform:translate(-50%,-50%);filter:blur(110px);background:radial-gradient(circle at 30% 50%,rgba(200,135,58,.17),transparent 36%),radial-gradient(circle at 72% 50%,rgba(120,70,20,.13),transparent 42%);opacity:0;animation:flare 1.8s var(--ease) .2s forwards;pointer-events:none;}
 @keyframes flare{to{opacity:1;}}
-#s0 .o1,#s0 .o2,#s0 .o3,#s0 .o4{opacity:0;animation:up 1s var(--ease) forwards;}
-#s0 .o1{animation-delay:.3s;}
-#s0 .o2{animation-delay:.55s;}
-#s0 .o3{animation-delay:.85s;}
-#s0 .o4{animation-delay:1.15s;}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;position:relative;z-index:2;}
+.hero-txt h1{font-family:var(--fd);font-weight:900;text-transform:uppercase;font-size:clamp(46px,5.6vw,86px);line-height:.95;margin-top:20px;}
+.hero-txt .em{color:var(--bronze-l);}
+.hero-txt .it{font-style:italic;font-weight:700;}
+.hero-sub{margin-top:24px;max-width:480px;font-size:17.5px;font-weight:300;color:rgba(240,235,228,.82);}
+.hero-ctas{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+.hero-stats{display:flex;gap:26px;margin-top:44px;flex-wrap:wrap;}
+.hero-stats .st{white-space:nowrap;font-family:var(--fd);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);display:flex;align-items:baseline;gap:9px;}
+.hero-stats .n{font-size:26px;font-weight:800;color:var(--paper);letter-spacing:0;}
+.hero-stats .n em{font-style:normal;color:var(--bronze-l);}
+#hero .o1,#hero .o2,#hero .o3,#hero .o4{opacity:0;animation:up 1s var(--ease) forwards;}
+#hero .o1{animation-delay:.25s;}
+#hero .o2{animation-delay:.45s;}
+#hero .o3{animation-delay:.7s;}
+#hero .o4{animation-delay:.95s;}
 @keyframes up{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:none;}}
-#s0 h1 .line{display:block;}
-#s0 .ol{color:transparent;-webkit-text-stroke:1.5px var(--paper);}
-.scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:9px;font-family:var(--fd);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--mut);opacity:0;animation:up 1s var(--ease) 1.6s forwards;}
-.scroll-cue::after{content:"";width:1.5px;height:44px;background:linear-gradient(var(--bronze),transparent);animation:cue 1.8s ease-in-out infinite;}
+/* fan aus browser-mockups */
+.hero-fan{position:relative;height:560px;}
+.fan-card{position:absolute;width:340px;border-radius:8px;overflow:hidden;background:var(--card);border:1px solid var(--line2);box-shadow:0 34px 80px rgba(0,0,0,.55);transition:transform .5s var(--ease);}
+.fan-card img{width:100%;height:420px;object-fit:cover;object-position:top;display:block;}
+.fc1{top:44px;left:-12px;transform:rotate(-7deg);}
+.fc3{top:76px;right:-18px;transform:rotate(6.5deg);}
+.fc2{top:0;left:50%;transform:translateX(-50%);z-index:3;width:360px;box-shadow:0 44px 100px rgba(0,0,0,.65),0 0 60px rgba(200,135,58,.08);}
+.fc2 img{height:470px;}
+.fan-card:hover{transform:translateY(-10px);z-index:5;}
+.fc2:hover{transform:translateX(-50%) translateY(-10px);}
+.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:9px;font-family:var(--fd);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--mut);opacity:0;animation:up 1s var(--ease) 1.4s forwards;}
+.scroll-cue::after{content:"";width:1.5px;height:40px;background:linear-gradient(var(--bronze),transparent);animation:cue 1.8s ease-in-out infinite;}
 @keyframes cue{0%,100%{transform:scaleY(.4);transform-origin:top;}50%{transform:scaleY(1);}}
-
-/* transition band after film */
-#pitch{background:var(--black);padding:150px 0 140px;text-align:center;position:relative;}
-#pitch::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:1.5px;height:90px;background:linear-gradient(transparent,var(--bronze));}
-#pitch h2{font-family:var(--fd);font-weight:900;text-transform:uppercase;font-size:clamp(40px,6.4vw,88px);line-height:.98;}
-#pitch h2 em{font-style:italic;font-weight:700;color:var(--bronze-l);}
-#pitch p{max-width:560px;margin:26px auto 0;font-size:18px;font-weight:300;color:var(--mut);}
-#pitch .btns{display:flex;gap:14px;justify-content:center;margin-top:40px;flex-wrap:wrap;}
-.pitch-stats{display:flex;gap:56px;justify-content:center;margin-top:64px;flex-wrap:wrap;}
-.pitch-stats .st{text-align:center;}
-.pitch-stats .n{font-family:var(--fd);font-size:44px;font-weight:800;line-height:1;}
-.pitch-stats .n em{font-style:normal;color:var(--bronze);}
-.pitch-stats .l{font-family:var(--fd);font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);margin-top:7px;}
+@media(max-width:1080px){.hero-fan{height:500px;}.fan-card{width:290px;}.fan-card img{height:360px;}.fc2{width:310px;}.fc2 img{height:400px;}}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:48px;}
+  #hero{padding:120px 0 90px;}
+  .hero-fan{height:440px;max-width:520px;margin:0 auto;width:100%;}
+  .fan-card{width:250px;}.fan-card img{height:310px;}
+  .fc2{width:270px;}.fc2 img{height:350px;}
+  .fc1{left:-6px;}.fc3{right:-6px;}
+}
+@media(max-width:520px){
+  .hero-fan{height:400px;}
+  .fc1{display:none;}
+  .fan-card{width:240px;}
+  .fc3{right:0;top:60px;}.fc3 img{height:300px;}
+  .fc2{left:0;transform:none;width:260px;}
+  .fc2:hover{transform:translateY(-10px);}
+}
 
 /* ══════════ LOGO BAND ══════════ */
 #band{background:var(--dark);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:34px 0;overflow:hidden;}
@@ -281,8 +288,7 @@ footer{background:var(--dark);border-top:1px solid var(--line);padding:60px 0 30
 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
-  .reveal,.stagger,#s0 .o1,#s0 .o2,#s0 .o3,#s0 .o4{opacity:1!important;transform:none!important;}
-  .scene-bg img{transform:none!important;}
+  .reveal,.stagger,#hero .o1,#hero .o2,#hero .o3,#hero .o4{opacity:1!important;transform:none!important;}
   body::after{display:none;}
 }
 </style>
@@ -292,81 +298,39 @@ footer{background:var(--dark);border-top:1px solid var(--line);padding:60px 0 30
 <div id="sp"></div>
 
 <nav id="nav">
-  <a href="#s0" class="nav-logo"><img src="/images/logo-handwerksmanufaktur.png" alt="HandwerksManufaktur"></a>
+  <a href="#hero" class="nav-logo"><img src="/images/logo-handwerksmanufaktur.png" alt="HandwerksManufaktur"></a>
   <div class="nav-r">
+    <a href="#projekte">Arbeiten</a>
     <a href="#leistungen">Leistungen</a>
-    <a href="#projekte">Projekte</a>
     <a href="#stimmen">Stimmen</a>
     <a href="#kontakt" class="nav-cta">Projekt anfragen →</a>
   </div>
 </nav>
 
-<!-- ═══ FILM: OPENER ═══ -->
-<section class="scene" id="s0">
-  <div class="scene-inner">
-    <div class="label o1">Ein Abend, irgendwo in Bayern</div>
-    <h1>
-      <span class="line o2">22:41 Uhr.</span>
-      <span class="line o3 em">Die Heizung</span>
-      <span class="line o4 ol">fällt aus.</span>
-    </h1>
-    <p class="sub o4">So beginnt dein nächster Auftrag – bei jemandem, den du noch gar nicht kennst.</p>
-  </div>
-  <div class="scroll-cue">Die Geschichte beginnt</div>
-</section>
-
-<!-- ═══ FILM: SZENE 01 ═══ -->
-<section class="scene" id="s1">
-  <div class="scene-bg"><img src="/neu/assets/story-suche.jpg" alt="Kunde tippt eine Suche ins Handy"></div>
-  <div class="scene-shade"></div>
-  <div class="scene-count">SZENE 01 — DIE SUCHE</div>
-  <div class="scene-inner">
-    <div class="label reveal">Szene 01 · Die Suche</div>
-    <h2 class="reveal">Der Kunde greift <span class="em it">zum Handy.</span></h2>
-    <p class="sub reveal">Nicht zum Branchenbuch. Nicht zur Empfehlung von früher. Er googelt – und sieht zuerst die Betriebe, die online stattfinden.</p>
-  </div>
-</section>
-
-<!-- ═══ FILM: SZENE 02 ═══ -->
-<section class="scene" id="s2">
-  <div class="scene-bg"><img src="/neu/assets/story-anruf.jpg" alt="Website gefunden – Finger über dem Anruf-Button"></div>
-  <div class="scene-shade"></div>
-  <div class="scene-count">SZENE 02 — DIE ENTSCHEIDUNG</div>
-  <div class="scene-inner">
-    <div class="label reveal">Szene 02 · Die Entscheidung</div>
-    <h2 class="reveal">3 Sekunden. Dann ist klar, <span class="em it">wer den Anruf bekommt.</span></h2>
-    <p class="sub reveal">Echte Fotos, klare Leistungen, ein Auftritt, der nach Meisterbetrieb aussieht – der Daumen tippt auf „Anrufen". Bei dem Betrieb, der überzeugt.</p>
-  </div>
-</section>
-
-<!-- ═══ FILM: SZENE 03 ═══ -->
-<section class="scene" id="s3">
-  <div class="scene-bg"><img src="/images/foto-monteur.jpg" alt="Handwerker nimmt den Anruf entgegen" style="object-position:60% center;"></div>
-  <div class="scene-shade"></div>
-  <div class="scene-count">SZENE 03 — DER AUFTRAG</div>
-  <div class="scene-inner">
-    <div class="label reveal">Szene 03 · Der Auftrag</div>
-    <h2 class="reveal">Das Telefon klingelt. <span class="em it">Bei dir.</span></h2>
-    <p class="sub reveal">Kein Zufall, keine Mundpropaganda – ein planbarer Kanal, der liefert. Egal wie der Markt läuft.</p>
-  </div>
-</section>
-
-<!-- ═══ PITCH ═══ -->
-<section id="pitch">
-  <div class="wrap">
-    <div class="label reveal" style="justify-content:center;">Die HandwerksManufaktur</div>
-    <h2 class="reveal" style="margin-top:18px;">Wir bauen die Website,<br>die <em>diesen Film</em> für<br>deinen Betrieb dreht.</h2>
-    <p class="reveal">Webdesign, Texte, Fotos und Google-Sichtbarkeit – alles aus einer Hand, spezialisiert auf Handwerksbetriebe im DACH-Raum.</p>
-    <div class="btns reveal">
-      <a href="#kontakt" class="btn btn-bronze">Kostenloses Erstgespräch</a>
-      <a href="#projekte" class="btn btn-line">Projekte ansehen</a>
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-txt">
+      <div class="label o1">Webdesign-Agentur für Handwerksbetriebe</div>
+      <h1 class="o2">Handwerk verdient<br><span class="em it">bessere Websites.</span></h1>
+      <p class="hero-sub o3">Wir bauen Auftritte, die aus Google-Suchen Anfragen machen – mit echten Fotos statt Stock, Texten, die klingen wie du, und Sichtbarkeit ab Tag eins.</p>
+      <div class="hero-ctas o3">
+        <a href="#kontakt" class="btn btn-bronze">Kostenloses Erstgespräch</a>
+        <a href="#projekte" class="btn btn-line">Arbeiten ansehen</a>
+      </div>
+      <div class="hero-stats o4">
+        <div class="st"><span class="n">120<em>+</em></span> Handwerksbetriebe</div>
+        <div class="st"><span class="n">5.0<em>★</em></span> Google-Bewertungen</div>
+        <div class="st"><span class="n">6<em>+</em></span> Jahre Fokus</div>
+      </div>
     </div>
-    <div class="pitch-stats reveal">
-      <div class="st"><div class="n">120<em>+</em></div><div class="l">Handwerksbetriebe</div></div>
-      <div class="st"><div class="n">6<em>+</em></div><div class="l">Jahre Erfahrung</div></div>
-      <div class="st"><div class="n">98<em>%</em></div><div class="l">Zufriedenheit</div></div>
+    <div class="hero-fan o4">
+      <div class="fan-card fc1"><div class="pbar"><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="purl">zimmerei-knappich.de</span></div><img src="/images/Vorher-Nachher/compressed/scroll-nachher-11.jpg" alt="Website Zimmerei Knappich"></div>
+      <div class="fan-card fc3"><div class="pbar"><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="purl">dachbau-kraus.de</span></div><img src="/images/Vorher-Nachher/compressed/scroll-nachher-3.jpg" alt="Website Dachbau Kraus"></div>
+      <div class="fan-card fc2"><div class="pbar"><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="purl">schreinerei-kreitner.de</span></div><img src="/images/Vorher-Nachher/compressed/scroll-nachher-9.jpg" alt="Website Schreinerei Kreitner"></div>
     </div>
   </div>
+  <div class="scroll-cue">Unsere Arbeiten</div>
 </section>
 
 <!-- ═══ LOGO BAND ═══ -->
@@ -411,25 +375,6 @@ footer{background:var(--dark);border-top:1px solid var(--line);padding:60px 0 30
   </div>
 </section>
 
-<!-- ═══ LEISTUNGEN ═══ -->
-<section id="leistungen" class="light">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="label">Was wir übernehmen</div>
-      <h2>Du machst Handwerk.<br>Wir machen den Rest.</h2>
-      <p>Website, Texte, Fotos, Google – alles aus einer Hand, perfekt aufeinander abgestimmt. Dein Aufwand: ein Gespräch.</p>
-    </div>
-    <div class="svc-rows">
-      <div class="svc-row stagger"><div class="svc-num">01</div><h3>Webdesign &amp; Entwicklung</h3><p>Moderne, schnelle Website, die deine Arbeit so zeigt, wie sie ist: meisterhaft. Besucher werden zu Anfragen.</p><div class="svc-arr">→</div></div>
-      <div class="svc-row stagger"><div class="svc-num">02</div><h3>SEO &amp; Google-Sichtbarkeit</h3><p>Gefunden werden, wenn in deiner Region gesucht wird – bei Google und in den KI-Suchen von morgen.</p><div class="svc-arr">→</div></div>
-      <div class="svc-row stagger"><div class="svc-num">03</div><h3>Conversion &amp; Performance</h3><p>Struktur, Texte und Ladezeiten, die aus Besuchern Kunden machen. Messbar, nicht gefühlt.</p><div class="svc-arr">→</div></div>
-      <div class="svc-row stagger"><div class="svc-num">04</div><h3>Karriereseite &amp; Recruiting</h3><p>Zeig, warum man bei dir arbeiten will – und erreiche die Fachkräfte, die nie ein Stellenportal öffnen.</p><div class="svc-arr">→</div></div>
-      <div class="svc-row stagger"><div class="svc-num">05</div><h3>Echte Fotografie</h3><p>Wir kommen zu dir in den Betrieb. Echte Menschen, echte Baustellen – statt Stockfotos, die jeder hat.</p><div class="svc-arr">→</div></div>
-      <div class="svc-row stagger"><div class="svc-num">06</div><h3>Betreuung &amp; Weiterentwicklung</h3><p>Nach dem Launch fängt's an: Pflege, Updates, Optimierung. Ein Ansprechpartner, keine Warteschleife.</p><div class="svc-arr">→</div></div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══ PROJEKTE REEL ═══ -->
 <section id="projekte">
   <div class="sec-head reveal">
@@ -455,6 +400,25 @@ footer{background:var(--dark);border-top:1px solid var(--line);padding:60px 0 30
     <div class="pcard"><div class="pbar"><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="purl">vogel-holzbau.de</span></div><div class="pview"><img src="/images/Vorher-Nachher/compressed/scroll-nachher-13.jpg" alt="Vogel Holzbau Nachher" class="pimg active" loading="lazy"><img src="/images/Vorher-Nachher/compressed/scroll-vorher-13.jpg" alt="Vogel Holzbau Vorher" class="pimg" loading="lazy"></div><div class="pinfo"><span class="pname">Vogel Holzbau</span><button class="ptog">Vorher</button></div></div>
     <div class="pcard"><div class="pbar"><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="purl">maser-tankschutz.de</span></div><div class="pview"><img src="/images/Vorher-Nachher/compressed/scroll-nachher-14.jpg" alt="Maser Tankschutz Nachher" class="pimg active" loading="lazy"><img src="/images/Vorher-Nachher/compressed/scroll-vorher-14.jpg" alt="Maser Tankschutz Vorher" class="pimg" loading="lazy"></div><div class="pinfo"><span class="pname">Maser Tankschutz</span><button class="ptog">Vorher</button></div></div>
     <div class="pcard"><div class="pbar"><span class="pdot"></span><span class="pdot"></span><span class="pdot"></span><span class="purl">schustererisried.de</span></div><div class="pview"><img src="/images/Vorher-Nachher/compressed/scroll-nachher-15.jpg" alt="Schuster Erisried Nachher" class="pimg active" loading="lazy"><img src="/images/Vorher-Nachher/compressed/scroll-vorher-15.jpg" alt="Schuster Erisried Vorher" class="pimg" loading="lazy"></div><div class="pinfo"><span class="pname">Schuster Erisried</span><button class="ptog">Vorher</button></div></div>
+  </div>
+</section>
+
+<!-- ═══ LEISTUNGEN ═══ -->
+<section id="leistungen" class="light">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="label">Was wir übernehmen</div>
+      <h2>Du machst Handwerk.<br>Wir machen den Rest.</h2>
+      <p>Website, Texte, Fotos, Google – alles aus einer Hand, perfekt aufeinander abgestimmt. Dein Aufwand: ein Gespräch.</p>
+    </div>
+    <div class="svc-rows">
+      <div class="svc-row stagger"><div class="svc-num">01</div><h3>Webdesign &amp; Entwicklung</h3><p>Moderne, schnelle Website, die deine Arbeit so zeigt, wie sie ist: meisterhaft. Besucher werden zu Anfragen.</p><div class="svc-arr">→</div></div>
+      <div class="svc-row stagger"><div class="svc-num">02</div><h3>SEO &amp; Google-Sichtbarkeit</h3><p>Gefunden werden, wenn in deiner Region gesucht wird – bei Google und in den KI-Suchen von morgen.</p><div class="svc-arr">→</div></div>
+      <div class="svc-row stagger"><div class="svc-num">03</div><h3>Conversion &amp; Performance</h3><p>Struktur, Texte und Ladezeiten, die aus Besuchern Kunden machen. Messbar, nicht gefühlt.</p><div class="svc-arr">→</div></div>
+      <div class="svc-row stagger"><div class="svc-num">04</div><h3>Karriereseite &amp; Recruiting</h3><p>Zeig, warum man bei dir arbeiten will – und erreiche die Fachkräfte, die nie ein Stellenportal öffnen.</p><div class="svc-arr">→</div></div>
+      <div class="svc-row stagger"><div class="svc-num">05</div><h3>Echte Fotografie</h3><p>Wir kommen zu dir in den Betrieb. Echte Menschen, echte Baustellen – statt Stockfotos, die jeder hat.</p><div class="svc-arr">→</div></div>
+      <div class="svc-row stagger"><div class="svc-num">06</div><h3>Betreuung &amp; Weiterentwicklung</h3><p>Nach dem Launch fängt's an: Pflege, Updates, Optimierung. Ein Ansprechpartner, keine Warteschleife.</p><div class="svc-arr">→</div></div>
+    </div>
   </div>
 </section>
 
@@ -657,7 +621,7 @@ footer{background:var(--dark);border-top:1px solid var(--line);padding:60px 0 30
         <p class="tag">Webauftritte, die Handwerksbetrieben planbar neue Aufträge und echte Sichtbarkeit bringen – unabhängig von Mundpropaganda.</p>
       </div>
       <div class="f-nav">
-        <div class="f-col"><h5>Navigation</h5><a href="#s0">Start</a><a href="#leistungen">Leistungen</a><a href="#projekte">Projekte</a><a href="#stimmen">Stimmen</a></div>
+        <div class="f-col"><h5>Navigation</h5><a href="#hero">Start</a><a href="#leistungen">Leistungen</a><a href="#projekte">Projekte</a><a href="#stimmen">Stimmen</a></div>
         <div class="f-col"><h5>Kontakt</h5><a href="tel:+4981947174990">+49 8194 7174990</a><a href="mailto:info@die-handwerksmanufaktur.de">info@die-handwerksmanufaktur.de</a></div>
         <div class="f-col"><h5>Rechtliches</h5><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a><a href="/agb">AGB</a></div>
       </div>
@@ -692,21 +656,6 @@ var io=new IntersectionObserver(function(es){
 },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 document.querySelectorAll('.stagger').forEach(function(el,i){el.dataset.delay=(i%6)*90;io.observe(el);});
-
-// scene parallax (sanfter Zoom, kein Scroll-Hijack)
-(function(){
-  var scenes=[].slice.call(document.querySelectorAll('.scene-bg img'));
-  if(!scenes.length)return;
-  function tick(){
-    scenes.forEach(function(img){
-      var r=img.closest('.scene').getBoundingClientRect();
-      var p=Math.max(0,Math.min(1,1-(r.bottom)/(innerHeight+r.height)));
-      img.style.transform='scale('+(1.12-p*.12)+') translateY('+(p*24-12)+'px)';
-    });
-    requestAnimationFrame(tick);
-  }
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)requestAnimationFrame(tick);
-})();
 
 // projekte reel: drag scroll
 (function(){
