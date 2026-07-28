@@ -153,6 +153,22 @@ h2.display{font-family:var(--fd);font-weight:800;font-size:clamp(38px,5.4vw,68px
 .marquee .li:hover{opacity:1;filter:none;}
 .marquee .li img{height:44px;width:auto;max-width:150px;object-fit:contain;}
 
+/* ═══════════════════ STORY (dark, Higgsfield-Assets) ═══════════════════ */
+#story{background:var(--dark);padding:110px 0;}
+#story .lw-head h2{color:var(--white);}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:60px;}
+.story-card{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border-d);background:#000;}
+.story-card img{width:100%;aspect-ratio:16/9.6;object-fit:cover;display:block;transition:transform 1.2s var(--ease-out);}
+.story-card:hover img{transform:scale(1.045);}
+.story-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.78) 0%,rgba(0,0,0,.18) 45%,transparent 70%);pointer-events:none;}
+.story-cap{position:absolute;left:26px;right:26px;bottom:22px;z-index:2;display:flex;align-items:baseline;gap:16px;}
+.story-num{font-family:var(--fd);font-size:15px;font-weight:800;letter-spacing:.14em;color:var(--accent-l);white-space:nowrap;}
+.story-cap h3{font-family:var(--fd);font-size:clamp(20px,2.2vw,28px);font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--white);line-height:1.1;}
+.story-cap p{font-size:13.5px;color:rgba(240,235,228,.75);margin-top:4px;}
+.story-note{margin-top:28px;text-align:center;font-size:13px;letter-spacing:.08em;color:var(--muted-d);}
+.story-note em{font-style:normal;color:var(--accent-l);}
+@media(max-width:820px){.story-grid{grid-template-columns:1fr;}}
+
 /* ═══════════════════ FOTO STRIP (dark) ═══════════════════ */
 #fotos{background:var(--dark);padding:40px 0 110px;overflow:hidden;}
 #fotos .lw-head h2{color:var(--white);}
@@ -510,6 +526,28 @@ footer{background:var(--dark2);color:var(--muted-d);padding:70px 0 34px;border-t
       <div class="li"><img src="/images/logo-happach-maschinenbau.png" alt="" loading="lazy"></div>
       <div class="li"><img src="/images/logo-eibl-bau.png" alt="" loading="lazy"></div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════ STORY (Higgsfield-Assets) ═══════ -->
+<section id="story" class="on-dark">
+  <div class="wrap">
+    <div class="lw-head reveal" style="margin-bottom:0;">
+      <div class="sec-label" style="justify-content:center;">So entsteht dein nächster Auftrag</div>
+      <h2 class="display split">Gesucht. Gefunden.<br>Angerufen.</h2>
+      <p class="sec-sub" style="margin-left:auto;margin-right:auto;">Deine Kunden entscheiden in Sekunden auf dem Handy. Eine Website, die überzeugt, macht aus der Suche einen Anruf – und aus dem Anruf einen Auftrag.</p>
+    </div>
+    <div class="story-grid">
+      <div class="story-card stagger">
+        <img src="/neu/assets/story-suche.jpg" alt="Kunde sucht auf dem Handy nach einem Handwerksbetrieb" loading="lazy">
+        <div class="story-cap"><span class="story-num">01</span><div><h3>Der Kunde sucht</h3><p>Heizung kaputt, Bad-Sanierung geplant – die Suche startet immer bei Google.</p></div></div>
+      </div>
+      <div class="story-card stagger">
+        <img src="/neu/assets/story-anruf.jpg" alt="Kunde findet die Website und tippt auf den Anruf-Button" loading="lazy">
+        <div class="story-cap"><span class="story-num">02</span><div><h3>Dein Auftritt überzeugt</h3><p>Professionelle Website, echte Werkstatt-Fotos – ein Tipp auf den Button, und das Telefon klingelt bei dir.</p></div></div>
+      </div>
+    </div>
+    <p class="story-note reveal">▶ Hier entsteht gerade ein <em>kompletter Kurzfilm</em> – vom Sofa über die Suche bis zum gewonnenen Auftrag.</p>
   </div>
 </section>
 
