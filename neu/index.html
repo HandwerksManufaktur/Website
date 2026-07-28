@@ -213,6 +213,14 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 .fcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(10,8,5,.66));}
 .fname{position:absolute;left:16px;bottom:13px;z-index:2;font-size:14px;font-weight:600;color:#fff;}
 .fotos-head{margin-bottom:44px;}
+.vidrow{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:18px;margin-bottom:44px;}
+.vcard{position:relative;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--night-line);background:var(--night2);}
+.vcard video{width:100%;height:280px;object-fit:cover;display:block;}
+.vlabel{position:absolute;left:16px;bottom:13px;z-index:2;font-size:13.5px;font-weight:600;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6);}
+.vcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,8,5,.6));pointer-events:none;}
+.fmarq.frev .fmarq-t{animation-direction:reverse;animation-duration:80s;}
+.fcard.fsmall{width:230px;height:290px;}
+@media(max-width:860px){.vidrow{grid-template-columns:1fr;}.vcard video{height:230px;}}
 
 /* ═══════ STIMMEN ═══════ */
 #stimmen{padding:110px 0 120px;overflow:hidden;}
@@ -542,9 +550,14 @@ footer{padding:30px 0 40px;color:var(--sub);}
   <div class="wrap fotos-head reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;">
     <div>
       <div class="eyebrow"><span class="dot"></span>Aus der Praxis</div>
-      <h2 class="d" style="margin-top:18px;">In jeder Branche <em>zuhause.</em></h2>
+      <h2 class="d" style="margin-top:18px;">Echt gedreht.<br>Echt <em>fotografiert.</em></h2>
     </div>
-    <p class="sec-sub" style="margin:0;max-width:340px;">Vom Dachstuhl bis zur Wallbox: Wir kennen dein Gewerk – und fotografieren es vor Ort, statt Stockfotos zu kaufen.</p>
+    <p class="sec-sub" style="margin:0;max-width:340px;">Imagefilme, Drohnenaufnahmen, Betriebs-Fotoshootings: Alles, was du hier siehst, haben wir selbst für unsere Kunden produziert – vor Ort, in jeder Branche.</p>
+  </div>
+  <div class="wrap vidrow reveal">
+    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/koller.mp4" type="video/mp4"></video><div class="vlabel">Zimmerei Koller · Imagefilm</div></div>
+    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/wohner.mp4" type="video/mp4"></video><div class="vlabel">Wohner Elektrotechnik · Drohne</div></div>
+    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/koller-team.mp4" type="video/mp4"></video><div class="vlabel">Zimmerei Koller · Team</div></div>
   </div>
   <div class="fmarq">
     <div class="fmarq-t">
@@ -571,6 +584,11 @@ footer{padding:30px 0 40px;color:var(--sub);}
       <div class="fcard"><img src="/images/foto-klass-heizung.jpg" alt="" loading="lazy"><div class="fname">Sanitär</div></div>
       <div class="fcard"><img src="/images/foto-elektro.jpg" alt="" loading="lazy" style="object-position:40% center;"><div class="fname">Elektro</div></div>
     </div>
+  </div>
+
+  <div class="fmarq frev" style="margin-top:18px;">
+    <div class="fmarq-t"><div class="fcard fsmall"><img src="/neu/assets/praxis/p1.jpg" alt="Werkstatt Senftleben Haustechnik" loading="lazy"><div class="fname">Senftleben Haustechnik</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p2.jpg" alt="Showroom Senftleben" loading="lazy"><div class="fname">Senftleben Haustechnik</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p3.jpg" alt="Drohnenaufnahme Fuhrpark Senftleben" loading="lazy"><div class="fname">Senftleben Haustechnik</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p4.jpg" alt="Werkstatt Senftleben" loading="lazy"><div class="fname">Senftleben Haustechnik</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p5.jpg" alt="Showroom-Beratung Senftleben" loading="lazy"><div class="fname">Senftleben Haustechnik</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p6.jpg" alt="Team Erwin Schmidt und Sohn" loading="lazy"><div class="fname">Erwin Schmidt &amp; Sohn</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p7.jpg" alt="Mitarbeiter Erwin Schmidt und Sohn" loading="lazy"><div class="fname">Erwin Schmidt &amp; Sohn</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p8.jpg" alt="Werkstatt Erwin Schmidt und Sohn" loading="lazy"><div class="fname">Erwin Schmidt &amp; Sohn</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p9.jpg" alt="Betriebsgebäude Erwin Schmidt und Sohn" loading="lazy"><div class="fname">Erwin Schmidt &amp; Sohn</div></div></div>
+    <div class="fmarq-t" aria-hidden="true"><div class="fcard fsmall"><img src="/neu/assets/praxis/p1.jpg" alt="Werkstatt Senftleben Haustechnik" loading="lazy"><div class="fname">Senftleben Haustechnik</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p2.jpg" alt="Showroom Senftleben" loading="lazy"><div class="fname">Senftleben Haustechnik</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p3.jpg" alt="Drohnenaufnahme Fuhrpark Senftleben" loading="lazy"><div class="fname">Senftleben Haustechnik</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p4.jpg" alt="Werkstatt Senftleben" loading="lazy"><div class="fname">Senftleben Haustechnik</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p5.jpg" alt="Showroom-Beratung Senftleben" loading="lazy"><div class="fname">Senftleben Haustechnik</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p6.jpg" alt="Team Erwin Schmidt und Sohn" loading="lazy"><div class="fname">Erwin Schmidt &amp; Sohn</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p7.jpg" alt="Mitarbeiter Erwin Schmidt und Sohn" loading="lazy"><div class="fname">Erwin Schmidt &amp; Sohn</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p8.jpg" alt="Werkstatt Erwin Schmidt und Sohn" loading="lazy"><div class="fname">Erwin Schmidt &amp; Sohn</div></div><div class="fcard fsmall"><img src="/neu/assets/praxis/p9.jpg" alt="Betriebsgebäude Erwin Schmidt und Sohn" loading="lazy"><div class="fname">Erwin Schmidt &amp; Sohn</div></div></div>
   </div>
 </section>
 
@@ -778,7 +796,20 @@ document.querySelectorAll('.stagger').forEach(function(el,i){el.dataset.delay=(i
 
 // Word-Reveal für alle großen Headlines
 document.querySelectorAll('h2.d, .night h2, .k-head h2').forEach(function(h){
-  if(h.querySelector('.rot'))return; // Rotator-Headline nicht zerlegen
+  if(h.querySelector('.rot'))return; // Praxis-Videos: nur abspielen, wenn sichtbar
+(function(){
+  var vids=[].slice.call(document.querySelectorAll('.vcard video'));if(!vids.length)return;
+  var pvio=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var v=e.target;
+      if(e.isIntersecting){v.play().catch(function(){});}
+      else{v.pause();}
+    });
+  },{threshold:.25});
+  vids.forEach(function(v){pvio.observe(v);});
+})();
+
+// Rotator-Headline nicht zerlegen
   var nodes=[].slice.call(h.childNodes);
   var out='';
   nodes.forEach(function(n){
