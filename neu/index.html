@@ -61,7 +61,8 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 .split .word .accent,.split em{font-family:var(--serif);font-style:italic;font-weight:400;}
 
 /* ═══════ NAV ═══════ */
-#nav{position:fixed;top:0;left:0;right:0;z-index:400;display:flex;align-items:center;justify-content:space-between;padding:16px 34px;background:rgba(250,247,241,.6);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid transparent;transition:border-color .3s,padding .3s;}
+#nav{position:fixed;top:0;left:0;right:0;z-index:400;display:flex;align-items:center;justify-content:space-between;padding:16px 34px;background:rgba(250,247,241,.6);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid transparent;transition:border-color .3s,padding .3s,transform .45s cubic-bezier(.22,1,.36,1);}
+#nav.hide{transform:translateY(-110%);}
 #nav.scrolled{border-bottom-color:var(--line);padding:12px 34px;}
 .nav-logo img{height:30px;filter:invert(1) hue-rotate(180deg) brightness(.2);}
 .nav-links{display:flex;align-items:center;gap:26px;}
@@ -74,8 +75,8 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 /* ═══════ HERO ═══════ */
 #hero{padding:170px 0 0;text-align:center;position:relative;}
 #hero::before{content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:1200px;height:700px;background:radial-gradient(ellipse at 50% 20%,rgba(200,135,58,.10),transparent 55%),radial-gradient(ellipse at 30% 60%,rgba(200,160,110,.13),transparent 50%),radial-gradient(ellipse at 72% 55%,rgba(224,190,140,.15),transparent 50%);pointer-events:none;}
-.hero-inner{position:relative;z-index:2;max-width:880px;margin:0 auto;padding:0 24px;}
-#hero h1{font-weight:800;letter-spacing:-.045em;font-size:clamp(44px,7vw,92px);line-height:1.0;}
+.hero-inner{position:relative;z-index:2;max-width:960px;margin:0 auto;padding:0 24px;}
+#hero h1{font-weight:800;letter-spacing:-.045em;font-size:clamp(42px,6.4vw,84px);line-height:1.02;}
 #hero h1 .accent{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--acc);}
 .hero-sub{max-width:600px;margin:24px auto 0;font-size:18.5px;color:var(--sub);}
 .hero-ctas{display:flex;gap:12px;justify-content:center;margin-top:34px;flex-wrap:wrap;}
@@ -476,9 +477,12 @@ footer{padding:30px 0 40px;color:var(--sub);}
 <!-- ═══════ ABLAUF ═══════ -->
 <section id="ablauf">
   <div class="wrap">
-    <div class="reveal center">
-      <div class="eyebrow"><span class="dot"></span>So läuft's ab</div>
-      <h2 class="d" style="margin-top:18px;">Vier Schritte bis zum <em>neuen Auftritt.</em></h2>
+    <div class="reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>So läuft's ab</div>
+        <h2 class="d" style="margin-top:18px;">Vier Schritte bis zum<br><em>neuen Auftritt.</em></h2>
+      </div>
+      <p class="sec-sub" style="margin:0;max-width:320px;">Meist 4–6 Wochen vom ersten Gespräch bis zum Launch – Fotoshooting und drei Entwurfsschleifen inklusive.</p>
     </div>
     <div class="steps">
       <div class="step stagger"><h3>Erstgespräch</h3><p>10 Minuten, auch von der Baustelle. Wir analysieren, wo dein Betrieb online steht – ohne Verkaufsdruck.</p></div>
@@ -663,10 +667,12 @@ footer{padding:30px 0 40px;color:var(--sub);}
 <script>
 if(location.hash){document.documentElement.style.scrollBehavior='auto';addEventListener('load',function(){setTimeout(function(){document.documentElement.style.scrollBehavior='';},300);});}
 
-var sp=document.getElementById('sp'),nav=document.getElementById('nav');
+var sp=document.getElementById('sp'),nav=document.getElementById('nav'),lastY=0;
 addEventListener('scroll',function(){
   sp.style.width=(scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%';
   nav.classList.toggle('scrolled',scrollY>30);
+  nav.classList.toggle('hide',scrollY>360&&scrollY>lastY);
+  lastY=scrollY;
 },{passive:true});
 
 var io=new IntersectionObserver(function(es){
