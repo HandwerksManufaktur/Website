@@ -105,6 +105,7 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 .marq-t{display:flex;align-items:center;gap:68px;padding:0 34px;flex-shrink:0;animation:marq 44s linear infinite;}
 .marq:hover .marq-t{animation-play-state:paused;}
 @keyframes marq{to{transform:translateX(-100%);}}
+.marq.rev2 .marq-t{animation-direction:reverse;animation-duration:52s;}
 .marq .li{flex-shrink:0;height:36px;display:flex;align-items:center;opacity:.6;transition:opacity .3s;}
 .marq .li:hover{opacity:1;}
 .marq .li img{height:36px;width:auto;max-width:130px;object-fit:contain;}
@@ -186,7 +187,7 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 @media(max-width:900px){.night{padding:52px 28px;}.night-grid{grid-template-columns:1fr;gap:44px;}.nstats{grid-template-columns:1fr;}}
 
 /* ═══════ ABLAUF ═══════ */
-#ablauf{padding:0 0 120px;}
+#ablauf{padding:0 0 110px;}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;counter-reset:step;border-top:1.5px solid var(--line2);}
 .step{padding:30px 28px 6px 0;position:relative;border-right:1.5px solid var(--line);margin-right:28px;}
 .step:last-child{border-right:none;margin-right:0;}
@@ -197,11 +198,15 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 @media(max-width:560px){.steps{grid-template-columns:1fr;}}
 
 /* ═══════ FOTO-STREIFEN ═══════ */
-#fotos{padding:0 0 120px;overflow:hidden;}
+#fotos{padding:100px 0;overflow:hidden;background:var(--night);color:#fff;}
+#fotos .eyebrow{color:#E0A45C;}
+#fotos .eyebrow .dot{background:var(--acc);}
+#fotos .sec-sub{color:var(--night-sub);}
+#fotos h2.d em{color:#E0A45C;}
 .fmarq{display:flex;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
 .fmarq-t{display:flex;gap:18px;padding:0 9px;flex-shrink:0;animation:marq 70s linear infinite;}
 .fmarq:hover .fmarq-t{animation-play-state:paused;}
-.fcard{position:relative;width:250px;height:320px;border-radius:var(--r-md);overflow:hidden;flex-shrink:0;}
+.fcard{position:relative;width:250px;height:320px;border-radius:var(--r-md);overflow:hidden;flex-shrink:0;border:1px solid var(--night-line);}
 .fcard img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);}
 .fcard:hover img{transform:scale(1.05);}
 .fcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(10,8,5,.66));}
@@ -209,7 +214,7 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 .fotos-head{margin-bottom:44px;}
 
 /* ═══════ STIMMEN ═══════ */
-#stimmen{padding:0 0 120px;overflow:hidden;}
+#stimmen{padding:110px 0 120px;overflow:hidden;}
 #stimmen .wrap{position:relative;}
 .rev-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:48px;}
 .score{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 22px;box-shadow:var(--shadow-md);}
@@ -313,7 +318,7 @@ footer{padding:30px 0 40px;color:var(--sub);}
   <div class="hero-inner">
     <div class="eyebrow o1"><span class="dot"></span>Webdesign-Agentur für Handwerksbetriebe</div>
     <h1 class="o2">Deine nächsten Kunden<br><span class="accent">googeln</span> gerade.</h1>
-    <p class="hero-sub o3">Die einzige Frage: Finden sie dich – oder deinen Wettbewerber? Wir bauen Handwerksbetrieben Websites, die diese Entscheidung gewinnen. Mit echten Fotos, Texten, die klingen wie du, und Sichtbarkeit ab Tag eins.</p>
+    <p class="hero-sub o3">Die einzige Frage: Finden sie dich – oder deinen Wettbewerber? Wir bauen Handwerksbetrieben Websites, die diese Entscheidung gewinnen.</p>
     <div class="hero-ctas o4">
       <a href="#kontakt" class="btn btn-ink">Kostenloses Erstgespräch</a>
       <a href="#arbeiten" class="btn btn-ghost">Arbeiten ansehen</a>
@@ -335,7 +340,7 @@ footer{padding:30px 0 40px;color:var(--sub);}
 <section id="band">
   <div class="wrap">
     <div class="band-card reveal">
-      <div class="band-label">Über <b>120 Handwerksbetriebe</b> aus ganz Deutschland vertrauen der HandwerksManufaktur</div>
+      <div class="band-label">Vom Ein-Mann-Betrieb bis zum Maschinenbauer: <b>120+ Betriebe</b> vertrauen uns ihren Auftritt an</div>
       <div class="marq">
         <div class="marq-t">
           <div class="li"><img src="/images/logo-alexander-dietmayer.png" alt="Alexander Dietmayer" loading="lazy"></div>
@@ -374,6 +379,44 @@ footer{padding:30px 0 40px;color:var(--sub);}
           <div class="li"><img src="/images/logo-happach-maschinenbau.png" alt="" loading="lazy"></div>
         </div>
       </div>
+      <div class="marq rev2" style="margin-top:26px;">
+        <div class="marq-t">
+          <div class="li"><img src="/images/logo-schreinerei-rupp.png" alt="Schreinerei Rupp" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-schwaighofer-betontechnik-logo.png" alt="Schwaighofer Betontechnik" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-spenglerei-gleixner.png" alt="Spenglerei Gleixner" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-steinmetz-janisch.png" alt="Steinmetz Janisch" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-thomas-vogel-holzbau.png" alt="Thomas Vogel Holzbau" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-weber-metallbau.png" alt="Weber Metallbau" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-wegele-bau-gmbh-utting.png" alt="Wegele Bau" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-zimmerei-knappich.png" alt="Zimmerei Knappich" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-zimmerei-rauschmair.png" alt="Zimmerei Rauschmair" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-maler-abenthum.png" alt="Maler Abenthum" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-lueders-fliesen.png" alt="Lüders Fliesen" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-kfz-greif.png" alt="KFZ Greif" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-eibl-bau.png" alt="Eibl Bau" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-holzbau-gerg.png" alt="Holzbau Gerg" loading="lazy"></div>
+          <div class="li"><img src="/images/Wohner_Elektrotechnik_Weiß_cropped.png" alt="Wohner Elektrotechnik" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-gattinger-gmbh.png" alt="Gattinger GmbH" loading="lazy"></div>
+        </div>
+        <div class="marq-t" aria-hidden="true">
+          <div class="li"><img src="/images/logo-schreinerei-rupp.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-schwaighofer-betontechnik-logo.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-spenglerei-gleixner.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-steinmetz-janisch.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-thomas-vogel-holzbau.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-weber-metallbau.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-wegele-bau-gmbh-utting.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-zimmerei-knappich.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-zimmerei-rauschmair.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-maler-abenthum.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-lueders-fliesen.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-kfz-greif.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-eibl-bau.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-holzbau-gerg.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/Wohner_Elektrotechnik_Weiß_cropped.png" alt="" loading="lazy"></div>
+          <div class="li"><img src="/images/logo-gattinger-gmbh.png" alt="" loading="lazy"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -390,33 +433,33 @@ footer{padding:30px 0 40px;color:var(--sub);}
     <div class="work-head reveal">
       <div>
         <div class="eyebrow"><span class="dot"></span>Ausgewählte Arbeiten</div>
-        <h2 class="d" style="margin-top:18px;">Echte Betriebe,<br>echte <em>Ergebnisse.</em></h2>
+        <h2 class="d" style="margin-top:18px;">Arbeiten, die<br><em>arbeiten.</em></h2>
       </div>
     </div>
     <div class="show reveal">
-      <div class="show-media wcard"><div class="wview" style="height:440px;"><img src="/neu/assets/work/nachher-3.jpg" alt="Dachbau Kraus Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-3.jpg" alt="Dachbau Kraus alte Website" class="wimg" loading="lazy"></div></div>
+      <div class="show-media wcard"><div class="wview" style="height:440px;"><img src="/neu/assets/work/nachher-wohner.jpg" alt="Wohner Elektrotechnik Website" class="wimg active" loading="lazy"></div></div>
       <div class="show-txt">
-        <div class="show-kicker">Dach &amp; Fassade · Industrie</div>
-        <h3>Dachbau <em>Kraus.</em></h3>
-        <p>Über 50 Jahre Meisterbetrieb – aber online unsichtbar. Jetzt: ein Auftritt mit echten Projektfotos, klarer Leistungsstruktur und Karrierebereich, der Industrie-Kunden und Bewerber gleichermaßen überzeugt.</p>
-        <div class="show-actions"><button class="wtog">Vorher ansehen</button><span class="show-hint">Hover scrollt durch die Seite</span></div>
+        <div class="show-kicker">Elektrotechnik · PV &amp; E-Mobilität · Landsberg</div>
+        <h3>Wohner <em>Elektrotechnik.</em></h3>
+        <p>„Energie der Zukunft. Heute." – ein Auftritt, der das einlöst: PV-Anlagen, Speicher und Wallboxen klar strukturiert, moderne Bildsprache, direkte Anfragewege. Eine Website, die Technikkompetenz ausstrahlt, bevor das erste Wort gelesen ist.</p>
+        <div class="show-actions"><a href="https://elektrotechnik-wohner.de" target="_blank" rel="noopener" class="wtog" style="text-decoration:none;display:inline-block;">Live ansehen ↗</a><span class="show-hint">Hover scrollt durch die Seite</span></div>
       </div>
     </div>
     <div class="show rev reveal">
-      <div class="show-media wcard"><div class="wview" style="height:440px;"><img src="/neu/assets/work/nachher-11.jpg" alt="Zimmerei Knappich Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-11.jpg" alt="Zimmerei Knappich alte Website" class="wimg" loading="lazy"></div></div>
+      <div class="show-media wcard"><div class="wview" style="height:440px;"><img src="/neu/assets/work/nachher-9.jpg" alt="Schreinerei Kreitner Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-9.jpg" alt="Schreinerei Kreitner alte Website" class="wimg" loading="lazy"></div></div>
       <div class="show-txt">
-        <div class="show-kicker">Zimmerei &amp; Holzbau</div>
-        <h3>Zimmerei <em>Knappich.</em></h3>
-        <p>Handwerk mit Charakter braucht einen Auftritt mit Charakter: Fotoshooting vor Ort, warme Bildsprache, Texte, die klingen wie der Betrieb selbst – und eine Struktur, die aus Besuchern Anfragen macht.</p>
+        <div class="show-kicker">Schreinerei · Landsberg, Ammersee &amp; Lech</div>
+        <h3>Schreinerei <em>Kreitner.</em></h3>
+        <p>Meisterbetrieb mit Spezialgebiet barrierefreies Wohnen – jetzt mit einem Auftritt, der beides zeigt: die Handwerksqualität und den Menschen dahinter. Fotoshooting in der Werkstatt inklusive.</p>
         <div class="show-actions"><button class="wtog">Vorher ansehen</button><span class="show-hint">Hover scrollt durch die Seite</span></div>
       </div>
     </div>
     <div class="mini-head reveal">Weitere Projekte</div>
     <div class="mini-grid">
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-9.jpg" alt="Schreinerei Kreitner" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-9.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">Schreinerei Kreitner</div><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-3.jpg" alt="Dachbau Kraus" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-3.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">Dachbau Kraus</div><button class="wtog">Vorher</button></div></div>
       <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-2.jpg" alt="CS Metalldesign" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-2.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">CS Metalldesign</div><button class="wtog">Vorher</button></div></div>
       <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-12.jpg" alt="Küchenhaus Hirschvogel" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-12.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">Küchenhaus Hirschvogel</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-6.jpg" alt="Planung Hindelang" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-6.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">Planung Hindelang</div><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-11.jpg" alt="Zimmerei Knappich" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-11.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">Zimmerei Knappich</div><button class="wtog">Vorher</button></div></div>
     </div>
     <div class="work-more reveal"><a href="#kontakt" class="btn btn-ghost">Dein Projekt besprechen</a></div>
   </div>
@@ -500,7 +543,7 @@ footer{padding:30px 0 40px;color:var(--sub);}
       <div class="eyebrow"><span class="dot"></span>Aus der Praxis</div>
       <h2 class="d" style="margin-top:18px;">In jeder Branche <em>zuhause.</em></h2>
     </div>
-    <p class="sec-sub" style="margin:0;max-width:340px;">Sanitär, Zimmerei, Metallbau, Elektro &amp; mehr – wir sprechen die Sprache deines Gewerks.</p>
+    <p class="sec-sub" style="margin:0;max-width:340px;">Vom Dachstuhl bis zur Wallbox: Wir kennen dein Gewerk – und fotografieren es vor Ort, statt Stockfotos zu kaufen.</p>
   </div>
   <div class="fmarq">
     <div class="fmarq-t">
@@ -536,7 +579,7 @@ footer{padding:30px 0 40px;color:var(--sub);}
     <div class="rev-head reveal">
       <div>
         <div class="eyebrow"><span class="dot"></span>Stimmen aus dem Handwerk</div>
-        <h2 class="d" style="margin-top:18px;">Das sagen <em>Meister</em> über uns.</h2>
+        <h2 class="d" style="margin-top:18px;">Wir könnten viel erzählen.<br>Meister erzählen es <em>besser.</em></h2>
       </div>
       <div class="score"><div class="n">5,0</div><div><div class="stars">★★★★★</div><small>Google Bewertungen</small></div></div>
     </div>
