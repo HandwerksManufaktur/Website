@@ -153,20 +153,6 @@ h2.display{font-family:var(--fd);font-weight:800;font-size:clamp(38px,5.4vw,68px
 .marquee .li:hover{opacity:1;filter:none;}
 .marquee .li img{height:44px;width:auto;max-width:150px;object-fit:contain;}
 
-/* ═══════════════════ SCROLL-SCRUB (dark, canvas) ═══════════════════ */
-#scrub{height:300vh;position:relative;background:var(--dark);}
-.scrub-sticky{position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--dark);}
-#scrubCanvas{display:block;width:100%;height:100%;}
-.scrub-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:0 0 11vh 6vw;pointer-events:none;background:linear-gradient(to top,rgba(10,9,8,.88) 0%,rgba(10,9,8,.35) 42%,transparent 72%);}
-.scrub-label{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-l);margin-bottom:16px;}
-.scrub-lines{position:relative;min-height:2.4em;width:min(760px,88vw);}
-.scrub-line{position:absolute;left:0;bottom:0;font-family:var(--fd);font-weight:800;text-transform:uppercase;font-size:clamp(34px,5.5vw,64px);line-height:1.02;color:var(--white);opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease-out),transform .55s var(--ease-out);}
-.scrub-line.on{opacity:1;transform:none;}
-.scrub-line em{font-style:normal;color:var(--accent);}
-.scrub-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-d);animation:hintPulse 2.2s ease-in-out infinite;}
-@keyframes hintPulse{0%,100%{opacity:.45;transform:translateX(-50%) translateY(0);}50%{opacity:1;transform:translateX(-50%) translateY(-5px);}}
-@media(prefers-reduced-motion:reduce){#scrub{height:100vh;}}
-
 /* ═══════════════════ FOTO STRIP (dark) ═══════════════════ */
 #fotos{background:var(--dark);padding:40px 0 110px;overflow:hidden;}
 #fotos .lw-head h2{color:var(--white);}
@@ -524,22 +510,6 @@ footer{background:var(--dark2);color:var(--muted-d);padding:70px 0 34px;border-t
       <div class="li"><img src="/images/logo-happach-maschinenbau.png" alt="" loading="lazy"></div>
       <div class="li"><img src="/images/logo-eibl-bau.png" alt="" loading="lazy"></div>
     </div>
-  </div>
-</section>
-
-<!-- ═══════ SCROLL-SCRUB (Canvas-Frame-Scrub, SOP-Technik) ═══════ -->
-<section id="scrub" class="on-dark">
-  <div class="scrub-sticky">
-    <canvas id="scrubCanvas"></canvas>
-    <div class="scrub-overlay">
-      <div class="scrub-label">Handwerk im Fokus</div>
-      <div class="scrub-lines">
-        <div class="scrub-line" data-from="0" data-to="0.34">Echte Betriebe.<br><em>Echte Menschen.</em></div>
-        <div class="scrub-line" data-from="0.36" data-to="0.7">Wir zeigen dein Handwerk,<br><em>wie es wirklich ist.</em></div>
-        <div class="scrub-line" data-from="0.72" data-to="1.01">Professionell<br><em>in Szene gesetzt.</em></div>
-      </div>
-    </div>
-    <div class="scrub-hint">Scrollen</div>
   </div>
 </section>
 
@@ -964,64 +934,6 @@ document.querySelectorAll('.sm-toggle').forEach(function(btn){
     after.style.top=before.style.top='0';
   });
 });
-
-// ── scroll-scrub canvas (frame scrub, kein <video>, kein scroll-listener) ──
-(function(){
-  var FRAME_COUNT=112;
-  var container=document.getElementById('scrub');
-  var canvas=document.getElementById('scrubCanvas');
-  if(!container||!canvas)return;
-  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var ctx=canvas.getContext('2d');
-  var frames=new Array(FRAME_COUNT),currentIdx=-1,loadedFirst=false,preloadStarted=false,rafId=null;
-  function src(i){return '/neu/frames/frame_'+String(i+1).padStart(4,'0')+'.jpg';}
-  function sizeCanvas(){
-    var dpr=Math.min(devicePixelRatio||1,2);
-    canvas.width=canvas.clientWidth*dpr;
-    canvas.height=canvas.clientHeight*dpr;
-  }
-  function draw(i){
-    var img=frames[i];
-    if(!img||!img.complete||!img.naturalWidth)return;
-    var cw=canvas.width,ch=canvas.height,iw=img.naturalWidth,ih=img.naturalHeight;
-    var s=Math.max(cw/iw,ch/ih),w=iw*s,h=ih*s;
-    ctx.fillStyle='#0A0908';ctx.fillRect(0,0,cw,ch);
-    ctx.drawImage(img,(cw-w)/2,(ch-h)/2,w,h);
-    currentIdx=i;
-  }
-  function preload(){
-    if(preloadStarted)return;preloadStarted=true;
-    for(var i=0;i<FRAME_COUNT;i++){(function(i){
-      var img=new Image();
-      img.onload=function(){if(!loadedFirst){loadedFirst=true;sizeCanvas();draw(0);}};
-      img.src=src(i);frames[i]=img;
-    })(i);}
-  }
-  // Preload erst, wenn die Sektion in die Nähe kommt (~2 Viewports)
-  new IntersectionObserver(function(es,obs){
-    es.forEach(function(e){if(e.isIntersecting){preload();obs.disconnect();}});
-  },{rootMargin:'200% 0px'}).observe(container);
-  var lines=container.querySelectorAll('.scrub-line');
-  function loop(){
-    var top=container.getBoundingClientRect().top;
-    var progress=Math.max(0,Math.min(1,-top/(container.offsetHeight-innerHeight)));
-    var target=Math.round(progress*(FRAME_COUNT-1));
-    if(target!==currentIdx)draw(target);
-    lines.forEach(function(l){
-      l.classList.toggle('on',progress>=+l.dataset.from&&progress<+l.dataset.to);
-    });
-    rafId=requestAnimationFrame(loop);
-  }
-  if(reduced){
-    // Kein Scrub – nur erstes Frame statisch zeigen
-    preload();
-    var st=setInterval(function(){if(loadedFirst){clearInterval(st);}},200);
-    lines[0].classList.add('on');
-  }else{
-    rafId=requestAnimationFrame(loop);
-  }
-  addEventListener('resize',function(){sizeCanvas();if(currentIdx>=0)draw(currentIdx);},{passive:true});
-})();
 
 // ── rotator ──
 (function(){
