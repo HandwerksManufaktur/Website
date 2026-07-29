@@ -175,7 +175,11 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 .svc-flow{border-top:1.5px solid var(--line2);}
 .svc-item{display:flex;gap:26px;padding:36px 4px;border-bottom:1.5px solid var(--line2);opacity:.3;transform:translateX(14px);transition:opacity .5s var(--ease),transform .5s var(--ease);}
 .svc-item.act{opacity:1;transform:none;}
-.si-num{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--acc);flex-shrink:0;width:44px;padding-top:2px;}
+.si-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.si-ic{width:48px;height:48px;border-radius:14px;background:var(--acc-soft);color:var(--acc-deep);display:flex;align-items:center;justify-content:center;transition:transform .4s var(--ease);}
+.si-ic svg{width:23px;height:23px;}
+.svc-item.act .si-ic{transform:scale(1.08) rotate(-3deg);}
+.si-num{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--faint);}
 .svc-item h3{font-size:21px;font-weight:700;letter-spacing:-.02em;margin-bottom:7px;}
 .svc-item p{font-size:15px;color:var(--sub);max-width:460px;}
 @media(max-width:900px){.svc-layout{grid-template-columns:1fr;gap:44px;}.svc-sticky{position:static;}}
@@ -202,6 +206,18 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 .nstat .v span{color:#E0A45C;}
 .nstat .l{font-size:13px;color:var(--night-sub);margin-top:4px;}
 @media(max-width:900px){.night{padding:52px 28px;}.night-grid{grid-template-columns:1fr;gap:44px;}.nstats{grid-template-columns:1fr;}}
+
+/* ═══════ TEAM ═══════ */
+#team{padding:0 0 120px;}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px;max-width:980px;margin-left:auto;margin-right:auto;}
+.tcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:34px 28px;text-align:center;transition:transform .4s var(--ease),box-shadow .4s;}
+.tcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);}
+.tphoto{width:92px;height:92px;border-radius:50%;object-fit:cover;margin:0 auto 18px;}
+.tavatar{width:92px;height:92px;border-radius:50%;background:var(--acc-soft);color:var(--acc-deep);font-family:var(--serif);font-style:italic;font-size:40px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.tname{font-weight:700;font-size:17px;letter-spacing:-.015em;}
+.trole{font-size:13px;font-weight:600;color:var(--acc-deep);margin:3px 0 10px;}
+.tbio{font-size:14px;color:var(--sub);}
+@media(max-width:760px){.team-grid{grid-template-columns:1fr;}}
 
 /* ═══════ ABLAUF ═══════ */
 #ablauf{padding:0 0 110px;}
@@ -357,7 +373,6 @@ footer{padding:30px 0 40px;color:var(--sub);}
         <source src="/neu/assets/hero-loop.mp4" type="video/mp4">
       </video>
       <div class="vclip-shade"></div>
-      <div class="vclip-cap"><span>Echte Betriebe. Echte Fotos. Echte Ergebnisse.</span></div>
     </div>
   </div>
 </section>
@@ -476,11 +491,11 @@ footer{padding:30px 0 40px;color:var(--sub);}
       </div>
     </div>
     <div class="show rev reveal">
-      <div class="show-media wcard"><div class="wview" style="height:440px;"><img src="/neu/assets/work/nachher-2.jpg" alt="CS Metalldesign Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-2.jpg" alt="CS Metalldesign alte Website" class="wimg" loading="lazy"></div></div>
+      <div class="show-media wcard"><div class="wview" style="height:440px;"><img src="/neu/assets/work/nachher-8.jpg" alt="SD Hirsch Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-8.jpg" alt="SD Hirsch alte Website" class="wimg" loading="lazy"></div></div>
       <div class="show-txt">
-        <div class="show-kicker">Metallbau · Einzelfertigung</div>
-        <h3>CS <em>Metalldesign.</em></h3>
-        <p>Website, Fotos und Film aus einer Hand: Für CS Metalldesign haben wir nicht nur den Auftritt gebaut, sondern auch den kompletten Content produziert – vom Werkstatt-Shooting bis zur Drohnenaufnahme.</p>
+        <div class="show-kicker">Zulieferer &amp; Fertigung · Automotive</div>
+        <h3>SD <em>Hirsch.</em></h3>
+        <p>Website und kompletter Content aus einer Hand: Für die SD Hirsch GmbH haben wir den Auftritt gebaut und das Bildmaterial gleich mitproduziert – direkt in der Fertigung.</p>
         <div class="show-actions"><button class="wtog">Vorher ansehen</button><span class="show-hint">Hover scrollt durch die Seite</span></div>
       </div>
     </div>
@@ -491,8 +506,8 @@ footer{padding:30px 0 40px;color:var(--sub);}
       <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-11.jpg" alt="Zimmerei Knappich Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-11.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">Zimmerei Knappich</div><button class="wtog">Vorher</button></div></div>
       <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-12.jpg" alt="Küchenhaus Hirschvogel Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-12.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">Küchenhaus Hirschvogel</div><button class="wtog">Vorher</button></div></div>
       <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-koller.jpg" alt="Zimmerei Koller Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-koller.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">Zimmerei Koller</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-alb.jpg" alt="Ammer Lech Bau Website" class="wimg active" loading="lazy"></div><div class="winfo"><div class="wname">Ammer Lech Bau</div></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-8.jpg" alt="SD Hirsch Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-8.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">SD Hirsch</div><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-alb.jpg" alt="Ammer Lech Bau Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-alb.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">Ammer Lech Bau</div><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-2.jpg" alt="CS Metalldesign Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-2.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">CS Metalldesign</div><button class="wtog">Vorher</button></div></div>
       <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-4.jpg" alt="Dinkel Metallbau Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-4.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">Dinkel Metallbau</div><button class="wtog">Vorher</button></div></div>
       <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-1.jpg" alt="Baureize Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-1.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">Baureize</div><button class="wtog">Vorher</button></div></div>
       <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/neu/assets/work/nachher-5.jpg" alt="Baustoffe Kirchner Website" class="wimg active" loading="lazy"><img src="/neu/assets/work/vorher-5.jpg" alt="" class="wimg" loading="lazy"></div><div class="winfo"><div class="wname">Baustoffe Kirchner</div><button class="wtog">Vorher</button></div></div>
@@ -505,6 +520,50 @@ footer{padding:30px 0 40px;color:var(--sub);}
     </div>
     <div class="work-more reveal"><a href="#kontakt" class="btn btn-ghost">Dein Projekt besprechen</a></div>
   </div>
+</section>
+
+<!-- ═══════ FOTOS ═══════ -->
+<section id="fotos">
+  <div class="wrap fotos-head reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>Aus der Praxis</div>
+      <h2 class="d" style="margin-top:18px;">Gedreht und fotografiert –<br><em>direkt im Betrieb.</em></h2>
+    </div>
+    <p class="sec-sub" style="margin:0;max-width:340px;">Videos, Drohnenaufnahmen und Fotos entstehen bei uns vor Ort – damit deine Website nach deinem Betrieb aussieht, nicht nach Stockfotos.</p>
+  </div>
+  <div class="wrap vidrow reveal">
+    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/koller.mp4" type="video/mp4"></video><div class="vlabel">Zimmerei Koller</div></div>
+    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/koller-team.mp4" type="video/mp4"></video><div class="vlabel">Zimmerei Koller · Team</div></div>
+    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/kreitner.mp4" type="video/mp4"></video><div class="vlabel">Schreinerei Kreitner</div></div>
+    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/kirchner.mp4" type="video/mp4"></video><div class="vlabel">Kirchner Thaining · 50 Jahre</div></div>
+  </div>
+  <div class="fmarq">
+    <div class="fmarq-t">
+      <div class="fcard"><img src="/images/foto-zimmerei-koller.jpg" alt="Holzbau" loading="lazy"><div class="fname">Holzbau</div></div>
+      <div class="fcard"><img src="/images/foto-schreinerei-kreitner.jpg" alt="Schreinerei" loading="lazy"><div class="fname">Schreinerei</div></div>
+      <div class="fcard"><img src="/images/foto-sd-hirsch.jpg" alt="Automotive" loading="lazy"><div class="fname">Automotive</div></div>
+      <div class="fcard"><img src="/images/foto-kirchner.jpg" alt="Bau" loading="lazy" style="object-position:center 35%;"><div class="fname">Bau</div></div>
+      <div class="fcard"><img src="/images/foto-zimmerei-schneider-gmbh.jpg" alt="Zimmerei" loading="lazy"><div class="fname">Zimmerei</div></div>
+      <div class="fcard"><img src="/images/foto-cs-metalldesign.jpg" alt="Metallbau" loading="lazy" style="object-position:center 40%;"><div class="fname">Metallbau</div></div>
+      <div class="fcard"><img src="/images/foto-hawe-engineering.jpg" alt="Engineering" loading="lazy"><div class="fname">Engineering</div></div>
+      <div class="fcard"><img src="/images/foto-kuchenhaus-hirschvogel.jpg" alt="Küche und Wohnen" loading="lazy"><div class="fname">Küche &amp; Wohnen</div></div>
+      <div class="fcard"><img src="/images/foto-klass-heizung.jpg" alt="Sanitär" loading="lazy"><div class="fname">Sanitär</div></div>
+      <div class="fcard"><img src="/images/foto-elektro.jpg" alt="Elektro" loading="lazy" style="object-position:40% center;"><div class="fname">Elektro</div></div>
+    </div>
+    <div class="fmarq-t" aria-hidden="true">
+      <div class="fcard"><img src="/images/foto-zimmerei-koller.jpg" alt="" loading="lazy"><div class="fname">Holzbau</div></div>
+      <div class="fcard"><img src="/images/foto-schreinerei-kreitner.jpg" alt="" loading="lazy"><div class="fname">Schreinerei</div></div>
+      <div class="fcard"><img src="/images/foto-sd-hirsch.jpg" alt="" loading="lazy"><div class="fname">Automotive</div></div>
+      <div class="fcard"><img src="/images/foto-kirchner.jpg" alt="" loading="lazy" style="object-position:center 35%;"><div class="fname">Bau</div></div>
+      <div class="fcard"><img src="/images/foto-zimmerei-schneider-gmbh.jpg" alt="" loading="lazy"><div class="fname">Zimmerei</div></div>
+      <div class="fcard"><img src="/images/foto-cs-metalldesign.jpg" alt="" loading="lazy" style="object-position:center 40%;"><div class="fname">Metallbau</div></div>
+      <div class="fcard"><img src="/images/foto-hawe-engineering.jpg" alt="" loading="lazy"><div class="fname">Engineering</div></div>
+      <div class="fcard"><img src="/images/foto-kuchenhaus-hirschvogel.jpg" alt="" loading="lazy"><div class="fname">Küche &amp; Wohnen</div></div>
+      <div class="fcard"><img src="/images/foto-klass-heizung.jpg" alt="" loading="lazy"><div class="fname">Sanitär</div></div>
+      <div class="fcard"><img src="/images/foto-elektro.jpg" alt="" loading="lazy" style="object-position:40% center;"><div class="fname">Elektro</div></div>
+    </div>
+  </div>
+
 </section>
 
 <!-- ═══════ SEO-BEWEIS ═══════ -->
@@ -523,6 +582,7 @@ footer{padding:30px 0 40px;color:var(--sub);}
       <div class="serp stagger"><div class="serp-badge">Platz 2</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>tiefbau ammersee</div><div class="serp-r"><div class="serp-t">Tiefbau in Landsberg am Lech &amp; am Ammersee</div><div class="serp-u">kirchner-thaining.de</div></div></div>
       <div class="serp stagger"><div class="serp-badge">Top&nbsp;3</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>bau landsberg</div><div class="serp-r"><div class="serp-t">Dörfler Bau – zuverlässige Bauarbeiten in Landsberg</div><div class="serp-u">doerfler-bau-landsberg.de</div></div></div>
       <div class="serp serp-double stagger"><div class="serp-badge">2&times; Seite 1</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>zimmerei landsberg</div><div class="serp-r"><div class="serp-t">Zimmerei C&amp;H Schneider GmbH</div><div class="serp-u">schneider-penzing.de</div></div><div class="serp-r"><div class="serp-t">Zimmerei Rauschmair</div><div class="serp-u">zimmerei-rauschmair.de</div></div></div>
+      <div class="serp stagger"><div class="serp-badge">Platz 1</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>tank demontage landsberg</div><div class="serp-r"><div class="serp-t">Maser Tankschutz – Spezialist für Öltankdemontagen</div><div class="serp-u">tankschutz-landsberg.de</div></div></div>
     </div>
     <p class="serp-note reveal">Rankings schwanken je nach Standort und Zeitpunkt – deshalb: einfach selbst googeln.</p>
   </div>
@@ -539,12 +599,12 @@ footer{padding:30px 0 40px;color:var(--sub);}
         <a href="#kontakt" class="btn btn-ink" style="margin-top:28px;">Kostenloses Erstgespräch</a>
       </div>
       <div class="svc-flow">
-        <div class="svc-item"><div class="si-num">01</div><div><h3>Webdesign &amp; Entwicklung</h3><p>Moderne, schnelle Website, die deine Arbeit so zeigt, wie sie ist: meisterhaft. Besucher werden zu Anfragen – nicht zu Absprüngen.</p></div></div>
-        <div class="svc-item"><div class="si-num">02</div><div><h3>SEO &amp; Google-Sichtbarkeit</h3><p>Gefunden werden, wenn in deiner Region gesucht wird – bei Google und in den KI-Suchen von morgen.</p></div></div>
-        <div class="svc-item"><div class="si-num">03</div><div><h3>Conversion &amp; Performance</h3><p>Struktur, Texte und Ladezeiten, die aus Besuchern Kunden machen. Messbar, nicht gefühlt.</p></div></div>
-        <div class="svc-item"><div class="si-num">04</div><div><h3>Karriereseite &amp; Recruiting</h3><p>Zeig, warum man bei dir arbeiten will – und erreiche Fachkräfte, die nie ein Stellenportal öffnen.</p></div></div>
-        <div class="svc-item"><div class="si-num">05</div><div><h3>Echte Fotografie</h3><p>Wir kommen zu dir in den Betrieb. Echte Menschen, echte Baustellen – statt Stockfotos, die jeder hat.</p></div></div>
-        <div class="svc-item"><div class="si-num">06</div><div><h3>Betreuung &amp; Weiterentwicklung</h3><p>Nach dem Launch fängt's an: Pflege, Updates, Optimierung. Ein Ansprechpartner, keine Warteschleife.</p></div></div>
+        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><path d="M7 10l2 2-2 2M12 14h4"/></svg></div><div class="si-num">01</div></div><div><h3>Webdesign &amp; Entwicklung</h3><p>Moderne, schnelle Website, die deine Arbeit so zeigt, wie sie ist: meisterhaft. Besucher werden zu Anfragen – nicht zu Absprüngen.</p></div></div>
+        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M8 12l2-3 2 2 2-4"/></svg></div><div class="si-num">02</div></div><div><h3>SEO &amp; Google-Sichtbarkeit</h3><p>Gefunden werden, wenn in deiner Region gesucht wird – bei Google und in den KI-Suchen von morgen.</p></div></div>
+        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></div><div class="si-num">03</div></div><div><h3>Conversion &amp; Performance</h3><p>Struktur, Texte und Ladezeiten, die aus Besuchern Kunden machen. Messbar, nicht gefühlt.</p></div></div>
+        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.8 3.2-6 6.5-6s5.9 2.2 6.5 6"/><circle cx="17.5" cy="9" r="2.6"/><path d="M16.5 14.4c2.8.2 4.6 2 5 5.1"/></svg></div><div class="si-num">04</div></div><div><h3>Karriereseite &amp; Recruiting</h3><p>Zeig, warum man bei dir arbeiten will – und erreiche Fachkräfte, die nie ein Stellenportal öffnen.</p></div></div>
+        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="3"/><circle cx="12" cy="14" r="4"/><path d="M8.5 7l1.5-3h4l1.5 3"/></svg></div><div class="si-num">05</div></div><div><h3>Echte Fotografie</h3><p>Wir kommen zu dir in den Betrieb. Echte Menschen, echte Baustellen – statt Stockfotos, die jeder hat.</p></div></div>
+        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div><div class="si-num">06</div></div><div><h3>Betreuung &amp; Weiterentwicklung</h3><p>Nach dem Launch fängt's an: Pflege, Updates, Optimierung. Ein Ansprechpartner, keine Warteschleife.</p></div></div>
       </div>
     </div>
   </div>
@@ -580,6 +640,36 @@ footer{padding:30px 0 40px;color:var(--sub);}
   </div>
 </section>
 
+<!-- ═══════ TEAM ═══════ -->
+<section id="team">
+  <div class="wrap">
+    <div class="reveal center">
+      <div class="eyebrow"><span class="dot"></span>Das Team dahinter</div>
+      <h2 class="d" style="margin-top:18px;">Drei Leute. <em>Kurze Wege.</em></h2>
+    </div>
+    <div class="team-grid">
+      <div class="tcard stagger">
+        <img src="/images/foto-noah-portrait-rund.png" alt="Noah Seelau" class="tphoto">
+        <div class="tname">Noah Seelau</div>
+        <div class="trole">Gründer · Strategie, Webdesign &amp; Foto</div>
+        <p class="tbio">Dein Ansprechpartner vom ersten Gespräch bis zum Launch – und der Mann hinter Kamera und Drohne.</p>
+      </div>
+      <div class="tcard stagger">
+        <div class="tavatar">R</div>
+        <div class="tname">Rudolf</div>
+        <div class="trole">Design &amp; Umsetzung</div>
+        <p class="tbio">Sorgt dafür, dass aus Konzepten saubere, schnelle Websites werden – Pixel für Pixel.</p>
+      </div>
+      <div class="tcard stagger">
+        <div class="tavatar">A</div>
+        <div class="tname">Angelo</div>
+        <div class="trole">Erstberatung &amp; Vertrieb</div>
+        <p class="tbio">Deine erste Stimme am Telefon: klärt, ob und wie wir deinem Betrieb helfen können.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════ ABLAUF ═══════ -->
 <section id="ablauf">
   <div class="wrap">
@@ -597,50 +687,6 @@ footer{padding:30px 0 40px;color:var(--sub);}
       <div class="step stagger"><h3>Launch &amp; Betreuung</h3><p>Deine Seite geht live – und wir bleiben dran: Updates, Optimierung, Weiterentwicklung.</p></div>
     </div>
   </div>
-</section>
-
-<!-- ═══════ FOTOS ═══════ -->
-<section id="fotos">
-  <div class="wrap fotos-head reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;">
-    <div>
-      <div class="eyebrow"><span class="dot"></span>Aus der Praxis</div>
-      <h2 class="d" style="margin-top:18px;">Wir zeigen Handwerk,<br><em>wie es wirklich ist.</em></h2>
-    </div>
-    <p class="sec-sub" style="margin:0;max-width:340px;">Drohnenflüge, Betriebsfilme, Fotoshootings: So sehen Handwerksbetriebe aus, wenn man sie richtig in Szene setzt.</p>
-  </div>
-  <div class="wrap vidrow reveal">
-    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/koller.mp4" type="video/mp4"></video><div class="vlabel">Zimmerei Koller</div></div>
-    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/wohner.mp4" type="video/mp4"></video><div class="vlabel">Wohner Elektrotechnik · PV</div></div>
-    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/kreitner.mp4" type="video/mp4"></video><div class="vlabel">Schreinerei Kreitner</div></div>
-    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/kirchner.mp4" type="video/mp4"></video><div class="vlabel">Kirchner Thaining · 50 Jahre</div></div>
-  </div>
-  <div class="fmarq">
-    <div class="fmarq-t">
-      <div class="fcard"><img src="/images/foto-zimmerei-koller.jpg" alt="Holzbau" loading="lazy"><div class="fname">Holzbau</div></div>
-      <div class="fcard"><img src="/images/foto-schreinerei-kreitner.jpg" alt="Schreinerei" loading="lazy"><div class="fname">Schreinerei</div></div>
-      <div class="fcard"><img src="/images/foto-sd-hirsch.jpg" alt="Automotive" loading="lazy"><div class="fname">Automotive</div></div>
-      <div class="fcard"><img src="/images/foto-kirchner.jpg" alt="Bau" loading="lazy" style="object-position:center 35%;"><div class="fname">Bau</div></div>
-      <div class="fcard"><img src="/images/foto-zimmerei-schneider-gmbh.jpg" alt="Zimmerei" loading="lazy"><div class="fname">Zimmerei</div></div>
-      <div class="fcard"><img src="/images/foto-cs-metalldesign.jpg" alt="Metallbau" loading="lazy" style="object-position:center 40%;"><div class="fname">Metallbau</div></div>
-      <div class="fcard"><img src="/images/foto-hawe-engineering.jpg" alt="Engineering" loading="lazy"><div class="fname">Engineering</div></div>
-      <div class="fcard"><img src="/images/foto-kuchenhaus-hirschvogel.jpg" alt="Küche und Wohnen" loading="lazy"><div class="fname">Küche &amp; Wohnen</div></div>
-      <div class="fcard"><img src="/images/foto-klass-heizung.jpg" alt="Sanitär" loading="lazy"><div class="fname">Sanitär</div></div>
-      <div class="fcard"><img src="/images/foto-elektro.jpg" alt="Elektro" loading="lazy" style="object-position:40% center;"><div class="fname">Elektro</div></div>
-    </div>
-    <div class="fmarq-t" aria-hidden="true">
-      <div class="fcard"><img src="/images/foto-zimmerei-koller.jpg" alt="" loading="lazy"><div class="fname">Holzbau</div></div>
-      <div class="fcard"><img src="/images/foto-schreinerei-kreitner.jpg" alt="" loading="lazy"><div class="fname">Schreinerei</div></div>
-      <div class="fcard"><img src="/images/foto-sd-hirsch.jpg" alt="" loading="lazy"><div class="fname">Automotive</div></div>
-      <div class="fcard"><img src="/images/foto-kirchner.jpg" alt="" loading="lazy" style="object-position:center 35%;"><div class="fname">Bau</div></div>
-      <div class="fcard"><img src="/images/foto-zimmerei-schneider-gmbh.jpg" alt="" loading="lazy"><div class="fname">Zimmerei</div></div>
-      <div class="fcard"><img src="/images/foto-cs-metalldesign.jpg" alt="" loading="lazy" style="object-position:center 40%;"><div class="fname">Metallbau</div></div>
-      <div class="fcard"><img src="/images/foto-hawe-engineering.jpg" alt="" loading="lazy"><div class="fname">Engineering</div></div>
-      <div class="fcard"><img src="/images/foto-kuchenhaus-hirschvogel.jpg" alt="" loading="lazy"><div class="fname">Küche &amp; Wohnen</div></div>
-      <div class="fcard"><img src="/images/foto-klass-heizung.jpg" alt="" loading="lazy"><div class="fname">Sanitär</div></div>
-      <div class="fcard"><img src="/images/foto-elektro.jpg" alt="" loading="lazy" style="object-position:40% center;"><div class="fname">Elektro</div></div>
-    </div>
-  </div>
-
 </section>
 
 <!-- ═══════ STIMMEN ═══════ -->
