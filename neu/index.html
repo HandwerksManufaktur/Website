@@ -245,7 +245,7 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 .fcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(10,8,5,.66));}
 .fname{position:absolute;left:16px;bottom:13px;z-index:2;font-size:14px;font-weight:600;color:#fff;}
 .fotos-head{margin-bottom:44px;}
-.vidrow{display:grid;grid-template-columns:1.25fr 1fr 1fr 0.85fr;gap:18px;margin-bottom:44px;}
+.vidrow{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:44px;}
 .vcard{position:relative;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--night-line);background:var(--night2);}
 .vcard video{width:100%;height:280px;object-fit:cover;display:block;}
 .vlabel{position:absolute;left:16px;bottom:13px;z-index:2;font-size:13.5px;font-weight:600;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6);}
@@ -533,8 +533,10 @@ footer{padding:30px 0 40px;color:var(--sub);}
   </div>
   <div class="wrap vidrow reveal">
     <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/koller.mp4" type="video/mp4"></video><div class="vlabel">Zimmerei Koller</div></div>
-    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/koller-team.mp4" type="video/mp4"></video><div class="vlabel">Zimmerei Koller · Team</div></div>
+    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/cs-metall.mp4" type="video/mp4"></video><div class="vlabel">CS Metalldesign</div></div>
+    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/baureize.mp4" type="video/mp4"></video><div class="vlabel">Baureize · Drohne</div></div>
     <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/kreitner.mp4" type="video/mp4"></video><div class="vlabel">Schreinerei Kreitner</div></div>
+    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/koller-team.mp4" type="video/mp4"></video><div class="vlabel">Zimmerei Koller · Team</div></div>
     <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/kirchner.mp4" type="video/mp4"></video><div class="vlabel">Kirchner Thaining · 50 Jahre</div></div>
   </div>
   <div class="fmarq">
@@ -649,19 +651,19 @@ footer{padding:30px 0 40px;color:var(--sub);}
     </div>
     <div class="team-grid">
       <div class="tcard stagger">
-        <img src="/images/foto-noah-portrait-rund.png" alt="Noah Seelau" class="tphoto">
+        <img src="/neu/assets/team-noah.jpg" alt="Noah Seelau" class="tphoto">
         <div class="tname">Noah Seelau</div>
         <div class="trole">Gründer · Strategie, Webdesign &amp; Foto</div>
         <p class="tbio">Dein Ansprechpartner vom ersten Gespräch bis zum Launch – und der Mann hinter Kamera und Drohne.</p>
       </div>
       <div class="tcard stagger">
-        <div class="tavatar">R</div>
+        <img src="/neu/assets/team-rudolf.jpg" alt="Rudolf" class="tphoto">
         <div class="tname">Rudolf</div>
         <div class="trole">Design &amp; Umsetzung</div>
         <p class="tbio">Sorgt dafür, dass aus Konzepten saubere, schnelle Websites werden – Pixel für Pixel.</p>
       </div>
       <div class="tcard stagger">
-        <div class="tavatar">A</div>
+        <img src="/neu/assets/team-angelo.jpg" alt="Angelo" class="tphoto">
         <div class="tname">Angelo</div>
         <div class="trole">Erstberatung &amp; Vertrieb</div>
         <p class="tbio">Deine erste Stimme am Telefon: klärt, ob und wie wir deinem Betrieb helfen können.</p>
