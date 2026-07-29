@@ -23,15 +23,15 @@
   --shadow-md:0 12px 36px rgba(60,44,20,.09);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--paper);color:var(--ink);font-family:var(--f);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;letter-spacing:-0.011em;}
+html{scroll-behavior:smooth;overflow-x:clip;}
+body{background:var(--paper);color:var(--ink);font-family:var(--f);line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased;letter-spacing:-0.011em;}
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 ::selection{background:var(--acc);color:#fff;}
 ::-webkit-scrollbar{width:5px;}
 ::-webkit-scrollbar-thumb{background:var(--line2);border-radius:3px;}
 
-.wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px;}
 section{scroll-margin-top:92px;}
 .eyebrow{display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--acc-deep);border-radius:0;padding:0;font-size:13.5px;font-weight:600;letter-spacing:-.01em;}
 .eyebrow .dot{width:22px;height:2px;border-radius:1px;background:var(--acc);}
@@ -76,7 +76,7 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 /* ═══════ HERO ═══════ */
 #hero{padding:170px 0 0;text-align:center;position:relative;}
 #hero::before{content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:1200px;height:700px;background:radial-gradient(ellipse at 50% 20%,rgba(200,135,58,.10),transparent 55%),radial-gradient(ellipse at 30% 60%,rgba(200,160,110,.13),transparent 50%),radial-gradient(ellipse at 72% 55%,rgba(224,190,140,.15),transparent 50%);pointer-events:none;}
-.hero-inner{position:relative;z-index:2;max-width:960px;margin:0 auto;padding:0 24px;}
+.hero-inner{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:0 24px;}
 #hero h1{font-weight:800;letter-spacing:-.045em;font-size:clamp(42px,6.4vw,84px);line-height:1.02;}
 #hero h1 .accent{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--acc);}
 .hero-sub{max-width:600px;margin:24px auto 0;font-size:18.5px;color:var(--sub);}
@@ -110,6 +110,10 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 .marq .li{flex-shrink:0;height:36px;display:flex;align-items:center;opacity:.6;transition:opacity .3s;}
 .marq .li:hover{opacity:1;}
 .marq .li img{height:36px;width:auto;max-width:130px;object-fit:contain;}
+
+/* ═══════ PRAXIS-FOTOS ═══════ */
+#praxisfotos{padding:90px 0 0;overflow:hidden;}
+#praxisfotos .fcard{border-color:var(--line);}
 
 /* ═══════ KINETIC TYPE (scroll-getrieben) ═══════ */
 #kinetic{padding:110px 0 30px;overflow:hidden;white-space:nowrap;}
@@ -153,7 +157,7 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 @media(max-width:820px){.work-grid{grid-template-columns:1fr;}.wview{height:280px;}}
 
 /* ═══════ SEO-BEWEIS ═══════ */
-#seo{padding:20px 0 120px;}
+#seo{padding:120px 0;}
 .serp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px;}
 .serp{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:24px;transition:transform .4s var(--ease),box-shadow .4s;}
 .serp:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);}
@@ -365,7 +369,7 @@ footer{padding:30px 0 40px;color:var(--sub);}
       <a href="#kontakt" class="btn btn-ink">Kostenloses Erstgespräch</a>
       <a href="#arbeiten" class="btn btn-ghost">Arbeiten ansehen</a>
     </div>
-    <div class="hero-proof o4"><span class="stars">★★★★★</span><span><b>5,0</b> auf Google</span><span>·</span><span><b>120+</b> Betriebe</span><span>·</span><span><b>6+</b> Jahre Fokus</span></div>
+    <div class="hero-proof o4"><span class="stars">★★★★★</span><span><b>5,0</b> auf Google</span><span>·</span><span><b>120+</b> Betriebe</span><span>·</span><span><b>6+</b> Jahre spezialisiert aufs Handwerk</span></div>
   </div>
   <div class="video-stage o5">
     <div class="vclip" id="vclip">
@@ -466,6 +470,37 @@ footer{padding:30px 0 40px;color:var(--sub);}
   </div>
 </section>
 
+<!-- ═══════ PRAXIS-FOTOS (Vertrauens-Streifen) ═══════ -->
+<section id="praxisfotos">
+  <div class="fmarq">
+    <div class="fmarq-t">
+      <div class="fcard"><img src="/images/foto-zimmerei-koller.jpg" alt="Holzbau" loading="lazy"><div class="fname">Holzbau</div></div>
+      <div class="fcard"><img src="/images/foto-schreinerei-kreitner.jpg" alt="Schreinerei" loading="lazy"><div class="fname">Schreinerei</div></div>
+      <div class="fcard"><img src="/images/foto-sd-hirsch.jpg" alt="Automotive" loading="lazy"><div class="fname">Automotive</div></div>
+      <div class="fcard"><img src="/images/foto-kirchner.jpg" alt="Bau" loading="lazy" style="object-position:center 35%;"><div class="fname">Bau</div></div>
+      <div class="fcard"><img src="/images/foto-zimmerei-schneider-gmbh.jpg" alt="Zimmerei" loading="lazy"><div class="fname">Zimmerei</div></div>
+      <div class="fcard"><img src="/images/foto-cs-metalldesign.jpg" alt="Metallbau" loading="lazy" style="object-position:center 40%;"><div class="fname">Metallbau</div></div>
+      <div class="fcard"><img src="/images/foto-hawe-engineering.jpg" alt="Engineering" loading="lazy"><div class="fname">Engineering</div></div>
+      <div class="fcard"><img src="/images/foto-kuchenhaus-hirschvogel.jpg" alt="Küche und Wohnen" loading="lazy"><div class="fname">Küche &amp; Wohnen</div></div>
+      <div class="fcard"><img src="/images/foto-klass-heizung.jpg" alt="Sanitär" loading="lazy"><div class="fname">Sanitär</div></div>
+      <div class="fcard"><img src="/images/foto-elektro.jpg" alt="Elektro" loading="lazy" style="object-position:40% center;"><div class="fname">Elektro</div></div>
+    </div>
+    <div class="fmarq-t" aria-hidden="true">
+      <div class="fcard"><img src="/images/foto-zimmerei-koller.jpg" alt="" loading="lazy"><div class="fname">Holzbau</div></div>
+      <div class="fcard"><img src="/images/foto-schreinerei-kreitner.jpg" alt="" loading="lazy"><div class="fname">Schreinerei</div></div>
+      <div class="fcard"><img src="/images/foto-sd-hirsch.jpg" alt="" loading="lazy"><div class="fname">Automotive</div></div>
+      <div class="fcard"><img src="/images/foto-kirchner.jpg" alt="" loading="lazy" style="object-position:center 35%;"><div class="fname">Bau</div></div>
+      <div class="fcard"><img src="/images/foto-zimmerei-schneider-gmbh.jpg" alt="" loading="lazy"><div class="fname">Zimmerei</div></div>
+      <div class="fcard"><img src="/images/foto-cs-metalldesign.jpg" alt="" loading="lazy" style="object-position:center 40%;"><div class="fname">Metallbau</div></div>
+      <div class="fcard"><img src="/images/foto-hawe-engineering.jpg" alt="" loading="lazy"><div class="fname">Engineering</div></div>
+      <div class="fcard"><img src="/images/foto-kuchenhaus-hirschvogel.jpg" alt="" loading="lazy"><div class="fname">Küche &amp; Wohnen</div></div>
+      <div class="fcard"><img src="/images/foto-klass-heizung.jpg" alt="" loading="lazy"><div class="fname">Sanitär</div></div>
+      <div class="fcard"><img src="/images/foto-elektro.jpg" alt="" loading="lazy" style="object-position:40% center;"><div class="fname">Elektro</div></div>
+    </div>
+  </div>
+
+</section>
+
 <!-- ═══════ KINETIC TYPE ═══════ -->
 <section id="kinetic" aria-hidden="true">
   <div class="kin-row" data-speed="0.42"><span>Mehr Anfragen · Bessere Projekte · Volle Bücher · Mehr Anfragen · Bessere Projekte · Volle Bücher · Mehr Anfragen · Bessere Projekte · Volle Bücher · </span></div>
@@ -527,45 +562,18 @@ footer{padding:30px 0 40px;color:var(--sub);}
   <div class="wrap fotos-head reveal" style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;">
     <div>
       <div class="eyebrow"><span class="dot"></span>Aus der Praxis</div>
-      <h2 class="d" style="margin-top:18px;">Gedreht und fotografiert –<br><em>direkt im Betrieb.</em></h2>
+      <h2 class="d" style="margin-top:18px;">Direkt im Betrieb <em>gedreht.</em></h2>
     </div>
-    <p class="sec-sub" style="margin:0;max-width:340px;">Videos, Drohnenaufnahmen und Fotos entstehen bei uns vor Ort – damit deine Website nach deinem Betrieb aussieht, nicht nach Stockfotos.</p>
+    <p class="sec-sub" style="margin:0;max-width:340px;">Drohne, Kamera, echter Baustellenstaub: Diese Videos haben wir für unsere Kunden gedreht – vor Ort, nicht im Studio.</p>
   </div>
   <div class="wrap vidrow reveal">
     <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/koller.mp4" type="video/mp4"></video><div class="vlabel">Zimmerei Koller</div></div>
     <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/cs-metall.mp4" type="video/mp4"></video><div class="vlabel">CS Metalldesign</div></div>
     <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/baureize.mp4" type="video/mp4"></video><div class="vlabel">Baureize · Drohne</div></div>
     <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/kreitner.mp4" type="video/mp4"></video><div class="vlabel">Schreinerei Kreitner</div></div>
-    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/koller-team.mp4" type="video/mp4"></video><div class="vlabel">Zimmerei Koller · Team</div></div>
+    <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/resch.mp4" type="video/mp4"></video><div class="vlabel">Resch Bau</div></div>
     <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/neu/assets/vids/kirchner.mp4" type="video/mp4"></video><div class="vlabel">Kirchner Thaining · 50 Jahre</div></div>
   </div>
-  <div class="fmarq">
-    <div class="fmarq-t">
-      <div class="fcard"><img src="/images/foto-zimmerei-koller.jpg" alt="Holzbau" loading="lazy"><div class="fname">Holzbau</div></div>
-      <div class="fcard"><img src="/images/foto-schreinerei-kreitner.jpg" alt="Schreinerei" loading="lazy"><div class="fname">Schreinerei</div></div>
-      <div class="fcard"><img src="/images/foto-sd-hirsch.jpg" alt="Automotive" loading="lazy"><div class="fname">Automotive</div></div>
-      <div class="fcard"><img src="/images/foto-kirchner.jpg" alt="Bau" loading="lazy" style="object-position:center 35%;"><div class="fname">Bau</div></div>
-      <div class="fcard"><img src="/images/foto-zimmerei-schneider-gmbh.jpg" alt="Zimmerei" loading="lazy"><div class="fname">Zimmerei</div></div>
-      <div class="fcard"><img src="/images/foto-cs-metalldesign.jpg" alt="Metallbau" loading="lazy" style="object-position:center 40%;"><div class="fname">Metallbau</div></div>
-      <div class="fcard"><img src="/images/foto-hawe-engineering.jpg" alt="Engineering" loading="lazy"><div class="fname">Engineering</div></div>
-      <div class="fcard"><img src="/images/foto-kuchenhaus-hirschvogel.jpg" alt="Küche und Wohnen" loading="lazy"><div class="fname">Küche &amp; Wohnen</div></div>
-      <div class="fcard"><img src="/images/foto-klass-heizung.jpg" alt="Sanitär" loading="lazy"><div class="fname">Sanitär</div></div>
-      <div class="fcard"><img src="/images/foto-elektro.jpg" alt="Elektro" loading="lazy" style="object-position:40% center;"><div class="fname">Elektro</div></div>
-    </div>
-    <div class="fmarq-t" aria-hidden="true">
-      <div class="fcard"><img src="/images/foto-zimmerei-koller.jpg" alt="" loading="lazy"><div class="fname">Holzbau</div></div>
-      <div class="fcard"><img src="/images/foto-schreinerei-kreitner.jpg" alt="" loading="lazy"><div class="fname">Schreinerei</div></div>
-      <div class="fcard"><img src="/images/foto-sd-hirsch.jpg" alt="" loading="lazy"><div class="fname">Automotive</div></div>
-      <div class="fcard"><img src="/images/foto-kirchner.jpg" alt="" loading="lazy" style="object-position:center 35%;"><div class="fname">Bau</div></div>
-      <div class="fcard"><img src="/images/foto-zimmerei-schneider-gmbh.jpg" alt="" loading="lazy"><div class="fname">Zimmerei</div></div>
-      <div class="fcard"><img src="/images/foto-cs-metalldesign.jpg" alt="" loading="lazy" style="object-position:center 40%;"><div class="fname">Metallbau</div></div>
-      <div class="fcard"><img src="/images/foto-hawe-engineering.jpg" alt="" loading="lazy"><div class="fname">Engineering</div></div>
-      <div class="fcard"><img src="/images/foto-kuchenhaus-hirschvogel.jpg" alt="" loading="lazy"><div class="fname">Küche &amp; Wohnen</div></div>
-      <div class="fcard"><img src="/images/foto-klass-heizung.jpg" alt="" loading="lazy"><div class="fname">Sanitär</div></div>
-      <div class="fcard"><img src="/images/foto-elektro.jpg" alt="" loading="lazy" style="object-position:40% center;"><div class="fname">Elektro</div></div>
-    </div>
-  </div>
-
 </section>
 
 <!-- ═══════ SEO-BEWEIS ═══════ -->
@@ -619,15 +627,15 @@ footer{padding:30px 0 40px;color:var(--sub);}
       <div class="night-grid">
         <div>
           <div class="eyebrow" style="color:#E0A45C;"><span class="dot"></span>Wer dahinter steht</div>
-          <h2 style="margin-top:18px;">Webdesign ist bei uns<br><em>Chefsache.</em></h2>
-          <p>Seit über sechs Jahren machen wir nur eines: Websites für Handwerksbetriebe. Über 120 Betriebe später wissen wir genau, was in deiner Branche funktioniert – und was nicht.</p>
+          <h2 style="margin-top:18px;">Du redest nicht mit einer Agentur.<br><em>Du redest mit mir.</em></h2>
+          <p>Ich bin Noah – seit über sechs Jahren baue ich mit meinem Team nur eines: Websites für Handwerksbetriebe. Über 120 Betriebe später weiß ich ziemlich genau, was in deiner Branche funktioniert. Und was du dir sparen kannst.</p>
           <p><strong>Du sprichst immer direkt mit dem, der deine Website baut.</strong> Vom ersten Gespräch bis zum Launch – und bei jeder Frage danach.</p>
           <div class="founder">
             <img src="/images/foto-noah-portrait-rund.png" alt="Noah Seelau" loading="lazy">
             <div>
               <div class="n">Noah Seelau</div>
               <div class="r">Gründer &amp; Geschäftsführer</div>
-              <p class="q">„Dein Handwerk spricht für sich. Deine Website sollte das auch."</p>
+              <p class="q">„Dein Handwerk spricht für sich.<br>Deine Website sollte das auch."</p>
             </div>
           </div>
         </div>
@@ -647,7 +655,7 @@ footer{padding:30px 0 40px;color:var(--sub);}
   <div class="wrap">
     <div class="reveal center">
       <div class="eyebrow"><span class="dot"></span>Das Team dahinter</div>
-      <h2 class="d" style="margin-top:18px;">Drei Leute. <em>Kurze Wege.</em></h2>
+      <h2 class="d" style="margin-top:18px;">Du bekommst keine Ticketnummer.<br><em>Du bekommst uns drei.</em></h2>
     </div>
     <div class="team-grid">
       <div class="tcard stagger">
