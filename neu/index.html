@@ -177,13 +177,17 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 .svc-layout{display:grid;grid-template-columns:1fr 1.15fr;gap:80px;align-items:start;}
 .svc-sticky{position:sticky;top:120px;}
 .svc-flow{border-top:1.5px solid var(--line2);}
-.svc-item{display:flex;gap:26px;padding:36px 4px;border-bottom:1.5px solid var(--line2);opacity:.3;transform:translateX(14px);transition:opacity .5s var(--ease),transform .5s var(--ease);}
+.svc-item{position:relative;display:flex;gap:26px;padding:36px 12px;border-bottom:1.5px solid var(--line2);opacity:.3;transform:translateX(14px);transition:opacity .5s var(--ease),transform .5s var(--ease);}
+.svc-item::before{content:"";position:absolute;left:-1px;top:24%;bottom:24%;width:2.5px;border-radius:2px;background:linear-gradient(180deg,var(--acc),transparent);transform:scaleY(0);transform-origin:top;transition:transform .7s var(--ease) .12s;}
 .svc-item.act{opacity:1;transform:none;}
+.svc-item.act::before{transform:scaleY(1);}
 .si-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:8px;}
-.si-ic{width:48px;height:48px;border-radius:14px;background:var(--acc-soft);color:var(--acc-deep);display:flex;align-items:center;justify-content:center;transition:transform .4s var(--ease);}
-.si-ic svg{width:23px;height:23px;}
-.svc-item.act .si-ic{transform:scale(1.08) rotate(-3deg);}
-.si-num{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--faint);}
+.si-ic{width:52px;height:52px;border-radius:15px;background:var(--acc-soft);color:var(--acc-deep);display:flex;align-items:center;justify-content:center;transition:transform .5s var(--ease),box-shadow .5s var(--ease),background .5s var(--ease);}
+.si-ic svg{width:24px;height:24px;}
+.si-ic svg *{transition:stroke-dashoffset 1.1s var(--ease) .15s;}
+.svc-item.act .si-ic{transform:scale(1.1) rotate(-4deg);box-shadow:0 12px 28px -12px rgba(200,135,58,.5);background:linear-gradient(135deg,var(--acc-soft),rgba(200,135,58,.22));}
+.si-num{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--faint);transition:color .5s var(--ease),transform .5s var(--ease);}
+.svc-item.act .si-num{color:var(--acc-deep);transform:translateY(2px) scale(1.12);}
 .svc-item h3{font-size:21px;font-weight:700;letter-spacing:-.02em;margin-bottom:7px;}
 .svc-item p{font-size:15px;color:var(--sub);max-width:460px;}
 @media(max-width:900px){.svc-layout{grid-template-columns:1fr;gap:44px;}.svc-sticky{position:static;}}
@@ -474,28 +478,28 @@ footer{padding:30px 0 40px;color:var(--sub);}
 <section id="praxisfotos">
   <div class="fmarq">
     <div class="fmarq-t">
-      <div class="fcard"><img src="/images/foto-zimmerei-koller.jpg" alt="Holzbau" loading="lazy" style="object-position:center 15%;"><div class="fname">Holzbau</div></div>
-      <div class="fcard"><img src="/images/foto-schreinerei-kreitner.jpg" alt="Schreinerei" loading="lazy" style="object-position:center 15%;"><div class="fname">Schreinerei</div></div>
-      <div class="fcard"><img src="/images/foto-sd-hirsch.jpg" alt="Automotive" loading="lazy" style="object-position:center 15%;"><div class="fname">Automotive</div></div>
-      <div class="fcard"><img src="/images/foto-kirchner.jpg" alt="Bau" loading="lazy" style="object-position:center 12%;"><div class="fname">Bau</div></div>
-      <div class="fcard"><img src="/images/foto-zimmerei-schneider-gmbh.jpg" alt="Zimmerei" loading="lazy" style="object-position:center 20%;"><div class="fname">Zimmerei</div></div>
-      <div class="fcard"><img src="/images/foto-cs-metalldesign.jpg" alt="Metallbau" loading="lazy" style="object-position:center 40%;"><div class="fname">Metallbau</div></div>
-      <div class="fcard"><img src="/images/foto-hawe-engineering.jpg" alt="Ingenieurbüro" loading="lazy" style="object-position:center 15%;"><div class="fname">Ingenieurbüro</div></div>
-      <div class="fcard"><img src="/images/foto-kuchenhaus-hirschvogel.jpg" alt="Küche und Wohnen" loading="lazy" style="object-position:center 18%;"><div class="fname">Küche &amp; Wohnen</div></div>
-      <div class="fcard"><img src="/images/foto-klass-heizung.jpg" alt="Sanitär" loading="lazy" style="object-position:center 18%;"><div class="fname">Sanitär</div></div>
-      <div class="fcard"><img src="/images/foto-elektro.jpg" alt="Elektro" loading="lazy" style="object-position:40% center;"><div class="fname">Elektro</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/holzbau.jpg" alt="Holzbau" loading="lazy"><div class="fname">Holzbau</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/schreinerei.jpg" alt="Schreinerei" loading="lazy"><div class="fname">Schreinerei</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/automotive.jpg" alt="Automotive" loading="lazy"><div class="fname">Automotive</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/bau.jpg" alt="Bau" loading="lazy"><div class="fname">Bau</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/zimmerei.jpg" alt="Zimmerei" loading="lazy"><div class="fname">Zimmerei</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/metallbau.jpg" alt="Metallbau" loading="lazy"><div class="fname">Metallbau</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/ingenieur.jpg" alt="Ingenieurbüro" loading="lazy"><div class="fname">Ingenieurbüro</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/kueche.jpg" alt="Küche und Wohnen" loading="lazy"><div class="fname">Küche &amp; Wohnen</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/sanitaer.jpg" alt="Sanitär" loading="lazy"><div class="fname">Sanitär</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/elektro.jpg" alt="Elektro" loading="lazy"><div class="fname">Elektro</div></div>
     </div>
     <div class="fmarq-t" aria-hidden="true">
-      <div class="fcard"><img src="/images/foto-zimmerei-koller.jpg" alt="" loading="lazy" style="object-position:center 15%;"><div class="fname">Holzbau</div></div>
-      <div class="fcard"><img src="/images/foto-schreinerei-kreitner.jpg" alt="" loading="lazy" style="object-position:center 15%;"><div class="fname">Schreinerei</div></div>
-      <div class="fcard"><img src="/images/foto-sd-hirsch.jpg" alt="" loading="lazy" style="object-position:center 15%;"><div class="fname">Automotive</div></div>
-      <div class="fcard"><img src="/images/foto-kirchner.jpg" alt="" loading="lazy" style="object-position:center 12%;"><div class="fname">Bau</div></div>
-      <div class="fcard"><img src="/images/foto-zimmerei-schneider-gmbh.jpg" alt="" loading="lazy" style="object-position:center 20%;"><div class="fname">Zimmerei</div></div>
-      <div class="fcard"><img src="/images/foto-cs-metalldesign.jpg" alt="" loading="lazy" style="object-position:center 40%;"><div class="fname">Metallbau</div></div>
-      <div class="fcard"><img src="/images/foto-hawe-engineering.jpg" alt="" loading="lazy" style="object-position:center 15%;"><div class="fname">Ingenieurbüro</div></div>
-      <div class="fcard"><img src="/images/foto-kuchenhaus-hirschvogel.jpg" alt="" loading="lazy" style="object-position:center 18%;"><div class="fname">Küche &amp; Wohnen</div></div>
-      <div class="fcard"><img src="/images/foto-klass-heizung.jpg" alt="" loading="lazy" style="object-position:center 18%;"><div class="fname">Sanitär</div></div>
-      <div class="fcard"><img src="/images/foto-elektro.jpg" alt="" loading="lazy" style="object-position:40% center;"><div class="fname">Elektro</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/holzbau.jpg" alt="" loading="lazy"><div class="fname">Holzbau</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/schreinerei.jpg" alt="" loading="lazy"><div class="fname">Schreinerei</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/automotive.jpg" alt="" loading="lazy"><div class="fname">Automotive</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/bau.jpg" alt="" loading="lazy"><div class="fname">Bau</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/zimmerei.jpg" alt="" loading="lazy"><div class="fname">Zimmerei</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/metallbau.jpg" alt="" loading="lazy"><div class="fname">Metallbau</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/ingenieur.jpg" alt="" loading="lazy"><div class="fname">Ingenieurbüro</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/kueche.jpg" alt="" loading="lazy"><div class="fname">Küche &amp; Wohnen</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/sanitaer.jpg" alt="" loading="lazy"><div class="fname">Sanitär</div></div>
+      <div class="fcard"><img src="/neu/assets/praxis/elektro.jpg" alt="" loading="lazy"><div class="fname">Elektro</div></div>
     </div>
   </div>
 
@@ -627,7 +631,7 @@ footer{padding:30px 0 40px;color:var(--sub);}
       <div class="night-grid">
         <div>
           <div class="eyebrow" style="color:#E0A45C;"><span class="dot"></span>Wer dahinter steht</div>
-          <h2 style="margin-top:18px;">Auch das hier ist Handwerk.<br><em>Nur eben online.</em></h2>
+          <h2 style="margin-top:18px;">Du beherrschst dein Handwerk.<br><em>Wir unseres.</em></h2>
           <p>Ich bin Noah – seit über sechs Jahren baue ich mit meinem Team nur eines: Websites für Handwerksbetriebe. Über 120 Betriebe später weiß ich ziemlich genau, was in deiner Branche funktioniert. Und was du dir sparen kannst.</p>
           <p><strong>Du sprichst immer direkt mit dem, der deine Website baut.</strong> Vom ersten Gespräch bis zum Launch – und bei jeder Frage danach.</p>
           <div class="founder">
@@ -895,8 +899,20 @@ document.querySelectorAll('.stagger').forEach(function(el,i){el.dataset.delay=(i
 // Leistungen: aktives Item beim Scrollen hervorheben
 (function(){
   var items=[].slice.call(document.querySelectorAll('.svc-item'));if(!items.length)return;
+  // Icon-Linien zeichnen sich beim Aktivieren selbst (stroke-dash-Draw)
+  items.forEach(function(i){
+    [].slice.call(i.querySelectorAll('.si-ic svg *')).forEach(function(sh){
+      try{var L=sh.getTotalLength();sh.style.strokeDasharray=L;sh.style.strokeDashoffset=L;}catch(e){}
+    });
+  });
   var sio=new IntersectionObserver(function(es){
-    es.forEach(function(e){e.target.classList.toggle('act',e.isIntersecting);});
+    es.forEach(function(e){
+      e.target.classList.toggle('act',e.isIntersecting);
+      [].slice.call(e.target.querySelectorAll('.si-ic svg *')).forEach(function(sh){
+        if(!sh.style.strokeDasharray)return;
+        sh.style.strokeDashoffset=e.isIntersecting?0:sh.style.strokeDasharray;
+      });
+    });
   },{rootMargin:'-32% 0px -32% 0px'});
   items.forEach(function(i){sio.observe(i);});
 })();
