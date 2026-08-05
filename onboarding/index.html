@@ -545,6 +545,7 @@ function addLeistung() {
   const div = document.createElement('div');
   div.className = 'leistung-item';
   div.id = 'leistung-' + id;
+  div.dataset.uploadKey = key;
   div.innerHTML =
     '<div class="leistung-header"><div class="leistung-num">Leistung ' + String(id).padStart(2,'0') + '</div>' +
     '<button type="button" class="remove-leistung" onclick="removeLeistung(' + id + ')">×</button></div>' +
@@ -572,9 +573,10 @@ function addSP(id) {
   sp.appendChild(r);
 }
 function removeLeistung(id) {
-  document.getElementById('leistung-' + id)?.remove();
-  document.querySelectorAll('.leistung-item').forEach(function(el, i) {
-    el.querySelector('.leistung-num').textContent = 'Leistung ' + String(i + 1).padStart(2, '0');
+  const el = document.getElementById('leistung-' + id);
+  if (el) { delete fileStore[el.dataset.uploadKey]; el.remove(); }
+  document.querySelectorAll('.leistung-item').forEach(function(item, i) {
+    item.querySelector('.leistung-num').textContent = 'Leistung ' + String(i + 1).padStart(2, '0');
   });
 }
 addLeistung(); addLeistung(); addLeistung();
@@ -590,23 +592,61 @@ function setTeamChoice(c) {
 // === FILE UPLOADS ===
 const fileStore = {};
 function storeFiles(f, k) { if (!fileStore[k]) fileStore[k] = []; fileStore[k].push(...f); }
+function removeStoredFile(storeKey, fileObj) {
+  const arr = fileStore[storeKey];
+  if (!arr) return;
+  const i = arr.indexOf(fileObj);
+  if (i > -1) arr.splice(i, 1);
+}
 function handleFiles(files, previewId, storeKey) {
-  storeFiles([...files], storeKey);
+  // Ordner-Einträge & leere Dateien rausfiltern (0-Byte-Uploads lassen Drive mit 400 scheitern)
+  const clean = [...files].filter(function(f) { return f.size > 0; });
+  storeFiles(clean, storeKey);
   const p = document.getElementById(previewId);
   if (!p) return;
-  [...files].forEach(function(f) {
+  clean.forEach(function(f) {
     const c = document.createElement('div');
     c.className = 'preview-chip';
     const s = f.size > 1048576 ? (f.size / 1048576).toFixed(1) + 'MB' : Math.round(f.size / 1024) + 'KB';
     c.innerHTML = '<span>' + (f.name.length > 22 ? f.name.slice(0,20) + '…' : f.name) + '</span>' +
       '<span style="color:var(--muted);font-size:10px">' + s + '</span>' +
-      '<span class="chip-remove" onclick="this.parentElement.remove()">×</span>';
+      '<span class="chip-remove">×</span>';
+    c.querySelector('.chip-remove').addEventListener('click', function() { removeStoredFile(storeKey, f); c.remove(); });
     p.appendChild(c);
   });
 }
 function dragOver(e, el) { e.preventDefault(); el.classList.add('drag-over'); }
 function dragLeave(el) { el.classList.remove('drag-over'); }
-function handleDrop(e, el, pId, sk) { e.preventDefault(); el.classList.remove('drag-over'); if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files, pId, sk); }
+// Rekursiv Dateien aus gedroppten Ordnern einsammeln (webkitGetAsEntry)
+function walkEntry(entry) {
+  return new Promise(function(resolve) {
+    if (entry.isFile) { entry.file(function(f) { resolve([f]); }, function() { resolve([]); }); }
+    else if (entry.isDirectory) {
+      const reader = entry.createReader();
+      const collected = [];
+      (function readBatch() {
+        reader.readEntries(function(batch) {
+          if (!batch.length) { Promise.all(collected.map(walkEntry)).then(function(a) { resolve(a.flat()); }); }
+          else { collected.push(...batch); readBatch(); }
+        }, function() { resolve([]); });
+      })();
+    } else resolve([]);
+  });
+}
+function handleDrop(e, el, pId, sk) {
+  e.preventDefault(); el.classList.remove('drag-over');
+  const items = e.dataTransfer.items;
+  if (items && items.length && items[0].webkitGetAsEntry) {
+    const entries = [];
+    for (let i = 0; i < items.length; i++) { const en = items[i].webkitGetAsEntry(); if (en) entries.push(en); }
+    Promise.all(entries.map(walkEntry)).then(function(a) {
+      const files = a.flat();
+      if (files.length) handleFiles(files, pId, sk);
+    });
+  } else if (e.dataTransfer.files.length) {
+    handleFiles(e.dataTransfer.files, pId, sk);
+  }
+}
 
 // === DSGVO ===
 let dsgvoChecked = false;
@@ -775,8 +815,10 @@ function collectMissing(leistungen) {
   if (!(fileStore.logo && fileStore.logo.length)) missing.push('Logo (Datei)');
   if (!(fileStore.inhaberfoto && fileStore.inhaberfoto.length)) missing.push('Inhaberfoto');
   if (!(fileStore.teamfotos && fileStore.teamfotos.length)) missing.push('Team-Fotos');
-  leistungen.forEach(function(name, i) {
-    var key = 'leistung_' + i;
+  document.querySelectorAll('.leistung-item').forEach(function(el, i) {
+    var nameEl = el.querySelector('.leistung-name');
+    var name = (nameEl && nameEl.value ? nameEl.value : '').trim() || ('Leistung ' + (i + 1));
+    var key = el.dataset.uploadKey;
     if (!(fileStore[key] && fileStore[key].length)) missing.push('Fotos zu Leistung: ' + name);
   });
   return missing;
@@ -784,28 +826,55 @@ function collectMissing(leistungen) {
 
 // === SUBMIT ===
 const API_BASE = 'https://handwerksmanufaktur-onboarding.handwerksmanufaktur.workers.dev';
+// Merkt sich nach dem ersten Erfolg die Ordner-IDs — verhindert doppelte
+// Drive-Ordner/ClickUp-Tasks, wenn der Kunde nach einem Upload-Fehler nochmal absendet.
+let createdFolders = null;
+let uploadErrors = [];
+
+async function safeUpload(label, files, folderId) {
+  if (!files || !files.length || !folderId) return;
+  const s = addStep(label);
+  setStepStatus(s, 'active');
+  let failed = 0;
+  for (let i = 0; i < files.length; i++) {
+    try { await uploadOneFile(files[i], folderId, s.idx, i + 1, files.length); }
+    catch (e) { console.error('Upload failed:', label, files[i].name, e); failed++; uploadErrors.push(label + ': ' + files[i].name); }
+  }
+  document.getElementById('stepprog-' + s.idx).textContent = '';
+  document.getElementById('stepsub-' + s.idx).textContent = failed ? failed + ' Datei(en) übersprungen' : '';
+  setStepStatus(s, failed === files.length ? 'error' : 'done');
+}
+
 async function submitForm() {
   const firmaName = document.getElementById('firmaName').value.trim();
   if (!firmaName) { alert('Bitte Firmennamen eingeben.'); return; }
   if (!dsgvoChecked) { alert('Bitte stimme zuerst der Datenschutzerklärung zu.'); return; }
-  const leistungen = [...document.querySelectorAll('.leistung-name')].map(function(i) { return i.value.trim() || 'Leistung'; });
+  const leistungItems = [...document.querySelectorAll('.leistung-item')].map(function(el) {
+    const nameEl = el.querySelector('.leistung-name');
+    return { name: (nameEl && nameEl.value ? nameEl.value : '').trim() || 'Leistung', key: el.dataset.uploadKey };
+  });
+  const leistungen = leistungItems.map(function(l) { return l.name; });
   document.getElementById('btnNext').disabled = true;
   steps = [];
+  uploadErrors = [];
   document.getElementById('uploadSteps').innerHTML = '';
   document.getElementById('uploadOverlay').classList.add('visible');
   try {
-    const s1 = addStep('Ordnerstruktur wird erstellt');
-    setStepStatus(s1, 'active');
-    const r = await fetch(API_BASE + '/create-folders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ firmaName, leistungen, serviceType: 'webdesign', formData: collectFormData(), missing: collectMissing(leistungen) }) });
-    const { folderIds, driveLink, error } = await r.json();
-    if (error) throw new Error(error);
-    setStepStatus(s1, 'done');
-    if (fileStore.logo?.length) { const s = addStep('Logo'); setStepStatus(s, 'active'); await uploadFiles(fileStore.logo, folderIds.logo, s.idx); setStepStatus(s, 'done'); }
-    if (fileStore.inhaberfoto?.length) { const s = addStep('Inhaberfoto'); setStepStatus(s, 'active'); await uploadFiles(fileStore.inhaberfoto, folderIds.inhaberfoto, s.idx); setStepStatus(s, 'done'); }
-    if (fileStore.teamfotos?.length) { const s = addStep('Teamfotos'); setStepStatus(s, 'active'); await uploadFiles(fileStore.teamfotos, folderIds.teamfotos, s.idx); setStepStatus(s, 'done'); }
-    for (let i = 0; i < leistungen.length; i++) {
-      const key = 'leistung_' + i;
-      if (fileStore[key]?.length) { const s = addStep(leistungen[i]); setStepStatus(s, 'active'); await uploadFiles(fileStore[key], folderIds[key], s.idx); setStepStatus(s, 'done'); }
+    if (!createdFolders) {
+      const s1 = addStep('Ordnerstruktur wird erstellt');
+      setStepStatus(s1, 'active');
+      const r = await fetch(API_BASE + '/create-folders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ firmaName, leistungen, serviceType: 'webdesign', formData: collectFormData(), missing: collectMissing(leistungen) }) });
+      const { folderIds, error } = await r.json();
+      if (error) throw new Error(error);
+      createdFolders = folderIds;
+      setStepStatus(s1, 'done');
+    }
+    const folderIds = createdFolders;
+    await safeUpload('Logo', fileStore.logo, folderIds.logo);
+    await safeUpload('Inhaberfoto', fileStore.inhaberfoto, folderIds.inhaberfoto);
+    await safeUpload('Teamfotos', fileStore.teamfotos, folderIds.teamfotos);
+    for (let i = 0; i < leistungItems.length; i++) {
+      await safeUpload(leistungItems[i].name, fileStore[leistungItems[i].key], folderIds['leistung_' + i]);
     }
     document.getElementById('uploadOverlay').classList.remove('visible');
     clearDraft();
@@ -813,12 +882,18 @@ async function submitForm() {
     document.querySelector('.wizard-nav').style.display = 'none';
     document.querySelector('.step-dots').style.display = 'none';
     document.querySelector('.motiv-wrap').style.display = 'none';
+    if (uploadErrors.length) {
+      const note = document.createElement('p');
+      note.style.cssText = 'color:var(--muted);font-size:13px;line-height:1.7;max-width:440px;margin-top:14px';
+      note.textContent = 'Hinweis: ' + uploadErrors.length + ' Foto(s) konnten nicht hochgeladen werden (' + uploadErrors.slice(0, 3).join(', ') + (uploadErrors.length > 3 ? ', …' : '') + '). Kein Problem — eure Daten sind angekommen, die Fotos könnt ihr einfach später in der Google Drive nachreichen.';
+      document.getElementById('successScreen').appendChild(note);
+    }
     document.getElementById('successScreen').classList.add('visible');
   } catch(err) {
     console.error(err);
     document.getElementById('uploadOverlay').classList.remove('visible');
     document.getElementById('btnNext').disabled = false;
-    alert('Fehler: ' + err.message);
+    alert('Es gab ein technisches Problem beim Übertragen. Bitte einfach nochmal auf Absenden klicken — bereits übertragene Daten bleiben erhalten.');
   }
 }
 
