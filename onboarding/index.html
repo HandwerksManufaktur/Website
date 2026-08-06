@@ -641,15 +641,22 @@ function walkEntry(entry) {
 function handleDrop(e, el, pId, sk) {
   e.preventDefault(); el.classList.remove('drag-over');
   const items = e.dataTransfer.items;
+  const plainFiles = e.dataTransfer.files;
   if (items && items.length && items[0].webkitGetAsEntry) {
     const entries = [];
     for (let i = 0; i < items.length; i++) { const en = items[i].webkitGetAsEntry(); if (en) entries.push(en); }
+    if (!entries.length) {
+      // Manche Drag-Quellen (z.B. Fotos-App) liefern keine Entries — Fallback auf files
+      if (plainFiles.length) handleFiles(plainFiles, pId, sk);
+      return;
+    }
     Promise.all(entries.map(walkEntry)).then(function(a) {
       const files = a.flat();
       if (files.length) handleFiles(files, pId, sk);
+      else if (plainFiles.length) handleFiles(plainFiles, pId, sk);
     });
-  } else if (e.dataTransfer.files.length) {
-    handleFiles(e.dataTransfer.files, pId, sk);
+  } else if (plainFiles.length) {
+    handleFiles(plainFiles, pId, sk);
   }
 }
 
