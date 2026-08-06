@@ -491,6 +491,11 @@ function loadDraft() {
     const s = localStorage.getItem(SAVE_KEY);
     if (!s) return;
     const data = JSON.parse(s);
+    // Zusätzliche Leistungen (über die 3 Standard-Items hinaus) wiederherstellen
+    Object.keys(data).forEach(function(id) {
+      const m = id.match(/^lname-(\d+)$/);
+      if (m && data[id]) { let guard = 0; while (!document.getElementById(id) && guard++ < 30) addLeistung(); }
+    });
     Object.entries(data).forEach(function([id, val]) {
       const el = document.getElementById(id);
       if (el && val) { el.value = val; }
@@ -863,7 +868,7 @@ async function submitForm() {
     if (!createdFolders) {
       const s1 = addStep('Ordnerstruktur wird erstellt');
       setStepStatus(s1, 'active');
-      const r = await fetch(API_BASE + '/create-folders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ firmaName, leistungen, serviceType: 'webdesign', formData: collectFormData(), missing: collectMissing(leistungen) }) });
+      const r = await fetch(API_BASE + '/create-folders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ firmaName, leistungen, serviceType: 'webdesign', formData: collectFormData(), missing: collectMissing(leistungen), clientV: 3 }) });
       const { folderIds, error } = await r.json();
       if (error) throw new Error(error);
       createdFolders = folderIds;
@@ -893,7 +898,7 @@ async function submitForm() {
     console.error(err);
     document.getElementById('uploadOverlay').classList.remove('visible');
     document.getElementById('btnNext').disabled = false;
-    alert('Es gab ein technisches Problem beim Übertragen. Bitte einfach nochmal auf Absenden klicken — bereits übertragene Daten bleiben erhalten.');
+    alert(err && err.message && err.message.length > 20 ? err.message : 'Es gab ein technisches Problem beim Übertragen. Bitte einfach nochmal auf Absenden klicken — bereits übertragene Daten bleiben erhalten.');
   }
 }
 
