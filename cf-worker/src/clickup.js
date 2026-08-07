@@ -172,12 +172,32 @@ async function clickup(token, path, method, body) {
 }
 
 // Sucht ein Form-Feld unter mehreren möglichen Keys (Fuzzy-Matching)
+// Formular-Keys von Unterfeldern kommen eingerückt an ("  Link zur alten Website"),
+// deshalb wird jeder Key auch getrimmt gesucht — sonst greift stillschweigend der Fallback.
 function pick(formData, ...keys) {
   for (const k of keys) {
     const v = formData[k];
     if (v !== undefined && v !== null && v !== '') return v;
+    for (const realKey of Object.keys(formData)) {
+      if (realKey.trim() === k) {
+        const rv = formData[realKey];
+        if (rv !== undefined && rv !== null && rv !== '') return rv;
+      }
+    }
   }
   return null;
+}
+
+// URL-Felder in ClickUp lehnen alles ab, was keine URL ist (400 FIELD_010) —
+// z.B. das "Ja" aus einem Ja/Nein-Toggle. Lieber leer lassen als den Field-Set killen.
+function asUrl(raw) {
+  if (!raw) return null;
+  const v = String(raw).trim();
+  if (!/^https?:\/\/\S+\.\S+/i.test(v)) {
+    if (/^(www\.|[\w-]+\.[a-z]{2,})/i.test(v) && !/\s/.test(v)) return 'https://' + v.replace(/^\/+/, '');
+    return null;
+  }
+  return v;
 }
 
 // Long-Text-Antworten in eine Description packen
@@ -286,9 +306,9 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
   const email           = pick(formData, 'E-Mail', 'Email');
   const telefon         = normalizePhone(pick(formData, 'Telefon'));
   const uid             = pick(formData, 'UID / USt-ID', 'UID', 'USt-ID');
-  const websiteUrl      = pick(formData, 'Link zur alten Website', 'Bestehende Website');
-  const facebook        = pick(formData, 'Facebook Seite Link', 'Link Facebook', 'Facebook');
-  const instagram       = pick(formData, 'Instagram Handle', 'Handle Instagram', 'Instagram');
+  const websiteUrl      = asUrl(pick(formData, 'Link zur alten Website', 'Website'));
+  const facebook        = asUrl(pick(formData, 'FB: Link zur Seite', 'Facebook Seite Link', 'Link Facebook', 'Facebook'));
+  const instagram       = asUrl(pick(formData, 'IG: Link', 'Instagram Handle', 'Handle Instagram', 'Instagram'));
 
   const todayMs = Date.now();
   const description = buildDescription(formData, driveLink);
@@ -373,6 +393,25 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
     const auswahl = (pick(formData, 'Service-Auswahl', 'Recruiting / Neukundengewinnung') || '').toLowerCase();
     const isRecruiting = auswahl.includes('recruiting');
 
+    // Offene Stellen gehören in die Description (Infos, keine To-dos — KEINE Subtasks)
+    let stellenText = '';
+    if (isRecruiting) {
+      for (let i = 1; i <= 10; i++) {
+        const stelle = pick(formData, `Stelle ${i} - Stellenbezeichnung`, `Stellenbezeichnung ${i}`, `Stelle ${i}`);
+        if (!stelle) break;
+        const gehalt      = pick(formData, `Stelle ${i} - Gehaltsspanne brutto`, `Stelle ${i} - Gehalt`);
+        const muss        = pick(formData, `Stelle ${i} - Muss-Anforderungen`);
+        const kann        = pick(formData, `Stelle ${i} - Kann-Anforderungen`);
+        const arbeitszeit = pick(formData, `Stelle ${i} - Arbeitszeiten`);
+        stellenText += `\n\n**🎯 Stelle ${i}: ${stelle}**` + [
+          gehalt      && `\nGehalt: ${gehalt}`,
+          muss        && `\nMuss: ${muss}`,
+          kann        && `\nKann: ${kann}`,
+          arbeitszeit && `\nArbeitszeiten: ${arbeitszeit}`,
+        ].filter(Boolean).join('');
+      }
+    }
+
     const ppFields = cleanFields([
       { id: FIELDS.pipeline.verknuepft,    value: firmaName },
       { id: FIELDS.pipeline.serviceTyp,    value: isRecruiting ? OPTS.serviceTyp.Recruiting : OPTS.serviceTyp.Leadgen },
@@ -386,7 +425,7 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
       name: `${firmaName} - ${isRecruiting ? 'Recruiting' : 'Leadgen'}`,
       status: '🆕 Neuer Kunde',
       custom_item_id: TASK_TYPE_PROJECT,
-      description,
+      description: description + stellenText,
       assignees: [NOAH_USER_ID],
       custom_fields: ppFields,
     });
@@ -396,29 +435,6 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
 
     // Standard-Subtasks (an Noah, erste 3 mit Due Date = heute) + Checklisten
     await addPipelineExtras(token, ppTask.id, todayMs);
-
-    // Offene Stellen als Subtasks (nur bei Recruiting)
-    if (isRecruiting) {
-      for (let i = 1; i <= 10; i++) {
-        const stelle = pick(formData, `Stelle ${i} - Stellenbezeichnung`, `Stellenbezeichnung ${i}`, `Stelle ${i}`);
-        if (!stelle) break;
-        const gehalt      = pick(formData, `Stelle ${i} - Gehaltsspanne brutto`, `Stelle ${i} - Gehalt`);
-        const muss        = pick(formData, `Stelle ${i} - Muss-Anforderungen`);
-        const kann        = pick(formData, `Stelle ${i} - Kann-Anforderungen`);
-        const arbeitszeit = pick(formData, `Stelle ${i} - Arbeitszeiten`);
-        const subDesc = [
-          gehalt      && `**Gehalt:** ${gehalt}`,
-          muss        && `**Muss-Anforderungen:**\n${muss}`,
-          kann        && `**Kann-Anforderungen:**\n${kann}`,
-          arbeitszeit && `**Arbeitszeiten:** ${arbeitszeit}`,
-        ].filter(Boolean).join('\n\n');
-        await clickup(token, `/list/${LISTS.pipeline}/task`, 'POST', {
-          name: `🎯 ${stelle}`,
-          parent: ppTask.id,
-          description: subDesc,
-        }).catch(() => {});
-      }
-    }
 
     return { kdbTaskId: kdbTask.id, pipelineTaskId: ppTask.id };
   }
