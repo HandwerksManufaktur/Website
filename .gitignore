@@ -2,3 +2,4 @@ images/Vorher-Nachher/*.png
 images/*.zip
 .DS_Store
 **/.DS_Store
+node_modules/
