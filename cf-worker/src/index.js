@@ -189,8 +189,13 @@ async function sendNotification(env, firmaName, serviceType, driveLink, formData
 
 async function handleCreateFolders(request, env, ctx) {
   const body = await request.json();
-  const { firmaName, leistungen = [], serviceType = 'webdesign', formData = {}, missing = [] } = body;
+  const { firmaName, leistungen = [], serviceType = 'webdesign', formData = {}, missing = [], clientV = 0 } = body;
   if (!firmaName) return jsonResp({ error: 'firmaName required' }, 400);
+  // Versions-Sperre: veraltete, im Browser gecachte Formular-Versionen haben fehlerhafte
+  // Upload-Logik (Abbruch bei Foto-Fehlern, doppelte Ordner-Sets). Klare Ansage statt Chaos.
+  if (clientV < 4) {
+    return jsonResp({ error: 'Diese Seite wurde zwischenzeitlich aktualisiert. Bitte lade die Seite einmal neu (Strg+R bzw. Cmd+R) und sende das Formular danach erneut ab — deine Texteingaben bleiben dabei gespeichert, nur die Fotos musst du nochmal auswählen.' }, 409);
+  }
 
   const token    = await getAccessToken(env.GOOGLE_CLIENT_EMAIL, env.GOOGLE_PRIVATE_KEY);
   const parentId = FOLDER_IDS[serviceType] || FOLDER_IDS.webdesign;

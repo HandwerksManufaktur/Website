@@ -939,7 +939,7 @@ async function submitForm() {
     if (!createdFolders) {
       const s1 = addStep('Ordnerstruktur wird erstellt');
       setStepStatus(s1, 'active');
-      const r = await fetch(API_BASE + '/create-folders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ firmaName, leistungen, serviceType: 'webdesign', formData: collectFormData(), missing: collectMissing(leistungen), clientV: 3 }) });
+      const r = await fetch(API_BASE + '/create-folders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ firmaName, leistungen, serviceType: 'webdesign', formData: collectFormData(), missing: collectMissing(leistungen), clientV: 4 }) });
       const { folderIds, error } = await r.json();
       if (error) throw new Error(error);
       createdFolders = folderIds;
