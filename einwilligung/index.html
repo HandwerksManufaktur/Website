@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Einwilligung Foto- und Videoaufnahmen</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#eceae6;color:#111;line-height:1.6}
+
+  /* ---------- Bedienleiste (nur am Bildschirm) ---------- */
+  .bar{background:#141210;color:#fff;padding:22px clamp(16px,4vw,34px)}
+  .bar-in{max-width:920px;margin:0 auto}
+  .bar h1{font-size:17px;font-weight:700;letter-spacing:-.01em;margin-bottom:4px}
+  .bar p{font-size:13.5px;color:#a8a29a;max-width:640px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  label{display:block;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#c8873a;margin-bottom:6px}
+  input,textarea{width:100%;background:#211d19;border:1.5px solid #3a332c;border-radius:9px;padding:11px 13px;color:#fff;font:inherit;font-size:14px}
+  input:focus,textarea:focus{outline:none;border-color:#c8873a}
+  textarea{min-height:104px;resize:vertical;line-height:1.7}
+  .hint{font-size:12px;color:#8d867d;margin-top:6px}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+  button{background:#c8873a;color:#151210;border:0;border-radius:9px;padding:12px 22px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+  button:hover{background:#d9974a}
+  button.ghost{background:transparent;color:#c8873a;border:1.5px solid #4a4038}
+  button.ghost:hover{background:#211d19}
+  .status{font-size:13px;color:#8d867d}
+
+  /* ---------- Dokument ---------- */
+  .sheet{max-width:920px;margin:26px auto 60px;background:#fff;padding:clamp(26px,5vw,54px);border-radius:4px;box-shadow:0 3px 22px rgba(0,0,0,.13)}
+  .head{border-bottom:2px solid #111;padding-bottom:14px;margin-bottom:22px}
+  .betrieb{font-size:19px;font-weight:800;letter-spacing:-.01em}
+  .sheet h1{font-size:22px;font-weight:800;margin-top:9px;letter-spacing:-.02em}
+  .sub{font-size:12.5px;color:#555;margin-top:5px}
+  .sheet h2{font-size:14px;font-weight:800;margin:22px 0 7px}
+  .sheet p{font-size:13.2px;margin-bottom:9px;text-align:justify}
+  .sheet ul{font-size:13.2px;margin:0 0 9px 20px}
+  .sheet li{margin-bottom:4px}
+  table{width:100%;border-collapse:collapse}
+  .fields{margin-bottom:20px}
+  .fields td{padding:7px 0;font-size:13.2px}
+  .fields .lbl{width:190px;color:#555}
+  .fields .fill{border-bottom:1px solid #999}
+  .sig{margin-top:12px;border:1px solid #111}
+  .sig th{border:1px solid #111;padding:7px 9px;font-size:11.5px;text-align:left;background:#f1efec}
+  .sig td{border:1px solid #111;height:40px;padding:7px 9px;font-size:13px;vertical-align:middle}
+  .foot{margin-top:22px;padding-top:12px;border-top:1px solid #ccc;font-size:11.5px;color:#555}
+
+  @media print{
+    body{background:#fff}
+    .bar,.noprint{display:none!important}
+    .sheet{max-width:none;margin:0;padding:0;box-shadow:none;border-radius:0}
+    .sheet p{text-align:left}
+    .sig{page-break-inside:auto}
+    .sig tr{page-break-inside:avoid}
+    @page{size:A4;margin:16mm 15mm}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar noprint">
+  <div class="bar-in">
+    <h1>Einwilligung für Foto- und Videoaufnahmen</h1>
+    <p>Trage euren Betrieb und die Namen der Personen ein, die auf den Aufnahmen zu sehen sein werden. Danach das Formular ausdrucken, unterschreiben lassen und uns eine Kopie zurückschicken. Das Dokument läuft auf euren Namen – ihr bleibt Verantwortliche für die Einwilligungen.</p>
+    <div class="grid">
+      <div>
+        <label for="betrieb">Betrieb / Firma</label>
+        <input type="text" id="betrieb" placeholder="z.B. Mustermann GmbH" autocomplete="organization">
+      </div>
+      <div>
+        <label for="namen">Namen der abgebildeten Personen</label>
+        <textarea id="namen" placeholder="Ein Name pro Zeile:&#10;Max Mustermann&#10;Erika Musterfrau"></textarea>
+        <div class="hint">Ein Name pro Zeile. Leer lassen für ein Blankoformular.</div>
+      </div>
+    </div>
+    <div class="actions">
+      <button type="button" onclick="druckeFormular()">Drucken / als PDF speichern</button>
+      <button type="button" class="ghost" onclick="leeren()">Zurücksetzen</button>
+      <span class="status" id="status"></span>
+    </div>
+  </div>
+</div>
+
+<div class="sheet" id="sheet">
+  <div class="head">
+    <div class="betrieb" id="outBetrieb">[Betrieb eintragen]</div>
+    <h1>Einwilligung in Foto- und Videoaufnahmen</h1>
+    <p class="sub">Erklärung unserer Mitarbeiterinnen und Mitarbeiter · gemäß § 22 KUG sowie Art. 6 Abs. 1 lit. a, Art. 7 DSGVO</p>
+  </div>
+
+  <table class="fields">
+    <tr><td class="lbl">Ort der Aufnahmen</td><td class="fill"></td></tr>
+    <tr><td class="lbl">Datum der Aufnahmen</td><td class="fill"></td></tr>
+  </table>
+
+  <h2>1. Worum es geht</h2>
+  <p>Wir – <b class="bn">[Betrieb]</b> – lassen in unserem Betrieb professionelle Foto- und Videoaufnahmen anfertigen. Die Aufnahmen zeigen unseren Betrieb, unsere Arbeit und unser Team. Sie werden für unsere Außendarstellung und für unsere Personalgewinnung eingesetzt. Erstellt werden die Aufnahmen von der von uns beauftragten Agentur, der <b>HandwerksManufaktur Ltd.</b> (Georgiou Griva Digeni 51, Athineon Building, 1st floor, 8047 Paphos, Zypern).</p>
+
+  <h2>2. Wofür die Aufnahmen verwendet werden</h2>
+  <p>Mit meiner Unterschrift willige ich ein, dass Aufnahmen, auf denen ich abgebildet bin, angefertigt, gespeichert, bearbeitet und für folgende Zwecke veröffentlicht werden dürfen:</p>
+  <ul>
+    <li>Unsere Website und Karriereseite sowie unsere Social-Media-Kanäle</li>
+    <li>Unsere Werbeanzeigen und Kampagnen (z.&nbsp;B. Meta/Facebook, Instagram, Google), einschließlich Stellenanzeigen und Bewerbungsstrecken</li>
+    <li>Unser Print- und Werbematerial (z.&nbsp;B. Flyer, Broschüren, Fahrzeugbeschriftung, Messeauftritte)</li>
+    <li>Verwendung durch die von uns beauftragte Agentur und deren Dienstleister zur Erstellung, Bearbeitung und Ausspielung dieser Medien sowie zur Darstellung des Projekts als Referenz ihrer Arbeit (z.&nbsp;B. Website, Portfolio, Präsentationen, Social Media)</li>
+  </ul>
+  <p>Eine Bearbeitung der Aufnahmen (z.&nbsp;B. Zuschnitt, Farbkorrektur, Freistellung, Kombination mit Texten und Grafiken) ist zulässig, solange der Aussagegehalt nicht entstellt oder herabsetzend verändert wird.</p>
+
+  <h2>3. Umfang und Vergütung</h2>
+  <p>Die Einwilligung wird zeitlich und räumlich unbeschränkt erteilt und gilt über das Ende meines Beschäftigungsverhältnisses hinaus. Eine Vergütung für die Anfertigung oder Verwendung der Aufnahmen wird nicht gewährt und nicht geschuldet.</p>
+
+  <h2>4. Freiwilligkeit und Widerruf</h2>
+  <p>Die Einwilligung ist freiwillig. Aus einer Verweigerung entstehen mir keine Nachteile im Beschäftigungsverhältnis. Ich kann meine Einwilligung jederzeit ohne Angabe von Gründen in Textform mit Wirkung für die Zukunft widerrufen – gegenüber <b class="bn">[Betrieb]</b>. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt unberührt. Nach einem Widerruf werden die Aufnahmen aus den laufenden Online-Medien entfernt; bereits gedruckte oder ausgelieferte Werbemittel müssen nicht zurückgerufen werden. Auf eine Weiterverbreitung durch Dritte (z.&nbsp;B. Teilen in sozialen Netzwerken) besteht kein Einfluss.</p>
+
+  <h2>5. Datenschutz</h2>
+  <p>Verantwortlich für die Verarbeitung ist <b class="bn">[Betrieb]</b>. Die beauftragte Agentur verarbeitet die Aufnahmen im Rahmen des Auftrags sowie – auf Grundlage dieser Einwilligung – zu eigenen Referenzzwecken. Mir stehen die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Beschwerde bei einer Aufsichtsbehörde zu.</p>
+
+  <h2>Einwilligung der abgebildeten Personen</h2>
+  <p>Bitte pro Person eine Zeile ausfüllen. Bei Minderjährigen zusätzlich Unterschrift eines Erziehungsberechtigten.</p>
+  <table class="sig">
+    <tr><th style="width:36%">Name (Druckbuchstaben)</th><th style="width:17%">Datum</th><th>Unterschrift</th></tr>
+    <tbody id="sigRows"></tbody>
+  </table>
+
+  <div class="foot">Bitte im Betrieb aufbewahren. Eine Kopie (Scan oder Foto) an die beauftragte Agentur: info@die-handwerksmanufaktur.de</div>
+</div>
+
+<script>
+var MIN_ZEILEN = 8;
+
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+function namenListe() {
+  return document.getElementById('namen').value
+    .split('\n').map(function(n){ return n.trim(); }).filter(Boolean);
+}
+
+function render() {
+  var betrieb = document.getElementById('betrieb').value.trim();
+  var anzeige = betrieb || '[Betrieb eintragen]';
+  document.getElementById('outBetrieb').textContent = anzeige;
+  [].forEach.call(document.querySelectorAll('.bn'), function(el){ el.textContent = betrieb || '[Betrieb]'; });
+
+  var namen = namenListe();
+  var rows = '';
+  for (var i = 0; i < Math.max(namen.length, MIN_ZEILEN); i++) {
+    rows += '<tr><td>' + (namen[i] ? esc(namen[i]) : '') + '</td><td></td><td></td></tr>';
+  }
+  document.getElementById('sigRows').innerHTML = rows;
+
+  document.title = betrieb
+    ? 'Einwilligung Fotoaufnahmen – ' + betrieb
+    : 'Einwilligung Foto- und Videoaufnahmen';
+
+  var s = document.getElementById('status');
+  s.textContent = namen.length
+    ? namen.length + (namen.length === 1 ? ' Name' : ' Namen') + ' eingetragen'
+    : '';
+  speichern();
+}
+
+function speichern() {
+  try {
+    localStorage.setItem('hwm-einwilligung', JSON.stringify({
+      betrieb: document.getElementById('betrieb').value,
+      namen: document.getElementById('namen').value
+    }));
+  } catch (e) {}
+}
+
+function laden() {
+  var p = new URLSearchParams(location.search);
+  var betrieb = p.get('betrieb') || '';
+  var namen = (p.get('namen') || '').split('|').filter(Boolean).join('\n');
+  if (!betrieb && !namen) {
+    try {
+      var d = JSON.parse(localStorage.getItem('hwm-einwilligung') || '{}');
+      betrieb = d.betrieb || ''; namen = d.namen || '';
+    } catch (e) {}
+  }
+  document.getElementById('betrieb').value = betrieb;
+  document.getElementById('namen').value = namen;
+}
+
+function druckeFormular() {
+  if (!document.getElementById('betrieb').value.trim()) {
+    alert('Bitte zuerst den Namen eures Betriebs eintragen – das Formular läuft auf euren Namen.');
+    document.getElementById('betrieb').focus();
+    return;
+  }
+  window.print();
+}
+
+function leeren() {
+  document.getElementById('betrieb').value = '';
+  document.getElementById('namen').value = '';
+  render();
+}
+
+document.getElementById('betrieb').addEventListener('input', render);
+document.getElementById('namen').addEventListener('input', render);
+laden();
+render();
+</script>
+</body>
+</html>

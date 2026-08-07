@@ -366,6 +366,17 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-we
             <div id="teamUploadField" style="display:none"><div class="upload-zone" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="handleDrop(event,this,'teamPreview','teamfotos')"><input type="file" accept="image/*,.heic,.heif" multiple onchange="handleFiles(this.files,'teamPreview','teamfotos')"><div class="upload-icon">⬆</div><div class="upload-title"><span>Fotos auswählen</span> oder Ordner reinziehen</div><div class="upload-sub">Mehrere Dateien · beliebig viele</div></div><div class="upload-preview" id="teamPreview"></div></div>
             <div id="teamTerminField" style="display:none"><div class="field"><label>Bis wann können Team-Fotos gemacht werden?</label><input type="text" id="wdTeamTermin" placeholder="z.B. KW 20, spätestens Ende Mai"><div class="hint">Wir starten erst mit dem finalen Design wenn Bildmaterial da ist</div></div></div>
           </div></div></div>
+
+          <div class="divider"></div>
+          <div class="field">
+            <label>Einwilligung der abgebildeten Personen</label>
+            <div class="hint" style="margin-bottom:10px">Sobald Mitarbeiter auf Fotos oder Videos zu sehen sind, brauchen wir von ihnen eine unterschriebene Einwilligung. Trage die Namen ein — wir erzeugen euch daraus das fertige Formular auf euren Briefkopf.</div>
+            <textarea id="wdMitarbeiterNamen" placeholder="Ein Name pro Zeile:&#10;Max Mustermann&#10;Erika Musterfrau" style="min-height:92px"></textarea>
+            <button type="button" class="choice-btn" style="width:auto;margin-top:10px" onclick="oeffneEinwilligung()">📄 Formular öffnen &amp; drucken</button>
+            <div class="hint" style="margin-top:10px">Unterschriebene Formulare könnt ihr hier direkt hochladen — oder später per Mail an info@die-handwerksmanufaktur.de nachreichen.</div>
+            <div class="upload-zone" style="margin-top:8px" ondragover="dragOver(event,this)" ondragleave="dragLeave(this)" ondrop="handleDrop(event,this,'einwPreview','einwilligungen')"><input type="file" accept="image/*,.pdf,.heic,.heif" multiple onchange="handleFiles(this.files,'einwPreview','einwilligungen')"><div class="upload-icon">⬆</div><div class="upload-title"><span>Unterschriebene Einwilligungen</span> hochladen</div><div class="upload-sub">Scan oder Foto · PDF, JPG, PNG</div></div>
+            <div class="upload-preview" id="einwPreview"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -714,6 +725,24 @@ function toggleDsgvo() {
   box.innerHTML = dsgvoChecked ? '<span style="color:#000;font-size:12px;font-weight:700">✓</span>' : '';
 }
 
+// === EINWILLIGUNGS-FORMULAR ===
+function mitarbeiterNamen() {
+  var el = document.getElementById('wdMitarbeiterNamen');
+  if (!el) return [];
+  return el.value.split('\n').map(function(n) { return n.trim(); }).filter(Boolean);
+}
+function oeffneEinwilligung() {
+  var betrieb = (document.getElementById('firmaName').value || '').trim();
+  if (!betrieb) {
+    alert('Bitte trage zuerst im Schritt „Betrieb" euren Firmennamen ein — das Formular läuft auf euren Namen.');
+    return;
+  }
+  var url = '/einwilligung/?betrieb=' + encodeURIComponent(betrieb);
+  var namen = mitarbeiterNamen();
+  if (namen.length) url += '&namen=' + encodeURIComponent(namen.join('|'));
+  window.open(url, '_blank', 'noopener');
+}
+
 // === BILDRECHTE / REFERENZ ===
 let bildrechteChecked = false;
 let bildrechteZeit = '';
@@ -860,6 +889,9 @@ function collectFormData() {
   add('Datenschutzerklärung akzeptiert', dsgvoChecked ? 'Ja' : 'Nein');
   add('Bildrechte & Referenznutzung erklärt (§ 17 AGB)', bildrechteChecked ? 'Ja' : 'Nein');
   add('Mitarbeiter-Einwilligungen zugesichert', bildrechteChecked ? 'Ja' : 'Nein');
+  var mn = mitarbeiterNamen();
+  if (mn.length) add('Abgebildete Personen (Einwilligung)', mn.join(', '));
+  add('Unterschriebene Einwilligungen hochgeladen', (fileStore.einwilligungen && fileStore.einwilligungen.length) ? fileStore.einwilligungen.length + ' Datei(en)' : 'Nein – wird nachgereicht');
   add('Zeitpunkt der Erklärung', bildrechteZeit);
 
   return data;
@@ -949,6 +981,7 @@ async function submitForm() {
     await safeUpload('Logo', fileStore.logo, folderIds.logo);
     await safeUpload('Inhaberfoto', fileStore.inhaberfoto, folderIds.inhaberfoto);
     await safeUpload('Teamfotos', fileStore.teamfotos, folderIds.teamfotos);
+    await safeUpload('Einwilligungen', fileStore.einwilligungen, folderIds.sonstiges);
     for (let i = 0; i < leistungItems.length; i++) {
       await safeUpload(leistungItems[i].name, fileStore[leistungItems[i].key], folderIds['leistung_' + i]);
     }
