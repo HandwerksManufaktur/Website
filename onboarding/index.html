@@ -402,6 +402,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-we
             <div class="dsgvo-check" id="bildrechteBox"></div>
             <div class="dsgvo-text">Ich erkläre für unseren Betrieb: Die HandwerksManufaktur darf die bei uns angefertigten Foto- und Videoaufnahmen sowie unseren Firmennamen und unser Logo als Referenz verwenden (z.B. Website, Portfolio, Social Media). Ich stelle sicher, dass alle abgebildeten Personen – insbesondere unsere Mitarbeiter – vor den Aufnahmen eingewilligt haben, und stelle die HandwerksManufaktur von Ansprüchen Dritter frei. Details siehe <a href="https://die-handwerksmanufaktur.de/agb/" target="_blank">§ 17 AGB</a>. <span style="color:var(--accent)">*</span></div>
           </div>
+          <div style="margin-top:10px;padding:13px 16px;background:rgba(30,154,208,.07);border:1px solid rgba(30,154,208,.28);border-radius:10px;font-size:13.5px;line-height:1.55">
+            <b>📄 Vorlage für euer Team</b><br>
+            Damit ihr die Einwilligungen sauber dokumentiert habt, stellen wir euch eine fertige Vorlage bereit — ausdrucken, beim Fototermin unterschreiben lassen, bei euch aufbewahren.<br>
+            <a href="#" id="einwLink" target="_blank" rel="noopener" style="display:inline-block;margin-top:7px;font-weight:600">→ Einwilligungs-Vorlage öffnen (mit eurem Betriebsnamen)</a>
+          </div>
           <div style="background:var(--accent-dim);border:1px solid rgba(212,134,10,0.18);border-radius:var(--radius);padding:14px 16px;font-size:13px;color:var(--label);line-height:1.6">
             Nach dem Absenden legen wir automatisch deine Google Drive-Ordnerstruktur an – dann geht's los!
           </div>
@@ -469,6 +474,7 @@ function updateMotiv(sid) {
 }
 
 function showStep(idx) {
+  if (typeof updateEinwLink === 'function') updateEinwLink();
   document.querySelectorAll('.step').forEach(function(s) { s.classList.remove('active'); });
   const sid = stepSeq[idx];
   document.getElementById(sid).classList.add('active');
@@ -746,6 +752,12 @@ function oeffneEinwilligung() {
 // === BILDRECHTE / REFERENZ ===
 let bildrechteChecked = false;
 let bildrechteZeit = '';
+function updateEinwLink() {
+  const a = document.getElementById('einwLink');
+  if (!a) return;
+  const fn = (document.getElementById('firmaName') || {}).value || '';
+  a.href = 'https://die-handwerksmanufaktur.de/einwilligung/' + (fn.trim() ? '?betrieb=' + encodeURIComponent(fn.trim()) : '');
+}
 function toggleBildrechte() {
   bildrechteChecked = !bildrechteChecked;
   bildrechteZeit = bildrechteChecked ? new Date().toISOString() : '';
