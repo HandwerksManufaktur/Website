@@ -387,6 +387,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-we
             <div class="dsgvo-check" id="dsgvoBox"></div>
             <div class="dsgvo-text">Ich habe die <a href="https://die-handwerksmanufaktur.de/datenschutz/" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. <span style="color:var(--accent)">*</span></div>
           </div>
+          <div class="dsgvo-box" onclick="toggleBildrechte()" style="margin-top:10px">
+            <div class="dsgvo-check" id="bildrechteBox"></div>
+            <div class="dsgvo-text">Ich erkläre für unseren Betrieb: Die HandwerksManufaktur darf die bei uns angefertigten Foto- und Videoaufnahmen sowie unseren Firmennamen und unser Logo als Referenz verwenden (z.B. Website, Portfolio, Social Media). Ich stelle sicher, dass alle abgebildeten Personen – insbesondere unsere Mitarbeiter – vor den Aufnahmen eingewilligt haben, und stelle die HandwerksManufaktur von Ansprüchen Dritter frei. Details siehe <a href="https://die-handwerksmanufaktur.de/agb/" target="_blank">§ 17 AGB</a>. <span style="color:var(--accent)">*</span></div>
+          </div>
           <div style="background:var(--accent-dim);border:1px solid rgba(212,134,10,0.18);border-radius:var(--radius);padding:14px 16px;font-size:13px;color:var(--label);line-height:1.6">
             Nach dem Absenden legen wir automatisch deine Google Drive-Ordnerstruktur an – dann geht's los!
           </div>
@@ -481,9 +485,24 @@ function goBack() {
 const SAVE_KEY = 'hwm_wd_draft_v2';
 function saveDraft() {
   const d = {};
-  document.querySelectorAll('input[type=text],input[type=email],input[type=tel],input[type=url],textarea,select').forEach(function(el) {
+  document.querySelectorAll('input[type=text],input[type=email],input[type=tel],input[type=url],input[type=time],textarea,select').forEach(function(el) {
     if (el.id) d[el.id] = el.value;
   });
+  // Schalter + Öffnungstage mitsichern — sonst stehen sie nach einem Reload
+  // wieder auf Default und werden als echte Kundenangabe abgeschickt.
+  d.__toggles = {};
+  ['hr-toggle', 'web-toggle', 'team-toggle'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) d.__toggles[id] = el.classList.contains('on');
+  });
+  d.__days = days.map(function(_, i) {
+    const os = document.getElementById('os' + i);
+    return os ? !os.disabled : false;
+  });
+  const jaBtn = document.getElementById('btnTeamJa');
+  const neinBtn = document.getElementById('btnTeamNein');
+  d.__teamChoice = jaBtn && jaBtn.classList.contains('active-yes') ? 'ja'
+    : (neinBtn && neinBtn.classList.contains('active-no') ? 'nein' : '');
   localStorage.setItem(SAVE_KEY, JSON.stringify(d));
 }
 function loadDraft() {
@@ -496,15 +515,40 @@ function loadDraft() {
       const m = id.match(/^lname-(\d+)$/);
       if (m && data[id]) { let guard = 0; while (!document.getElementById(id) && guard++ < 30) addLeistung(); }
     });
+    // Öffnungstage zuerst: schaltet die Zeit-Felder frei, bevor Werte gesetzt werden
+    if (Array.isArray(data.__days)) {
+      data.__days.forEach(function(on, i) {
+        const os = document.getElementById('os' + i);
+        const oe = document.getElementById('oe' + i);
+        const tg = os && os.parentElement ? os.parentElement.querySelector('.day-toggle') : null;
+        if (!os || !oe) return;
+        os.disabled = !on; oe.disabled = !on;
+        if (tg) tg.classList.toggle('on', !!on);
+        if (!on) { os.value = ''; oe.value = ''; }
+      });
+    }
     Object.entries(data).forEach(function([id, val]) {
+      if (id.indexOf('__') === 0) return;
       const el = document.getElementById(id);
       if (el && val) { el.value = val; }
     });
+    if (data.__toggles) {
+      Object.entries(data.__toggles).forEach(function([id, on]) {
+        const el = document.getElementById(id);
+        if (!el || !on || el.classList.contains('on')) return;
+        el.click();
+      });
+    }
+    if (data.__teamChoice) setTeamChoice(data.__teamChoice);
   } catch(e) {}
 }
 function clearDraft() { localStorage.removeItem(SAVE_KEY); }
 document.addEventListener('input', function(e) {
   if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) saveDraft();
+});
+// Schalter (day-toggle, hr/web/team-toggle, Team-Ja/Nein) sind Divs und feuern kein input-Event
+document.addEventListener('click', function(e) {
+  if (e.target.closest('.day-toggle, .toggle, .choice-btn')) setTimeout(saveDraft, 0);
 });
 
 // === FIELD HELPERS ===
@@ -670,6 +714,18 @@ function toggleDsgvo() {
   box.innerHTML = dsgvoChecked ? '<span style="color:#000;font-size:12px;font-weight:700">✓</span>' : '';
 }
 
+// === BILDRECHTE / REFERENZ ===
+let bildrechteChecked = false;
+let bildrechteZeit = '';
+function toggleBildrechte() {
+  bildrechteChecked = !bildrechteChecked;
+  bildrechteZeit = bildrechteChecked ? new Date().toISOString() : '';
+  const box = document.getElementById('bildrechteBox');
+  if (!box) return;
+  box.classList.toggle('on', bildrechteChecked);
+  box.innerHTML = bildrechteChecked ? '<span style="color:#000;font-size:12px;font-weight:700">✓</span>' : '';
+}
+
 // === UPLOAD HELPERS ===
 let steps = [];
 function addStep(label) {
@@ -799,6 +855,13 @@ function collectFormData() {
   add('Konkurrenten mit guter Website', val('wdKonkurrenz'));
   add('Weitere Hinweise', val('wdSonstiges'));
 
+  // ── ERKLÄRUNGEN ──
+  section('ERKLÄRUNGEN');
+  add('Datenschutzerklärung akzeptiert', dsgvoChecked ? 'Ja' : 'Nein');
+  add('Bildrechte & Referenznutzung erklärt (§ 17 AGB)', bildrechteChecked ? 'Ja' : 'Nein');
+  add('Mitarbeiter-Einwilligungen zugesichert', bildrechteChecked ? 'Ja' : 'Nein');
+  add('Zeitpunkt der Erklärung', bildrechteZeit);
+
   return data;
 }
 
@@ -861,6 +924,7 @@ async function submitForm() {
   const firmaName = document.getElementById('firmaName').value.trim();
   if (!firmaName) { alert('Bitte Firmennamen eingeben.'); return; }
   if (!dsgvoChecked) { alert('Bitte stimme zuerst der Datenschutzerklärung zu.'); return; }
+  if (!bildrechteChecked) { alert('Bitte bestätige noch die Erklärung zu Bildrechten und Referenznutzung.'); return; }
   const leistungItems = [...document.querySelectorAll('.leistung-item')].map(function(el) {
     const nameEl = el.querySelector('.leistung-name');
     return { name: (nameEl && nameEl.value ? nameEl.value : '').trim() || 'Leistung', key: el.dataset.uploadKey };
