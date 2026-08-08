@@ -34,13 +34,20 @@ const FIELDS = {
     onboardingDatum:  '84fea7d6-8ee8-4a52-9b83-ff4321b2d3ce',
   },
   // Performance Projekte
+  // Stand 08/2026 gegen die Liste abgeglichen. "verknuepft" und "serviceTyp" gab es
+  // nicht mehr (Rebuild) — die Verknüpfung läuft über die Relationship, die Linie über
+  // das Label "Paket". Tote IDs kosten Zeit: der Create läuft sonst in den Fallback und
+  // setzt jedes Feld einzeln nach.
   pipeline: {
-    verknuepft:      '6763295c-bd89-42e2-b85a-bfeb17d59038',
-    serviceTyp:      '7f3563d3-06d9-4181-ae38-8980d5a018c0',
+    paket:           'e26428d8-6c95-4cb3-ae64-60da41e0e53b',
     eingangsdatum:   '843cfc33-6b8f-42fb-a467-ce1d7873f9fe',
     drive:           'e0f84371-a112-46c0-bd6b-2eb22b60a3b1',
     facebook:        '1a704120-1820-4d05-b2b7-bc6e9944e715',
-    instagram:       '84012652-380b-4496-9aa5-c574c03cdb4c',
+    instagram:       '1608f876-6f0b-49e5-9088-65401c9c86b0',
+    ansprechpartner: 'af58b50f-ccdb-4f17-aef9-3108ed521c42',
+    email:           '7a4de0a6-4919-49f2-a471-45b2f5bcedcd',
+    telefon:         '40d86cc8-bb12-4efe-8ab7-f5dedd4ff352',
+    firmenadresse:   '11ac7353-b083-48df-8a05-39b3a755a8c0',
   },
   // Website Projekte
   webdesign: {
@@ -68,9 +75,10 @@ const OPTS = {
     Recruiting:      'd1924e4f-d3e8-4468-b800-e3aa8a68a2cf',
     Wartungsvertrag: '16a60de6-c2bb-456b-9083-ea96b39daac4',
   },
-  serviceTyp: {
-    Leadgen:    '86442432-86cc-4871-8401-da17850d9aeb',
-    Recruiting: '26b44106-7ff7-45b9-82c9-fce56446d7dd',
+  // Label-Feld "Paket" in Performance Projekte
+  paket: {
+    Leadgen:    '262c19ba-843e-4517-ade5-0191ebfc66cc', // Lead Generation
+    Recruiting: '904ab9a2-b387-45c7-9c8f-094892534ea7',
   },
   projekttyp: {
     Onepager:   '21f42b6d-622e-4d39-95a3-c5e936f74c5d',
@@ -158,17 +166,34 @@ const PIPELINE_CHECKLISTS = [
 // Helpers
 // ============================================================
 
-async function clickup(token, path, method, body) {
+async function clickup(token, path, method, body, versuch = 0) {
   const res = await fetch(CLICKUP_API + path, {
     method,
     headers: { Authorization: token, 'Content-Type': 'application/json' },
     body: body ? JSON.stringify(body) : undefined,
   });
+  // 429 = Rate Limit (ClickUp: 100 Requests/Minute). Kurz warten und erneut versuchen,
+  // sonst gehen bei zwei Projekt-Tasks einzelne Subtasks/Checklist-Items verloren.
+  if (res.status === 429 && versuch < 4) {
+    const wartezeit = Number(res.headers.get('retry-after') || 0) * 1000 || (2 ** versuch) * 1000;
+    await new Promise(r => setTimeout(r, wartezeit));
+    return clickup(token, path, method, body, versuch + 1);
+  }
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`ClickUp ${method} ${path} → ${res.status}: ${text}`);
   }
   return res.json();
+}
+
+// Parallel, aber gedrosselt — volle Parallelität reißt das ClickUp-Rate-Limit,
+// rein sequenziell läuft der Worker in sein Zeitlimit.
+async function mitLimit(items, limit, fn) {
+  const ergebnisse = [];
+  for (let i = 0; i < items.length; i += limit) {
+    ergebnisse.push(...await Promise.all(items.slice(i, i + limit).map(fn)));
+  }
+  return ergebnisse;
 }
 
 // Sucht ein Form-Feld unter mehreren möglichen Keys (Fuzzy-Matching)
@@ -201,6 +226,40 @@ function asUrl(raw) {
 }
 
 // Long-Text-Antworten in eine Description packen
+// Stellen aus den Section-Markern lesen ("── STELLE 1 ──" gefolgt von den Feldern).
+// Bewusst NICHT über feste Feldnamen: Das Formular sendet die Stellen-Felder eingerückt
+// und ohne "Stelle N - "-Präfix ("  Gehaltsspanne brutto"), Mehrfach-Stellen zusätzlich
+// mit "(2)"-Suffix. Über die Sections bleibt das unabhängig von den Feldnamen korrekt.
+function extractStellen(formData) {
+  const stellen = [];
+  let current = null;
+  for (const [rawKey, value] of Object.entries(formData)) {
+    const sec = /^──\s*(.+?)\s*──$/.exec(rawKey);
+    if (sec) {
+      if (current && Object.keys(current).length) stellen.push(current);
+      current = /^STELLE\b/i.test(sec[1]) ? {} : null;
+      continue;
+    }
+    // Bei mehreren Stellen hängt das Formular " (2)", " (3)" … an doppelte Feldnamen
+    // — für die Anzeige wieder abstreifen, sonst heißt es "Stellenbezeichnung (2)".
+    if (current && value) current[rawKey.trim().replace(/\s*\(\d+\)$/, '')] = value;
+  }
+  if (current && Object.keys(current).length) stellen.push(current);
+  return stellen;
+}
+
+function buildStellenText(formData) {
+  const stellen = extractStellen(formData);
+  if (!stellen.length) return '';
+  return stellen.map((felder, i) => {
+    const bez = felder['Stellenbezeichnung'] || `Stelle ${i + 1}`;
+    const zeilen = Object.entries(felder)
+      .filter(([k]) => k !== 'Stellenbezeichnung')
+      .map(([k, v]) => `\n${k}: ${v}`);
+    return `\n\n**🎯 Stelle ${i + 1}: ${bez}**${zeilen.join('')}`;
+  }).join('');
+}
+
 function buildDescription(formData, driveLink) {
   const longTextKeys = [
     'Was macht ihr genau? (2–3 Sätze)',
@@ -212,8 +271,12 @@ function buildDescription(formData, driveLink) {
     'Was macht euch als Arbeitgeber besonders?',
     'Erfolgsziel nach der Laufzeit',
     'Betriebsvorteile',
+    'Einsatzgebiet / Radius',
     'Personen vor der Kamera',
     'Bevorzugtes Datum & Uhrzeit für Videodreh',
+    'Wunschtermin Videodreh',
+    'Abgebildete Personen (Einwilligung)',
+    'Unterschriebene Einwilligungen hochgeladen',
     'Öffnungszeiten',
     'Aktuelle Auslastung Badsanierung / Monat',
     'Aktuelle Auslastung Wärmepumpen / Monat',
@@ -265,16 +328,23 @@ async function createTaskSafe(token, listId, payload) {
 }
 
 // Subtasks (an Noah, teils Due Date = heute) + Checklisten an einen Performance-Projekt-Task hängen
+// Subtasks + Checklisten laufen parallel statt nacheinander: bei zwei Projekt-Tasks
+// (Recruiting + Leadgen) sind das ~52 API-Calls — sequenziell lief der Worker in sein
+// Zeitlimit und der zweite Task wurde nie fertig angelegt.
 async function addPipelineExtras(token, taskId, todayMs) {
-  for (const st of PIPELINE_SUBTASKS) {
-    await clickup(token, `/list/${LISTS.pipeline}/task`, 'POST', {
+  await mitLimit(PIPELINE_SUBTASKS, 4, st =>
+    clickup(token, `/list/${LISTS.pipeline}/task`, 'POST', {
       name: st.name,
       parent: taskId,
       assignees: [NOAH_USER_ID],
       ...(st.dueToday ? { due_date: todayMs, due_date_time: false } : {}),
-    }).catch(e => console.error(`[ClickUp] Subtask "${st.name}" übersprungen:`, e.message));
-  }
-  for (const cl of PIPELINE_CHECKLISTS) {
+    }).catch(e => console.error(`[ClickUp] Subtask "${st.name}" übersprungen:`, e.message))
+  );
+
+  // Checklisten bewusst SEQUENZIELL (Limit 1): parallel angelegte Checklisten kamen
+  // zwar an, ihre Items aber nicht — ClickUp verträgt gleichzeitige Checklist-Writes
+  // auf demselben Task nicht. Nur die Subtasks oben laufen parallel.
+  await mitLimit(PIPELINE_CHECKLISTS, 1, async cl => {
     try {
       const created = await clickup(token, `/task/${taskId}/checklist`, 'POST', { name: cl.name });
       const clId = created.checklist ? created.checklist.id : created.id;
@@ -285,7 +355,7 @@ async function addPipelineExtras(token, taskId, todayMs) {
     } catch (e) {
       console.error(`[ClickUp] Checkliste "${cl.name}" übersprungen:`, e.message);
     }
-  }
+  });
 }
 
 // ============================================================
@@ -390,53 +460,63 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
   // 2b. SHK-FLOW → zusätzlich Task in Performance Projekte
   // ============================================================
   if (isSHK) {
-    const auswahl = (pick(formData, 'Service-Auswahl', 'Recruiting / Neukundengewinnung') || '').toLowerCase();
-    const isRecruiting = auswahl.includes('recruiting');
+    // Gebuchte Leistung(en) — Feldname kommt so aus dem Formular; ältere Namen als Fallback.
+    const auswahl = (pick(formData, 'Gebuchte Leistung(en)', 'Gebuchte Leistungen',
+                          'Service-Auswahl', 'Recruiting / Neukundengewinnung') || '').toLowerCase();
+    const hatRecruiting = /recruiting|mitarbeitergewinnung/.test(auswahl);
+    const hatLeadgen    = /neukundengewinnung|leadgen|lead-gen/.test(auswahl);
+
+    // Pro gebuchter Leistung ein eigener Projekt-Task — so bleibt jede Linie einzeln
+    // trackbar (eine kann auslaufen, während die andere weiterläuft).
+    // Nichts erkannt → Leadgen als Fallback, damit nie ein Kunde ohne Projekt-Task dasteht.
+    const linien = [];
+    if (hatRecruiting) linien.push('Recruiting');
+    if (hatLeadgen || !linien.length) linien.push('Leadgen');
 
     // Offene Stellen gehören in die Description (Infos, keine To-dos — KEINE Subtasks)
-    let stellenText = '';
-    if (isRecruiting) {
-      for (let i = 1; i <= 10; i++) {
-        const stelle = pick(formData, `Stelle ${i} - Stellenbezeichnung`, `Stellenbezeichnung ${i}`, `Stelle ${i}`);
-        if (!stelle) break;
-        const gehalt      = pick(formData, `Stelle ${i} - Gehaltsspanne brutto`, `Stelle ${i} - Gehalt`);
-        const muss        = pick(formData, `Stelle ${i} - Muss-Anforderungen`);
-        const kann        = pick(formData, `Stelle ${i} - Kann-Anforderungen`);
-        const arbeitszeit = pick(formData, `Stelle ${i} - Arbeitszeiten`);
-        stellenText += `\n\n**🎯 Stelle ${i}: ${stelle}**` + [
-          gehalt      && `\nGehalt: ${gehalt}`,
-          muss        && `\nMuss: ${muss}`,
-          kann        && `\nKann: ${kann}`,
-          arbeitszeit && `\nArbeitszeiten: ${arbeitszeit}`,
-        ].filter(Boolean).join('');
-      }
+    const stellenText = buildStellenText(formData);
+
+    // Zuerst ALLE Projekt-Tasks anlegen (wenige Calls) — erst danach die Extras.
+    // So existieren die Tasks auch dann, wenn der Worker beim Nachziehen der
+    // Subtasks/Checklisten abbrechen sollte.
+    const pipelineTaskIds = [];
+    for (const linie of linien) {
+      const isRecruiting = linie === 'Recruiting';
+
+      const ppFields = cleanFields([
+        { id: FIELDS.pipeline.paket,           value: [isRecruiting ? OPTS.paket.Recruiting : OPTS.paket.Leadgen] },
+        { id: FIELDS.pipeline.eingangsdatum,   value: todayMs },
+        { id: FIELDS.pipeline.drive,           value: driveLink },
+        { id: FIELDS.pipeline.facebook,        value: facebook },
+        { id: FIELDS.pipeline.instagram,       value: instagram },
+        { id: FIELDS.pipeline.ansprechpartner, value: ansprechpartner },
+        { id: FIELDS.pipeline.email,           value: email },
+        { id: FIELDS.pipeline.telefon,         value: telefon },
+        { id: FIELDS.pipeline.firmenadresse,   value: firmenadresse },
+      ]);
+
+      const ppTask = await createTaskSafe(token, LISTS.pipeline, {
+        name: `${firmaName} - ${linie}`,
+        status: '🆕 Neuer Kunde',
+        custom_item_id: TASK_TYPE_PROJECT,
+        description: description + (isRecruiting ? stellenText : ''),
+        assignees: [NOAH_USER_ID],
+        custom_fields: ppFields,
+      });
+
+      // Relationship: Performance Projekt ↔ Kundendatenbank
+      await clickup(token, `/task/${ppTask.id}/link/${kdbTask.id}`, 'POST', null).catch(() => {});
+
+      pipelineTaskIds.push(ppTask.id);
     }
 
-    const ppFields = cleanFields([
-      { id: FIELDS.pipeline.verknuepft,    value: firmaName },
-      { id: FIELDS.pipeline.serviceTyp,    value: isRecruiting ? OPTS.serviceTyp.Recruiting : OPTS.serviceTyp.Leadgen },
-      { id: FIELDS.pipeline.eingangsdatum, value: todayMs },
-      { id: FIELDS.pipeline.drive,         value: driveLink },
-      { id: FIELDS.pipeline.facebook,      value: facebook },
-      { id: FIELDS.pipeline.instagram,     value: instagram },
-    ]);
+    // Standard-Subtasks (an Noah, erste 3 mit Due Date = heute) + Checklisten.
+    // Nacheinander pro Task — die Extras selbst sind intern schon gedrosselt parallel.
+    for (const id of pipelineTaskIds) {
+      await addPipelineExtras(token, id, todayMs);
+    }
 
-    const ppTask = await createTaskSafe(token, LISTS.pipeline, {
-      name: `${firmaName} - ${isRecruiting ? 'Recruiting' : 'Leadgen'}`,
-      status: '🆕 Neuer Kunde',
-      custom_item_id: TASK_TYPE_PROJECT,
-      description: description + stellenText,
-      assignees: [NOAH_USER_ID],
-      custom_fields: ppFields,
-    });
-
-    // Relationship: Performance Projekt ↔ Kundendatenbank
-    await clickup(token, `/task/${ppTask.id}/link/${kdbTask.id}`, 'POST', null).catch(() => {});
-
-    // Standard-Subtasks (an Noah, erste 3 mit Due Date = heute) + Checklisten
-    await addPipelineExtras(token, ppTask.id, todayMs);
-
-    return { kdbTaskId: kdbTask.id, pipelineTaskId: ppTask.id };
+    return { kdbTaskId: kdbTask.id, pipelineTaskIds, pipelineTaskId: pipelineTaskIds[0] };
   }
 
   return { kdbTaskId: kdbTask.id };
