@@ -2,6 +2,14 @@ name = "handwerksmanufaktur-onboarding"
 main = "src/index.js"
 compatibility_date = "2025-01-01"
 
+# Self-Service-Binding: der Worker ruft sich selbst auf (/clickup-extras),
+# damit jeder Projekt-Task sein Subtask/Checklisten-Geruest in einer EIGENEN
+# Invocation mit frischem Laufzeitlimit bekommt. Direkte HTTP-Self-Requests
+# auf die eigene workers.dev-URL blockiert Cloudflare — das Binding nicht.
+[[services]]
+binding = "SELF"
+service = "handwerksmanufaktur-onboarding"
+
 # Secrets werden per CLI gesetzt – niemals hier eintragen:
 # wrangler secret put GOOGLE_CLIENT_EMAIL
 # wrangler secret put GOOGLE_PRIVATE_KEY

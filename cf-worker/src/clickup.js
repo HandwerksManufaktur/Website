@@ -347,17 +347,19 @@ async function addPipelineSubtasks(token, taskId, todayMs) {
   );
 }
 
-// Bewusst SEQUENZIELL: parallel angelegte Checklisten kamen zwar an, ihre Items aber
-// nicht — ClickUp verträgt gleichzeitige Checklist-Writes auf demselben Task nicht.
+// Die Checklisten selbst SEQUENZIELL anlegen — parallel angelegte Checklisten kamen
+// zwar an, ihre Items aber nicht (ClickUp verträgt gleichzeitige Checklist-Writes auf
+// demselben Task nicht). Die Items innerhalb einer Checkliste dürfen parallel laufen;
+// eine feste Reihenfolge gibt ClickUp dort ohnehin nicht zurück.
 async function addPipelineChecklisten(token, taskId) {
   for (const cl of PIPELINE_CHECKLISTS) {
     try {
       const created = await clickup(token, `/task/${taskId}/checklist`, 'POST', { name: cl.name });
       const clId = created.checklist ? created.checklist.id : created.id;
-      for (const item of cl.items) {
-        await clickup(token, `/checklist/${clId}/checklist_item`, 'POST', { name: item })
-          .catch(e => console.error(`[ClickUp] Checklist-Item "${item}" übersprungen:`, e.message));
-      }
+      await mitLimit(cl.items, 4, item =>
+        clickup(token, `/checklist/${clId}/checklist_item`, 'POST', { name: item })
+          .catch(e => console.error(`[ClickUp] Checklist-Item "${item}" übersprungen:`, e.message))
+      );
     } catch (e) {
       console.error(`[ClickUp] Checkliste "${cl.name}" übersprungen:`, e.message);
     }
@@ -368,7 +370,7 @@ async function addPipelineChecklisten(token, taskId) {
 // Haupt-Funktion: createClickUpTasks
 // ============================================================
 
-export async function createClickUpTasks({ token, firmaName, serviceType, formData, driveLink, leistungen, selfUrl }) {
+export async function createClickUpTasks({ token, firmaName, serviceType, formData, driveLink, leistungen, selfService }) {
   const isWebdesign = serviceType === 'webdesign';
   const isSHK       = serviceType === 'shk';
 
@@ -519,11 +521,33 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
     // Reihenfolge nach Wichtigkeit: erst bekommen ALLE Tasks ihre Subtasks (die echten
     // Arbeitsschritte), danach die Checklisten (QA-Details). Bei zwei Projekt-Tasks ist
     // die Worker-Laufzeit knapp — so ist im Zweifel das Wichtigere zuerst vollständig.
-    for (const id of pipelineTaskIds) {
-      await addPipelineSubtasks(token, id, todayMs);
-    }
-    for (const id of pipelineTaskIds) {
-      await addPipelineChecklisten(token, id);
+    // Subtask/Checklisten-Gerüst pro Task. Zwei volle Gerüste (~80 API-Calls) sprengen
+    // das Laufzeitlimit EINER Invocation — deshalb ruft sich der Worker pro Task über
+    // das Service Binding selbst auf (/clickup-extras): jede Invocation hat ihr eigenes
+    // frisches Limit. Die Aufrufe laufen parallel und werden abgewartet.
+    if (selfService) {
+      const results = await Promise.all(pipelineTaskIds.map(id =>
+        selfService.fetch('https://self/clickup-extras', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ taskId: id, todayMs }),
+        }).then(r => ({ id, status: r.status }))
+          .catch(e => ({ id, error: e.message }))
+      ));
+      console.log('[ClickUp Extras via SELF]', JSON.stringify(results));
+      // Fallback: Tasks, deren Self-Request nicht mit 200 endete, inline versorgen
+      for (const r of results) {
+        if (r.status !== 200) {
+          console.error('[ClickUp] Self-Extras fehlgeschlagen, mache inline:', JSON.stringify(r));
+          await addPipelineSubtasks(token, r.id, todayMs);
+          await addPipelineChecklisten(token, r.id);
+        }
+      }
+    } else {
+      // Ohne Binding (z.B. lokal): erst alle Subtasks, dann Checklisten — über die
+      // Tasks hinweg parallel; der Checklist-Konflikt trat nur auf DEMSELBEN Task auf.
+      await Promise.all(pipelineTaskIds.map(id => addPipelineSubtasks(token, id, todayMs)));
+      await Promise.all(pipelineTaskIds.map(id => addPipelineChecklisten(token, id)));
     }
 
     return { kdbTaskId: kdbTask.id, pipelineTaskIds, pipelineTaskId: pipelineTaskIds[0] };

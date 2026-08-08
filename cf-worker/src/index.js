@@ -277,7 +277,7 @@ async function handleCreateFolders(request, env, ctx) {
       formData,
       driveLink,
       leistungen,
-      selfUrl: request.url, // für den /clickup-extras-Nachzug bei mehreren Projekt-Tasks
+      selfService: env.SELF, // Service Binding: Extras pro Task in eigener Invocation
     }).then(r => console.log('[ClickUp OK]', JSON.stringify(r)))
       .catch(err => console.error('[ClickUp ERROR]', err.message, err.stack));
     if (ctx && ctx.waitUntil) {
@@ -356,14 +356,14 @@ export default {
       // bei zwei Projekt-Tasks (Recruiting + Leadgen) reichte die Laufzeit eines einzigen
       // Worker-Aufrufs nicht, der zweite Task blieb ohne Subtasks/Checklisten.
       if (p === '/clickup-extras') {
-        const { taskId } = await request.json();
+        const { taskId, todayMs } = await request.json();
         if (!taskId) return jsonResp({ error: 'taskId fehlt' }, 400);
         if (!env.CLICKUP_API_TOKEN) return jsonResp({ error: 'kein Token' }, 500);
-        ctx.waitUntil(
-          addPipelineExtrasForTask(env.CLICKUP_API_TOKEN, taskId, Date.now())
-            .then(() => console.log('[ClickUp Extras OK]', taskId))
-            .catch(e => console.error('[ClickUp Extras ERROR]', taskId, e.message))
-        );
+        // Bewusst SYNCHRON (kein waitUntil): der Aufrufer ist der Worker selbst via
+        // Service Binding und wartet auf das Ergebnis — so ist deterministisch fertig,
+        // was fertig gemeldet wird.
+        await addPipelineExtrasForTask(env.CLICKUP_API_TOKEN, taskId, todayMs || Date.now());
+        console.log('[ClickUp Extras OK]', taskId);
         return jsonResp({ ok: true, taskId });
       }
       if (p === '/start-upload'    || p === '/api/start-upload')    return handleStartUpload(request, env);
