@@ -268,7 +268,7 @@ nav.scrolled{box-shadow:0 1px 24px rgba(60,44,20,.05);}
 #studio{padding:2rem 0 120px;}
 .night{background:var(--night);color:#fff;border-radius:var(--r-lg);padding:76px 64px;position:relative;overflow:hidden;}
 .night::before{content:"";position:absolute;top:-160px;right:-120px;width:560px;height:560px;background:radial-gradient(circle,rgba(200,135,58,.17),transparent 62%);pointer-events:none;}
-.night-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:60px;align-items:center;position:relative;z-index:2;}
+.night-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:60px;align-items:stretch;position:relative;z-index:2;}
 .night h2{font-weight:700;letter-spacing:-.035em;font-size:clamp(30px,3.8vw,48px);line-height:1.06;}
 .night h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:#E0A45C;}
 .night p{color:var(--night-sub);font-size:16px;margin-top:18px;}
@@ -278,8 +278,8 @@ nav.scrolled{box-shadow:0 1px 24px rgba(60,44,20,.05);}
 .founder .n{font-weight:600;font-size:15.5px;color:#fff;}
 .founder .r{font-size:12.5px;color:var(--acc);font-weight:600;margin:1px 0 4px;}
 .founder .q{font-size:13.5px;color:var(--night-sub);font-style:italic;margin:0;}
-.night-vis{position:relative;}
-.night-vis img{border-radius:var(--r-md);}
+.night-vis{position:relative;display:flex;min-height:100%;}
+.night-vis img{border-radius:var(--r-md);width:100%;height:100%;min-height:340px;object-fit:cover;object-position:center 22%;}
 .nstats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;background:var(--night-line);border-radius:var(--r-md);overflow:hidden;position:relative;z-index:2;}
 .nstat{background:var(--night2);padding:28px 24px;text-align:center;}
 .nstat .v{font-weight:800;font-size:clamp(30px,3.4vw,44px);letter-spacing:-.03em;}
@@ -723,7 +723,7 @@ footer{padding:2rem 0 40px;color:var(--sub);}
         <div>
           <div class="eyebrow" style="color:#E0A45C;"><span class="dot"></span>Wer dahinter steht</div>
           <h2 style="margin-top:18px;">Du beherrschst dein Handwerk.<br><em>Wir unseres.</em></h2>
-          <p>Ich bin Noah. Angefangen habe ich vor über sechs Jahren allein – mit Websites für Handwerksbetriebe, sonst nichts. Inzwischen bin ich nicht mehr allein dabei, der Fokus ist derselbe geblieben. Über 120 Betriebe später wissen wir ziemlich genau, was in deiner Branche funktioniert – und was du dir sparen kannst.</p>
+          <p>Ich bin Noah. Seit über sechs Jahren dreht sich bei uns alles um eine Branche: das Handwerk. Über 120 Betriebe später wissen wir ziemlich genau, was funktioniert – und was du dir sparen kannst.</p>
           <p><strong>Wir kennen dein Gewerk, bevor du es erklären musst.</strong> Wir wissen, wonach deine Kunden suchen, warum sie beim Wettbewerber landen – und was es braucht, damit sie bei dir anrufen.</p>
           <div class="founder">
             <img src="/images/foto-noah-portrait-rund.png" alt="Noah Seelau" loading="lazy" width="500" height="500">
