@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HandwerksManufaktur – Studio Preview II</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="preload" href="/fonts/inter-v20-latin_latin-ext-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+/* ═══════ TERAFAB-TOUCH: Vollschwarz, kinoartig, scrollgetrieben ═══════ */
+:root{
+  --bg:#000; --ink:#EDEDEE; --sub:#9A948B; --faint:#5C574F;
+  --line:rgba(255,255,255,.12); --line2:rgba(255,255,255,.07);
+  --acc:#C8873A; --acc-hell:#E0A45C;
+  --f:'Inter',system-ui,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:clip;}
+body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased;}
+img,video{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--acc);color:#000;}
+.wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,44px);}
+section{scroll-margin-top:80px;}
+
+/* Typo — groß, eng, medium */
+h1{font-size:clamp(44px,7vw,92px);font-weight:600;letter-spacing:-.03em;line-height:1.02;}
+h2{font-size:clamp(30px,4.2vw,54px);font-weight:600;letter-spacing:-.025em;line-height:1.06;}
+.statement{font-size:clamp(24px,3.2vw,42px);font-weight:500;letter-spacing:-.02em;line-height:1.25;}
+.sub{color:var(--sub);font-size:clamp(16px,1.6vw,19px);letter-spacing:0;}
+.acc{color:var(--acc-hell);}
+
+/* ═══ Nav: Frost + Scroll-Progress ═══ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;}
+.nav-frost{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);opacity:0;transition:opacity .4s var(--ease);}
+#nav.scrolled .nav-frost{opacity:1;}
+.nav-in{position:relative;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,4vw,44px);}
+.nav-logo img{height:26px!important;width:auto;filter:brightness(0) invert(1);}
+.nav-links{display:flex;align-items:center;gap:26px;}
+.nav-links a{font-size:14px;font-weight:500;color:var(--sub);padding:11px 4px;margin:-11px -4px;transition:color .2s,transform .2s;}
+.nav-links a.hier,.nav-links a:hover{color:var(--ink);}
+.nav-cta{background:#fff;color:#000!important;border-radius:4px;padding:10px 18px!important;margin:0!important;font-weight:600;}
+.nav-cta:active{transform:scale(.97);transition:transform 100ms ease-out;}
+#progress{position:absolute;bottom:0;left:0;height:2px;width:0;background:var(--acc);transition:width .1s linear;}
+@media(max-width:680px){.nav-links a:not(.nav-cta){display:none;}}
+
+/* ═══ Hero: Full-Bleed-Video, Text links, Logo-Reihe unten ═══ */
+#hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;}
+.hero-media{position:absolute;inset:0;}
+.hero-media video{width:100%;height:100%;object-fit:cover;opacity:.55;}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.35) 55%,rgba(0,0,0,.15) 100%),linear-gradient(0deg,#000 0%,transparent 28%);}
+.hero-in{position:relative;z-index:2;width:100%;padding-top:80px;}
+.hero-sub{margin-top:22px;max-width:440px;font-size:clamp(17px,2vw,22px);color:rgba(237,237,238,.85);line-height:1.5;}
+.hero-ctas{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap;}
+.tbtn{display:inline-flex;align-items:center;gap:9px;border-radius:4px;padding:15px 26px;font-size:15.5px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:transform .3s var(--ease),background .25s,opacity .25s;}
+.tbtn:active{transform:scale(.97);transition:transform 100ms ease-out;}
+.tbtn .ch{font-size:13px;opacity:.7;transform:translateY(.5px);}
+.tbtn-w{background:#fff;color:#000;}
+.tbtn-w:hover{background:#E9E7E2;}
+.tbtn-g{background:rgba(255,255,255,.12);color:#fff;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+.tbtn-g:hover{background:rgba(255,255,255,.2);}
+.hero-foot{position:relative;z-index:2;position:absolute;left:0;right:0;bottom:0;}
+.hero-foot .wrap{border-top:1px solid var(--line);padding-top:22px;padding-bottom:26px;display:flex;align-items:center;gap:clamp(24px,4vw,54px);flex-wrap:wrap;}
+.hero-foot img{height:26px;width:auto;max-width:110px;object-fit:contain;opacity:.65;}
+.hero-proof{font-size:13.5px;color:var(--sub);margin-right:auto;}
+.hero-proof b{color:var(--ink);}
+@media(max-width:720px){.hero-foot img:nth-child(n+5){display:none;}}
+
+/* ═══ Statement ═══ */
+.stmt{padding:clamp(6rem,14vh,10rem) 0;}
+.stmt .statement{max-width:880px;}
+.stmt .statement .dim{color:var(--faint);}
+
+/* ═══ Sticky-Sequenz (Kardashev-Prinzip) ═══ */
+#weg{position:relative;}
+.seq{height:340vh;position:relative;}
+.seq-sticky{position:sticky;top:0;height:100svh;overflow:hidden;}
+.seq-media{position:absolute;inset:0;}
+.seq-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s var(--ease);}
+.seq-media img.an{opacity:.42;}
+.seq-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.25) 45%,rgba(0,0,0,.7) 100%);}
+.seq-overlay{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(40px,8vh,90px);}
+.seq-kicker{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--acc-hell);margin-bottom:18px;}
+.seq-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,44px);border-top:1px solid var(--line);padding-top:26px;}
+.seq-step{opacity:.28;transition:opacity .5s var(--ease);}
+.seq-step.an{opacity:1;}
+.seq-step .num{font-size:13px;color:var(--acc-hell);font-weight:600;margin-bottom:8px;display:block;}
+.seq-step h3{font-size:clamp(17px,1.8vw,24px);font-weight:600;letter-spacing:-.015em;margin-bottom:8px;}
+.seq-step p{font-size:14.5px;color:var(--sub);max-width:340px;}
+.seq-bar{height:2px;background:var(--line2);margin-bottom:10px;border-radius:1px;overflow:hidden;}
+.seq-bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .25s linear;}
+.seq-head{margin-bottom:auto;padding-top:110px;}
+@media(max-width:760px){.seq-steps{grid-template-columns:1fr;gap:16px;}.seq-step p{display:none;}.seq-step.an p{display:block;}}
+
+/* ═══ Builders / Beweise ═══ */
+.blk{padding:clamp(5rem,12vh,9rem) 0;}
+.beweise-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(30px,5vw,80px);align-items:start;}
+.beweis-liste{border-top:1px solid var(--line);}
+.beweis{display:flex;gap:18px;align-items:baseline;padding:17px 0;border-bottom:1px solid var(--line2);font-size:clamp(15px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.beweis.da{opacity:1;transform:none;}
+.beweis .pfeil{color:var(--acc);font-size:14px;flex-shrink:0;}
+.beweis span{color:var(--sub);font-weight:400;}
+@media(max-width:860px){.beweise-grid{grid-template-columns:1fr;}}
+
+/* ═══ Riesen-Zahlen ═══ */
+.zahlen{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,4vw,60px);border-top:1px solid var(--line);padding-top:clamp(30px,5vh,54px);}
+.zahl .v{font-size:clamp(44px,6.5vw,96px);font-weight:600;letter-spacing:-.04em;line-height:1;}
+.zahl .v em{font-style:normal;color:var(--acc);}
+.zahl .l{margin-top:10px;color:var(--sub);font-size:clamp(13px,1.4vw,16px);}
+@media(max-width:640px){.zahlen{grid-template-columns:1fr;gap:34px;}}
+
+/* ═══ Video-Szenen (Full-Bleed) ═══ */
+.szene{position:relative;height:clamp(420px,88vh,860px);overflow:hidden;margin:clamp(2rem,5vh,4rem) 0;}
+.szene video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.szene::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85) 0%,transparent 40%),linear-gradient(180deg,rgba(0,0,0,.5) 0%,transparent 25%);}
+.szene-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding-bottom:clamp(26px,5vh,54px);}
+.szene-cap .t{font-size:clamp(20px,2.6vw,34px);font-weight:600;letter-spacing:-.02em;}
+.szene-cap .s{color:var(--sub);font-size:14.5px;margin-top:4px;}
+
+/* ═══ Vergleich (Scale-Prinzip) ═══ */
+.vgl{border-top:1px solid var(--line);padding-top:clamp(30px,5vh,50px);}
+.vgl-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,40px);}
+.vgl-col .lab{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:14px;}
+.vgl-col.gut .lab{color:var(--acc-hell);}
+.vgl-col img{border-radius:6px;border:1px solid var(--line);width:100%;}
+.vgl-col.schlecht img{opacity:.45;filter:grayscale(.6);}
+@media(max-width:700px){.vgl-row{grid-template-columns:1fr;}}
+
+/* ═══ Arbeiten-Grid dunkel ═══ */
+.werke{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:clamp(26px,4vh,44px);}
+.werk{position:relative;border-radius:6px;overflow:hidden;border:1px solid var(--line2);}
+.werk img{width:100%;height:100%;object-fit:cover;object-position:top;aspect-ratio:4/3;transition:transform .5s var(--ease),opacity .4s;opacity:.85;}
+.werk:hover img{transform:scale(1.03);opacity:1;}
+.werk:active{transform:scale(.985);transition:transform 100ms ease-out;}
+.werk .n{position:absolute;left:12px;bottom:10px;z-index:2;font-size:13px;font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.9);}
+.werk::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.65),transparent 45%);}
+@media(max-width:860px){.werke{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:540px){.werke{grid-template-columns:1fr;}}
+
+/* ═══ Stimmen ═══ */
+.stimmen{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:clamp(26px,4vh,44px);}
+.stimme{border:1px solid var(--line2);border-radius:6px;padding:24px;background:rgba(255,255,255,.02);}
+.stimme .sterne{color:var(--acc);letter-spacing:2px;font-size:13px;margin-bottom:12px;}
+.stimme p{font-size:14.5px;color:var(--sub);line-height:1.65;}
+.stimme .wer{margin-top:14px;font-size:13.5px;font-weight:600;color:var(--ink);}
+@media(max-width:860px){.stimmen{grid-template-columns:1fr;}}
+
+/* ═══ Kontakt ═══ */
+#kontakt{padding-bottom:clamp(4rem,8vh,7rem);}
+.k-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,80px);border-top:1px solid var(--line);padding-top:clamp(36px,6vh,60px);}
+.form input,.form textarea{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:4px;padding:13px 15px;color:var(--ink);font:inherit;font-size:15px;margin-bottom:12px;}
+.form input:focus,.form textarea:focus{outline:none;border-color:var(--acc);}
+.form input:not(:placeholder-shown):invalid{border-color:#B0433A;}
+.form textarea{min-height:110px;resize:vertical;}
+.k-info p{color:var(--sub);font-size:15.5px;margin-bottom:16px;max-width:420px;}
+.k-info a.tel{font-size:clamp(22px,2.6vw,30px);font-weight:600;letter-spacing:-.02em;display:inline-block;margin:6px 0 18px;}
+footer{border-top:1px solid var(--line2);padding:30px 0 40px;color:var(--faint);font-size:13px;}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+footer a:hover{color:var(--ink);}
+
+/* Reveals */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.rv.da{opacity:1;transform:none;}
+
+@media(prefers-reduced-transparency:reduce){.nav-frost{background:#000;backdrop-filter:none;-webkit-backdrop-filter:none;}.tbtn-g{background:#1c1c1c;backdrop-filter:none;}}
+@media(prefers-contrast:more){body{color:#fff;}.sub,.seq-step p,.stimme p,.k-info p{color:#C9C4BC;}.nav-frost{background:#000;}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
+  .rv,.beweis{opacity:1!important;transform:none!important;}
+  .seq-media img.an{opacity:.42;}
+  html{scroll-behavior:auto;}
+  video{display:none;}
+  .hero-media,.szene{background:#0d0b08;}
+}
+</style>
+</head>
+<body>
+
+<header id="nav">
+  <div class="nav-frost"></div>
+  <div class="nav-in">
+    <a href="#hero" class="nav-logo"><img src="/images/logo-handwerksmanufaktur.png" alt="HandwerksManufaktur"></a>
+    <div class="nav-links">
+      <a href="#weg">So läuft's</a>
+      <a href="#arbeiten">Arbeiten</a>
+      <a href="#stimmen">Stimmen</a>
+      <a href="#kontakt" class="nav-cta">Projekt anfragen</a>
+    </div>
+  </div>
+  <div id="progress"></div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-media">
+    <video autoplay muted loop playsinline preload="metadata" src="/assets/hero-loop.mp4"></video>
+  </div>
+  <div class="hero-in">
+    <div class="wrap">
+      <h1>Deine nächsten Kunden<br>googeln gerade.</h1>
+      <p class="hero-sub">Finden sie dich – oder deinen Wettbewerber? Wir bauen Handwerksbetrieben Websites, die diese Entscheidung gewinnen.</p>
+      <div class="hero-ctas">
+        <a class="tbtn tbtn-w" href="#kontakt">Kostenloses Erstgespräch <span class="ch">›</span></a>
+        <a class="tbtn tbtn-g" href="#arbeiten">Arbeiten ansehen <span class="ch">›</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <div class="wrap">
+      <div class="hero-proof"><b>★ 5,0</b> auf Google · <b>120+</b> Betriebe · <b>6+</b> Jahre Handwerk</div>
+      <img src="/images/logo-zimmerei-knappich.png" alt="Zimmerei Knappich">
+      <img src="/images/logo-dachbau-kraus-gmbh.png" alt="Dachbau Kraus">
+      <img src="/images/Wohner_Elektrotechnik_Wei%C3%9F_cropped.png" alt="Wohner Elektrotechnik">
+      <img src="/images/logo-zimmerei-koller.png" alt="Zimmerei Koller">
+      <img src="/images/logo-baustoffe-thaining-kirchner.png" alt="Baustoffe Thaining Kirchner">
+      <img src="/images/logo-hawe-engineering.png" alt="HAWE Engineering">
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATEMENT ═══ -->
+<section class="stmt">
+  <div class="wrap">
+    <p class="statement rv">Mundpropaganda hat dich hierher gebracht. <span class="dim">Aber sie entscheidet nicht mehr, wer den nächsten Auftrag bekommt.</span> Google tut es.</p>
+  </div>
+</section>
+
+<!-- ═══ STICKY-SEQUENZ: DER WEG ═══ -->
+<section id="weg">
+  <div class="seq" id="seq">
+    <div class="seq-sticky">
+      <div class="seq-media">
+        <img src="/assets/praxis/zimmerei.jpg" alt="" class="an" data-step="0">
+        <img src="/assets/praxis/metallbau.jpg" alt="" data-step="1">
+        <img src="/assets/praxis/bau.jpg" alt="" data-step="2">
+      </div>
+      <div class="seq-overlay">
+        <div class="wrap seq-head">
+          <div class="seq-kicker">Der Weg zu vollen Büchern</div>
+          <h2>Drei Stufen.<br>Ein Ergebnis: Anfragen.</h2>
+        </div>
+        <div class="wrap">
+          <div class="seq-steps">
+            <div class="seq-step an" data-step="0">
+              <div class="seq-bar"><i></i></div>
+              <span class="num">01</span>
+              <h3>Website, die verkauft</h3>
+              <p>Echte Fotos aus deinem Betrieb, klare Texte, schnelle Technik. Gebaut, um aus Besuchern Anrufe zu machen.</p>
+            </div>
+            <div class="seq-step" data-step="1">
+              <div class="seq-bar"><i></i></div>
+              <span class="num">02</span>
+              <h3>Sichtbar bei Google</h3>
+              <p>Wenn in deiner Region nach deinem Gewerk gesucht wird, stehst du oben – nicht dein Wettbewerber.</p>
+            </div>
+            <div class="seq-step" data-step="2">
+              <div class="seq-bar"><i></i></div>
+              <span class="num">03</span>
+              <h3>Anfragen &amp; Bewerbungen</h3>
+              <p>Kunden rufen an, Fachkräfte bewerben sich. Deine Website arbeitet – auch nachts und am Wochenende.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BEWEISE ═══ -->
+<section class="blk" id="beweise">
+  <div class="wrap">
+    <div class="beweise-grid">
+      <div>
+        <h2 class="rv">Wir müssen nichts versprechen.<br><span class="acc">Wir können zeigen.</span></h2>
+        <p class="sub rv" style="margin-top:18px;max-width:400px;">Echte Suchergebnisse unserer Kunden – zuletzt geprüft am 8.&nbsp;August 2026. Gib die Begriffe selbst bei Google ein. Ergebnisse variieren je nach Standort, Endgerät und Zeitpunkt.</p>
+      </div>
+      <div class="beweis-liste">
+        <div class="beweis"><span class="pfeil">→</span><div>Platz 1 für „zimmerei schongau" <span>· Zimmerei Knappich</span></div></div>
+        <div class="beweis"><span class="pfeil">→</span><div>Platz 1 für „dachbau schwabmünchen" <span>· Dachbau Kraus</span></div></div>
+        <div class="beweis"><span class="pfeil">→</span><div>Platz 1 für „bau landsberg" <span>· Dörfler Bau</span></div></div>
+        <div class="beweis"><span class="pfeil">→</span><div>Platz 1 für „tank demontage landsberg" <span>· Maser Tankschutz</span></div></div>
+        <div class="beweis"><span class="pfeil">→</span><div>Platz 2 für „tiefbau landsberg" <span>· Kirchner Thaining</span></div></div>
+        <div class="beweis"><span class="pfeil">→</span><div>2× Seite 1 für „zimmerei landsberg" <span>· Schneider &amp; Rauschmair</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RIESEN-ZAHLEN ═══ -->
+<section class="blk" style="padding-top:0;">
+  <div class="wrap">
+    <div class="zahlen">
+      <div class="zahl rv"><div class="v" data-count="120">0<em>+</em></div><div class="l">Handwerksbetriebe vertrauen uns ihren Auftritt an</div></div>
+      <div class="zahl rv"><div class="v">5,0<em>★</em></div><div class="l">Google-Bewertung – jede einzelne echt</div></div>
+      <div class="zahl rv"><div class="v">4–6<em> Wo.</em></div><div class="l">vom ersten Gespräch bis zum Launch</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SZENE 1 ═══ -->
+<div class="szene">
+  <video autoplay muted loop playsinline preload="metadata" src="/assets/vids/koller.mp4"></video>
+  <div class="szene-cap"><div class="wrap">
+    <div class="t">Direkt im Betrieb gedreht.</div>
+    <div class="s">Zimmerei Koller · Fotoshooting &amp; Film vor Ort</div>
+  </div></div>
+</div>
+
+<!-- ═══ VERGLEICH ═══ -->
+<section class="blk" id="vergleich">
+  <div class="wrap">
+    <h2 class="rv">Der Unterschied ist<br>kein Detail.</h2>
+    <p class="sub rv" style="margin-top:16px;max-width:480px;">Gleicher Betrieb, gleiche Leistung – nur der Auftritt entscheidet, wen der Kunde anruft.</p>
+    <div class="vgl" style="margin-top:clamp(26px,4vh,44px);">
+      <div class="vgl-row">
+        <div class="vgl-col schlecht rv"><div class="lab">Vorher</div><img src="/assets/work/vorher-1.jpg" alt="Website vorher" loading="lazy"></div>
+        <div class="vgl-col gut rv"><div class="lab">Nachher</div><img src="/assets/work/nachher-1.jpg" alt="Website nachher" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ARBEITEN ═══ -->
+<section class="blk" id="arbeiten" style="padding-top:0;">
+  <div class="wrap">
+    <h2 class="rv">Arbeiten, die arbeiten.</h2>
+    <div class="werke">
+      <a class="werk rv" href="https://wohner-elektrotechnik.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-wohner.jpg" alt="Wohner Elektrotechnik" loading="lazy"><div class="n">Wohner Elektrotechnik</div></a>
+      <a class="werk rv" href="https://zimmerei-knappich.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-2.jpg" alt="Zimmerei Knappich" loading="lazy"><div class="n">Zimmerei Knappich</div></a>
+      <a class="werk rv" href="https://dachbau-kraus.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-3.jpg" alt="Dachbau Kraus" loading="lazy"><div class="n">Dachbau Kraus</div></a>
+      <a class="werk rv" href="https://zimmerei-koller.com" target="_blank" rel="noopener"><img src="/assets/work/nachher-koller.jpg" alt="Zimmerei Koller" loading="lazy"><div class="n">Zimmerei Koller</div></a>
+      <a class="werk rv" href="https://kirchner-thaining.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-4.jpg" alt="Baustoffe Thaining Kirchner" loading="lazy"><div class="n">Baustoffe Thaining Kirchner</div></a>
+      <a class="werk rv" href="#kontakt"><img src="/assets/work/nachher-5.jpg" alt="Weitere Projekte" loading="lazy"><div class="n">Deins könnte hier stehen →</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SZENE 2 ═══ -->
+<div class="szene">
+  <video autoplay muted loop playsinline preload="metadata" src="/assets/vids/kirchner.mp4"></video>
+  <div class="szene-cap"><div class="wrap">
+    <div class="t">50 Jahre Kirchner – festgehalten.</div>
+    <div class="s">Baustoffe Thaining · Jubiläumsfilm</div>
+  </div></div>
+</div>
+
+<!-- ═══ STIMMEN ═══ -->
+<section class="blk" id="stimmen">
+  <div class="wrap">
+    <h2 class="rv">Unsere Kunden<br>erzählen es besser.</h2>
+    <div class="stimmen">
+      <div class="stimme rv"><div class="sterne">★★★★★</div><p>„Von der ersten Beratung bis zur fertigen Website – alles lief professionell, schnell und unkompliziert. Das Ergebnis übertrifft unsere Erwartungen."</p><div class="wer">Zimmerei Knappich</div></div>
+      <div class="stimme rv"><div class="sterne">★★★★★</div><p>„Endlich eine Website, die zu unserem Betrieb passt. Die Fotos vor Ort machen den Unterschied – das sieht man sofort."</p><div class="wer">Dachbau Kraus</div></div>
+      <div class="stimme rv"><div class="sterne">★★★★★</div><p>„Seit dem Relaunch kommen deutlich mehr Anfragen über Google. Genau das, was uns versprochen wurde."</p><div class="wer">Maser Tankschutz</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KONTAKT ═══ -->
+<section class="blk" id="kontakt">
+  <div class="wrap">
+    <h2 class="rv">Der nächste Schritt<br>kostet nichts.</h2>
+    <div class="k-grid" style="margin-top:clamp(26px,4vh,44px);">
+      <div class="k-info rv">
+        <p>15 Minuten, ehrliche Einschätzung, kein Verkaufsdruck. Wir schauen uns deinen aktuellen Auftritt an und sagen dir, was möglich ist – und was du dir sparen kannst.</p>
+        <a class="tel" href="tel:+4981947174990">+49 8194 7174990</a>
+        <p style="font-size:13.5px;">Oder schreib uns – wir melden uns innerhalb von 24 Stunden.</p>
+      </div>
+      <form class="form rv" action="https://api.web3forms.com/submit" method="POST" id="kform">
+        <input type="hidden" name="access_key" value="9a4e6ba4-58e9-4782-8953-e53eed867640">
+        <input type="hidden" name="subject" value="Neue Anfrage über die Website (/neu Konzept II)">
+        <input type="checkbox" name="botcheck" style="display:none">
+        <input type="text" name="Name" placeholder="Name" autocomplete="name" required>
+        <input type="text" name="Betrieb" placeholder="Betrieb" autocomplete="organization" required>
+        <input type="tel" name="Telefon" placeholder="Telefon" autocomplete="tel" required>
+        <textarea name="Nachricht" placeholder="Worum geht's? (optional)"></textarea>
+        <button class="tbtn tbtn-w" type="submit" style="width:100%;justify-content:center;">Anfrage senden <span class="ch">›</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 HandwerksManufaktur Ltd.</div>
+    <div style="display:flex;gap:18px;">
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+      <a href="/agb/">AGB</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav: Frost + Progress
+(function(){
+  var nav=document.getElementById('nav'),bar=document.getElementById('progress');
+  addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',scrollY>40);
+    var h=document.documentElement.scrollHeight-innerHeight;
+    bar.style.width=(h>0?(scrollY/h)*100:0)+'%';
+  },{passive:true});
+})();
+
+// Scroll-Spy
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.nav-links a[href^="#"]:not(.nav-cta)'));
+  var ziele=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  new IntersectionObserver(function(es){es.forEach(function(e){
+    var i=ziele.indexOf(e.target);if(i<0)return;
+    if(e.isIntersecting){links.forEach(function(l){l.classList.remove('hier');});links[i].classList.add('hier');}
+  });},{rootMargin:'-40% 0px -55% 0px'}).observe||null;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var i=ziele.indexOf(e.target);if(i<0)return;
+    if(e.isIntersecting){links.forEach(function(l){l.classList.remove('hier');});links[i].classList.add('hier');}
+  });},{rootMargin:'-40% 0px -55% 0px'});
+  ziele.forEach(function(z){if(z)io.observe(z);});
+})();
+
+// Reveals + Beweise
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('da');io.unobserve(e.target);}
+  });},{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.beweis').forEach(function(el,i){
+    el.style.transitionDelay=(i*70)+'ms';io.observe(el);
+  });
+})();
+
+// Sticky-Sequenz: Schritt aus Scroll-Fortschritt
+(function(){
+  var seq=document.getElementById('seq');if(!seq)return;
+  var bilder=[].slice.call(seq.querySelectorAll('.seq-media img'));
+  var steps=[].slice.call(seq.querySelectorAll('.seq-step'));
+  var aktiv=-1;
+  function tick(){
+    var r=seq.getBoundingClientRect();
+    var gesamt=r.height-innerHeight;
+    var p=Math.min(1,Math.max(0,-r.top/gesamt));
+    var stufe=Math.min(2,Math.floor(p*3));
+    steps.forEach(function(s,i){
+      var von=i/3,bis=(i+1)/3;
+      var teil=Math.min(1,Math.max(0,(p-von)/(bis-von)));
+      s.querySelector('.seq-bar i').style.width=(teil*100)+'%';
+    });
+    if(stufe!==aktiv){
+      aktiv=stufe;
+      bilder.forEach(function(b,i){b.classList.toggle('an',i===stufe);});
+      steps.forEach(function(s,i){s.classList.toggle('an',i===stufe);});
+    }
+  }
+  addEventListener('scroll',tick,{passive:true});tick();
+})();
+
+// Count-up 120+
+(function(){
+  var el=document.querySelector('[data-count]');if(!el)return;
+  var ziel=parseInt(el.dataset.count,10);
+  new IntersectionObserver(function(es,io){
+    if(!es[0].isIntersecting)return;io.disconnect();
+    var t0=null;
+    requestAnimationFrame(function schritt(t){
+      if(!t0)t0=t;
+      var p=Math.min(1,(t-t0)/1200);p=1-Math.pow(1-p,3);
+      el.firstChild.textContent=Math.round(ziel*p);
+      if(p<1)requestAnimationFrame(schritt);
+    });
+  },{threshold:.4}).observe(el);
+})();
+
+// Videos nur abspielen, wenn sichtbar
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;if(e.isIntersecting){v.play&&v.play().catch(function(){});}else{v.pause&&v.pause();}
+  });},{rootMargin:'80px'});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+
+// Formular
+(function(){
+  var f=document.getElementById('kform');if(!f)return;
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var btn=f.querySelector('button');btn.disabled=true;btn.textContent='Wird gesendet …';
+    fetch(f.action,{method:'POST',body:new FormData(f)}).then(function(r){
+      btn.textContent=r.ok?'Danke! Wir melden uns.':'Fehler – bitte ruf kurz an.';
+      if(r.ok)f.reset();
+    }).catch(function(){btn.textContent='Fehler – bitte ruf kurz an.';}).finally(function(){btn.disabled=false;});
+  });
+})();
+</script>
+</body>
+</html>
