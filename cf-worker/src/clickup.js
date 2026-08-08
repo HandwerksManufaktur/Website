@@ -529,7 +529,7 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
       const results = await Promise.all(pipelineTaskIds.map(id =>
         selfService.fetch('https://self/clickup-extras', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'x-internal-auth': token },
           body: JSON.stringify({ taskId: id, todayMs }),
         }).then(r => ({ id, status: r.status }))
           .catch(e => ({ id, error: e.message }))

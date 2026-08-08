@@ -356,9 +356,14 @@ export default {
       // bei zwei Projekt-Tasks (Recruiting + Leadgen) reichte die Laufzeit eines einzigen
       // Worker-Aufrufs nicht, der zweite Task blieb ohne Subtasks/Checklisten.
       if (p === '/clickup-extras') {
+        // Nur der Worker selbst (via Service Binding) darf das aufrufen — der Endpoint
+        // ist sonst öffentlich und würde beliebige Task-IDs mit Gerüsten befüllen.
+        if (!env.CLICKUP_API_TOKEN) return jsonResp({ error: 'kein Token' }, 500);
+        if (request.headers.get('x-internal-auth') !== env.CLICKUP_API_TOKEN) {
+          return new Response('Not found', { status: 404, headers: CORS });
+        }
         const { taskId, todayMs } = await request.json();
         if (!taskId) return jsonResp({ error: 'taskId fehlt' }, 400);
-        if (!env.CLICKUP_API_TOKEN) return jsonResp({ error: 'kein Token' }, 500);
         // Bewusst SYNCHRON (kein waitUntil): der Aufrufer ist der Worker selbst via
         // Service Binding und wartet auf das Ergebnis — so ist deterministisch fertig,
         // was fertig gemeldet wird.
