@@ -108,9 +108,9 @@ h2.d em,.serif-it{font-family:var(--serif);font-style:italic;font-weight:400;let
 .split .word .accent,.split em{font-family:var(--serif);font-style:italic;font-weight:400;}
 
 /* ═══════ NAV ═══════ */
-#nav{position:fixed;top:0;left:0;right:0;z-index:400;display:flex;align-items:center;justify-content:space-between;padding:16px 34px;background:rgba(250,247,241,.6);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border-bottom:none;transition:padding .3s,transform .45s cubic-bezier(.22,1,.36,1),box-shadow .4s;}
+#nav{position:fixed;top:0;left:0;right:0;z-index:400;display:flex;align-items:center;justify-content:space-between;padding:16px 34px;background:rgba(250,247,241,.6);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border-bottom:none;transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s,background .3s;}
 #nav.hide{transform:translateY(-110%);}
-#nav.scrolled{border-bottom-color:var(--line);padding:12px 34px;}
+#nav.scrolled{border-bottom-color:var(--line);}
 .nav-logo img{height:30px!important;width:auto;filter:invert(1) hue-rotate(180deg) brightness(.2);}
 
 /* R12 Material — weiche Scroll-Kante statt Trennlinie; Glas wird bei Scroll dichter */
@@ -120,7 +120,26 @@ nav::after{content:"";position:absolute;left:0;right:0;top:100%;height:22px;poin
 nav.scrolled::after{opacity:1;}
 nav.scrolled{box-shadow:0 1px 24px rgba(60,44,20,.05);}
 .nav-links{display:flex;align-items:center;gap:26px;}
-.nav-links a{font-size:14.5px;font-weight:500;color:var(--sub);transition:color .2s;}
+
+
+/* R16 Wayfinding — die aktuelle Sektion ist in der Nav sichtbar */
+.nav-links a[href^="#"]{position:relative;}
+.nav-links a[href^="#"]::after{content:"";position:absolute;left:4px;right:4px;bottom:4px;height:2px;border-radius:1px;
+  background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease);}
+.nav-links a.hier{color:var(--ink);}
+.nav-links a.hier::after{transform:scaleX(1);}
+
+/* R16 Feedback — Formularfelder melden inline, nicht erst beim Absenden */
+.form-card input:not(:placeholder-shown):invalid{border-color:#C6453C;}
+.form-card input:not(:placeholder-shown):valid{border-color:#7BA05B;}
+.wtog{min-height:44px;}
+@media(max-width:680px){.nav-logo{min-height:44px;display:inline-flex;align-items:center;}}
+/* R10 — Tap-Ziele: mind. 44px Trefferfläche, Hit-Padding um kleine Links */
+.nav-links a{padding:11px 4px;margin:-11px -4px;}
+@media(max-width:680px){
+  .nav-links a,.f-links a,.footer a{min-height:44px;display:inline-flex;align-items:center;}
+}
+.nav-links a{font-size:14.5px;font-weight:500;color:var(--sub);transition:color .2s,transform .2s;}
 .nav-links a:hover{color:var(--ink);}
 .nav-cta{background:var(--ink);color:#fff!important;border-radius:12px;padding:11px 20px;font-weight:600;transition:background .25s;}
 .nav-cta:hover{background:var(--acc);}
@@ -142,7 +161,7 @@ nav.scrolled{box-shadow:0 1px 24px rgba(60,44,20,.05);}
 @keyframes rise{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
 /* Video-Stage: Apple-Scroll-Expand (Clip weitet sich beim Scrollen) */
 .video-stage{position:relative;z-index:2;width:100%;margin:70px auto 0;}
-.vclip{position:relative;height:82vh;min-height:480px;overflow:hidden;clip-path:inset(0 12% round 22px);will-change:clip-path;background:var(--night);}
+.vclip{position:relative;transform-origin:center top;height:82vh;min-height:480px;overflow:hidden;clip-path:inset(0 12% round 22px);will-change:clip-path;background:var(--night);}
 .vclip video{width:100%;height:100%;object-fit:cover;display:block;}
 .vclip-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,8,5,.55) 0%,transparent 40%);}
 .vclip-cap{position:absolute;left:0;right:0;bottom:34px;text-align:center;}
@@ -188,7 +207,7 @@ nav.scrolled{box-shadow:0 1px 24px rgba(60,44,20,.05);}
 .winfo{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;}
 .wname{font-size:16.5px;font-weight:600;letter-spacing:-.015em;}
 .wtag{font-size:13px;color:var(--faint);margin-top:2px;}
-.wtog{font-size:13px;font-weight:600;padding:9px 16px;border-radius:10px;border:1.5px solid var(--line2);background:transparent;color:var(--sub);cursor:pointer;transition:all .25s;}
+.wtog{font-size:13px;font-weight:600;padding:9px 16px;border-radius:10px;border:1.5px solid var(--line2);background:transparent;color:var(--sub);cursor:pointer;transition:background .25s,border-color .25s,color .25s,transform .2s;}
 .wtog:hover,.wtog.on{border-color:var(--acc);color:var(--acc);}
 .work-more{text-align:center;margin-top:44px;}
 .show{display:grid;grid-template-columns:1.3fr 1fr;gap:64px;align-items:center;padding:4.5rem 0;}
@@ -301,7 +320,7 @@ nav.scrolled{box-shadow:0 1px 24px rgba(60,44,20,.05);}
 .fmarq-t{display:flex;gap:18px;padding:0 9px;flex-shrink:0;animation:marq 70s linear infinite;}
 .fmarq:hover .fmarq-t{animation-play-state:paused;}
 .fcard{position:relative;width:250px;height:320px;border-radius:var(--r-md);overflow:hidden;flex-shrink:0;border:1px solid var(--night-line);}
-.fcard img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);}
+.fcard img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease);}
 .fcard:hover img{transform:scale(1.05);}
 .fcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(10,8,5,.66));}
 .fname{position:absolute;left:16px;bottom:13px;z-index:2;font-size:14px;font-weight:600;color:#fff;}
@@ -352,8 +371,10 @@ nav.scrolled{box-shadow:0 1px 24px rgba(60,44,20,.05);}
 .faq-q{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 24px;cursor:pointer;font-size:16px;font-weight:600;letter-spacing:-.015em;}
 .faq-q .pm{width:28px;height:28px;flex-shrink:0;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:400;color:var(--acc-deep);transition:transform .35s var(--ease),background .3s,color .3s;}
 .faq-item.open .faq-q .pm{transform:rotate(45deg);background:var(--acc);color:#fff;}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .5s var(--ease);}
-.faq-a p{padding:0 24px 22px;font-size:14.5px;color:var(--sub);}
+.faq-a{display:grid;grid-template-rows:0fr;overflow:hidden;transition:grid-template-rows .4s var(--ease);}
+.faq-a>*{min-height:0;overflow:hidden;}
+.faq-item.open .faq-a{grid-template-rows:1fr;}
+.faq-inner p{padding:0 24px 22px;font-size:14.5px;color:var(--sub);}
 
 /* ═══════ KONTAKT ═══════ */
 #kontakt{padding:0 0 100px;}
@@ -398,12 +419,12 @@ footer{padding:2rem 0 40px;color:var(--sub);}
 
 
 @media(prefers-reduced-transparency:reduce){
-  nav{background:var(--paper);backdrop-filter:none;-webkit-backdrop-filter:none;}
-  nav::after{display:none;}
+  #nav{background:var(--paper)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;}
+  #nav::after{display:none;}
   .glass,[style*="backdrop-filter"]{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;}
 }
 @media(prefers-contrast:more){
-  nav{background:var(--paper);backdrop-filter:none;border-bottom:1.5px solid var(--ink);}
+  #nav{background:var(--paper)!important;backdrop-filter:none!important;border-bottom:1.5px solid var(--ink);}
   .btn-ghost{border-color:var(--ink);border-width:2px;}
   body{color:#0C0A07;}
   .sec-sub,p{color:#3D372C;}
@@ -412,6 +433,10 @@ footer{padding:2rem 0 40px;color:var(--sub);}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
   .reveal,.stagger,.o1,.o2,.o3,.o4,.o5{opacity:1!important;transform:none!important;}
+  .marq-t,.fmarq-t,.rmarq-t{animation:none!important;transform:none!important;}
+  .vclip{clip-path:none!important;}
+  .kin-row{transform:none!important;}
+  html{scroll-behavior:auto;}
 }
 </style>
 </head>
@@ -654,13 +679,13 @@ footer{padding:2rem 0 40px;color:var(--sub);}
         <div class="eyebrow"><span class="dot"></span>Sichtbarkeit, die man messen kann</div>
         <h2 class="d" style="margin-top:18px;">Frag Google einfach <em>selbst.</em></h2>
       </div>
-      <p class="sec-sub" style="margin-top:0;max-width:360px;">Echte Suchergebnisse unserer Kunden – zuletzt geprüft im Juli 2026. Gib die Begriffe selbst bei Google ein.</p>
+      <p class="sec-sub" style="margin-top:0;max-width:360px;">Echte Suchergebnisse unserer Kunden – zuletzt geprüft am 8. August 2026. Gib die Begriffe selbst bei Google ein. Platzierungen schwanken naturgemäß leicht.</p>
     </div>
     <div class="serp-grid">
       <div class="serp stagger"><div class="serp-badge">Platz 1</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>zimmerei schongau</div><div class="serp-r"><div class="serp-t">Zimmerei Knappich GmbH</div><div class="serp-u">zimmerei-knappich.de</div></div></div>
       <div class="serp stagger"><div class="serp-badge">Platz 1</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>dachbau schwabmünchen</div><div class="serp-r"><div class="serp-t">Dachbau Kraus GmbH – Schwabmünchen</div><div class="serp-u">dachbau-kraus.de</div></div></div>
-      <div class="serp stagger"><div class="serp-badge">Platz 2</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>tiefbau ammersee</div><div class="serp-r"><div class="serp-t">Tiefbau in Landsberg am Lech &amp; am Ammersee</div><div class="serp-u">kirchner-thaining.de</div></div></div>
-      <div class="serp stagger"><div class="serp-badge">Top&nbsp;3</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>bau landsberg</div><div class="serp-r"><div class="serp-t">Dörfler Bau – zuverlässige Bauarbeiten in Landsberg</div><div class="serp-u">doerfler-bau-landsberg.de</div></div></div>
+      <div class="serp stagger"><div class="serp-badge">Platz 2</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>tiefbau landsberg</div><div class="serp-r"><div class="serp-t">Tiefbau in Landsberg am Lech &amp; am Ammersee</div><div class="serp-u">kirchner-thaining.de</div></div></div>
+      <div class="serp stagger"><div class="serp-badge">Platz 1</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>bau landsberg</div><div class="serp-r"><div class="serp-t">Dörfler Bau – zuverlässige Bauarbeiten in Landsberg</div><div class="serp-u">doerfler-bau-landsberg.de</div></div></div>
       <div class="serp serp-double stagger"><div class="serp-badge">2&times; Seite 1</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>zimmerei landsberg</div><div class="serp-r"><div class="serp-t">Zimmerei C&amp;H Schneider GmbH</div><div class="serp-u">schneider-penzing.de</div></div><div class="serp-r"><div class="serp-t">Zimmerei Rauschmair</div><div class="serp-u">zimmerei-rauschmair.de</div></div></div>
       <div class="serp stagger"><div class="serp-badge">Platz 1</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>tank demontage landsberg</div><div class="serp-r"><div class="serp-t">Maser Tankschutz – Spezialist für Öltankdemontagen</div><div class="serp-u">tankschutz-landsberg.de</div></div></div>
     </div>
@@ -698,8 +723,8 @@ footer{padding:2rem 0 40px;color:var(--sub);}
         <div>
           <div class="eyebrow" style="color:#E0A45C;"><span class="dot"></span>Wer dahinter steht</div>
           <h2 style="margin-top:18px;">Du beherrschst dein Handwerk.<br><em>Wir unseres.</em></h2>
-          <p>Ich bin Noah – seit über sechs Jahren baue ich mit meinem Team nur eines: Websites für Handwerksbetriebe. Über 120 Betriebe später weiß ich ziemlich genau, was in deiner Branche funktioniert. Und was du dir sparen kannst.</p>
-          <p><strong>Du sprichst immer direkt mit dem, der deine Website baut.</strong> Vom ersten Gespräch bis zum Launch – und bei jeder Frage danach.</p>
+          <p>Ich bin Noah. Angefangen habe ich vor über sechs Jahren allein – mit Websites für Handwerksbetriebe, sonst nichts. Aus dem Ein-Mann-Betrieb ist inzwischen ein eingespieltes Team geworden, aber der Fokus ist derselbe geblieben. Über 120 Betriebe später wissen wir ziemlich genau, was in deiner Branche funktioniert – und was du dir sparen kannst.</p>
+          <p><strong>Wir kennen dein Gewerk, bevor du es erklären musst.</strong> Wir wissen, wonach deine Kunden suchen, warum sie beim Wettbewerber landen – und was es braucht, damit sie bei dir anrufen.</p>
           <div class="founder">
             <img src="/images/foto-noah-portrait-rund.png" alt="Noah Seelau" loading="lazy" width="500" height="500">
             <div>
@@ -833,12 +858,12 @@ footer{padding:2rem 0 40px;color:var(--sub);}
         <a href="tel:+4981947174990" class="faq-tel">📞 +49 8194 7174990</a>
       </div>
     <div class="faq-list reveal">
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was kostet eine neue Website?<span class="pm">+</span></div><div class="faq-a"><p>Die Kosten hängen vom Umfang ab. Im kostenlosen Erstgespräch bekommst du ein individuelles Angebot – transparent und ohne versteckte Kosten. Wir arbeiten mit Betrieben jeder Größe.</p></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Wie lange dauert die Umsetzung?<span class="pm">+</span></div><div class="faq-a"><p>In der Regel 4–6 Wochen vom ersten Gespräch bis zum Launch. Fotoshooting und drei Entwurfsschleifen sind bereits inklusive.</p></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was muss ich selbst beisteuern?<span class="pm">+</span></div><div class="faq-a"><p>Sehr wenig. Wir kommen für das Fotoshooting zu dir, übernehmen Texterstellung und die komplette technische Umsetzung. Dein Aufwand ist minimal.</p></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Kann ich die Website selbst bearbeiten?<span class="pm">+</span></div><div class="faq-a"><p>Ja – auf Wunsch richten wir ein einfaches CMS ein, mit dem du selbst Bilder und Texte austauschen kannst. Eine ausführliche Anleitung gehört dazu.</p></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Arbeitet ihr nur mit Betrieben aus Bayern?<span class="pm">+</span></div><div class="faq-a"><p>Nein – wir sind deutschlandweit tätig. Das Fotoshooting findet vor Ort statt, alles andere läuft remote und vollständig digital.</p></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was unterscheidet euch von anderen Agenturen?<span class="pm">+</span></div><div class="faq-a"><p>Wir bauen ausschließlich digitale Systeme für Handwerksbetriebe. Dieser Fokus bedeutet: Wir kennen deine Branche, deine Kunden und deine Herausforderungen – und das schlägt sich direkt in den Ergebnissen nieder.</p></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was kostet eine neue Website?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Die Kosten hängen vom Umfang ab. Im kostenlosen Erstgespräch bekommst du ein individuelles Angebot – transparent und ohne versteckte Kosten. Wir arbeiten mit Betrieben jeder Größe.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Wie lange dauert die Umsetzung?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>In der Regel 4–6 Wochen vom ersten Gespräch bis zum Launch. Fotoshooting und drei Entwurfsschleifen sind bereits inklusive.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was muss ich selbst beisteuern?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Sehr wenig. Wir kommen für das Fotoshooting zu dir, übernehmen Texterstellung und die komplette technische Umsetzung. Dein Aufwand ist minimal.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Kann ich die Website selbst bearbeiten?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Ja – auf Wunsch richten wir ein einfaches CMS ein, mit dem du selbst Bilder und Texte austauschen kannst. Eine ausführliche Anleitung gehört dazu.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Arbeitet ihr nur mit Betrieben aus Bayern?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Nein – wir sind deutschlandweit tätig. Das Fotoshooting findet vor Ort statt, alles andere läuft remote und vollständig digital.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was unterscheidet euch von anderen Agenturen?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Wir bauen ausschließlich digitale Systeme für Handwerksbetriebe. Dieser Fokus bedeutet: Wir kennen deine Branche, deine Kunden und deine Herausforderungen – und das schlägt sich direkt in den Ergebnissen nieder.</p></div></div></div>
     </div>
   </div>
   </div>
@@ -1070,8 +1095,8 @@ document.querySelectorAll('.wtog').forEach(function(btn){
 // FAQ
 function faq(el){
   var it=el.parentElement,isOpen=it.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(function(f){f.classList.remove('open');f.querySelector('.faq-a').style.maxHeight='0';});
-  if(!isOpen){it.classList.add('open');var a=it.querySelector('.faq-a');a.style.maxHeight=a.scrollHeight+'px';}
+  document.querySelectorAll('.faq-item.open').forEach(function(f){f.classList.remove('open');});
+  if(!isOpen)it.classList.add('open');
 }
 
 // Form
@@ -1088,6 +1113,20 @@ function faq(el){
         else{btn.textContent='Fehler – erneut versuchen';}
       }).catch(function(){btn.textContent='Fehler – erneut versuchen';});
   });
+})();
+
+// R16 Wayfinding — aktive Sektion in der Nav markieren
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.nav-links a[href^="#"]:not(.nav-cta)'));
+  if(!links.length)return;
+  var ziele=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  var spy=new IntersectionObserver(function(eintraege){
+    eintraege.forEach(function(e){
+      var i=ziele.indexOf(e.target); if(i<0)return;
+      if(e.isIntersecting){links.forEach(function(l){l.classList.remove('hier');});links[i].classList.add('hier');}
+    });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  ziele.forEach(function(z){if(z)spy.observe(z);});
 })();
 </script>
 </body>
