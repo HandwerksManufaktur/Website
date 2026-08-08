@@ -331,7 +331,12 @@ async function createTaskSafe(token, listId, payload) {
 // Subtasks + Checklisten laufen parallel statt nacheinander: bei zwei Projekt-Tasks
 // (Recruiting + Leadgen) sind das ~52 API-Calls — sequenziell lief der Worker in sein
 // Zeitlimit und der zweite Task wurde nie fertig angelegt.
-async function addPipelineExtras(token, taskId, todayMs) {
+export async function addPipelineExtrasForTask(token, taskId, todayMs) {
+  await addPipelineSubtasks(token, taskId, todayMs);
+  await addPipelineChecklisten(token, taskId);
+}
+
+async function addPipelineSubtasks(token, taskId, todayMs) {
   await mitLimit(PIPELINE_SUBTASKS, 4, st =>
     clickup(token, `/list/${LISTS.pipeline}/task`, 'POST', {
       name: st.name,
@@ -340,11 +345,12 @@ async function addPipelineExtras(token, taskId, todayMs) {
       ...(st.dueToday ? { due_date: todayMs, due_date_time: false } : {}),
     }).catch(e => console.error(`[ClickUp] Subtask "${st.name}" übersprungen:`, e.message))
   );
+}
 
-  // Checklisten bewusst SEQUENZIELL (Limit 1): parallel angelegte Checklisten kamen
-  // zwar an, ihre Items aber nicht — ClickUp verträgt gleichzeitige Checklist-Writes
-  // auf demselben Task nicht. Nur die Subtasks oben laufen parallel.
-  await mitLimit(PIPELINE_CHECKLISTS, 1, async cl => {
+// Bewusst SEQUENZIELL: parallel angelegte Checklisten kamen zwar an, ihre Items aber
+// nicht — ClickUp verträgt gleichzeitige Checklist-Writes auf demselben Task nicht.
+async function addPipelineChecklisten(token, taskId) {
+  for (const cl of PIPELINE_CHECKLISTS) {
     try {
       const created = await clickup(token, `/task/${taskId}/checklist`, 'POST', { name: cl.name });
       const clId = created.checklist ? created.checklist.id : created.id;
@@ -355,14 +361,14 @@ async function addPipelineExtras(token, taskId, todayMs) {
     } catch (e) {
       console.error(`[ClickUp] Checkliste "${cl.name}" übersprungen:`, e.message);
     }
-  });
+  }
 }
 
 // ============================================================
 // Haupt-Funktion: createClickUpTasks
 // ============================================================
 
-export async function createClickUpTasks({ token, firmaName, serviceType, formData, driveLink, leistungen }) {
+export async function createClickUpTasks({ token, firmaName, serviceType, formData, driveLink, leistungen, selfUrl }) {
   const isWebdesign = serviceType === 'webdesign';
   const isSHK       = serviceType === 'shk';
 
@@ -510,10 +516,14 @@ export async function createClickUpTasks({ token, firmaName, serviceType, formDa
       pipelineTaskIds.push(ppTask.id);
     }
 
-    // Standard-Subtasks (an Noah, erste 3 mit Due Date = heute) + Checklisten.
-    // Nacheinander pro Task — die Extras selbst sind intern schon gedrosselt parallel.
+    // Reihenfolge nach Wichtigkeit: erst bekommen ALLE Tasks ihre Subtasks (die echten
+    // Arbeitsschritte), danach die Checklisten (QA-Details). Bei zwei Projekt-Tasks ist
+    // die Worker-Laufzeit knapp — so ist im Zweifel das Wichtigere zuerst vollständig.
     for (const id of pipelineTaskIds) {
-      await addPipelineExtras(token, id, todayMs);
+      await addPipelineSubtasks(token, id, todayMs);
+    }
+    for (const id of pipelineTaskIds) {
+      await addPipelineChecklisten(token, id);
     }
 
     return { kdbTaskId: kdbTask.id, pipelineTaskIds, pipelineTaskId: pipelineTaskIds[0] };

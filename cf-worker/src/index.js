@@ -2,7 +2,7 @@
  * Handwerksmanufaktur Onboarding – Cloudflare Worker
  */
 
-import { createClickUpTasks } from './clickup.js';
+import { createClickUpTasks, addPipelineExtrasForTask } from './clickup.js';
 
 const FOLDER_IDS = {
   webdesign: '0AEItEqlPzyB0Uk9PVA',
@@ -277,6 +277,7 @@ async function handleCreateFolders(request, env, ctx) {
       formData,
       driveLink,
       leistungen,
+      selfUrl: request.url, // für den /clickup-extras-Nachzug bei mehreren Projekt-Tasks
     }).then(r => console.log('[ClickUp OK]', JSON.stringify(r)))
       .catch(err => console.error('[ClickUp ERROR]', err.message, err.stack));
     if (ctx && ctx.waitUntil) {
@@ -351,6 +352,20 @@ export default {
     try {
       const p = url.pathname;
       if (p === '/create-folders'  || p === '/api/create-folders')  return handleCreateFolders(request, env, ctx);
+      // Subtasks + Checklisten für EINEN Projekt-Task. Bewusst ein eigener Request:
+      // bei zwei Projekt-Tasks (Recruiting + Leadgen) reichte die Laufzeit eines einzigen
+      // Worker-Aufrufs nicht, der zweite Task blieb ohne Subtasks/Checklisten.
+      if (p === '/clickup-extras') {
+        const { taskId } = await request.json();
+        if (!taskId) return jsonResp({ error: 'taskId fehlt' }, 400);
+        if (!env.CLICKUP_API_TOKEN) return jsonResp({ error: 'kein Token' }, 500);
+        ctx.waitUntil(
+          addPipelineExtrasForTask(env.CLICKUP_API_TOKEN, taskId, Date.now())
+            .then(() => console.log('[ClickUp Extras OK]', taskId))
+            .catch(e => console.error('[ClickUp Extras ERROR]', taskId, e.message))
+        );
+        return jsonResp({ ok: true, taskId });
+      }
       if (p === '/start-upload'    || p === '/api/start-upload')    return handleStartUpload(request, env);
       if (p === '/upload-chunk'    || p === '/api/upload-chunk')    return handleUploadChunk(request, env);
       return new Response('Not found', { status: 404, headers: CORS });
