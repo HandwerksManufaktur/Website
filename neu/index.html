@@ -38,7 +38,7 @@ h2{font-size:clamp(30px,4.2vw,54px);font-weight:600;letter-spacing:-.025em;line-
 .nav-frost{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);opacity:0;transition:opacity .4s var(--ease);}
 #nav.scrolled .nav-frost{opacity:1;}
 .nav-in{position:relative;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,4vw,44px);}
-.nav-logo img{height:26px!important;width:auto;filter:brightness(0) invert(1);}
+.nav-logo img{height:31px!important;width:auto;filter:brightness(0) invert(1);}
 .nav-links{display:flex;align-items:center;gap:26px;}
 .nav-links a{font-size:14px;font-weight:500;color:var(--sub);padding:11px 4px;margin:-11px -4px;transition:color .2s,transform .2s;}
 .nav-links a.hier,.nav-links a:hover{color:var(--ink);}
@@ -62,12 +62,17 @@ h2{font-size:clamp(30px,4.2vw,54px);font-weight:600;letter-spacing:-.025em;line-
 .tbtn-w:hover{background:#E9E7E2;}
 .tbtn-g{background:rgba(255,255,255,.12);color:#fff;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
 .tbtn-g:hover{background:rgba(255,255,255,.2);}
-.hero-foot{position:relative;z-index:2;position:absolute;left:0;right:0;bottom:0;}
-.hero-foot .wrap{border-top:1px solid var(--line);padding-top:22px;padding-bottom:26px;display:flex;align-items:center;gap:clamp(24px,4vw,54px);flex-wrap:wrap;}
-.hero-foot img{height:26px;width:auto;max-width:110px;object-fit:contain;opacity:.65;}
-.hero-proof{font-size:13.5px;color:var(--sub);margin-right:auto;}
+.hero-foot{position:absolute;left:0;right:0;bottom:0;z-index:2;padding-bottom:20px;}
+.hero-foot-line{border-top:1px solid var(--line);padding-top:18px;margin-bottom:16px;}
+.hero-proof{font-size:13.5px;color:var(--sub);}
 .hero-proof b{color:var(--ink);}
-@media(max-width:720px){.hero-foot img:nth-child(n+5){display:none;}}
+.hmarq{display:flex;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);}
+.hmarq+.hmarq{margin-top:16px;}
+.hmarq-t{display:flex;align-items:center;gap:clamp(40px,5vw,72px);padding-right:clamp(40px,5vw,72px);flex-shrink:0;animation:hmq 130s linear infinite;}
+.hmarq.r2 .hmarq-t{animation-duration:160s;animation-direction:reverse;}
+@keyframes hmq{to{transform:translateX(-100%);}}
+.hmarq img{height:20px;width:auto;max-width:96px;object-fit:contain;opacity:.45;}
+
 
 /* ═══ Statement ═══ */
 .stmt{padding:clamp(6rem,14vh,10rem) 0;}
@@ -79,7 +84,7 @@ h2{font-size:clamp(30px,4.2vw,54px);font-weight:600;letter-spacing:-.025em;line-
 .seq{height:340vh;position:relative;}
 .seq-sticky{position:sticky;top:0;height:100svh;overflow:hidden;}
 .seq-media{position:absolute;inset:0;}
-.seq-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s var(--ease);}
+.seq-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;opacity:0;transition:opacity .9s var(--ease);}
 .seq-media img.an{opacity:.42;}
 .seq-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.25) 45%,rgba(0,0,0,.7) 100%);}
 .seq-overlay{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(40px,8vh,90px);}
@@ -173,6 +178,7 @@ footer a:hover{color:var(--ink);}
   .seq-media img.an{opacity:.42;}
   html{scroll-behavior:auto;}
   video{display:none;}
+  .hmarq-t{animation:none!important;}
   .hero-media,.szene{background:#0d0b08;}
 }
 </style>
@@ -209,15 +215,9 @@ footer a:hover{color:var(--ink);}
     </div>
   </div>
   <div class="hero-foot">
-    <div class="wrap">
-      <div class="hero-proof"><b>★ 5,0</b> auf Google · <b>120+</b> Betriebe · <b>6+</b> Jahre Handwerk</div>
-      <img src="/images/logo-zimmerei-knappich.png" alt="Zimmerei Knappich">
-      <img src="/images/logo-dachbau-kraus-gmbh.png" alt="Dachbau Kraus">
-      <img src="/images/Wohner_Elektrotechnik_Wei%C3%9F_cropped.png" alt="Wohner Elektrotechnik">
-      <img src="/images/logo-zimmerei-koller.png" alt="Zimmerei Koller">
-      <img src="/images/logo-baustoffe-thaining-kirchner.png" alt="Baustoffe Thaining Kirchner">
-      <img src="/images/logo-hawe-engineering.png" alt="HAWE Engineering">
-    </div>
+    <div class="wrap"><div class="hero-foot-line"><div class="hero-proof"><b>★ 5,0</b> auf Google · <b>120+</b> Betriebe · <b>6+</b> Jahre Handwerk</div></div></div>
+    <div class="hmarq"><div class="hmarq-t"><img src="/images/logo-alexander-dietmayer.png" alt="" loading="lazy"><img src="/images/logo-barrrierefreier-wohnkomfort.png" alt="" loading="lazy"><img src="/images/logo-drehkranz-josef-schwarz.png" alt="" loading="lazy"><img src="/images/logo-elektro-langmajer.png" alt="" loading="lazy"><img src="/images/logo-franz-gallenberger.png" alt="" loading="lazy"><img src="/images/logo-goldacker.png" alt="" loading="lazy"><img src="/images/logo-hawe-engineering.png" alt="" loading="lazy"><img src="/images/logo-lueders-fliesen.png" alt="" loading="lazy"><img src="/images/logo-maser-tankschutz-logo.png" alt="" loading="lazy"><img src="/images/logo-planung-hindelang.png" alt="" loading="lazy"><img src="/images/logo-schreinerei-rupp.png" alt="" loading="lazy"><img src="/images/logo-steinmetz-janisch.png" alt="" loading="lazy"></div><div class="hmarq-t" aria-hidden="true"><img src="/images/logo-alexander-dietmayer.png" alt="" loading="lazy"><img src="/images/logo-barrrierefreier-wohnkomfort.png" alt="" loading="lazy"><img src="/images/logo-drehkranz-josef-schwarz.png" alt="" loading="lazy"><img src="/images/logo-elektro-langmajer.png" alt="" loading="lazy"><img src="/images/logo-franz-gallenberger.png" alt="" loading="lazy"><img src="/images/logo-goldacker.png" alt="" loading="lazy"><img src="/images/logo-hawe-engineering.png" alt="" loading="lazy"><img src="/images/logo-lueders-fliesen.png" alt="" loading="lazy"><img src="/images/logo-maser-tankschutz-logo.png" alt="" loading="lazy"><img src="/images/logo-planung-hindelang.png" alt="" loading="lazy"><img src="/images/logo-schreinerei-rupp.png" alt="" loading="lazy"><img src="/images/logo-steinmetz-janisch.png" alt="" loading="lazy"></div></div>
+    <div class="hmarq r2"><div class="hmarq-t"><img src="/images/logo-weber-metallbau.png" alt="" loading="lazy"><img src="/images/logo-zimmerei-knappich.png" alt="" loading="lazy"><img src="/images/logo-zimmerei-schuster.png" alt="" loading="lazy"><img src="/images/logo-allplast-laser.png" alt="" loading="lazy"><img src="/images/logo-baugenossenschaft-eichenau.png" alt="" loading="lazy"><img src="/images/logo-cs-metalldesign.png" alt="" loading="lazy"><img src="/images/logo-eckru-cnc.png" alt="" loading="lazy"><img src="/images/logo-esapovic-fensterreinigung.png" alt="" loading="lazy"><img src="/images/logo-franz-musch.png" alt="" loading="lazy"><img src="/images/logo-gutachter-hilbenz.png" alt="" loading="lazy"><img src="/images/logo-hohenester-zimmerei.png" alt="" loading="lazy"><img src="/images/logo-maler-abenthum.png" alt="" loading="lazy"></div><div class="hmarq-t" aria-hidden="true"><img src="/images/logo-weber-metallbau.png" alt="" loading="lazy"><img src="/images/logo-zimmerei-knappich.png" alt="" loading="lazy"><img src="/images/logo-zimmerei-schuster.png" alt="" loading="lazy"><img src="/images/logo-allplast-laser.png" alt="" loading="lazy"><img src="/images/logo-baugenossenschaft-eichenau.png" alt="" loading="lazy"><img src="/images/logo-cs-metalldesign.png" alt="" loading="lazy"><img src="/images/logo-eckru-cnc.png" alt="" loading="lazy"><img src="/images/logo-esapovic-fensterreinigung.png" alt="" loading="lazy"><img src="/images/logo-franz-musch.png" alt="" loading="lazy"><img src="/images/logo-gutachter-hilbenz.png" alt="" loading="lazy"><img src="/images/logo-hohenester-zimmerei.png" alt="" loading="lazy"><img src="/images/logo-maler-abenthum.png" alt="" loading="lazy"></div></div>
   </div>
 </section>
 
@@ -295,7 +295,7 @@ footer a:hover{color:var(--ink);}
     <div class="zahlen">
       <div class="zahl rv"><div class="v" data-count="120">0<em>+</em></div><div class="l">Handwerksbetriebe vertrauen uns ihren Auftritt an</div></div>
       <div class="zahl rv"><div class="v">5,0<em>★</em></div><div class="l">Google-Bewertung – jede einzelne echt</div></div>
-      <div class="zahl rv"><div class="v">4–6<em> Wo.</em></div><div class="l">vom ersten Gespräch bis zum Launch</div></div>
+      <div class="zahl rv"><div class="v">2–3<em> Wo.</em></div><div class="l">vom ersten Gespräch bis zum Launch</div></div>
     </div>
   </div>
 </section>
@@ -309,31 +309,23 @@ footer a:hover{color:var(--ink);}
   </div></div>
 </div>
 
-<!-- ═══ VERGLEICH ═══ -->
-<section class="blk" id="vergleich">
-  <div class="wrap">
-    <h2 class="rv">Der Unterschied ist<br>kein Detail.</h2>
-    <p class="sub rv" style="margin-top:16px;max-width:480px;">Gleicher Betrieb, gleiche Leistung – nur der Auftritt entscheidet, wen der Kunde anruft.</p>
-    <div class="vgl" style="margin-top:clamp(26px,4vh,44px);">
-      <div class="vgl-row">
-        <div class="vgl-col schlecht rv"><div class="lab">Vorher</div><img src="/assets/work/vorher-1.jpg" alt="Website vorher" loading="lazy"></div>
-        <div class="vgl-col gut rv"><div class="lab">Nachher</div><img src="/assets/work/nachher-1.jpg" alt="Website nachher" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══ ARBEITEN ═══ -->
-<section class="blk" id="arbeiten" style="padding-top:0;">
+<section class="blk" id="arbeiten">
   <div class="wrap">
     <h2 class="rv">Arbeiten, die arbeiten.</h2>
     <div class="werke">
-      <a class="werk rv" href="https://wohner-elektrotechnik.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-wohner.jpg" alt="Wohner Elektrotechnik" loading="lazy"><div class="n">Wohner Elektrotechnik</div></a>
-      <a class="werk rv" href="https://zimmerei-knappich.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-2.jpg" alt="Zimmerei Knappich" loading="lazy"><div class="n">Zimmerei Knappich</div></a>
-      <a class="werk rv" href="https://dachbau-kraus.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-3.jpg" alt="Dachbau Kraus" loading="lazy"><div class="n">Dachbau Kraus</div></a>
-      <a class="werk rv" href="https://zimmerei-koller.com" target="_blank" rel="noopener"><img src="/assets/work/nachher-koller.jpg" alt="Zimmerei Koller" loading="lazy"><div class="n">Zimmerei Koller</div></a>
-      <a class="werk rv" href="https://kirchner-thaining.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-4.jpg" alt="Baustoffe Thaining Kirchner" loading="lazy"><div class="n">Baustoffe Thaining Kirchner</div></a>
-      <a class="werk rv" href="#kontakt"><img src="/assets/work/nachher-5.jpg" alt="Weitere Projekte" loading="lazy"><div class="n">Deins könnte hier stehen →</div></a>
+      <a class="werk rv" href="https://wohner-elektrotechnik.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-wohner.jpg" alt="Wohner Elektrotechnik" loading="lazy"><div class="n">Wohner Elektrotechnik ↗</div></a>
+      <a class="werk rv" href="https://zimmerei-koller.com" target="_blank" rel="noopener"><img src="/assets/work/nachher-koller.jpg" alt="Zimmerei Koller" loading="lazy"><div class="n">Zimmerei Koller ↗</div></a>
+      <a class="werk rv" href="https://zimmerei-knappich.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-11.jpg" alt="Zimmerei Knappich" loading="lazy"><div class="n">Zimmerei Knappich ↗</div></a>
+      <a class="werk rv" href="https://dachbau-kraus.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-3.jpg" alt="Dachbau Kraus" loading="lazy"><div class="n">Dachbau Kraus ↗</div></a>
+      <a class="werk rv" href="https://kirchner-thaining.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-5.jpg" alt="Baustoffe Thaining Kirchner" loading="lazy"><div class="n">Baustoffe Thaining Kirchner ↗</div></a>
+      <a class="werk rv" href="https://tankschutz-landsberg.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-14.jpg" alt="Maser Tankschutz" loading="lazy"><div class="n">Maser Tankschutz ↗</div></a>
+      <a class="werk rv" href="https://baureize.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-1.jpg" alt="Baureize" loading="lazy"><div class="n">Baureize ↗</div></a>
+      <a class="werk rv" href="https://cs-metalldesign.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-2.jpg" alt="CS Metalldesign" loading="lazy"><div class="n">CS Metalldesign ↗</div></a>
+      <a class="werk rv" href="https://dinkel-metallbau.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-4.jpg" alt="Dinkel Metallbau" loading="lazy"><div class="n">Dinkel Metallbau ↗</div></a>
+      <a class="werk rv" href="https://planung-hindelang.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-6.jpg" alt="Planung Hindelang" loading="lazy"><div class="n">Planung Hindelang ↗</div></a>
+      <a class="werk rv" href="https://schreinerei-kreitner.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-9.jpg" alt="Schreinerei Kreitner" loading="lazy"><div class="n">Schreinerei Kreitner ↗</div></a>
+      <a class="werk rv" href="https://kuechenhaus-hirschvogel.de" target="_blank" rel="noopener"><img src="/assets/work/nachher-12.jpg" alt="Küchenhaus Hirschvogel" loading="lazy"><div class="n">Küchenhaus Hirschvogel ↗</div></a>
     </div>
   </div>
 </section>
@@ -352,9 +344,12 @@ footer a:hover{color:var(--ink);}
   <div class="wrap">
     <h2 class="rv">Unsere Kunden<br>erzählen es besser.</h2>
     <div class="stimmen">
-      <div class="stimme rv"><div class="sterne">★★★★★</div><p>„Von der ersten Beratung bis zur fertigen Website – alles lief professionell, schnell und unkompliziert. Das Ergebnis übertrifft unsere Erwartungen."</p><div class="wer">Zimmerei Knappich</div></div>
-      <div class="stimme rv"><div class="sterne">★★★★★</div><p>„Endlich eine Website, die zu unserem Betrieb passt. Die Fotos vor Ort machen den Unterschied – das sieht man sofort."</p><div class="wer">Dachbau Kraus</div></div>
-      <div class="stimme rv"><div class="sterne">★★★★★</div><p>„Seit dem Relaunch kommen deutlich mehr Anfragen über Google. Genau das, was uns versprochen wurde."</p><div class="wer">Maser Tankschutz</div></div>
+      <div class="stimme rv"><div class="sterne">★★★★★</div><p>„Noah hat unsere Website erstellt und auch die Bilder hierfür gemacht! Wir sind absolut happy und die Zusammenarbeit war top."</p><div class="wer">Alisa Kirchner · Kirchner GmbH</div></div>
+      <div class="stimme rv"><div class="sterne">★★★★★</div><p>„Klare Empfehlung! Sehr kompetenter und engagierter junger Unternehmer, der sich auf Webseiten für Handwerksbetriebe spezialisiert hat."</p><div class="wer">Christoph Hirschvogel · Küchenhaus Hirschvogel</div></div>
+      <div class="stimme rv"><div class="sterne">★★★★★</div><p>„Noah macht einen super Job, ist sehr verlässlich und meldet sich immer zeitnah zurück. Wir sind mega happy mit unserer Website."</p><div class="wer">Jules Frey · Zimmerei Schneider GmbH</div></div>
+      <div class="stimme rv"><div class="sterne">★★★★★</div><p>„Super Service! Wir sind mit dem Design und mit dem Kundenumgang mehr als zufrieden, unsere Erwartungen wurden übertroffen."</p><div class="wer">Raphael Weiß · Metallbau</div></div>
+      <div class="stimme rv"><div class="sterne">★★★★★</div><p>„Nach einem kurzen Telefonat verlief die Umsetzung reibungslos und zu unserer vollen Zufriedenheit. Auch ohne großes Zutun unsererseits."</p><div class="wer">Hannes Schmidt GmbH · Sanitär–Heizung–Klima</div></div>
+      <div class="stimme rv"><div class="sterne">★★★★★</div><p>„Wir haben eine überraschend hohe Anzahl an Bewerbern erhalten. Für uns ist dieser Weg der Personalsuche zukunftsweisend."</p><div class="wer">Autohaus Ressle</div></div>
     </div>
   </div>
 </section>
