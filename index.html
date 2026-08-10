@@ -444,6 +444,29 @@ footer{padding:2rem 0 40px;color:var(--sub);}
   .kin-row{transform:none!important;}
   html{scroll-behavior:auto;}
 }
+
+/* ═══════ MOBILE-FEINSCHLIFF (08/2026) ═══════ */
+@media(max-width:680px){
+  /* Luft oben & unten reduzieren */
+  #hero{padding:7rem 0 0;}
+  #stimmen{padding:3.5rem 0 60px;}
+  #kontakt{padding:0 0 44px;}
+  .k-card{padding:44px 22px;}
+  /* Bewertungen: statisch stapeln statt Laufband (war abgeschnitten) */
+  .rmarq{display:block;-webkit-mask-image:none;mask-image:none;}
+  .rmarq+.rmarq{display:none;}
+  .rmarq-t{display:block;animation:none!important;padding:0;}
+  .rmarq-t[aria-hidden="true"]{display:none;}
+  .rmarq .rc{width:100%;margin:0 0 12px;}
+  .rmarq-t > .rc:nth-child(n+5){display:none;}
+  /* Porträt: breit statt hoch */
+  .night-vis img{height:auto;min-height:0;aspect-ratio:16/10;object-position:72% 30%;}
+  /* Praxis-Fotos: kleinere Karten, ~2 sichtbar */
+  .fcard{width:172px;height:220px;}
+  .fcard.fsmall{width:160px;height:204px;}
+  .fname{font-size:12px;left:10px;bottom:8px;}
+  .fmarq-t{gap:12px;padding:0 6px;}
+}
 </style>
 </head>
 <body>
@@ -486,7 +509,7 @@ footer{padding:2rem 0 40px;color:var(--sub);}
 <section id="band">
   <div class="wrap">
     <div class="band-card reveal">
-      <div class="band-label">Vom Ein-Mann-Betrieb bis zum Maschinenbauer: <b>120+ Betriebe</b> vertrauen uns ihren Auftritt an</div>
+      <div class="band-label">Vom Ein-Mann-Betrieb bis zum 100-Mann-Betrieb: <b>120+ Betriebe</b> vertrauen uns ihren Auftritt an</div>
       <div class="marq row1">
           <div class="marq-t"><div class="li"><img src="/images/logo-alexander-dietmayer.png" alt="Alexander Dietmayer" loading="lazy" width="913" height="495"></div><div class="li fine"><img src="/images/logo-barrrierefreier-wohnkomfort.png" alt="Barrrierefreier Wohnkomfort" loading="lazy" width="800" height="800"></div><div class="li fine"><img src="/images/logo-drehkranz-josef-schwarz.png" alt="Drehkranz Josef Schwarz" loading="lazy" width="820" height="660"></div><div class="li"><img src="/images/logo-elektro-langmajer.png" alt="Elektro Langmajer" loading="lazy" width="768" height="182"></div><div class="li fine"><img src="/images/logo-franz-gallenberger.png" alt="Franz Gallenberger" loading="lazy" width="2560" height="1778"></div><div class="li"><img src="/images/logo-goldacker.png" alt="Goldacker" loading="lazy" width="1049" height="583"></div><div class="li"><img src="/images/logo-hawe-engineering.png" alt="HaWe Engineering" loading="lazy" width="4865" height="1475"></div><div class="li"><img src="/images/logo-lueders-fliesen.png" alt="Lüders Fliesen" loading="lazy" width="706" height="246"></div><div class="li"><img src="/images/logo-maser-tankschutz-logo.png" alt="Maser Tankschutz" loading="lazy" width="339" height="305"></div><div class="li"><img src="/images/logo-planung-hindelang.png" alt="Planung Hindelang" loading="lazy" width="505" height="326"></div><div class="li"><img src="/images/logo-schreinerei-rupp.png" alt="Schreinerei Rupp" loading="lazy" width="1578" height="711"></div><div class="li"><img src="/images/logo-steinmetz-janisch.png" alt="Steinmetz Janisch" loading="lazy" width="400" height="109"></div><div class="li"><img src="/images/logo-weber-metallbau.png" alt="Weber Metallbau" loading="lazy" width="1184" height="687"></div><div class="li"><img src="/images/logo-zimmerei-knappich.png" alt="Zimmerei Knappich" loading="lazy" width="2227" height="567"></div><div class="li"><img src="/images/logo-zimmerei-schuster.png" alt="Zimmerei Schuster" loading="lazy" width="596" height="278"></div></div>
           <div class="marq-t" aria-hidden="true"><div class="li"><img src="/images/logo-alexander-dietmayer.png" alt="" loading="lazy" width="913" height="495"></div><div class="li fine"><img src="/images/logo-barrrierefreier-wohnkomfort.png" alt="" loading="lazy" width="800" height="800"></div><div class="li fine"><img src="/images/logo-drehkranz-josef-schwarz.png" alt="" loading="lazy" width="820" height="660"></div><div class="li"><img src="/images/logo-elektro-langmajer.png" alt="" loading="lazy" width="768" height="182"></div><div class="li fine"><img src="/images/logo-franz-gallenberger.png" alt="" loading="lazy" width="2560" height="1778"></div><div class="li"><img src="/images/logo-goldacker.png" alt="" loading="lazy" width="1049" height="583"></div><div class="li"><img src="/images/logo-hawe-engineering.png" alt="" loading="lazy" width="4865" height="1475"></div><div class="li"><img src="/images/logo-lueders-fliesen.png" alt="" loading="lazy" width="706" height="246"></div><div class="li"><img src="/images/logo-maser-tankschutz-logo.png" alt="" loading="lazy" width="339" height="305"></div><div class="li"><img src="/images/logo-planung-hindelang.png" alt="" loading="lazy" width="505" height="326"></div><div class="li"><img src="/images/logo-schreinerei-rupp.png" alt="" loading="lazy" width="1578" height="711"></div><div class="li"><img src="/images/logo-steinmetz-janisch.png" alt="" loading="lazy" width="400" height="109"></div><div class="li"><img src="/images/logo-weber-metallbau.png" alt="" loading="lazy" width="1184" height="687"></div><div class="li"><img src="/images/logo-zimmerei-knappich.png" alt="" loading="lazy" width="2227" height="567"></div><div class="li"><img src="/images/logo-zimmerei-schuster.png" alt="" loading="lazy" width="596" height="278"></div></div>

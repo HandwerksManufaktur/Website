@@ -72,6 +72,7 @@ h2{font-size:clamp(30px,4.2vw,54px);font-weight:600;letter-spacing:-.025em;line-
 .hmarq.r2 .hmarq-t{animation-duration:160s;animation-direction:reverse;}
 @keyframes hmq{to{transform:translateX(-100%);}}
 .hmarq img{height:20px;width:auto;max-width:96px;object-fit:contain;opacity:.45;}
+.hmarq img.fine{height:28px;max-width:88px;opacity:.6;}
 
 
 /* ═══ Statement ═══ */
@@ -82,12 +83,12 @@ h2{font-size:clamp(30px,4.2vw,54px);font-weight:600;letter-spacing:-.025em;line-
 /* ═══ Sticky-Sequenz (Kardashev-Prinzip) ═══ */
 #weg{position:relative;}
 .seq{height:340vh;position:relative;}
-.seq-sticky{position:sticky;top:0;height:100svh;overflow:hidden;}
+.seq-sticky{position:sticky;top:0;height:100svh;height:100dvh;overflow:hidden;}
 .seq-media{position:absolute;inset:0;}
 .seq-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;opacity:0;transition:opacity .9s var(--ease);}
 .seq-media img.an{opacity:.42;}
 .seq-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.25) 45%,rgba(0,0,0,.7) 100%);}
-.seq-overlay{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(40px,8vh,90px);}
+.seq-overlay{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:calc(clamp(28px,6vh,90px) + env(safe-area-inset-bottom,0px));}
 .seq-kicker{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--acc-hell);margin-bottom:18px;}
 .seq-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,44px);border-top:1px solid var(--line);padding-top:26px;}
 .seq-step{opacity:.28;transition:opacity .5s var(--ease);}
@@ -170,6 +171,34 @@ footer a:hover{color:var(--ink);}
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
 .rv.da{opacity:1;transform:none;}
 
+
+/* ═══════ MOBILE-FEINSCHLIFF ═══════ */
+@media(max-width:680px){
+  .nav-in{padding:14px 18px;}
+  .nav-cta{padding:10px 16px!important;font-size:13.5px;}
+  .hero-in{padding-top:56px;padding-bottom:190px;}
+  .hero-foot{padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));}
+  .hmarq img{height:17px;}
+  .hmarq img.fine{height:24px;}
+  .hmarq+.hmarq{margin-top:12px;}
+  .blk{padding:3.5rem 0;}
+  .stmt{padding:4rem 0;}
+  .seq{height:300vh;}
+  .seq-head{padding-top:84px;}
+  .szene{height:62vh;margin:1.5rem 0;}
+  /* Referenzen: wischbares Karussell statt langer Stapel, mehr von der Seite sichtbar */
+  .werke{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:24px -20px 0;padding:0 20px 6px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .werke::-webkit-scrollbar{display:none;}
+  .werk{flex:0 0 82%;scroll-snap-align:center;}
+  .werk img{aspect-ratio:3/4;}
+  /* Stimmen: ebenfalls wischen statt stapeln */
+  .stimmen{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:24px -20px 0;padding:0 20px 6px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .stimmen::-webkit-scrollbar{display:none;}
+  .stimme{flex:0 0 84%;scroll-snap-align:center;}
+  .zahl .l{font-size:14px;}
+  #kontakt{padding-bottom:2.5rem;}
+  footer{padding:22px 0 calc(26px + env(safe-area-inset-bottom,0px));}
+}
 @media(prefers-reduced-transparency:reduce){.nav-frost{background:#000;backdrop-filter:none;-webkit-backdrop-filter:none;}.tbtn-g{background:#1c1c1c;backdrop-filter:none;}}
 @media(prefers-contrast:more){body{color:#fff;}.sub,.seq-step p,.stimme p,.k-info p{color:#C9C4BC;}.nav-frost{background:#000;}}
 @media(prefers-reduced-motion:reduce){
@@ -216,8 +245,8 @@ footer a:hover{color:var(--ink);}
   </div>
   <div class="hero-foot">
     <div class="wrap"><div class="hero-foot-line"><div class="hero-proof"><b>★ 5,0</b> auf Google · <b>120+</b> Betriebe · <b>6+</b> Jahre Handwerk</div></div></div>
-    <div class="hmarq"><div class="hmarq-t"><img src="/images/logo-alexander-dietmayer.png" alt="" loading="lazy"><img src="/images/logo-barrrierefreier-wohnkomfort.png" alt="" loading="lazy"><img src="/images/logo-drehkranz-josef-schwarz.png" alt="" loading="lazy"><img src="/images/logo-elektro-langmajer.png" alt="" loading="lazy"><img src="/images/logo-franz-gallenberger.png" alt="" loading="lazy"><img src="/images/logo-goldacker.png" alt="" loading="lazy"><img src="/images/logo-hawe-engineering.png" alt="" loading="lazy"><img src="/images/logo-lueders-fliesen.png" alt="" loading="lazy"><img src="/images/logo-maser-tankschutz-logo.png" alt="" loading="lazy"><img src="/images/logo-planung-hindelang.png" alt="" loading="lazy"><img src="/images/logo-schreinerei-rupp.png" alt="" loading="lazy"><img src="/images/logo-steinmetz-janisch.png" alt="" loading="lazy"></div><div class="hmarq-t" aria-hidden="true"><img src="/images/logo-alexander-dietmayer.png" alt="" loading="lazy"><img src="/images/logo-barrrierefreier-wohnkomfort.png" alt="" loading="lazy"><img src="/images/logo-drehkranz-josef-schwarz.png" alt="" loading="lazy"><img src="/images/logo-elektro-langmajer.png" alt="" loading="lazy"><img src="/images/logo-franz-gallenberger.png" alt="" loading="lazy"><img src="/images/logo-goldacker.png" alt="" loading="lazy"><img src="/images/logo-hawe-engineering.png" alt="" loading="lazy"><img src="/images/logo-lueders-fliesen.png" alt="" loading="lazy"><img src="/images/logo-maser-tankschutz-logo.png" alt="" loading="lazy"><img src="/images/logo-planung-hindelang.png" alt="" loading="lazy"><img src="/images/logo-schreinerei-rupp.png" alt="" loading="lazy"><img src="/images/logo-steinmetz-janisch.png" alt="" loading="lazy"></div></div>
-    <div class="hmarq r2"><div class="hmarq-t"><img src="/images/logo-weber-metallbau.png" alt="" loading="lazy"><img src="/images/logo-zimmerei-knappich.png" alt="" loading="lazy"><img src="/images/logo-zimmerei-schuster.png" alt="" loading="lazy"><img src="/images/logo-allplast-laser.png" alt="" loading="lazy"><img src="/images/logo-baugenossenschaft-eichenau.png" alt="" loading="lazy"><img src="/images/logo-cs-metalldesign.png" alt="" loading="lazy"><img src="/images/logo-eckru-cnc.png" alt="" loading="lazy"><img src="/images/logo-esapovic-fensterreinigung.png" alt="" loading="lazy"><img src="/images/logo-franz-musch.png" alt="" loading="lazy"><img src="/images/logo-gutachter-hilbenz.png" alt="" loading="lazy"><img src="/images/logo-hohenester-zimmerei.png" alt="" loading="lazy"><img src="/images/logo-maler-abenthum.png" alt="" loading="lazy"></div><div class="hmarq-t" aria-hidden="true"><img src="/images/logo-weber-metallbau.png" alt="" loading="lazy"><img src="/images/logo-zimmerei-knappich.png" alt="" loading="lazy"><img src="/images/logo-zimmerei-schuster.png" alt="" loading="lazy"><img src="/images/logo-allplast-laser.png" alt="" loading="lazy"><img src="/images/logo-baugenossenschaft-eichenau.png" alt="" loading="lazy"><img src="/images/logo-cs-metalldesign.png" alt="" loading="lazy"><img src="/images/logo-eckru-cnc.png" alt="" loading="lazy"><img src="/images/logo-esapovic-fensterreinigung.png" alt="" loading="lazy"><img src="/images/logo-franz-musch.png" alt="" loading="lazy"><img src="/images/logo-gutachter-hilbenz.png" alt="" loading="lazy"><img src="/images/logo-hohenester-zimmerei.png" alt="" loading="lazy"><img src="/images/logo-maler-abenthum.png" alt="" loading="lazy"></div></div>
+    <div class="hmarq"><div class="hmarq-t"><img src="/images/logo-alexander-dietmayer.png" alt="" loading="lazy"><img class="fine" src="/images/logo-barrrierefreier-wohnkomfort.png" alt="" loading="lazy"><img class="fine" src="/images/logo-drehkranz-josef-schwarz.png" alt="" loading="lazy"><img src="/images/logo-elektro-langmajer.png" alt="" loading="lazy"><img class="fine" src="/images/logo-franz-gallenberger.png" alt="" loading="lazy"><img src="/images/logo-goldacker.png" alt="" loading="lazy"><img src="/images/logo-hawe-engineering.png" alt="" loading="lazy"><img src="/images/logo-lueders-fliesen.png" alt="" loading="lazy"><img src="/images/logo-maser-tankschutz-logo.png" alt="" loading="lazy"><img src="/images/logo-planung-hindelang.png" alt="" loading="lazy"><img src="/images/logo-schreinerei-rupp.png" alt="" loading="lazy"><img src="/images/logo-steinmetz-janisch.png" alt="" loading="lazy"></div><div class="hmarq-t" aria-hidden="true"><img src="/images/logo-alexander-dietmayer.png" alt="" loading="lazy"><img class="fine" src="/images/logo-barrrierefreier-wohnkomfort.png" alt="" loading="lazy"><img class="fine" src="/images/logo-drehkranz-josef-schwarz.png" alt="" loading="lazy"><img src="/images/logo-elektro-langmajer.png" alt="" loading="lazy"><img class="fine" src="/images/logo-franz-gallenberger.png" alt="" loading="lazy"><img src="/images/logo-goldacker.png" alt="" loading="lazy"><img src="/images/logo-hawe-engineering.png" alt="" loading="lazy"><img src="/images/logo-lueders-fliesen.png" alt="" loading="lazy"><img src="/images/logo-maser-tankschutz-logo.png" alt="" loading="lazy"><img src="/images/logo-planung-hindelang.png" alt="" loading="lazy"><img src="/images/logo-schreinerei-rupp.png" alt="" loading="lazy"><img src="/images/logo-steinmetz-janisch.png" alt="" loading="lazy"></div></div>
+    <div class="hmarq r2"><div class="hmarq-t"><img src="/images/logo-weber-metallbau.png" alt="" loading="lazy"><img src="/images/logo-zimmerei-knappich.png" alt="" loading="lazy"><img src="/images/logo-zimmerei-schuster.png" alt="" loading="lazy"><img class="fine" src="/images/logo-allplast-laser.png" alt="" loading="lazy"><img src="/images/logo-baugenossenschaft-eichenau.png" alt="" loading="lazy"><img class="fine" src="/images/logo-cs-metalldesign.png" alt="" loading="lazy"><img class="fine" src="/images/logo-eckru-cnc.png" alt="" loading="lazy"><img src="/images/logo-esapovic-fensterreinigung.png" alt="" loading="lazy"><img src="/images/logo-franz-musch.png" alt="" loading="lazy"><img src="/images/logo-gutachter-hilbenz.png" alt="" loading="lazy"><img src="/images/logo-hohenester-zimmerei.png" alt="" loading="lazy"><img src="/images/logo-maler-abenthum.png" alt="" loading="lazy"></div><div class="hmarq-t" aria-hidden="true"><img src="/images/logo-weber-metallbau.png" alt="" loading="lazy"><img src="/images/logo-zimmerei-knappich.png" alt="" loading="lazy"><img src="/images/logo-zimmerei-schuster.png" alt="" loading="lazy"><img class="fine" src="/images/logo-allplast-laser.png" alt="" loading="lazy"><img src="/images/logo-baugenossenschaft-eichenau.png" alt="" loading="lazy"><img class="fine" src="/images/logo-cs-metalldesign.png" alt="" loading="lazy"><img class="fine" src="/images/logo-eckru-cnc.png" alt="" loading="lazy"><img src="/images/logo-esapovic-fensterreinigung.png" alt="" loading="lazy"><img src="/images/logo-franz-musch.png" alt="" loading="lazy"><img src="/images/logo-gutachter-hilbenz.png" alt="" loading="lazy"><img src="/images/logo-hohenester-zimmerei.png" alt="" loading="lazy"><img src="/images/logo-maler-abenthum.png" alt="" loading="lazy"></div></div>
   </div>
 </section>
 
