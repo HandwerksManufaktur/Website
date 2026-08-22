@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Webdesign für Handwerksbetriebe – Websites, die Aufträge bringen | HandwerksManufaktur</title>
-<meta name="description" content="Websites für Handwerksbetriebe: professionell gebaut, bei Google sichtbar, mit echten Fotos aus deinem Betrieb. Über 120 Betriebe betreut, 5,0 auf Google, Launch in 2–3 Wochen.">
+<meta name="description" content="Websites für Handwerksbetriebe: professionell gebaut, bei Google sichtbar, mit Fotos aus deinem Betrieb. Über 120 Betriebe betreut, 5,0 auf Google, Launch in 2–3 Wochen.">
 <link rel="canonical" href="https://die-handwerksmanufaktur.de/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta property="og:type" content="website">
@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="HandwerksManufaktur">
 <meta property="og:url" content="https://die-handwerksmanufaktur.de/">
 <meta property="og:title" content="Webdesign für Handwerksbetriebe – Websites, die Aufträge bringen">
-<meta property="og:description" content="Websites für Handwerksbetriebe: professionell gebaut, bei Google sichtbar, mit echten Fotos aus deinem Betrieb. Über 120 Betriebe betreut, 5,0 auf Google.">
+<meta property="og:description" content="Websites für Handwerksbetriebe: professionell gebaut, bei Google sichtbar, mit Fotos aus deinem Betrieb. Über 120 Betriebe betreut, 5,0 auf Google.">
 <meta property="og:image" content="https://die-handwerksmanufaktur.de/images/foto-kirchner.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
@@ -37,7 +37,7 @@
 {"@type":"Offer","itemOffered":{"@type":"Service","name":"SEO & Google-Sichtbarkeit","description":"Suchmaschinenoptimierung, damit Handwerksbetriebe in ihrer Region bei Google gefunden werden."}},
 {"@type":"Offer","itemOffered":{"@type":"Service","name":"Conversion-Optimierung","description":"Struktur, Texte und Ladezeiten, die aus Besuchern Anfragen machen."}},
 {"@type":"Offer","itemOffered":{"@type":"Service","name":"Karriereseite & Recruiting","description":"Karriereseiten und Recruiting-Kampagnen, die Fachkräfte für Handwerksbetriebe erreichen."}},
-{"@type":"Offer","itemOffered":{"@type":"Service","name":"Fotografie im Betrieb","description":"Fotoshooting vor Ort: echte Bilder von Team, Projekten und Arbeitsalltag."}}]}},
+{"@type":"Offer","itemOffered":{"@type":"Service","name":"Fotografie im Betrieb","description":"Fotoshooting vor Ort: Bilder von Team, Projekten und Arbeitsalltag."}}]}},
 {"@type":"WebSite","@id":"https://die-handwerksmanufaktur.de/#website","url":"https://die-handwerksmanufaktur.de/","name":"HandwerksManufaktur","inLanguage":"de-DE","publisher":{"@id":"https://die-handwerksmanufaktur.de/#organization"}},
 {"@type":"WebPage","@id":"https://die-handwerksmanufaktur.de/#webpage","url":"https://die-handwerksmanufaktur.de/","name":"Webdesign für Handwerksbetriebe – Websites, die Aufträge bringen","isPartOf":{"@id":"https://die-handwerksmanufaktur.de/#website"},"about":{"@id":"https://die-handwerksmanufaktur.de/#organization"},"inLanguage":"de-DE"}
 ]}
@@ -133,7 +133,7 @@ nav.scrolled{box-shadow:0 1px 24px rgba(60,44,20,.05);}
 .form-card input:not(:placeholder-shown):invalid{border-color:#C6453C;}
 .form-card input:not(:placeholder-shown):valid{border-color:#7BA05B;}
 .wtog{min-height:44px;}
-@media(max-width:680px){.nav-logo{min-height:44px;display:inline-flex;align-items:center;}}
+@media(max-width:1024px){.nav-logo{min-height:44px;display:inline-flex;align-items:center;}}
 /* R10 — Tap-Ziele: mind. 44px Trefferfläche, Hit-Padding um kleine Links */
 .nav-links a{padding:11px 4px;margin:-11px -4px;}
 @media(max-width:680px){
@@ -143,7 +143,11 @@ nav.scrolled{box-shadow:0 1px 24px rgba(60,44,20,.05);}
 .nav-links a:hover{color:var(--ink);}
 .nav-cta{background:var(--ink);color:#fff!important;border-radius:999px;padding:11px 20px;font-weight:600;transition:background .25s;}
 .nav-cta:hover{background:var(--acc);}
-@media(max-width:680px){.nav-links a:not(.nav-cta){display:none;}}
+/* 1100–860px: Menü ausdünnen, statt es zu quetschen */
+@media(max-width:1100px){.nav-links{gap:20px;}.nav-links a[href="#seo"],.nav-links a[href="#ablauf"]{display:none;}}
+@media(max-width:960px){.nav-links{gap:16px;}.nav-links a{font-size:13.5px;}}
+/* ab 860px: Burger — darunter passt keine Leiste mehr ohne Gedränge */
+@media(max-width:860px){.nav-links a:not(.nav-cta){display:none;}}
 
 /* ═══════ HERO ═══════ */
 #hero{padding:10.5rem 0 0;text-align:center;position:relative;}
@@ -153,6 +157,7 @@ nav.scrolled{box-shadow:0 1px 24px rgba(60,44,20,.05);}
 #hero h1 .accent{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--acc);}
 .hero-sub{max-width:620px;margin:28px auto 0;font-size:19px;color:var(--sub);}
 .hero-ctas{display:flex;gap:12px;justify-content:center;margin-top:34px;flex-wrap:wrap;}
+.nur-schmal{display:none;}
 .hero-proof{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:26px;font-size:14.5px;color:var(--sub);flex-wrap:wrap;}
 .hero-proof .stars{color:#F5A623;letter-spacing:1px;}
 .hero-proof b{color:var(--ink);font-weight:600;}
@@ -224,7 +229,10 @@ nav.scrolled{box-shadow:0 1px 24px rgba(60,44,20,.05);}
   99%,100%{object-position:center 2%;}
 }
 .winfo{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;}
-.wname{font-size:16.5px;font-weight:600;letter-spacing:-.015em;}
+.wname{font-size:16.5px;font-weight:600;letter-spacing:-.015em;color:var(--ink);display:inline-flex;align-items:center;gap:6px;min-height:44px;}
+a.wname .wpfeil{color:var(--sub);font-weight:500;transition:color .2s,transform .2s;}
+a.wname:hover{color:var(--acc-deep);}
+a.wname:hover .wpfeil{color:var(--acc-deep);transform:translate(2px,-2px);}
 .wtag{font-size:13px;color:var(--faint);margin-top:2px;}
 .wtog{font-size:13px;font-weight:600;padding:9px 16px;border-radius:10px;border:1.5px solid var(--line2);background:transparent;color:var(--sub);cursor:pointer;transition:background .25s,border-color .25s,color .25s,transform .2s;}
 .wtog:hover,.wtog.on{border-color:var(--acc);color:var(--acc);}
@@ -488,19 +496,31 @@ footer{padding:2rem 0 40px;color:var(--sub);}
   transition:transform .3s var(--ease),opacity .2s;}
 .nav-burger[aria-expanded="true"] span:first-child{transform:translateY(3.5px) rotate(45deg);}
 .nav-burger[aria-expanded="true"] span:last-child{transform:translateY(-3.5px) rotate(-45deg);}
-.mnav{position:fixed;top:64px;left:0;right:0;z-index:399;background:rgba(250,247,241,.97);
-  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
-  border-bottom:1px solid var(--line);padding:8px 20px 18px;
-  display:flex;flex-direction:column;
-  opacity:0;transform:translateY(-8px);transition:opacity .25s var(--ease),transform .25s var(--ease);}
-.mnav.auf{opacity:1;transform:none;}
-.mnav a{padding:14px 4px;font-size:16px;font-weight:600;letter-spacing:-.015em;border-bottom:1px solid var(--line2);min-height:44px;display:flex;align-items:center;}
-.mnav a:last-child{border-bottom:0;}
-.mnav .mnav-tel{color:var(--acc-deep);margin-top:6px;}
+.mnav-bd{position:fixed;inset:0;z-index:398;background:rgba(22,19,14,.45);
+  opacity:0;pointer-events:none;transition:opacity .3s var(--ease);}
+.mnav-bd.auf{opacity:1;pointer-events:auto;}
+body:has(.mnav.auf) #nav{background:var(--paper);}
+.mnav{position:fixed;top:var(--navh,60px);left:0;right:0;z-index:399;background:var(--paper);
+  border-bottom:1px solid var(--line);padding:6px 20px calc(20px + env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;max-height:calc(100dvh - var(--navh,60px));overflow-y:auto;
+  box-shadow:0 24px 48px -24px rgba(22,19,14,.35);
+  opacity:0;transform:translateY(-10px);pointer-events:none;
+  transition:opacity .25s var(--ease),transform .25s var(--ease);}
+.mnav.auf{opacity:1;transform:none;pointer-events:auto;}
+.mnav>a{padding:13px 4px;font-size:16.5px;font-weight:600;letter-spacing:-.015em;color:var(--ink);border-bottom:1px solid var(--line2);min-height:48px;display:flex;align-items:center;}
+.mnav-foot{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
+.mnav-foot a{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:999px;font-size:15.5px;font-weight:600;}
+.mnav .mnav-cta{background:var(--ink);color:#fff;}
+.mnav .mnav-tel{border:1.5px solid var(--line2);color:var(--ink);}
 
-@media(max-width:680px){
+@media(max-width:860px){
   .nav-burger{display:flex;}
-  .nav-cta{padding:11px 15px!important;font-size:13.5px;}
+  .nav-cta{padding:11px 16px!important;font-size:13.5px;}
+  /* Logo links, Anfrage-Knopf und Burger als Paar rechts */
+  #nav{justify-content:flex-start;gap:10px;}
+  .nav-links{margin-left:auto;}
+}
+@media(max-width:680px){
   /* Hero: gleicher Rhythmus zwischen Vorzeile, Überschrift und Fließtext */
   #hero .hero-inner h1{margin-top:18px;}
   #hero .hero-sub{margin-top:18px;}
@@ -523,6 +543,90 @@ footer{padding:2rem 0 40px;color:var(--sub);}
   .marq .li img[src*="effenberger"],
   .marq .li img[src*="eggert"]{height:34px;max-width:170px;}
 }
+
+/* ═══════ MOBIL & TABLET — Durchgang 23.08.2026 ═══════ */
+
+/* Ohne Maus brauchen alle Links eine Flaeche, die der Daumen trifft.
+   Ueber padding statt min-height, damit lange Adressen weiter umbrechen. */
+@media(hover:none),(max-width:1024px){
+  .footer a,.f-links a,.k-line a,.rmore a,
+  a[href^="tel:"]:not(.mnav-tel),a[href^="mailto:"]{padding:11px 0;margin:-11px 0;display:inline-block;}
+  .f-links a,.footer .f-links a{padding:11px 2px;margin:-11px 2px;}
+}
+
+/* aktive Sektion auch im mobilen Menü markieren */
+.mnav>a.hier{color:var(--acc-deep);}
+
+/* ── Handy + Tablet: Website-Screenshots als fester Kopf-Ausschnitt ──
+   Die Vorlagen sind bis 5300px hohe Ganzseiten-Screenshots. Ohne Maus
+   gibt es kein Hover-Scrollen; die Auto-Animation lief bei Kunden mit
+   viel Weissraum (Wohner) ins Leere. Deshalb Kopfbereich fixieren. */
+@media(max-width:1024px){
+  .wview{height:auto!important;aspect-ratio:16/11;overflow:hidden;}
+  .wview img.wimg{position:absolute;inset:0;width:100%;height:100%!important;
+    object-fit:cover;object-position:center top;animation:none!important;}
+  .wcard:hover .wimg.active,.wcard.auto .wimg.active{animation:none!important;}
+  .mini-grid .wview{aspect-ratio:16/10;}
+}
+@media(hover:none){
+  .show-hint{display:none;}
+}
+
+/* ── Tablet: Luft rausnehmen, Bloecke einspaltig ── */
+@media(max-width:1024px){
+  #arbeiten{padding:4.5rem 0 40px;}
+  #seo{padding:4.5rem 0;}
+  #leistungen{padding:4.5rem 0;}
+  #kinetic{padding:4rem 0 24px;}
+  #band{padding:3.5rem 0 0;}
+  /* Beitexte duerfen die Breite nutzen, die da ist */
+  .fotos-head .sec-sub,.work-head .sec-sub,#seo .sec-sub{max-width:none!important;}
+  #fotos{padding:4rem 0;}
+  #stimmen{padding:4.5rem 0 72px;}
+  #studio{padding:2rem 0 72px;}
+  #ablauf{padding:0 0 72px;}
+  #faq{padding:0 0 72px;}
+  #kontakt{padding:0 0 64px;}
+  .show{padding:2.2rem 0!important;}
+}
+
+/* ── Handy: Rhythmus enger, Tap-Ziele grosszuegig ── */
+@media(max-width:680px){
+  #hero{padding:5.5rem 0 0;}
+  #arbeiten{padding:3.2rem 0 28px;}
+  #seo{padding:3.2rem 0;}
+  #leistungen{padding:3.2rem 0;}
+  #fotos{padding:3rem 0;}
+  #studio{padding:1.5rem 0 48px;}
+  #ablauf{padding:0 0 48px;}
+  #faq{padding:0 0 52px;}
+  /* Hero: beide Knoepfe in eine Zeile, wie auf der SHK-Seite */
+  #hero .hero-ctas{display:flex;flex-direction:row;flex-wrap:nowrap;gap:10px;justify-content:center;}
+  #hero .hero-ctas .btn{flex:1 1 auto;min-width:0;padding-left:12px;padding-right:12px;
+    font-size:13.5px;white-space:nowrap;justify-content:center;}
+  .nur-breit{display:none;}
+  .nur-schmal{display:inline;}
+  /* Projekt-Kacheln: Name und Schalter mit Luft, Schalter nicht dominant */
+  .mini-grid .winfo{gap:10px;}
+  .mini-grid .wtog{font-size:12.5px;padding:8px 13px;flex:0 0 auto;}
+  /* Wechselnde Schlusszeile darf umbrechen statt aus dem Bild zu laufen */
+  .rot span{white-space:normal;}
+  /* Bewertungskarten bekommen denselben Seitenrand wie der Rest */
+  .rmarq{padding:0 16px;}
+  /* Logo-Band: breiterer Auslauf, sonst schneidet die Kante mitten ins Logo */
+  .marq{-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);
+        mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);}
+  .marq-t{gap:44px;padding:0 20px;}
+  #band{padding:2.5rem 0 0;}
+}
+
+/* ── Leistungen: ohne Maus bleibt alles lesbar ──
+   Der Scroll-Spy graut inaktive Eintraege aus. Am Handy stand dadurch
+   fast die ganze Liste in Hellgrau. */
+@media(max-width:1024px){
+  .svc-item{opacity:1!important;transform:none!important;}
+  .svc-item::before{transform:scaleY(1)!important;}
+}
 </style>
 </head>
 <body>
@@ -534,19 +638,28 @@ footer{padding:2rem 0 40px;color:var(--sub);}
   <div class="nav-links">
       <a href="#arbeiten">Arbeiten</a>
       <a href="#leistungen">Leistungen</a>
+      <a href="#seo">Google-Ergebnisse</a>
+      <a href="#ablauf">Ablauf</a>
       <a href="#stimmen">Stimmen</a>
+      <a href="#faq">Fragen</a>
       <a href="#kontakt" class="nav-cta">Projekt anfragen</a>
     </div>
     <button class="nav-burger" id="navBurger" aria-label="Menü öffnen" aria-expanded="false" onclick="toggleMenu()"><span></span><span></span></button>
 </nav>
 
+<div class="mnav-bd" id="mnavBd" onclick="toggleMenu(0)" hidden></div>
 <div class="mnav" id="mnav" hidden>
   <a href="#arbeiten" onclick="toggleMenu(0)">Arbeiten</a>
   <a href="#leistungen" onclick="toggleMenu(0)">Leistungen</a>
   <a href="#seo" onclick="toggleMenu(0)">Google-Ergebnisse</a>
+  <a href="#studio" onclick="toggleMenu(0)">Über uns</a>
+  <a href="#ablauf" onclick="toggleMenu(0)">Ablauf</a>
   <a href="#stimmen" onclick="toggleMenu(0)">Stimmen</a>
   <a href="#faq" onclick="toggleMenu(0)">Fragen</a>
-  <a href="tel:+4981947174990" class="mnav-tel">📞 +49 8194 7174990</a>
+  <div class="mnav-foot">
+    <a href="#kontakt" class="mnav-cta" onclick="toggleMenu(0)">Projekt anfragen</a>
+    <a href="tel:+4981947174990" class="mnav-tel">Anrufen · +49 8194 7174990</a>
+  </div>
 </div>
 
 <!-- ═══════ HERO ═══════ -->
@@ -554,9 +667,9 @@ footer{padding:2rem 0 40px;color:var(--sub);}
   <div class="hero-inner">
     <div class="eyebrow o1"><span class="dot"></span>Webdesign-Agentur für Handwerksbetriebe</div>
     <h1 class="o2">Deine nächsten Kunden<br><span class="accent">googeln</span> gerade.</h1>
-    <p class="hero-sub o3">Die einzige Frage: Finden sie dich – oder deinen Wettbewerber? Wir bauen Handwerksbetrieben Websites, die diese Entscheidung gewinnen.</p>
+    <p class="hero-sub o3">Die einzige Frage: Finden sie dich? Oder deinen Wettbewerber? Wir bauen Handwerksbetrieben Websites, die diese Entscheidung gewinnen.</p>
     <div class="hero-ctas o4">
-      <a href="#kontakt" class="btn btn-ink">Kostenloses Erstgespräch</a>
+      <a href="#kontakt" class="btn btn-ink"><span class="nur-breit">Kostenloses</span><span class="nur-schmal">Gratis</span> Erstgespräch</a>
       <a href="#arbeiten" class="btn btn-ghost">Arbeiten ansehen</a>
     </div>
     <div class="hero-proof o4"><span class="stars">★★★★★</span><span><b>5,0</b> auf Google</span><span>·</span><span><b>120+</b> Betriebe</span><span>·</span><span><b>6+</b> Jahre spezialisiert aufs Handwerk</span></div>
@@ -652,7 +765,7 @@ footer{padding:2rem 0 40px;color:var(--sub);}
       <div class="show-txt">
         <div class="show-kicker">Elektrotechnik · PV &amp; E-Mobilität · Landsberg</div>
         <h3>Wohner Elektrotechnik.</h3>
-        <p>„Energie der Zukunft. Heute." – ein Auftritt, der das einlöst: PV-Anlagen, Speicher und Wallboxen klar strukturiert, moderne Bildsprache, direkte Anfragewege. Eine Website, die Technikkompetenz ausstrahlt, bevor das erste Wort gelesen ist.</p>
+        <p>Elektrobetrieb aus Landsberg mit eigenem Tiefbau. Auf der Seite hat jeder Bereich seinen eigenen Platz: PV-Anlagen, Speicher, Wallboxen, Smart Home. Die Fotos und Drohnenaufnahmen sind vor Ort entstanden.</p>
         <div class="show-actions"><a href="https://elektrotechnik-wohner.de" target="_blank" rel="noopener" class="wtog" style="text-decoration:none;display:inline-block;">Live ansehen ↗</a><span class="show-hint">Hover scrollt durch die Seite</span></div>
       </div>
     </div>
@@ -661,27 +774,27 @@ footer{padding:2rem 0 40px;color:var(--sub);}
       <div class="show-txt">
         <div class="show-kicker">Zulieferer &amp; Fertigung · Automotive</div>
         <h3>SD Hirsch.</h3>
-        <p>Website und kompletter Content aus einer Hand: Für die SD Hirsch GmbH haben wir den Auftritt gebaut und das Bildmaterial gleich mitproduziert – direkt in der Fertigung.</p>
-        <div class="show-actions"><button class="wtog">Vorher ansehen</button><span class="show-hint">Hover scrollt durch die Seite</span></div>
+        <p>Für SD Hirsch haben wir die Website gebaut und das Bildmaterial in der Fertigung selbst fotografiert.</p>
+        <div class="show-actions"><button class="wtog">Alte Website zeigen</button><span class="show-hint">Hover scrollt durch die Seite</span></div>
       </div>
     </div>
     <div class="mini-head reveal">Alle Projekte</div>
     <div class="mini-grid">
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-9.jpg" alt="Schreinerei Kreitner Website" class="wimg active" loading="lazy" width="900" height="4240"><img src="/assets/work/vorher-9.jpg" alt="" class="wimg" loading="lazy" width="900" height="1733"></div><div class="winfo"><div class="wname">Schreinerei Kreitner</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-3.jpg" alt="Dachbau Kraus Website" class="wimg active" loading="lazy" width="900" height="3579"><img src="/assets/work/vorher-3.jpg" alt="" class="wimg" loading="lazy" width="900" height="794"></div><div class="winfo"><div class="wname">Dachbau Kraus</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-11.jpg" alt="Zimmerei Knappich Website" class="wimg active" loading="lazy" width="900" height="3570"><img src="/assets/work/vorher-11.jpg" alt="" class="wimg" loading="lazy" width="900" height="501"></div><div class="winfo"><div class="wname">Zimmerei Knappich</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-12.jpg" alt="Küchenhaus Hirschvogel Website" class="wimg active" loading="lazy" width="900" height="2931"><img src="/assets/work/vorher-12.jpg" alt="" class="wimg" loading="lazy" width="900" height="602"></div><div class="winfo"><div class="wname">Küchenhaus Hirschvogel</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-koller.jpg" alt="Zimmerei Koller Website" class="wimg active" loading="lazy" width="900" height="4951"><img src="/assets/work/vorher-koller.jpg" alt="" class="wimg" loading="lazy" width="900" height="1865"></div><div class="winfo"><div class="wname">Zimmerei Koller</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-alb.jpg" alt="Ammer Lech Bau Website" class="wimg active" loading="lazy" width="900" height="4451"><img src="/assets/work/vorher-alb.jpg" alt="" class="wimg" loading="lazy" width="900" height="855"></div><div class="winfo"><div class="wname">Ammer Lech Bau</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-2.jpg" alt="CS Metalldesign Website" class="wimg active" loading="lazy" width="900" height="3347"><img src="/assets/work/vorher-2.jpg" alt="" class="wimg" loading="lazy" width="900" height="501"></div><div class="winfo"><div class="wname">CS Metalldesign</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-4.jpg" alt="Dinkel Metallbau Website" class="wimg active" loading="lazy" width="900" height="5189"><img src="/assets/work/vorher-4.jpg" alt="" class="wimg" loading="lazy" width="900" height="1027"></div><div class="winfo"><div class="wname">Dinkel Metallbau</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-1.jpg" alt="Baureize Website" class="wimg active" loading="lazy" width="900" height="4335"><img src="/assets/work/vorher-1.jpg" alt="" class="wimg" loading="lazy" width="900" height="501"></div><div class="winfo"><div class="wname">Baureize</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-5.jpg" alt="Baustoffe Kirchner Website" class="wimg active" loading="lazy" width="900" height="4299"><img src="/assets/work/vorher-5.jpg" alt="" class="wimg" loading="lazy" width="900" height="501"></div><div class="winfo"><div class="wname">Baustoffe Kirchner</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-6.jpg" alt="Planung Hindelang Website" class="wimg active" loading="lazy" width="900" height="2890"><img src="/assets/work/vorher-6.jpg" alt="" class="wimg" loading="lazy" width="900" height="548"></div><div class="winfo"><div class="wname">Planung Hindelang</div><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-9.jpg" alt="Schreinerei Kreitner Website" class="wimg active" loading="lazy" width="900" height="4240"><img src="/assets/work/vorher-9.jpg" alt="" class="wimg" loading="lazy" width="900" height="1733"></div><div class="winfo"><a class="wname" href="https://schreinerei-kreitner.de" target="_blank" rel="noopener">Schreinerei Kreitner <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-3.jpg" alt="Dachbau Kraus Website" class="wimg active" loading="lazy" width="900" height="3579"><img src="/assets/work/vorher-3.jpg" alt="" class="wimg" loading="lazy" width="900" height="794"></div><div class="winfo"><a class="wname" href="https://dachbau-kraus.de" target="_blank" rel="noopener">Dachbau Kraus <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-11.jpg" alt="Zimmerei Knappich Website" class="wimg active" loading="lazy" width="900" height="3570"><img src="/assets/work/vorher-11.jpg" alt="" class="wimg" loading="lazy" width="900" height="501"></div><div class="winfo"><a class="wname" href="https://zimmerei-knappich.de" target="_blank" rel="noopener">Zimmerei Knappich <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-12.jpg" alt="Küchenhaus Hirschvogel Website" class="wimg active" loading="lazy" width="900" height="2931"><img src="/assets/work/vorher-12.jpg" alt="" class="wimg" loading="lazy" width="900" height="602"></div><div class="winfo"><a class="wname" href="https://kuechenhaus-hirschvogel.de" target="_blank" rel="noopener">Küchenhaus Hirschvogel <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-koller.jpg" alt="Zimmerei Koller Website" class="wimg active" loading="lazy" width="900" height="4951"><img src="/assets/work/vorher-koller.jpg" alt="" class="wimg" loading="lazy" width="900" height="1865"></div><div class="winfo"><a class="wname" href="https://zimmerei-koller.com" target="_blank" rel="noopener">Zimmerei Koller <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-alb.jpg" alt="Ammer Lech Bau Website" class="wimg active" loading="lazy" width="900" height="4451"><img src="/assets/work/vorher-alb.jpg" alt="" class="wimg" loading="lazy" width="900" height="855"></div><div class="winfo"><a class="wname" href="https://ammer-lech-bau.de" target="_blank" rel="noopener">Ammer Lech Bau <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-2.jpg" alt="CS Metalldesign Website" class="wimg active" loading="lazy" width="900" height="3347"><img src="/assets/work/vorher-2.jpg" alt="" class="wimg" loading="lazy" width="900" height="501"></div><div class="winfo"><a class="wname" href="https://cs-metalldesign.de" target="_blank" rel="noopener">CS Metalldesign <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-4.jpg" alt="Dinkel Metallbau Website" class="wimg active" loading="lazy" width="900" height="5189"><img src="/assets/work/vorher-4.jpg" alt="" class="wimg" loading="lazy" width="900" height="1027"></div><div class="winfo"><a class="wname" href="https://dinkel-metallbau.de" target="_blank" rel="noopener">Dinkel Metallbau <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-1.jpg" alt="Baureize Website" class="wimg active" loading="lazy" width="900" height="4335"><img src="/assets/work/vorher-1.jpg" alt="" class="wimg" loading="lazy" width="900" height="501"></div><div class="winfo"><a class="wname" href="https://baureize.de" target="_blank" rel="noopener">Baureize <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-5.jpg" alt="Baustoffe Kirchner Website" class="wimg active" loading="lazy" width="900" height="4299"><img src="/assets/work/vorher-5.jpg" alt="" class="wimg" loading="lazy" width="900" height="501"></div><div class="winfo"><a class="wname" href="https://kirchner-thaining.de" target="_blank" rel="noopener">Baustoffe Kirchner <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-6.jpg" alt="Planung Hindelang Website" class="wimg active" loading="lazy" width="900" height="2890"><img src="/assets/work/vorher-6.jpg" alt="" class="wimg" loading="lazy" width="900" height="548"></div><div class="winfo"><a class="wname" href="https://planung-hindelang.de" target="_blank" rel="noopener">Planung Hindelang <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
       <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-7.jpg" alt="Resch Bau Website" class="wimg active" loading="lazy" width="900" height="3778"><img src="/assets/work/vorher-7.jpg" alt="" class="wimg" loading="lazy" width="900" height="773"></div><div class="winfo"><div class="wname">Resch Bau</div><button class="wtog">Vorher</button></div></div>
       <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-10.jpg" alt="Schwaighofer Website" class="wimg active" loading="lazy" width="900" height="4039"><img src="/assets/work/vorher-10.jpg" alt="" class="wimg" loading="lazy" width="900" height="501"></div><div class="winfo"><div class="wname">Schwaighofer</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-13.jpg" alt="Vogel Holzbau Website" class="wimg active" loading="lazy" width="900" height="3266"><img src="/assets/work/vorher-13.jpg" alt="" class="wimg" loading="lazy" width="900" height="1351"></div><div class="winfo"><div class="wname">Vogel Holzbau</div><button class="wtog">Vorher</button></div></div>
-      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-14.jpg" alt="Maser Tankschutz Website" class="wimg active" loading="lazy" width="900" height="3405"><img src="/assets/work/vorher-14.jpg" alt="" class="wimg" loading="lazy" width="900" height="995"></div><div class="winfo"><div class="wname">Maser Tankschutz</div><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-13.jpg" alt="Vogel Holzbau Website" class="wimg active" loading="lazy" width="900" height="3266"><img src="/assets/work/vorher-13.jpg" alt="" class="wimg" loading="lazy" width="900" height="1351"></div><div class="winfo"><a class="wname" href="https://vogel-holzbau.de" target="_blank" rel="noopener">Vogel Holzbau <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
+      <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-14.jpg" alt="Maser Tankschutz Website" class="wimg active" loading="lazy" width="900" height="3405"><img src="/assets/work/vorher-14.jpg" alt="" class="wimg" loading="lazy" width="900" height="995"></div><div class="winfo"><a class="wname" href="https://tankschutz-landsberg.de" target="_blank" rel="noopener">Maser Tankschutz <span class="wpfeil">↗</span></a><button class="wtog">Vorher</button></div></div>
       <div class="wcard stagger"><div class="wview" style="height:210px;"><img src="/assets/work/nachher-15.jpg" alt="Schuster Erisried Website" class="wimg active" loading="lazy" width="900" height="3076"><img src="/assets/work/vorher-15.jpg" alt="" class="wimg" loading="lazy" width="900" height="501"></div><div class="winfo"><div class="wname">Schuster Erisried</div><button class="wtog">Vorher</button></div></div>
     </div>
     <div class="work-more reveal"><a href="#kontakt" class="btn btn-ghost">Dein Projekt besprechen</a></div>
@@ -695,7 +808,7 @@ footer{padding:2rem 0 40px;color:var(--sub);}
       <div class="eyebrow"><span class="dot"></span>Aus der Praxis</div>
       <h2 class="d" style="margin-top:18px;">Direkt im Betrieb <em>gedreht.</em></h2>
     </div>
-    <p class="sec-sub" style="margin:0;max-width:340px;">Drohne, Kamera, echter Baustellenstaub: Diese Videos haben wir für unsere Kunden gedreht – vor Ort, nicht im Studio.</p>
+    <p class="sec-sub" style="margin:0;max-width:340px;">Drohne, Kamera, Baustellenstaub. Diese Videos sind bei unseren Kunden im Betrieb entstanden.</p>
   </div>
   <div class="wrap vidrow reveal">
     <div class="vcard"><video muted loop playsinline preload="metadata"><source src="/assets/vids/koller.mp4" type="video/mp4"></video><div class="vlabel">Zimmerei Koller</div></div>
@@ -715,7 +828,7 @@ footer{padding:2rem 0 40px;color:var(--sub);}
         <div class="eyebrow"><span class="dot"></span>Sichtbarkeit, die man messen kann</div>
         <h2 class="d" style="margin-top:18px;">Frag Google einfach <em>selbst.</em></h2>
       </div>
-      <p class="sec-sub" style="margin-top:0;max-width:360px;">Echte Suchergebnisse unserer Kunden – zuletzt geprüft am 8. August 2026. Gib die Begriffe selbst bei Google ein. Ergebnisse variieren je nach Standort, Endgerät und Zeitpunkt.</p>
+      <p class="sec-sub" style="margin-top:0;max-width:360px;">Suchergebnisse unserer Kunden, zuletzt geprüft am 8. August 2026. Gib die Begriffe selbst bei Google ein. Was du siehst, hängt von deinem Standort und vom Zeitpunkt ab.</p>
     </div>
     <div class="serp-grid">
       <div class="serp stagger"><div class="serp-badge">Platz 1</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>zimmerei schongau</div><div class="serp-r"><div class="serp-t">Zimmerei Knappich GmbH</div><div class="serp-u">zimmerei-knappich.de</div></div></div>
@@ -725,7 +838,7 @@ footer{padding:2rem 0 40px;color:var(--sub);}
       <div class="serp serp-double stagger"><div class="serp-badge">2&times; Seite 1</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>zimmerei landsberg</div><div class="serp-r"><div class="serp-t">Zimmerei C&amp;H Schneider GmbH</div><div class="serp-u">schneider-penzing.de</div></div><div class="serp-r"><div class="serp-t">Zimmerei Rauschmair</div><div class="serp-u">zimmerei-rauschmair.de</div></div></div>
       <div class="serp stagger"><div class="serp-badge">Platz 1</div><div class="serp-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>tank demontage landsberg</div><div class="serp-r"><div class="serp-t">Maser Tankschutz – Spezialist für Öltankdemontagen</div><div class="serp-u">tankschutz-landsberg.de</div></div></div>
     </div>
-    <p class="serp-note reveal">Rankings schwanken je nach Standort und Zeitpunkt – deshalb: einfach selbst googeln.</p>
+    <p class="serp-note reveal">Rankings schwanken je nach Standort und Zeitpunkt. Am besten selbst googeln.</p>
   </div>
 </section>
 
@@ -736,15 +849,15 @@ footer{padding:2rem 0 40px;color:var(--sub);}
       <div class="svc-sticky reveal">
         <div class="eyebrow"><span class="dot"></span>Leistungen</div>
         <h2 class="d" style="margin-top:18px;">Alles aus einer Hand.<br>Dein Aufwand: <em>ein Gespräch.</em></h2>
-        <p class="sec-sub">Website, Texte, Fotos, Google – perfekt aufeinander abgestimmt. Du machst weiter Handwerk, wir machen den Rest.</p>
+        <p class="sec-sub">Website, Texte, Fotos, Google kommen von uns. Du machst weiter Handwerk, wir machen den Rest.</p>
         <a href="#kontakt" class="btn btn-ink" style="margin-top:28px;">Kostenloses Erstgespräch</a>
       </div>
       <div class="svc-flow">
-        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><path d="M7 10l2 2-2 2M12 14h4"/></svg></div><div class="si-num">01</div></div><div><h3>Webdesign &amp; Entwicklung</h3><p>Moderne, schnelle Website, die deine Arbeit so zeigt, wie sie ist: meisterhaft. Besucher werden zu Anfragen – nicht zu Absprüngen.</p></div></div>
-        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M8 12l2-3 2 2 2-4"/></svg></div><div class="si-num">02</div></div><div><h3>SEO &amp; Google-Sichtbarkeit</h3><p>Gefunden werden, wenn in deiner Region gesucht wird – bei Google und in den KI-Suchen von morgen.</p></div></div>
+        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="3"/><path d="M8 21h8M12 18v3"/><path d="M7 10l2 2-2 2M12 14h4"/></svg></div><div class="si-num">01</div></div><div><h3>Webdesign &amp; Entwicklung</h3><p>Moderne, schnelle Website, die deine Arbeit so zeigt, wie sie ist: meisterhaft. Aus Besuchern werden Anfragen.</p></div></div>
+        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M8 12l2-3 2 2 2-4"/></svg></div><div class="si-num">02</div></div><div><h3>SEO &amp; Google-Sichtbarkeit</h3><p>Gefunden werden, wenn in deiner Region gesucht wird. Bei Google und in den KI-Suchen von morgen.</p></div></div>
         <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></div><div class="si-num">03</div></div><div><h3>Conversion &amp; Performance</h3><p>Struktur, Texte und Ladezeiten, die aus Besuchern Kunden machen. Messbar, nicht gefühlt.</p></div></div>
-        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.8 3.2-6 6.5-6s5.9 2.2 6.5 6"/><circle cx="17.5" cy="9" r="2.6"/><path d="M16.5 14.4c2.8.2 4.6 2 5 5.1"/></svg></div><div class="si-num">04</div></div><div><h3>Karriereseite &amp; Recruiting</h3><p>Zeig, warum man bei dir arbeiten will – und erreiche Fachkräfte, die nie ein Stellenportal öffnen.</p></div></div>
-        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="3"/><circle cx="12" cy="14" r="4"/><path d="M8.5 7l1.5-3h4l1.5 3"/></svg></div><div class="si-num">05</div></div><div><h3>Echte Fotografie</h3><p>Wir kommen zu dir in den Betrieb. Echte Menschen, echte Baustellen – statt Stockfotos, die jeder hat.</p></div></div>
+        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.8 3.2-6 6.5-6s5.9 2.2 6.5 6"/><circle cx="17.5" cy="9" r="2.6"/><path d="M16.5 14.4c2.8.2 4.6 2 5 5.1"/></svg></div><div class="si-num">04</div></div><div><h3>Karriereseite &amp; Recruiting</h3><p>Zeig, warum man bei dir arbeiten will. So erreichst du auch Fachkräfte, die nie ein Stellenportal öffnen.</p></div></div>
+        <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="3"/><circle cx="12" cy="14" r="4"/><path d="M8.5 7l1.5-3h4l1.5 3"/></svg></div><div class="si-num">05</div></div><div><h3>Fotografie im Betrieb</h3><p>Wir kommen zu dir in den Betrieb und fotografieren deine Leute auf deinen Baustellen. Keine Stockfotos, die jeder hat.</p></div></div>
         <div class="svc-item"><div class="si-wrap"><div class="si-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div><div class="si-num">06</div></div><div><h3>Betreuung &amp; Weiterentwicklung</h3><p>Nach dem Launch fängt's an: Pflege, Updates, Optimierung. Ein Ansprechpartner, keine Warteschleife.</p></div></div>
       </div>
     </div>
@@ -759,8 +872,8 @@ footer{padding:2rem 0 40px;color:var(--sub);}
         <div>
           <div class="eyebrow" style="color:#E0A45C;"><span class="dot"></span>Wer dahinter steht</div>
           <h2 style="margin-top:18px;">Du beherrschst dein Handwerk.<br><em>Wir unseres.</em></h2>
-          <p>Ich bin Noah. Seit über sechs Jahren dreht sich bei uns alles um eine Branche: das Handwerk. Über 120 Betriebe später wissen wir ziemlich genau, was funktioniert – und was du dir sparen kannst.</p>
-          <p><strong>Wir kennen dein Gewerk, bevor du es erklären musst.</strong> Wir wissen, wonach deine Kunden suchen, warum sie beim Wettbewerber landen – und was es braucht, damit sie bei dir anrufen.</p>
+          <p>Ich bin Noah. Seit über sechs Jahren dreht sich bei uns alles um eine Branche: das Handwerk. Über 120 Betriebe später wissen wir ziemlich genau, was funktioniert und was du dir sparen kannst.</p>
+          <p><strong>Wir kennen dein Gewerk, bevor du es erklären musst.</strong> Wir wissen, wonach deine Kunden suchen, warum sie beim Wettbewerber landen und was es braucht, damit sie bei dir anrufen.</p>
           <div class="founder">
             <img src="/images/foto-noah-portrait-rund.png" alt="Noah Seelau" loading="lazy" width="500" height="500">
             <div>
@@ -795,13 +908,13 @@ footer{padding:2rem 0 40px;color:var(--sub);}
         <img src="/assets/team-noah.jpg" alt="Noah Seelau" class="tphoto" width="800" height="800" loading="lazy" decoding="async">
         <div class="tname">Noah</div>
         <div class="trole">Gründer</div>
-        <p class="tbio">Vom ersten Gespräch bis zum Launch dein direkter Draht – und auf Wunsch auch der Mann hinter Kamera und Drohne.</p>
+        <p class="tbio">Vom ersten Gespräch bis zum Launch dein direkter Draht. Auf Wunsch auch der Mann hinter Kamera und Drohne.</p>
       </div>
       <div class="tcard stagger">
         <img src="/assets/team-rudolf.jpg" alt="Rudolf" class="tphoto" width="800" height="800" loading="lazy" decoding="async">
         <div class="tname">Rudolf</div>
         <div class="trole">Webdesign</div>
-        <p class="tbio">Sorgt dafür, dass aus Konzepten saubere, schnelle Websites werden – Pixel für Pixel.</p>
+        <p class="tbio">Sorgt dafür, dass aus Konzepten saubere, schnelle Websites werden. Pixel für Pixel.</p>
       </div>
       <div class="tcard stagger">
         <img src="/assets/team-angelo.jpg" alt="Angelo" class="tphoto" width="800" height="800" loading="lazy" decoding="async">
@@ -822,13 +935,13 @@ footer{padding:2rem 0 40px;color:var(--sub);}
         <div class="eyebrow"><span class="dot"></span>So läuft's ab</div>
         <h2 class="d" style="margin-top:18px;">Vier Schritte bis zum<br><em>neuen Auftritt.</em></h2>
       </div>
-      <p class="sec-sub" style="margin:0;max-width:320px;">Meist 2–3 Wochen vom ersten Gespräch bis zum Launch – Fotoshooting und drei Entwurfsschleifen inklusive.</p>
+      <p class="sec-sub" style="margin:0;max-width:320px;">Meist 2–3 Wochen vom ersten Gespräch bis zum Launch. Fotoshooting und drei Entwurfsschleifen sind dabei.</p>
     </div>
     <div class="steps">
-      <div class="step stagger"><h3>Erstgespräch</h3><p>10 Minuten, auch von der Baustelle. Wir analysieren, wo dein Betrieb online steht – ohne Verkaufsdruck.</p></div>
-      <div class="step stagger"><h3>Strategie</h3><p>Klarer Plan für deinen Betrieb: Ziele, Maßnahmen, Zeitplan – auf deine Region und dein Gewerk zugeschnitten.</p></div>
+      <div class="step stagger"><h3>Erstgespräch</h3><p>10 Minuten, auch von der Baustelle. Wir schauen uns an, wo dein Betrieb online steht. Ohne Verkaufsdruck.</p></div>
+      <div class="step stagger"><h3>Strategie</h3><p>Klarer Plan für deinen Betrieb: Ziele, Maßnahmen, Zeitplan, zugeschnitten auf deine Region und dein Gewerk.</p></div>
       <div class="step stagger"><h3>Umsetzung</h3><p>Design, Texte, optional Fotoshooting vor Ort. Drei Entwurfsschleifen, bis alles sitzt.</p></div>
-      <div class="step stagger"><h3>Launch &amp; Betreuung</h3><p>Deine Seite geht live – und wir bleiben dran: Updates, Optimierung, Weiterentwicklung.</p></div>
+      <div class="step stagger"><h3>Launch &amp; Betreuung</h3><p>Deine Seite geht live und wir bleiben dran: Updates, Optimierung, Weiterentwicklung.</p></div>
     </div>
   </div>
 </section>
@@ -890,16 +1003,16 @@ footer{padding:2rem 0 40px;color:var(--sub);}
       <div class="faq-head reveal">
         <div class="eyebrow"><span class="dot"></span>Bevor du fragst</div>
         <h2 class="d" style="margin-top:18px;">Häufige <em>Fragen.</em></h2>
-        <p class="sec-sub">Alles andere klären wir im Erstgespräch – ehrlich und ohne Fachchinesisch.</p>
+        <p class="sec-sub">Alles andere klären wir im Erstgespräch, ohne Fachchinesisch.</p>
         <a href="tel:+4981947174990" class="faq-tel">📞 +49 8194 7174990</a>
       </div>
     <div class="faq-list reveal">
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was kostet eine neue Website?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Die Kosten hängen vom Umfang ab. Im kostenlosen Erstgespräch bekommst du ein individuelles Angebot – transparent und ohne versteckte Kosten. Wir arbeiten mit Betrieben jeder Größe.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was kostet eine neue Website?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Die Kosten hängen vom Umfang ab. Im kostenlosen Erstgespräch bekommst du ein Angebot mit allen Posten im Klartext. Wir arbeiten mit Betrieben jeder Größe.</p></div></div></div>
       <div class="faq-item"><div class="faq-q" onclick="faq(this)">Wie lange dauert die Umsetzung?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>In der Regel 2–3 Wochen vom ersten Gespräch bis zum Launch. Fotoshooting und drei Entwurfsschleifen sind bereits inklusive.</p></div></div></div>
       <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was muss ich selbst beisteuern?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Sehr wenig. Wir kommen für das Fotoshooting zu dir, übernehmen Texterstellung und die komplette technische Umsetzung. Dein Aufwand ist minimal.</p></div></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Kann ich die Website selbst bearbeiten?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Ja – auf Wunsch richten wir ein einfaches CMS ein, mit dem du selbst Bilder und Texte austauschen kannst. Eine ausführliche Anleitung gehört dazu.</p></div></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Arbeitet ihr nur mit Betrieben aus Bayern?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Nein – wir sind deutschlandweit tätig. Das Fotoshooting findet vor Ort statt, alles andere läuft remote und vollständig digital.</p></div></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was unterscheidet euch von anderen Agenturen?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Wir bauen ausschließlich digitale Systeme für Handwerksbetriebe. Dieser Fokus bedeutet: Wir kennen deine Branche, deine Kunden und deine Herausforderungen – und das schlägt sich direkt in den Ergebnissen nieder.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Kann ich die Website selbst bearbeiten?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Ja. Auf Wunsch richten wir ein einfaches CMS ein, mit dem du selbst Bilder und Texte austauschen kannst. Eine ausführliche Anleitung gehört dazu.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Arbeitet ihr nur mit Betrieben aus Bayern?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Nein, wir sind deutschlandweit tätig. Das Fotoshooting findet vor Ort statt, alles andere läuft remote und vollständig digital.</p></div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Was unterscheidet euch von anderen Agenturen?<span class="pm">+</span></div><div class="faq-a"><div class="faq-inner"><p>Wir bauen ausschließlich digitale Systeme für Handwerksbetriebe. Dieser Fokus bedeutet: Wir kennen deine Branche und wissen, wonach deine Kunden suchen. Das spart dir die Erklärrunden, die woanders zum Projekt dazugehören.</p></div></div></div>
     </div>
   </div>
   </div>
@@ -910,8 +1023,8 @@ footer{padding:2rem 0 40px;color:var(--sub);}
   <div class="wrap">
     <div class="k-card reveal">
       <div class="k-head">
-        <h2>Bereit für <span class="rot" id="rot"><span class="on">mehr Aufträge?</span><span>neue Fachkräfte?</span><span>echte Sichtbarkeit?</span><span>bessere Projekte?</span></span></h2>
-        <p>In 15 Minuten klären wir, wo dein Betrieb online steht und was ein professioneller Auftritt konkret verändern würde – kostenlos und unverbindlich.</p>
+        <h2>Bereit für <span class="rot" id="rot"><span class="on">mehr Aufträge?</span><span>neue Fachkräfte?</span><span>Sichtbarkeit bei Google?</span><span>bessere Projekte?</span></span></h2>
+        <p>In 15 Minuten klären wir, wo dein Betrieb online steht und was sich mit einem neuen Auftritt ändern würde. Kostenlos und unverbindlich.</p>
       </div>
       <div class="k-grid">
         <div>
@@ -961,7 +1074,7 @@ footer{padding:2rem 0 40px;color:var(--sub);}
   <div class="wrap">
     <div class="f-in">
       <img src="/images/logo-handwerksmanufaktur.png" alt="HandwerksManufaktur" width="884" height="282" loading="lazy" decoding="async">
-      <span>© 2026 HandwerksManufaktur – Alle Rechte vorbehalten.</span>
+      <span>© 2026 HandwerksManufaktur. Alle Rechte vorbehalten.</span>
       <div class="f-links"><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a><a href="/agb">AGB</a></div>
     </div>
   </div>
@@ -1030,11 +1143,14 @@ document.querySelectorAll('.stagger').forEach(function(el,i){el.dataset.delay=(i
 (function(){
   var items=[].slice.call(document.querySelectorAll('.svc-item'));if(!items.length)return;
   // Icon-Linien zeichnen sich beim Aktivieren selbst (stroke-dash-Draw)
-  items.forEach(function(i){
-    [].slice.call(i.querySelectorAll('.si-ic svg *')).forEach(function(sh){
-      try{var L=sh.getTotalLength();sh.style.strokeDasharray=L;sh.style.strokeDashoffset=L;}catch(e){}
+  var zeichnen = matchMedia('(hover: hover) and (pointer: fine)').matches && innerWidth>1024;
+  if(zeichnen){
+    items.forEach(function(i){
+      [].slice.call(i.querySelectorAll('.si-ic svg *')).forEach(function(sh){
+        try{var L=sh.getTotalLength();sh.style.strokeDasharray=L;sh.style.strokeDashoffset=L;}catch(e){}
+      });
     });
-  });
+  }
   var sio=new IntersectionObserver(function(es){
     es.forEach(function(e){
       e.target.classList.toggle('act',e.isIntersecting);
@@ -1153,16 +1269,18 @@ function faq(el){
 
 // R16 Wayfinding — aktive Sektion in der Nav markieren
 (function(){
-  var links=[].slice.call(document.querySelectorAll('.nav-links a[href^="#"]:not(.nav-cta)'));
+  var links=[].slice.call(document.querySelectorAll('.nav-links a[href^="#"]:not(.nav-cta), .mnav>a[href^="#"]'));
   if(!links.length)return;
-  var ziele=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  var ziele=[];
+  links.forEach(function(a){var z=document.querySelector(a.getAttribute('href'));if(z&&ziele.indexOf(z)<0)ziele.push(z);});
   var spy=new IntersectionObserver(function(eintraege){
     eintraege.forEach(function(e){
-      var i=ziele.indexOf(e.target); if(i<0)return;
-      if(e.isIntersecting){links.forEach(function(l){l.classList.remove('hier');});links[i].classList.add('hier');}
+      if(!e.isIntersecting)return;
+      var id='#'+e.target.id;
+      links.forEach(function(l){l.classList.toggle('hier',l.getAttribute('href')===id);});
     });
   },{rootMargin:'-45% 0px -50% 0px'});
-  ziele.forEach(function(z){if(z)spy.observe(z);});
+  ziele.forEach(function(z){spy.observe(z);});
 })();
 
 // Showcase-Screenshots: auf Touch-Geräten von selbst durchscrollen (kein Hover vorhanden)
@@ -1176,18 +1294,38 @@ function faq(el){
 })();
 
 // Mobiles Menü
+function navHoehe(){
+  var n=document.getElementById('nav');if(!n)return;
+  document.documentElement.style.setProperty('--navh',Math.round(n.getBoundingClientRect().height)+'px');
+}
+navHoehe();addEventListener('resize',navHoehe,{passive:true});addEventListener('load',navHoehe);
+
 function toggleMenu(auf){
-  var b=document.getElementById('navBurger'), p=document.getElementById('mnav');
+  var b=document.getElementById('navBurger'), p=document.getElementById('mnav'), bd=document.getElementById('mnavBd');
   if(!b||!p)return;
   var offen = auf===0 ? false : b.getAttribute('aria-expanded')!=='true';
   b.setAttribute('aria-expanded', offen?'true':'false');
   b.setAttribute('aria-label', offen?'Menü schließen':'Menü öffnen');
-  if(offen){ p.hidden=false; requestAnimationFrame(function(){p.classList.add('auf');}); }
-  else { p.classList.remove('auf'); setTimeout(function(){p.hidden=true;},250); }
+  navHoehe();
+  if(offen){
+    p.hidden=false; if(bd)bd.hidden=false;
+    document.body.style.overflow='hidden';
+    requestAnimationFrame(function(){p.classList.add('auf');if(bd)bd.classList.add('auf');});
+  } else {
+    p.classList.remove('auf'); if(bd)bd.classList.remove('auf');
+    document.body.style.overflow='';
+    setTimeout(function(){p.hidden=true;if(bd)bd.hidden=true;},300);
+  }
 }
-addEventListener('scroll',function(){
+addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    var b=document.getElementById('navBurger');
+    if(b&&b.getAttribute('aria-expanded')==='true')toggleMenu(0);
+  }
+});
+addEventListener('resize',function(){
   var b=document.getElementById('navBurger');
-  if(b&&b.getAttribute('aria-expanded')==='true')toggleMenu(0);
+  if(innerWidth>860&&b&&b.getAttribute('aria-expanded')==='true')toggleMenu(0);
 },{passive:true});
 </script>
 </body>
