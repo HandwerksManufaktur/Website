@@ -157,7 +157,6 @@ nav.scrolled{box-shadow:0 1px 24px rgba(60,44,20,.05);}
 #hero h1 .accent{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--acc);}
 .hero-sub{max-width:620px;margin:28px auto 0;font-size:19px;color:var(--sub);}
 .hero-ctas{display:flex;gap:12px;justify-content:center;margin-top:34px;flex-wrap:wrap;}
-.nur-schmal{display:none;}
 .hero-proof{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:26px;font-size:14.5px;color:var(--sub);flex-wrap:wrap;}
 .hero-proof .stars{color:#F5A623;letter-spacing:1px;}
 .hero-proof b{color:var(--ink);font-weight:600;}
@@ -241,7 +240,7 @@ a.wname:hover .wpfeil{color:var(--acc-deep);transform:translate(2px,-2px);}
 .show+.show{border-top:1.5px solid var(--line);}
 .show.rev .show-media{order:2;}
 .show.rev .show-txt{order:1;}
-.show-kicker{font-size:13.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);}
+.show-kicker{font-size:13.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .show-txt h3{font-weight:700;letter-spacing:-.03em;font-size:clamp(30px,3.2vw,44px);line-height:1.05;margin:12px 0 14px;}
 .show-txt h3 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--acc);}
 .show-txt p{font-size:16px;color:var(--sub);max-width:440px;}
@@ -516,9 +515,8 @@ body:has(.mnav.auf) #nav{background:var(--paper);}
 @media(max-width:860px){
   .nav-burger{display:flex;}
   .nav-cta{padding:11px 16px!important;font-size:13.5px;}
-  /* Logo links, Anfrage-Knopf und Burger als Paar rechts */
-  #nav{justify-content:flex-start;gap:10px;}
-  .nav-links{margin-left:auto;}
+  /* Anfrage-Knopf steht im Menue, nicht doppelt in der Leiste */
+  .nav-links{display:none;}
 }
 @media(max-width:680px){
   /* Hero: gleicher Rhythmus zwischen Vorzeile, Überschrift und Fließtext */
@@ -601,11 +599,8 @@ body:has(.mnav.auf) #nav{background:var(--paper);}
   #ablauf{padding:0 0 48px;}
   #faq{padding:0 0 52px;}
   /* Hero: beide Knoepfe in eine Zeile, wie auf der SHK-Seite */
-  #hero .hero-ctas{display:flex;flex-direction:row;flex-wrap:nowrap;gap:10px;justify-content:center;}
-  #hero .hero-ctas .btn{flex:1 1 auto;min-width:0;padding-left:12px;padding-right:12px;
-    font-size:13.5px;white-space:nowrap;justify-content:center;}
-  .nur-breit{display:none;}
-  .nur-schmal{display:inline;}
+  #hero .hero-ctas{display:flex;flex-direction:column;align-items:stretch;gap:10px;}
+  #hero .hero-ctas .btn{width:100%;justify-content:center;}
   /* Projekt-Kacheln: Name und Schalter mit Luft, Schalter nicht dominant */
   .mini-grid .winfo{gap:10px;}
   .mini-grid .wtog{font-size:12.5px;padding:8px 13px;flex:0 0 auto;}
@@ -669,7 +664,7 @@ body:has(.mnav.auf) #nav{background:var(--paper);}
     <h1 class="o2">Deine nächsten Kunden<br><span class="accent">googeln</span> gerade.</h1>
     <p class="hero-sub o3">Die einzige Frage: Finden sie dich? Oder deinen Wettbewerber? Wir bauen Handwerksbetrieben Websites, die diese Entscheidung gewinnen.</p>
     <div class="hero-ctas o4">
-      <a href="#kontakt" class="btn btn-ink"><span class="nur-breit">Kostenloses</span><span class="nur-schmal">Gratis</span> Erstgespräch</a>
+      <a href="#kontakt" class="btn btn-ink">Kostenloses Erstgespräch</a>
       <a href="#arbeiten" class="btn btn-ghost">Arbeiten ansehen</a>
     </div>
     <div class="hero-proof o4"><span class="stars">★★★★★</span><span><b>5,0</b> auf Google</span><span>·</span><span><b>120+</b> Betriebe</span><span>·</span><span><b>6+</b> Jahre spezialisiert aufs Handwerk</span></div>
@@ -763,9 +758,9 @@ body:has(.mnav.auf) #nav{background:var(--paper);}
     <div class="show reveal">
       <div class="show-media wcard"><div class="wview" style="height:440px;"><img src="/assets/work/nachher-wohner.jpg" alt="Wohner Elektrotechnik Website" class="wimg active" loading="lazy" width="900" height="5300"></div></div>
       <div class="show-txt">
-        <div class="show-kicker">Elektrotechnik · PV &amp; E-Mobilität · Landsberg</div>
+        <div class="show-kicker">Elektrotechnik &amp; PV · Landsberg</div>
         <h3>Wohner Elektrotechnik.</h3>
-        <p>Elektrobetrieb aus Landsberg mit eigenem Tiefbau. Auf der Seite hat jeder Bereich seinen eigenen Platz: PV-Anlagen, Speicher, Wallboxen, Smart Home. Die Fotos und Drohnenaufnahmen sind vor Ort entstanden.</p>
+        <p>Elektrobetrieb aus Landsberg, der in seiner Region sichtbarer werden wollte. Wir haben die Seite gebaut, die Struktur auf PV-Anlagen, Speicher und Wallboxen gelegt und die Fotos und Drohnenaufnahmen vor Ort gemacht. Er sagt, dass darüber neue Kunden kommen.</p>
         <div class="show-actions"><a href="https://elektrotechnik-wohner.de" target="_blank" rel="noopener" class="wtog" style="text-decoration:none;display:inline-block;">Live ansehen ↗</a><span class="show-hint">Hover scrollt durch die Seite</span></div>
       </div>
     </div>
