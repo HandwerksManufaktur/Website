@@ -570,6 +570,30 @@ body:has(.mnav.auf) #nav{background:var(--paper);}
   .show-hint{display:none;}
 }
 
+/* ── Logo-Band: unter 900 px kein Laufband ──
+   Ein Laufband braucht Breite. Auf dem Handy standen an beiden Kanten
+   angeschnittene Logos ("Fran…", ein halbes BAU), weil ein Logo bis 112 px
+   breit ist und die weiche Kante nur 70 px misst. Darum stehen die Logos
+   hier still und vollstaendig. ── */
+@media(max-width:900px){
+  #band .marq{display:block;overflow:visible;
+    -webkit-mask-image:none;mask-image:none;margin-top:0!important;}
+  #band .marq+.marq{margin-top:18px!important;}
+  #band .marq-t{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+    gap:18px 22px;padding:0;animation:none!important;}
+  #band .marq-t[aria-hidden="true"]{display:none;}
+  #band .marq.row4,#band .marq.row5{display:none;}
+  #band .marq-t>.li:nth-child(n+6){display:none;}
+  #band .marq .li{opacity:.78;}
+  #band .marq .li img{max-width:132px;}
+  #band .marq .li.fine img{height:44px;max-width:118px;}
+}
+@media(max-width:480px){
+  #band .marq-t>.li:nth-child(n+4){display:none;}
+  #band .marq .li img{max-width:104px;}
+  #band .marq .li.fine img{height:40px;max-width:96px;}
+}
+
 /* ── Tablet: Luft rausnehmen, Bloecke einspaltig ── */
 @media(max-width:1024px){
   #arbeiten{padding:4.5rem 0 40px;}
@@ -638,10 +662,6 @@ body:has(.mnav.auf) #nav{background:var(--paper);}
   .f-in span{font-size:13.5px;line-height:1.5;}
   .f-rechte{display:none;} /* sonst bricht die Zeile mitten im Satz um */
   .f-links{justify-content:center;gap:20px;}
-  /* Logo-Band: breiterer Auslauf, sonst schneidet die Kante mitten ins Logo */
-  .marq{-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);
-        mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);}
-  .marq-t{gap:44px;padding:0 20px;}
   #band{padding:2.5rem 0 0;}
 }
 
